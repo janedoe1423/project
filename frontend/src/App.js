@@ -12,6 +12,9 @@ import Innovators from './pages/Innovators';
 import Schemes from './pages/Schemes';
 import IPR from './pages/IPR';
 import Funding from './pages/Funding';
+import LoginPage from './pages/login';
+import Startup_profile_page from './pages/startup/startup_profile_page';
+import InvestorProfilePage from './pages/investor/investor_profile_page';
 
 function App() {
     return (
@@ -27,7 +30,9 @@ function App() {
                     <Route path="/schemes" element={<Schemes />} />
                     <Route path="/ipr-rights" element={<IPR />} />
                     <Route path="/funding" element={<Funding />} />
-                    {/* Add routes for Login and SignUp pages when they are ready */}
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/startup-profile" element={<Startup_profile_page />} />
+                    <Route path="/investor-profile" element={<InvestorProfilePage />} />
                 </Routes>
             </div>
             <Footer />
