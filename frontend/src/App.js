@@ -12,6 +12,7 @@ import Innovators from './pages/Innovators';
 import Schemes from './pages/Schemes';
 import IPR from './pages/IPR';
 import Funding from './pages/Funding';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     return (
