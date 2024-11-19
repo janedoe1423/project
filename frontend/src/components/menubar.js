@@ -3,7 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function menubar() {
     return (
-        <div className="container"></div>
+        <div className="menu-container">
+
+        </div>
     );
 }
 
