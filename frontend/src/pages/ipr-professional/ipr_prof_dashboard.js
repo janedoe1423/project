@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Search, ChevronDown, FileText } from "lucide-react";
+import { ChevronDown, FileText } from "lucide-react";
 import './ipr_dashboard.css';
 
 const mockData = [
@@ -24,7 +24,6 @@ const mockData = [
 ];
 
 const IPRDashboard = () => {
-  const [searchQuery, setSearchQuery] = useState("");
   const [selectedTab, setSelectedTab] = useState("Trademarks");
   const [selectedIndustry, setSelectedIndustry] = useState("All");
   const [selectedSector, setSelectedSector] = useState("All");

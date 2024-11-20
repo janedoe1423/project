@@ -1,0 +1,35 @@
+.investor-investments {
+    padding: 24px;
+}
+
+.page-header {
+    margin-bottom: 32px;
+}
+
+.portfolio-summary {
+    margin-top: 24px;
+}
+
+.amount, .count, .percentage {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1890ff;
+}
+
+.investment-card {
+    margin-bottom: 16px;
+}
+
+.investment-card img {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 16px;
+}
+
+.metrics {
+    margin-top: 16px;
+}
+
+.performance {
+    text-align: center;
+}

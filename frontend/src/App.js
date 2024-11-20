@@ -1,4 +1,3 @@
-// src/App.js
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -13,33 +12,36 @@ import Schemes from './pages/Schemes';
 import IPR from './pages/IPR';
 import Funding from './pages/Funding';
 import LoginPage from './pages/login';
-import Startup_profile_page from './pages/startup/startup_profile_page';
+import StartupProfilePage from './pages/startup/startup_profile_page';
 import InvestorProfilePage from './pages/investor/investor_profile_page';
 import IPRProfilePage from './pages/ipr-professional/ipr_prof_profile_page';
+import InvestorDashboard from './pages/investor/InvestorDashboard'; // Import InvestorDashboard
+import 'antd/dist/reset.css'; // for antd v5
 
 function App() {
-    return (
-        <Router>
-            <Header />
-            <div className="main-content">
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/startups" element={<Startups />} />
-                    <Route path="/investors" element={<Investors />} />
-                    <Route path="/innovations" element={<Innovations />} />
-                    <Route path="/innovators" element={<Innovators />} />
-                    <Route path="/schemes" element={<Schemes />} />
-                    <Route path="/ipr-rights" element={<IPR />} />
-                    <Route path="/funding" element={<Funding />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/startup-profile" element={<Startup_profile_page />} />
-                    <Route path="/investor-profile" element={<InvestorProfilePage />} />
-                    <Route path="/ipr-professional-profile" element={< IPRProfilePage/>} />
-                </Routes>
-            </div>
-            <Footer />
-        </Router>
-    );
+  return (
+    <Router>
+      <Header />
+      <div className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/startups" element={<Startups />} />
+          <Route path="/investors" element={<Investors />} />
+          <Route path="/investor-dashboard" element={<InvestorDashboard />} /> {/* Add route for Investor Dashboard */}
+          <Route path="/innovations" element={<Innovations />} />
+          <Route path="/innovators" element={<Innovators />} />
+          <Route path="/schemes" element={<Schemes />} />
+          <Route path="/ipr-rights" element={<IPR />} />
+          <Route path="/funding" element={<Funding />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/startup-profile" element={<StartupProfilePage />} />
+          <Route path="/investor-profile" element={<InvestorProfilePage />} />
+          <Route path="/ipr-professional-profile" element={<IPRProfilePage />} />
+        </Routes>
+      </div>
+      <Footer />
+    </Router>
+  );
 }
 
 export default App;
