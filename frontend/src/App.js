@@ -1,7 +1,7 @@
 // src/App.js
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -16,13 +16,18 @@ import LoginPage from './pages/login';
 import Startup_profile_page from './pages/startup/startup_profile_page';
 import InvestorProfilePage from './pages/investor/investor_profile_page';
 import IPRProfilePage from './pages/ipr-professional/ipr_prof_profile_page';
+import StartupDashboard from './pages/startup/startup_dashboard';
+import StartupDataInput from './pages/startup/startup_data_input';
 
 function App() {
     return (
-        <Router>
+        <BrowserRouter>
             <Header />
             <div className="main-content">
                 <Routes>
+                    <Route path="/" element={<StartupDashboard />} />
+                    <Route path="/startup_data_input" element={<StartupDataInput />} />
+                    <Route path="/startup_dashboard" element={<StartupDashboard />} />
                     <Route path="/" element={<Home />} />
                     <Route path="/startups" element={<Startups />} />
                     <Route path="/investors" element={<Investors />} />
@@ -34,11 +39,14 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/startup-profile" element={<Startup_profile_page />} />
                     <Route path="/investor-profile" element={<InvestorProfilePage />} />
-                    <Route path="/ipr-professional-profile" element={< IPRProfilePage/>} />
+                    <Route path="/ipr-professional-profile" element={<IPRProfilePage/>} />
+                    <Route path="/startup-dashboard" element={<StartupDashboard />} />
+                    <Route path="/startup/startup_data_input" element={<StartupDataInput />} />
+                    <Route path="/startup/graphs" element={<div>Graphs page coming soon!</div>} />
                 </Routes>
             </div>
             <Footer />
-        </Router>
+        </BrowserRouter>
     );
 }
 

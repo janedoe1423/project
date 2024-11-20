@@ -1,0 +1,198 @@
+.dashboard-container {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #f8fafc;
+  }
+  
+  .dashboard-title {
+    text-align: center;
+    color: #1a365d;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  
+  .analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .analytics-card {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .analytics-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-content {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    color: white;
+  }
+  
+  .revenue-icon {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+  }
+  
+  .growth-icon {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+  }
+  
+  .burn-icon {
+    background: linear-gradient(135deg, #FF5722, #F4511E);
+  }
+  
+  .funds-icon {
+    background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+  }
+  
+  .analytics-card h3 {
+    color: #2d3748;
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .card-description {
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+  
+  .view-analysis-btn {
+    background: #4299e1;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+  }
+  
+  .view-analysis-btn:hover {
+    background: #3182ce;
+  }
+  
+  .update-metrics-btn {
+    display: block;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+    background: #2d3748;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .update-metrics-btn:hover {
+    background: #1a202c;
+  }
+  
+  @media (max-width: 768px) {
+    .analytics-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .dashboard-title {
+      font-size: 2rem;
+    }
+  }
+  
+  /* Modal Styles */
+  .graph-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  .graph-modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #4a5568;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+  
+  .close-button:hover {
+    background: #f7fafc;
+    color: #2d3748;
+  }
+  
+  .graph-container {
+    height: 400px;
+    margin-top: 1.5rem;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
