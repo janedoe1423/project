@@ -15,6 +15,7 @@ import Funding from './pages/Funding';
 import LoginPage from './pages/login';
 import Startup_profile_page from './pages/startup/startup_profile_page';
 import InvestorProfilePage from './pages/investor/investor_profile_page';
+import IPRProfilePage from './pages/ipr-professional/ipr_prof_profile_page';
 
 function App() {
     return (
@@ -33,6 +34,7 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/startup-profile" element={<Startup_profile_page />} />
                     <Route path="/investor-profile" element={<InvestorProfilePage />} />
+                    <Route path="/ipr-professional-profile" element={< IPRProfilePage/>} />
                 </Routes>
             </div>
             <Footer />

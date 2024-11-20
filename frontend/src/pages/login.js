@@ -12,6 +12,8 @@ const LoginPage = () => {
             navigate("/investor-profile");
         } else if (userType === "innovator") {
             navigate("/innovator-profile");
+        } else if (userType === "ipr-professional"){
+            navigate("/ipr-professional-profile");
         }
     };
 
@@ -29,6 +31,9 @@ const LoginPage = () => {
                     </button>
                     <button className="btn btn-info" onClick={() => handleLogin("innovator")}>
                         Login as Innovator
+                    </button>
+                    <button className="btn btn-info" onClick={() => handleLogin("ipr-professional")}>
+                        Login as IPR Professional
                     </button>
                 </div>
             </div>
