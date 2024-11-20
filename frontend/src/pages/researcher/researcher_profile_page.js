@@ -1,34 +1,30 @@
-import React, { useState, useEffect } from "react";
-import ResearcherSidebar from "./Researchersidebar.js";
-import ResearcherDashboard from "./researcher_dashboard.js";
-import ResearcherProfile from "./researcher_profile.js";
-import ResearcherSidebar from "./researcher_sidebar.js";
-import ResearcherWorks from "./researcher_works.js";
+import React from "react";
+import ResearcherDashboard from "./researcher_dashboard";
+import ResearcherProfile from "./researcher_profile";
+import ResearcherGrantsFunding from "./researcher_grantsfunding";
+import ResearcherIPR from "./researcher_ipr";
+import ResearcherInsights from "./researcher_insights";
+import ResearcherPapers from "./researcher_paper";
+import ResearcherSidebar from "./researcher_sidebar";
+import ResearchersCollaborationRequests from "./researcher_collaboration";
 
-const Researcher_profile_page = () => {
-    const [currentPage, setCurrentPage] = useState(window.location.hash || "#dashboard");
-
-    useEffect(() => {
-        const handleHashChange = () => {
-            setCurrentPage(window.location.hash || "#dashboard");
-        };
-
-        window.addEventListener("hashchange", handleHashChange);
-
-        // Cleanup event listener on component unmount
-        return () => {
-            window.removeEventListener("hashchange", handleHashChange);
-        };
-    }, []);
-
+const Researcher = () => {
     const renderPage = (hash) => {
         switch (hash) {
             case "#dashboard":
                 return <ResearcherDashboard />;
             case "#profile":
                 return <ResearcherProfile />;
-            case "#works":
-                return <ResearcherWorks />;
+            case "#research-papers":
+                return <ResearcherPapers />;
+            case "#ipr":
+                return <ResearcherIPR />;
+            case "#collaboration-requests":
+                return <ResearchersCollaborationRequests/>;
+            case "#grants-funding":
+                return <ResearcherGrantsFunding />;
+            case "#insights":
+                return <ResearcherInsights/>;
             default:
                 return <ResearcherDashboard />;
         }
@@ -38,10 +34,10 @@ const Researcher_profile_page = () => {
         <div className="d-flex">
             <ResearcherSidebar />
             <div className="flex-grow-1 p-4">
-                {renderPage(currentPage)}
+                {renderPage(window.location.hash)}
             </div>
         </div>
     );
 };
 
-export default Researcher_profile_page;
+export default Researcher;
