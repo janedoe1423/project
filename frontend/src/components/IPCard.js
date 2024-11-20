@@ -1,9 +1,12 @@
 import React from 'react';
 import { Copyright, CircleDot, Lightbulb } from 'lucide-react';
 
-const IPCard = ({ type, title, description, owner, date, status }) => {
+const IPCard = ({ data }) => {
+    const industry = data?.industry || 'Unknown Industry';
+    const status = data?.status?.toLowerCase() || 'unknown';
+
     const getIcon = () => {
-        switch (type) {
+        switch (data?.type) {
             case 'patent':
                 return <Lightbulb className="w-6 h-6 text-blue-600" />;
             case 'trademark':
@@ -13,8 +16,8 @@ const IPCard = ({ type, title, description, owner, date, status }) => {
         }
     };
 
-    const getStatusColor = () => {
-        switch (status.toLowerCase()) {
+    const getStatusColor = (status) => {
+        switch (status) {
             case 'granted':
                 return 'bg-green-100 text-green-800';
             case 'pending':
@@ -31,16 +34,16 @@ const IPCard = ({ type, title, description, owner, date, status }) => {
             <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
                     {getIcon()}
-                    <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+                    <h3 className="text-lg font-semibold text-gray-800">{industry}</h3>
                 </div>
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor()}`}>
+                <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(status)}`}>
                     {status}
                 </span>
             </div>
-            <p className="mt-3 text-gray-600 text-sm">{description}</p>
+            <p className="mt-3 text-gray-600 text-sm">{data?.description}</p>
             <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
-                <span>Owner: {owner}</span>
-                <span>Filed: {date}</span>
+                <span>Owner: {data?.owner}</span>
+                <span>Filed: {data?.date}</span>
             </div>
         </div>
     );
