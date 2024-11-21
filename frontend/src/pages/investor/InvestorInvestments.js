@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Button, Modal, Row, Col, Typography, Space, Statistic, Radio, Progress, Avatar, Descriptions, Tabs, Tag } from "antd";
+import { Card, Button, Modal, Row, Col, Typography, Space, Statistic, Progress, Avatar, Descriptions, Tabs, Tag } from "antd";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Cell, BarChart, Bar, Legend } from 'recharts';
 import { ArrowUpOutlined, LineChartOutlined, UserOutlined, PieChartOutlined, DollarOutlined, RiseOutlined, Badge, EyeOutlined, SafetyOutlined, FundOutlined, BarChartOutlined, UpOutlined, DownOutlined, InfoCircleOutlined, DotChartOutlined, StockOutlined, ThunderboltOutlined, GlobalOutlined, UserAddOutlined } from '@ant-design/icons';
 import moment from 'moment';
@@ -139,159 +139,11 @@ const analysisCategories = {
 };
 
 const InvestorInvestments = () => {
-    const [investments, setInvestments] = useState([
-        {
-            id: 1,
-            companyName: "Tech Startup X",
-            logo: "https://placeholder.com/150",
-            description: "An innovative AI-powered solution for businesses",
-            sector: "Technology",
-            investmentAmount: 500000,
-            currentValue: 750000,
-            returns: 50,
-            investmentDate: "2023-01-15",
-            performanceData: [
-                { month: 'Jan', value: 500000 },
-                { month: 'Feb', value: 520000 },
-                { month: 'Mar', value: 580000 },
-                { month: 'Apr', value: 600000 },
-                { month: 'May', value: 750000 },
-            ],
-            additionalDetails: {
-                foundedYear: 2020,
-                location: "San Francisco, CA",
-                employeeCount: 150,
-                fundingRound: "Series B",
-                keyMetrics: {
-                    revenue: 2500000,
-                    growthRate: 125,
-                    marketShare: 15,
-                    burnRate: 180000
-                },
-                riskMetrics: {
-                    marketRisk: "Medium",
-                    executionRisk: "Low",
-                    competitiveRisk: "Medium"
-                },
-                financials: {
-                    cashFlow: 350000,
-                    grossMargin: 68,
-                    runwayMonths: 18
-                },
-                performanceHistory: [
-                    { quarter: "Q1 2023", revenue: 1800000, users: 15000, margin: 65 },
-                    { quarter: "Q2 2023", revenue: 2100000, users: 18500, margin: 67 },
-                    { quarter: "Q3 2023", revenue: 2500000, users: 22000, margin: 68 }
-                ],
-                marketAnalysis: {
-                    targetMarketSize: "12B",
-                    competitorCount: 8,
-                    marketGrowthRate: 25,
-                    marketPosition: "Market Leader",
-                    geographicPresence: ["North America", "Europe", "Asia"],
-                    industryTrends: ["AI Adoption", "Cloud Migration", "Digital Transformation"]
-                },
-                teamInfo: {
-                    executiveTeam: [
-                        { name: "John Doe", role: "CEO", experience: "15 years" },
-                        { name: "Jane Smith", role: "CTO", experience: "12 years" }
-                    ],
-                    boardMembers: ["Alice Johnson", "Bob Wilson"],
-                    advisors: ["Dr. Tech Expert", "Industry Veteran"]
-                },
-                intellectualProperty: {
-                    patents: 5,
-                    trademarks: 3,
-                    proprietaryTech: ["AI Algorithm", "Data Processing Engine"]
-                },
-                customerMetrics: {
-                    totalCustomers: 250,
-                    enterpriseCustomers: 50,
-                    customerRetention: 95,
-                    nps: 75
-                }
-            }
-        },
-        {
-            id: 2,
-            companyName: "HealthTech Solutions",
-            logo: "https://placeholder.com/150",
-            description: "Revolutionary healthcare management platform",
-            sector: "Healthcare",
-            investmentAmount: 750000,
-            currentValue: 1200000,
-            returns: 60,
-            investmentDate: "2023-02-20",
-            performanceData: [
-                { month: 'Jan', value: 750000 },
-                { month: 'Feb', value: 800000 },
-                { month: 'Mar', value: 900000 },
-                { month: 'Apr', value: 1000000 },
-                { month: 'May', value: 1200000 },
-            ],
-            additionalDetails: {
-                foundedYear: 2019,
-                location: "Boston, MA",
-                employeeCount: 200,
-                fundingRound: "Series C",
-                keyMetrics: {
-                    revenue: 3500000,
-                    growthRate: 150,
-                    marketShare: 20,
-                    burnRate: 220000
-                },
-                riskMetrics: {
-                    marketRisk: "Medium",
-                    executionRisk: "Low",
-                    competitiveRisk: "Medium"
-                },
-                financials: {
-                    cashFlow: 350000,
-                    grossMargin: 68,
-                    runwayMonths: 18
-                },
-                performanceHistory: [
-                    { quarter: "Q1 2023", revenue: 1800000, users: 15000, margin: 65 },
-                    { quarter: "Q2 2023", revenue: 2100000, users: 18500, margin: 67 },
-                    { quarter: "Q3 2023", revenue: 2500000, users: 22000, margin: 68 }
-                ],
-                marketAnalysis: {
-                    targetMarketSize: "12B",
-                    competitorCount: 8,
-                    marketGrowthRate: 25,
-                    marketPosition: "Market Leader",
-                    geographicPresence: ["North America", "Europe", "Asia"],
-                    industryTrends: ["AI Adoption", "Cloud Migration", "Digital Transformation"]
-                },
-                teamInfo: {
-                    executiveTeam: [
-                        { name: "John Doe", role: "CEO", experience: "15 years" },
-                        { name: "Jane Smith", role: "CTO", experience: "12 years" }
-                    ],
-                    boardMembers: ["Alice Johnson", "Bob Wilson"],
-                    advisors: ["Dr. Tech Expert", "Industry Veteran"]
-                },
-                intellectualProperty: {
-                    patents: 5,
-                    trademarks: 3,
-                    proprietaryTech: ["AI Algorithm", "Data Processing Engine"]
-                },
-                customerMetrics: {
-                    totalCustomers: 250,
-                    enterpriseCustomers: 50,
-                    customerRetention: 95,
-                    nps: 75
-                }
-            }
-        }
-    ]);
-
+    const [investments] = useState([]);
     const [detailsModal, setDetailsModal] = useState(false);
     const [analysisModal, setAnalysisModal] = useState(false);
     const [selectedCompany, setSelectedCompany] = useState(null);
-    const [expandedGraphs, setExpandedGraphs] = useState({});
     const [graphModal, setGraphModal] = useState({ visible: false, type: null });
-    const [activeGraphs, setActiveGraphs] = useState({});
 
     const showDetails = (company) => {
         setSelectedCompany(company);
@@ -301,13 +153,6 @@ const InvestorInvestments = () => {
     const showAnalysis = (company) => {
         setSelectedCompany(company);
         setAnalysisModal(true);
-    };
-
-    const toggleGraph = (graphId) => {
-        setExpandedGraphs(prev => ({
-            ...prev,
-            [graphId]: !prev[graphId]
-        }));
     };
 
     const renderGraph = (graph) => {
