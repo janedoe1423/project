@@ -174,7 +174,7 @@ const StartupDashboard = () => {
 
   return (
     <div className="dashboard-container">
-      {isNewUser ? (
+      {!isNewUser ? (
         <div className="welcome-section">
           <h2>Welcome to Startup Analytics</h2>
           <p className="description">

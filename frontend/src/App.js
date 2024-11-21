@@ -25,9 +25,7 @@ function App() {
             <Header />
             <div className="main-content">
                 <Routes>
-                    <Route path="/" element={<StartupDashboard />} />
                     <Route path="/startup_data_input" element={<StartupDataInput />} />
-                    <Route path="/startup_dashboard" element={<StartupDashboard />} />
                     <Route path="/" element={<Home />} />
                     <Route path="/startups" element={<Startups />} />
                     <Route path="/investors" element={<Investors />} />
@@ -40,9 +38,8 @@ function App() {
                     <Route path="/startup-profile" element={<Startup_profile_page />} />
                     <Route path="/investor-profile" element={<InvestorProfilePage />} />
                     <Route path="/ipr-professional-profile" element={<IPRProfilePage/>} />
-                    <Route path="/startup-dashboard" element={<StartupDashboard />} />
                     <Route path="/startup/startup_data_input" element={<StartupDataInput />} />
-                    <Route path="/startup/graphs" element={<div>Graphs page coming soon!</div>} />
+                
                 </Routes>
             </div>
             <Footer />
