@@ -10,6 +10,8 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  Checkbox,
+  Chip,
 } from "@mui/material";
 import { Pie } from 'react-chartjs-2';
 import {
@@ -80,16 +82,13 @@ const StartupResourceAllocation = () => {
     ],
   });
 
-  // Handle department selection
+  // Modify handleDepartmentChange to remove automatic calculation
   const handleDepartmentChange = (event) => {
     setSelectedDepartments(event.target.value);
-    if (totalFunds) {
-      handleAllocation();
-    }
   };
 
   const handleAllocation = () => {
-    if (!totalFunds) return;
+    if (!totalFunds || selectedDepartments.length === 0) return;
     
     const allocations = calculateAllocations(parseFloat(totalFunds));
     const newAllocation = {
@@ -113,7 +112,7 @@ const StartupResourceAllocation = () => {
         {/* Input Section */}
         <Grid item xs={12} md={4}>
           <Card className="input-card">
-            <Typography variant="h6" gutterBottom className="card-title">
+            <Typography variant="h6" gutterBottom>
               Allocate Resources
             </Typography>
             <TextField
@@ -123,24 +122,105 @@ const StartupResourceAllocation = () => {
               value={totalFunds}
               onChange={(e) => setTotalFunds(e.target.value)}
               className="funds-input"
+              sx={{ 
+                '& .MuiInputBase-root': { 
+                  height: '56px'
+                },
+                '& .MuiInputBase-input': {
+                  fontSize: '1.1rem'
+                }
+              }}
             />
             
-            {/* Add Department Selection */}
             <FormControl fullWidth sx={{ mt: 2 }}>
-              <InputLabel>Select Departments</InputLabel>
+              <InputLabel 
+                id="department-select-label"
+                sx={{ 
+                  backgroundColor: 'white',
+                  px: 1,
+                  '&.Mui-focused': {
+                    backgroundColor: 'white',
+                  }
+                }}
+              >
+                Select Departments
+              </InputLabel>
               <Select
+                labelId="department-select-label"
                 multiple
                 value={selectedDepartments}
                 onChange={handleDepartmentChange}
-                renderValue={(selected) => selected.join(', ')}
+                className="department-select"
+                sx={{ 
+                  '& .MuiSelect-select': { 
+                    minHeight: '56px !important',
+                    height: 'auto',
+                    maxHeight: selectedDepartments.length > 2 ? '150px' : '56px',
+                    transition: 'all 0.3s ease'
+                  }
+                }}
+                renderValue={(selected) => (
+                  <Box sx={{ 
+                    display: 'flex', 
+                    flexWrap: 'wrap', 
+                    gap: 0.5,
+                    overflow: 'auto',
+                    maxHeight: '150px'
+                  }}>
+                    {selected.map((value) => (
+                      <Chip
+                        key={value}
+                        label={value}
+                        className="department-chip selected"
+                        size="medium"
+                        sx={{ 
+                          m: '2px',
+                          '& .MuiChip-label': {
+                            fontSize: '0.9rem'
+                          }
+                        }}
+                      />
+                    ))}
+                  </Box>
+                )}
+                MenuProps={{
+                  PaperProps: {
+                    style: {
+                      maxHeight: 300,
+                      width: 350
+                    }
+                  }
+                }}
               >
                 {availableDepartments.map((dept) => (
-                  <MenuItem key={dept.name} value={dept.name}>
+                  <MenuItem 
+                    key={dept.name} 
+                    value={dept.name}
+                    className={`department-menu-item ${
+                      selectedDepartments.includes(dept.name) ? 'selected' : ''
+                    }`}
+                  >
+                    <Checkbox checked={selectedDepartments.includes(dept.name)} />
                     {dept.name}
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
+
+            {/* Add Calculate Button */}
+            <Button 
+              variant="contained" 
+              fullWidth 
+              sx={{ 
+                mt: 3,
+                height: '56px',
+                fontSize: '1.1rem'
+              }}
+              onClick={handleAllocation}
+              disabled={!totalFunds || selectedDepartments.length === 0}
+            >
+              Calculate Allocation
+            </Button>
           </Card>
         </Grid>
 

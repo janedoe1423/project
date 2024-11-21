@@ -1,166 +1,204 @@
+ /* Dashboard Layout */
 .resource-dashboard {
-    padding: 2rem;
+    padding: 24px;
     max-width: 1400px;
     margin: 0 auto;
-    background: #f8f9fa;
-    min-height: 100vh;
   }
   
   .dashboard-title {
+    margin-bottom: 24px !important;
     color: #1976d2;
-    text-align: center;
-    margin-bottom: 2rem !important;
-    font-weight: 600 !important;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
   }
   
-  /* Input Card Styles */
-  .input-card {
-    padding: 1.5rem !important;
-    background: linear-gradient(145deg, #ffffff, #f8f9fa) !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
-    border-radius: 15px !important;
-    transition: transform 0.3s ease;
+  /* Card Styles */
+  .input-card, .graph-card, .history-card {
+    padding: 24px !important;
+    min-height: 300px;
+    height: 100%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
   }
   
-  .input-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .card-title {
-    color: #2c3e50;
-    font-weight: 600 !important;
-    margin-bottom: 1.5rem !important;
-  }
-  
+  /* Input Section Styles */
   .funds-input {
-    margin-bottom: 1.5rem !important;
-  }
-  
-  .funds-input input {
-    font-size: 1.2rem;
-  }
-  
-  .calculate-btn {
-    background: linear-gradient(45deg, #1976d2, #2196f3) !important;
-    padding: 12px !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px;
-    transition: all 0.3s ease !important;
-  }
-  
-  .calculate-btn:hover {
-    background: linear-gradient(45deg, #1565c0, #1976d2) !important;
-    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3) !important;
-  }
-  
-  /* Departments List */
-  .departments-list {
-    margin-top: 2rem;
-    padding-top: 1rem;
-    border-top: 1px solid #e0e0e0;
-  }
-  
-  .dept-title {
-    color: #2c3e50;
     margin-bottom: 1rem !important;
-    font-size: 1rem !important;
   }
   
-  .dept-item {
+  .MuiInputBase-root {
+    height: 56px !important;
+    font-size: 1.1rem;
+  }
+  
+  /* Department Select Styles */
+  .department-select {
+    background-color: white;
+  }
+  
+  .department-select .MuiSelect-select {
     display: flex;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-    border-bottom: 1px dashed #e0e0e0;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 8px 14px !important;
+    align-items: flex-start;
+    min-height: 56px !important;
+    height: auto !important;
+    max-height: 150px !important;
+    overflow-y: auto !important;
   }
   
-  .dept-percentage {
+  .department-chip {
+    margin: 2px;
+    height: 28px !important;
+    font-size: 0.9rem !important;
+    background-color: #e3f2fd !important;
+  }
+  
+  .department-chip.selected {
+    background-color: #1976d2 !important;
+    color: white !important;
+  }
+  
+  .department-menu-item.selected {
+    background-color: rgba(25, 118, 210, 0.08) !important;
+  }
+  
+  .department-menu-item .MuiCheckbox-root.Mui-checked {
+    color: #1976d2 !important;
+  }
+  
+  /* Graph Section Styles */
+  .chart-container {
+    height: 400px;
+    position: relative;
+    margin-top: 20px;
+  }
+  
+  .empty-graph {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    color: #666;
+  }
+  
+  /* History Section Styles */
+  .history-card {
+    margin-top: 24px;
+  }
+  
+  .history-item {
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .history-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .history-item.selected {
+    border: 2px solid #1976d2;
+    background-color: #f5f9ff;
+  }
+  
+  .history-date {
     font-weight: 600;
     color: #1976d2;
   }
   
-  /* Graph Card Styles */
-  .graph-card {
-    padding: 1.5rem !important;
-    background: white !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
-    border-radius: 15px !important;
-    height: 100%;
-  }
-  
-  .chart-container {
-    position: relative;
-    height: 300px;
-    padding: 1rem;
-  }
-  
-  .empty-graph {
-    height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #9e9e9e;
-    text-align: center;
-    background: #f5f5f5;
-    border-radius: 10px;
-  }
-  
-  /* History Card Styles */
-  .history-card {
-    padding: 1.5rem !important;
-    background: white !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
-    border-radius: 15px !important;
-  }
-  
-  .history-item {
-    padding: 1rem !important;
-    cursor: pointer;
-    transition: all 0.3s ease !important;
-    border-radius: 10px !important;
-    border: 2px solid transparent;
-  }
-  
-  .history-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
-  }
-  
-  .history-item.selected {
-    border-color: #1976d2;
-    background-color: rgba(25, 118, 210, 0.05) !important;
-  }
-  
-  .history-date {
-    color: #2c3e50;
-    font-weight: 600 !important;
-  }
-  
   .history-amount {
-    color: #1976d2;
-    margin-top: 0.5rem !important;
+    color: #666;
+    margin-top: 8px;
   }
   
   /* Responsive Adjustments */
   @media (max-width: 960px) {
     .resource-dashboard {
-      padding: 1rem;
+      padding: 16px;
     }
-    
-    .dashboard-title {
-      font-size: 1.8rem !important;
+  
+    .chart-container {
+      height: 300px;
     }
   }
   
-  @media (max-width: 600px) {
-    .dashboard-title {
-      font-size: 1.5rem !important;
-    }
-    
-    .input-card, .graph-card, .history-card {
-      padding: 1rem !important;
-    }
+  /* Animation for chart transitions */
+  .chart-container canvas {
+    transition: all 0.3s ease;
+  }
+  
+  /* Custom Scrollbar for Select Dropdown */
+  .MuiSelect-select::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .MuiSelect-select::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .MuiSelect-select::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  
+  .MuiSelect-select::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  /* Error States */
+  .error-text {
+    color: #d32f2f;
+    font-size: 0.75rem;
+    margin-top: 4px;
+  }
+  
+  /* Loading States */
+  .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 1;
+  }
+  
+  /* Success States */
+  .success-text {
+    color: #2e7d32;
+    font-size: 0.75rem;
+    margin-top: 4px;
+  }
+  
+  /* Button States */
+  .MuiButton-contained:disabled {
+    background-color: rgba(0, 0, 0, 0.12) !important;
+    color: rgba(0, 0, 0, 0.26) !important;
+  }
+  
+  /* Tooltip Styles */
+  .MuiTooltip-tooltip {
+    background-color: #333 !important;
+    font-size: 0.75rem !important;
+  }
+  
+  /* Update other relevant styles */
+  .MuiFormControl-root {
+    margin-bottom: 20px !important;
+  }
+  
+  .MuiInputLabel-root {
+    font-size: 1.1rem !important;
+  }
+  
+  /* Button style update */
+  .MuiButton-contained {
+    height: 56px !important;
+    font-size: 1.1rem !important;
   }
