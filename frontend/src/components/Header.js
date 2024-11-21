@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "./css/Header.css";
 
 function Header() {
     return (
@@ -29,8 +29,15 @@ function Header() {
                         <li className="nav-item">
                             <Link to="/innovators" className="nav-link">Innovators</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link to="/schemes" className="nav-link">Schemes</Link>
+                        <li className="nav-item dropdown-hover">
+                            <Link to="/schemes" className="nav-link">
+                                Schemes
+                            </Link>
+                            <div className="dropdown-content">
+                                <Link to="/schemes/startup-india">Startup India Support</Link>
+                                <Link to="/schemes/women-entrepreneurship">Women Entrepreneurship</Link>
+                                <Link to="/schemes/incubator-framework">Incubator Framework</Link>
+                            </div>
                         </li>
                         <li className="nav-item">
                             <Link to="/ipr-rights" className="nav-link">IPR Rights</Link>
