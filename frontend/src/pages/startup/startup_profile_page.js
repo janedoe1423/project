@@ -6,6 +6,9 @@ import StartupResourceAllocation from "./startup_resource_allocate";
 import StartupIPRRights from "./startup_ipr";
 import StartupSchemes from "./startup_schemes";
 import StartupReports from "./startup_reports";
+import StartupCollaboration from "./startup_collaboration.js";
+import StartupNotify from "./startup_notify.js";
+import StartupFunding from "./startup_funding.js";
 
 const Startup_profile_page = () => {
     const [currentPage, setCurrentPage] = useState(window.location.hash || "#dashboard");
@@ -35,8 +38,14 @@ const Startup_profile_page = () => {
                 return <StartupIPRRights />;
             case "#schemes":
                 return <StartupSchemes />;
+            case "#collaboration-tools":
+                return <StartupCollaboration />;
+            case "#notify":
+                return <StartupNotify />;
             case "#reports":
                 return <StartupReports />;
+            case "#funding":
+                return <StartupFunding />;
             default:
                 return <StartupDashboard />;
         }
