@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Button, Modal, Row, Col, Typography, Space, Statistic, Radio, Progress, Avatar, Descriptions, Tabs, Tag } from "antd";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Cell, BarChart, Bar, Legend } from 'recharts';
-import { ArrowUpOutlined, LineChartOutlined, UserOutlined, PieChartOutlined, DollarOutlined, RiseOutlined, Badge, EyeOutlined, SafetyOutlined, FundOutlined, BarChartOutlined, UpOutlined, DownOutlined, InfoCircleOutlined, DotChartOutlined, StockOutlined, ThunderboltOutlined, GlobalOutlined } from '@ant-design/icons';
+import { ArrowUpOutlined, LineChartOutlined, UserOutlined, PieChartOutlined, DollarOutlined, RiseOutlined, Badge, EyeOutlined, SafetyOutlined, FundOutlined, BarChartOutlined, UpOutlined, DownOutlined, InfoCircleOutlined, DotChartOutlined, StockOutlined, ThunderboltOutlined, GlobalOutlined, UserAddOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
 const { Title, Text } = Typography;
@@ -34,27 +34,52 @@ const sampleData = {
         { name: 'Profit', actual: 2000, target: 2200 },
         { name: 'Growth', actual: 3000, target: 3200 },
         { name: 'Margin', actual: 2800, target: 3000 },
+    ],
+    competitivePosition: [
+        { name: 'Q1 2023', market: 15, competitor1: 12, competitor2: 10 },
+        { name: 'Q2 2023', market: 18, competitor1: 13, competitor2: 11 },
+        { name: 'Q3 2023', market: 22, competitor1: 15, competitor2: 13 },
+        { name: 'Q4 2023', market: 25, competitor1: 16, competitor2: 14 }
+    ],
+    customerAcquisition: [
+        { name: 'Jan', customers: 1200 },
+        { name: 'Feb', customers: 1800 },
+        { name: 'Mar', customers: 2200 },
+        { name: 'Apr', customers: 2800 },
+        { name: 'May', customers: 3500 },
+        { name: 'Jun', customers: 4200 }
+    ],
+    marketExpansion: [
+        { name: 'North America', value: 35 },
+        { name: 'Europe', value: 25 },
+        { name: 'Asia', value: 20 },
+        { name: 'Latin America', value: 12 },
+        { name: 'Africa', value: 8 }
     ]
 };
 
 const analysisCategories = {
     performance: {
         title: "Performance Metrics",
-        description: "Comprehensive analysis of company's financial and operational performance",
+        description: "Key performance indicators and growth metrics",
         graphs: [
             {
-                id: "revenue",
-                title: "Revenue Analysis",
-                description: "Track revenue growth patterns and projections",
-                icon: <LineChartOutlined />,
-                data: sampleData.performanceData
+                id: "competitive",
+                title: "Competitive Position",
+                description: "Market share comparison with competitors",
+                icon: <LineChartOutlined />
             },
             {
-                id: "profitMargins",
-                title: "Profit Margins",
-                description: "Analysis of gross, operating, and net profit margins",
-                icon: <BarChartOutlined />,
-                data: sampleData.financialData
+                id: "acquisition",
+                title: "Customer Acquisition",
+                description: "New customer growth over time",
+                icon: <UserAddOutlined />
+            },
+            {
+                id: "expansion",
+                title: "Market Expansion",
+                description: "Geographic market distribution",
+                icon: <GlobalOutlined />
             }
         ]
     },
@@ -362,6 +387,92 @@ const InvestorInvestments = () => {
                     <Line type="monotone" dataKey="value" stroke="#1890ff" name="Actual" />
                     <Line type="monotone" dataKey="projection" stroke="#52c41a" strokeDasharray="5 5" name="Projected" />
                 </LineChart>;
+            case 'competitive':
+                return (
+                    <ResponsiveContainer width="100%" height={300}>
+                        <LineChart data={sampleData.competitivePosition}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Line 
+                                type="monotone" 
+                                dataKey="market" 
+                                stroke="#1890ff" 
+                                name="Our Position"
+                                strokeWidth={2}
+                            />
+                            <Line 
+                                type="monotone" 
+                                dataKey="competitor1" 
+                                stroke="#13c2c2" 
+                                name="Competitor 1"
+                            />
+                            <Line 
+                                type="monotone" 
+                                dataKey="competitor2" 
+                                stroke="#52c41a" 
+                                name="Competitor 2"
+                            />
+                        </LineChart>
+                    </ResponsiveContainer>
+                );
+            
+            case 'acquisition':
+                return (
+                    <ResponsiveContainer width="100%" height={300}>
+                        <AreaChart data={sampleData.customerAcquisition}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Area 
+                                type="monotone" 
+                                dataKey="customers" 
+                                stroke="#1890ff"
+                                fill="#1890ff"
+                                fillOpacity={0.3}
+                                name="New Customers"
+                            />
+                        </AreaChart>
+                    </ResponsiveContainer>
+                );
+            
+            case 'expansion':
+                return (
+                    <ResponsiveContainer width="100%" height={300}>
+                        <PieChart>
+                            <Pie
+                                data={sampleData.marketExpansion}
+                                dataKey="value"
+                                nameKey="name"
+                                cx="50%"
+                                cy="50%"
+                                outerRadius={100}
+                                fill="#1890ff"
+                                label
+                            >
+                                {sampleData.marketExpansion.map((entry, index) => (
+                                    <Cell 
+                                        key={`cell-${index}`} 
+                                        fill={[
+                                            '#1890ff', 
+                                            '#13c2c2', 
+                                            '#52c41a', 
+                                            '#faad14', 
+                                            '#722ed1'
+                                        ][index % 5]} 
+                                    />
+                                ))}
+                            </Pie>
+                            <Tooltip />
+                            <Legend />
+                        </PieChart>
+                    </ResponsiveContainer>
+                );
+
             default:
                 return null;
         }
@@ -611,90 +722,208 @@ const InvestorInvestments = () => {
                     <>
                         {/* Analysis Modal Content */}
                         <div className="analysis-dashboard">
-                            {/* Summary Section */}
                             <div className="analysis-summary">
                                 <div className="summary-header">
-                                    <div className="company-title">
-                                        <Title level={3}>{selectedCompany?.companyName} Analysis</Title>
-                                        <Tag color="blue" style={{ padding: '4px 12px', fontSize: '14px' }}>
+                                    <div className="title-container">
+                                        <Title level={3} className="dashboard-title">
+                                            Investment Analysis Dashboard
+                                        </Title>
+                                        <Tag color="blue" className="dashboard-tag">
                                             {selectedCompany?.sector}
                                         </Tag>
                                     </div>
-                                    <div className="company-subtitle">
-                                        <Avatar src={selectedCompany?.logo} className="company-logo" />
-                                        <Text type="secondary">Comprehensive analysis and performance metrics</Text>
-                                    </div>
+                                    <Text className="dashboard-subtitle">
+                                        Comprehensive performance metrics and analytical insights
+                                    </Text>
                                 </div>
 
-                                {/* Key Metrics Row */}
-                                <Row gutter={[24, 24]}>
-                                    <Col span={6}>
-                                        <div className="metric-box primary-gradient">
-                                            <div className="metric-icon">
-                                                <RiseOutlined />
+                                <div style={{ padding: '20px', display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+                                    {/* ROI Card */}
+                                    <div style={{ 
+                                        flex: '1 1 250px',
+                                        minWidth: '250px',
+                                        background: 'linear-gradient(135deg, #1890ff 0%, #096dd9 100%)',
+                                        borderRadius: '15px',
+                                        padding: '25px',
+                                        color: 'white',
+                                        boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+                                    }}>
+                                        <div style={{ 
+                                            display: 'flex', 
+                                            alignItems: 'center', 
+                                            marginBottom: '20px' 
+                                        }}>
+                                            <div style={{ 
+                                                background: 'rgba(255,255,255,0.2)', 
+                                                borderRadius: '10px',
+                                                padding: '10px',
+                                                marginRight: '15px'
+                                            }}>
+                                                <RiseOutlined style={{ fontSize: '24px' }} />
                                             </div>
-                                            <div className="metric-content">
-                                                <div className="metric-title">ROI</div>
-                                                <div className="metric-value">+{selectedCompany?.returns}%</div>
-                                                <div className="metric-trend">
-                                                    <ArrowUpOutlined /> 12.5% vs last month
-                                                </div>
-                                            </div>
+                                            <span style={{ fontSize: '18px' }}>ROI</span>
                                         </div>
-                                    </Col>
-                                    <Col span={6}>
-                                        <div className="metric-box success-gradient">
-                                            <div className="metric-icon">
-                                                <FundOutlined />
-                                            </div>
-                                            <div className="metric-content">
-                                                <div className="metric-title">Market Share</div>
-                                                <div className="metric-value">{selectedCompany?.additionalDetails.keyMetrics.marketShare}%</div>
-                                                <div className="metric-trend">
-                                                    <ArrowUpOutlined /> Growing steadily
-                                                </div>
-                                            </div>
+                                        <div style={{ 
+                                            fontSize: '36px', 
+                                            fontWeight: 'bold',
+                                            margin: '15px 0' 
+                                        }}>
+                                            +{selectedCompany?.returns}%
                                         </div>
-                                    </Col>
-                                    <Col span={6}>
-                                        <div className="metric-box info-gradient">
-                                            <div className="metric-icon">
-                                                <ThunderboltOutlined />
-                                            </div>
-                                            <div className="metric-content">
-                                                <div className="metric-title">Growth Rate</div>
-                                                <div className="metric-value">{selectedCompany?.additionalDetails.keyMetrics.growthRate}%</div>
-                                                <div className="metric-trend">
-                                                    <ArrowUpOutlined /> Above target
-                                                </div>
-                                            </div>
+                                        <div style={{ 
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            background: 'rgba(255,255,255,0.15)',
+                                            padding: '8px 15px',
+                                            borderRadius: '20px',
+                                            fontSize: '14px'
+                                        }}>
+                                            <ArrowUpOutlined style={{ marginRight: '5px' }} /> 12.5% vs last month
                                         </div>
-                                    </Col>
-                                    <Col span={6}>
-                                        <div className="metric-box warning-gradient">
-                                            <div className="metric-icon">
-                                                <SafetyOutlined />
+                                    </div>
+
+                                    {/* Market Share Card */}
+                                    <div style={{ 
+                                        flex: '1 1 250px',
+                                        minWidth: '250px',
+                                        background: 'linear-gradient(135deg, #52c41a 0%, #389e0d 100%)',
+                                        borderRadius: '15px',
+                                        padding: '25px',
+                                        color: 'white',
+                                        boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+                                    }}>
+                                        <div style={{ 
+                                            display: 'flex', 
+                                            alignItems: 'center', 
+                                            marginBottom: '20px' 
+                                        }}>
+                                            <div style={{ 
+                                                background: 'rgba(255,255,255,0.2)', 
+                                                borderRadius: '10px',
+                                                padding: '10px',
+                                                marginRight: '15px'
+                                            }}>
+                                                <FundOutlined style={{ fontSize: '24px' }} />
                                             </div>
-                                            <div className="metric-content">
-                                                <div className="metric-title">Risk Score</div>
-                                                <div className="metric-value">Low</div>
-                                                <div className="metric-trend">
-                                                    <ArrowUpOutlined /> Stable outlook
-                                                </div>
-                                            </div>
+                                            <span style={{ fontSize: '18px' }}>Market Share</span>
                                         </div>
-                                    </Col>
-                                </Row>
+                                        <div style={{ 
+                                            fontSize: '36px', 
+                                            fontWeight: 'bold',
+                                            margin: '15px 0' 
+                                        }}>
+                                            {selectedCompany?.additionalDetails.keyMetrics.marketShare}%
+                                        </div>
+                                        <div style={{ 
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            background: 'rgba(255,255,255,0.15)',
+                                            padding: '8px 15px',
+                                            borderRadius: '20px',
+                                            fontSize: '14px'
+                                        }}>
+                                            <ArrowUpOutlined style={{ marginRight: '5px' }} /> Growing steadily
+                                        </div>
+                                    </div>
+
+                                    {/* Growth Rate Card */}
+                                    <div style={{ 
+                                        flex: '1 1 250px',
+                                        minWidth: '250px',
+                                        background: 'linear-gradient(135deg, #13c2c2 0%, #08979c 100%)',
+                                        borderRadius: '15px',
+                                        padding: '25px',
+                                        color: 'white',
+                                        boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+                                    }}>
+                                        <div style={{ 
+                                            display: 'flex', 
+                                            alignItems: 'center', 
+                                            marginBottom: '20px' 
+                                        }}>
+                                            <div style={{ 
+                                                background: 'rgba(255,255,255,0.2)', 
+                                                borderRadius: '10px',
+                                                padding: '10px',
+                                                marginRight: '15px'
+                                            }}>
+                                                <ThunderboltOutlined style={{ fontSize: '24px' }} />
+                                            </div>
+                                            <span style={{ fontSize: '18px' }}>Growth Rate</span>
+                                        </div>
+                                        <div style={{ 
+                                            fontSize: '36px', 
+                                            fontWeight: 'bold',
+                                            margin: '15px 0' 
+                                        }}>
+                                            {selectedCompany?.additionalDetails.keyMetrics.growthRate}%
+                                        </div>
+                                        <div style={{ 
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            background: 'rgba(255,255,255,0.15)',
+                                            padding: '8px 15px',
+                                            borderRadius: '20px',
+                                            fontSize: '14px'
+                                        }}>
+                                            <ArrowUpOutlined style={{ marginRight: '5px' }} /> Above target
+                                        </div>
+                                    </div>
+
+                                    {/* Risk Score Card */}
+                                    <div style={{ 
+                                        flex: '1 1 250px',
+                                        minWidth: '250px',
+                                        background: 'linear-gradient(135deg, #faad14 0%, #d48806 100%)',
+                                        borderRadius: '15px',
+                                        padding: '25px',
+                                        color: 'white',
+                                        boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+                                    }}>
+                                        <div style={{ 
+                                            display: 'flex', 
+                                            alignItems: 'center', 
+                                            marginBottom: '20px' 
+                                        }}>
+                                            <div style={{ 
+                                                background: 'rgba(255,255,255,0.2)', 
+                                                borderRadius: '10px',
+                                                padding: '10px',
+                                                marginRight: '15px'
+                                            }}>
+                                                <SafetyOutlined style={{ fontSize: '24px' }} />
+                                            </div>
+                                            <span style={{ fontSize: '18px' }}>Risk Score</span>
+                                        </div>
+                                        <div style={{ 
+                                            fontSize: '36px', 
+                                            fontWeight: 'bold',
+                                            margin: '15px 0' 
+                                        }}>
+                                            Low
+                                        </div>
+                                        <div style={{ 
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            background: 'rgba(255,255,255,0.15)',
+                                            padding: '8px 15px',
+                                            borderRadius: '20px',
+                                            fontSize: '14px'
+                                        }}>
+                                            <ArrowUpOutlined style={{ marginRight: '5px' }} /> Stable outlook
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             {/* Analysis Categories */}
                             <div className="analysis-cards">
                                 {Object.entries(analysisCategories).map(([key, category]) => (
                                     <div key={key} className="analysis-section">
-                                        <div className="category-header" style={{ borderColor: category.color }}>
-                                            <Title level={4}>
+                                        <div className="category-header">
+                                            <Title level={4} className="section-title">
                                                 {category.title}
-                                                <Text type="secondary" style={{ fontSize: '14px', marginLeft: '12px' }}>
+                                                <Text type="secondary" className="section-description">
                                                     {category.description}
                                                 </Text>
                                             </Title>
@@ -705,33 +934,21 @@ const InvestorInvestments = () => {
                                                 <Col span={12} key={graph.id}>
                                                     <Card className="analysis-card">
                                                         <div className="card-header">
-                                                            <span className="card-icon">{graph.icon}</span>
-                                                            <div>
-                                                                <Title level={5}>{graph.title}</Title>
-                                                                <Text type="secondary">{graph.description}</Text>
+                                                            <div className="header-content">
+                                                                <span className="card-icon">{graph.icon}</span>
+                                                                <div className="header-text">
+                                                                    <Title level={5}>{graph.title}</Title>
+                                                                    <Text type="secondary">{graph.description}</Text>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         
                                                         <div className="card-content">
-                                                            {activeGraphs[graph.id] ? (
-                                                                <div className="graph-container">
-                                                                    <ResponsiveContainer width="100%" height={300}>
-                                                                        {renderGraph(graph)}
-                                                                    </ResponsiveContainer>
-                                                                </div>
-                                                            ) : (
-                                                                <Button 
-                                                                    type="primary"
-                                                                    onClick={() => setActiveGraphs(prev => ({
-                                                                        ...prev,
-                                                                        [graph.id]: true
-                                                                    }))}
-                                                                    icon={<EyeOutlined />}
-                                                                    className="view-analysis-btn"
-                                                                >
-                                                                    View Analysis
-                                                                </Button>
-                                                            )}
+                                                            <div className="graph-container">
+                                                                <ResponsiveContainer width="100%" height={300}>
+                                                                    {renderGraph(graph)}
+                                                                </ResponsiveContainer>
+                                                            </div>
                                                         </div>
                                                     </Card>
                                                 </Col>
