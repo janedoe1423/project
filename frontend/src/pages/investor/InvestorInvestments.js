@@ -138,8 +138,97 @@ const analysisCategories = {
     }
 };
 
+const sampleInvestments = [
+    {
+        id: 1,
+        companyName: "Tech Innovators Inc.",
+        logo: "https://placeholder.com/100",
+        sector: "Technology",
+        description: "Leading AI and machine learning solutions provider",
+        currentValue: 2500000,
+        returns: 25,
+        investmentDate: "2022-01-15",
+        additionalDetails: {
+            foundedYear: 2018,
+            location: "San Francisco, CA",
+            employeeCount: 250,
+            fundingRound: "Series B",
+            keyMetrics: {
+                marketShare: 15,
+                growthRate: 85
+            },
+            marketAnalysis: {
+                marketPosition: "Market Leader",
+                targetMarketSize: 50,
+                marketGrowthRate: 12,
+                geographicPresence: ["North America", "Europe", "Asia"]
+            },
+            teamInfo: {
+                executiveTeam: [
+                    {
+                        name: "John Smith",
+                        role: "CEO",
+                        experience: "15+ years in tech"
+                    },
+                    {
+                        name: "Sarah Johnson",
+                        role: "CTO",
+                        experience: "12+ years in AI"
+                    }
+                ]
+            },
+            customerMetrics: {
+                customerRetention: 92
+            }
+        }
+    },
+    {
+        id: 2,
+        companyName: "GreenEnergy Solutions",
+        logo: "https://placeholder.com/100",
+        sector: "Clean Energy",
+        description: "Innovative renewable energy and sustainable solutions provider",
+        currentValue: 1800000,
+        returns: 32,
+        investmentDate: "2022-03-20",
+        additionalDetails: {
+            foundedYear: 2019,
+            location: "Austin, TX",
+            employeeCount: 180,
+            fundingRound: "Series A",
+            keyMetrics: {
+                marketShare: 12,
+                growthRate: 92
+            },
+            marketAnalysis: {
+                marketPosition: "Fast Growing",
+                targetMarketSize: 35,
+                marketGrowthRate: 15,
+                geographicPresence: ["North America", "Europe"]
+            },
+            teamInfo: {
+                executiveTeam: [
+                    {
+                        name: "Michael Chen",
+                        role: "CEO",
+                        experience: "12+ years in renewable energy"
+                    },
+                    {
+                        name: "Emily Rodriguez",
+                        role: "CTO",
+                        experience: "10+ years in clean tech"
+                    }
+                ]
+            },
+            customerMetrics: {
+                customerRetention: 88
+            }
+        }
+    }
+];
+
 const InvestorInvestments = () => {
-    const [investments] = useState([]);
+    const [investments] = useState(sampleInvestments);
     const [detailsModal, setDetailsModal] = useState(false);
     const [analysisModal, setAnalysisModal] = useState(false);
     const [selectedCompany, setSelectedCompany] = useState(null);
@@ -326,7 +415,6 @@ const InvestorInvestments = () => {
     return (
         <div style={{ padding: "24px" }}>
             <Title level={2}>Investment Portfolio</Title>
-            
             <Space direction="vertical" size="large" style={{ width: '100%' }}>
                 {investments.map((company) => (
                     <Card 
