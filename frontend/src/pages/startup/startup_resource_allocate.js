@@ -11,12 +11,12 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import { Bar } from "react-chartjs-2";
+import { Pie } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  BarElement,
+  ArcElement,
   Title,
   Tooltip,
   Legend,
@@ -27,7 +27,7 @@ import "./startup_resource_allocate.css";
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement,
+  ArcElement,
   Title,
   Tooltip,
   Legend
@@ -35,30 +35,36 @@ ChartJS.register(
 
 const StartupResourceAllocation = () => {
   const [totalFunds, setTotalFunds] = useState("");
-  const [departments, setDepartments] = useState([
-    { name: "Research & Development", percentage: 30 },
-    { name: "Marketing", percentage: 25 },
-    { name: "Operations", percentage: 20 },
-    { name: "Human Resources", percentage: 15 },
-    { name: "IT Infrastructure", percentage: 10 },
+  const [availableDepartments, setAvailableDepartments] = useState([
+    { name: "Research & Development", defaultPercentage: 30 },
+    { name: "Marketing", defaultPercentage: 25 },
+    { name: "Operations", defaultPercentage: 20 },
+    { name: "Human Resources", defaultPercentage: 15 },
+    { name: "IT Infrastructure", defaultPercentage: 10 },
+    { name: "Sales", defaultPercentage: 20 },
+    { name: "Customer Support", defaultPercentage: 15 },
+    { name: "Finance", defaultPercentage: 10 },
   ]);
+  const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [allocationHistory, setAllocationHistory] = useState([]);
   const [selectedHistory, setSelectedHistory] = useState(null);
 
-  // Calculate allocations based on percentages
+  // Calculate allocations automatically based on selected departments
   const calculateAllocations = (funds) => {
-    return departments.map((dept) => ({
-      ...dept,
-      allocated: (funds * dept.percentage) / 100,
+    if (selectedDepartments.length === 0) return [];
+    const equalPercentage = 100 / selectedDepartments.length;
+    return selectedDepartments.map((dept) => ({
+      name: dept,
+      percentage: equalPercentage,
+      allocated: (funds * equalPercentage) / 100,
     }));
   };
 
-  // Chart configuration
+  // Update chart data for pie chart
   const getChartData = (allocations) => ({
     labels: allocations.map((dept) => dept.name),
     datasets: [
       {
-        label: "Resource Allocation (in $)",
         data: allocations.map((dept) => dept.allocated),
         backgroundColor: [
           "#FF6384",
@@ -66,10 +72,21 @@ const StartupResourceAllocation = () => {
           "#FFCE56",
           "#4BC0C0",
           "#9966FF",
+          "#FF9F40",
+          "#4BC0C0",
+          "#FF66CC",
         ],
       },
     ],
   });
+
+  // Handle department selection
+  const handleDepartmentChange = (event) => {
+    setSelectedDepartments(event.target.value);
+    if (totalFunds) {
+      handleAllocation();
+    }
+  };
 
   const handleAllocation = () => {
     if (!totalFunds) return;
@@ -107,32 +124,27 @@ const StartupResourceAllocation = () => {
               onChange={(e) => setTotalFunds(e.target.value)}
               className="funds-input"
             />
-            <Button
-              variant="contained"
-              fullWidth
-              onClick={handleAllocation}
-              disabled={!totalFunds}
-              className="calculate-btn"
-            >
-              Calculate Allocation
-            </Button>
-
-            {/* Department List */}
-            <div className="departments-list">
-              <Typography variant="h6" className="dept-title">
-                Department Allocations
-              </Typography>
-              {departments.map((dept) => (
-                <div key={dept.name} className="dept-item">
-                  <span>{dept.name}</span>
-                  <span className="dept-percentage">{dept.percentage}%</span>
-                </div>
-              ))}
-            </div>
+            
+            {/* Add Department Selection */}
+            <FormControl fullWidth sx={{ mt: 2 }}>
+              <InputLabel>Select Departments</InputLabel>
+              <Select
+                multiple
+                value={selectedDepartments}
+                onChange={handleDepartmentChange}
+                renderValue={(selected) => selected.join(', ')}
+              >
+                {availableDepartments.map((dept) => (
+                  <MenuItem key={dept.name} value={dept.name}>
+                    {dept.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Card>
         </Grid>
 
-        {/* Graph Section */}
+        {/* Graph Section - Update to Pie chart */}
         <Grid item xs={12} md={8}>
           <Card className="graph-card">
             {selectedHistory ? (
@@ -141,14 +153,14 @@ const StartupResourceAllocation = () => {
                   Allocation Distribution - {selectedHistory.date}
                 </Typography>
                 <div className="chart-container">
-                  <Bar
+                  <Pie
                     data={getChartData(selectedHistory.allocations)}
                     options={{
                       responsive: true,
                       maintainAspectRatio: false,
                       plugins: {
                         legend: {
-                          position: 'top',
+                          position: 'right',
                         },
                         title: {
                           display: true,
@@ -163,7 +175,7 @@ const StartupResourceAllocation = () => {
             ) : (
               <div className="empty-graph">
                 <Typography variant="h6">
-                  Enter funds and calculate allocation to view the graph
+                  Select departments and enter funds to view the allocation
                 </Typography>
               </div>
             )}
