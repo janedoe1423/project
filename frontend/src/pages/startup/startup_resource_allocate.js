@@ -153,31 +153,33 @@ const StartupResourceAllocation = () => {
                 className="department-select"
                 sx={{ 
                   '& .MuiSelect-select': { 
+                    display: 'flex !important',
+                    flexWrap: 'wrap !important',
+                    gap: '8px !important',
                     minHeight: '56px !important',
-                    height: 'auto',
-                    maxHeight: selectedDepartments.length > 2 ? '150px' : '56px',
-                    transition: 'all 0.3s ease'
+                    height: 'auto !important',
+                    padding: '8px !important'
+                  },
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    height: 'auto !important'
                   }
                 }}
                 renderValue={(selected) => (
                   <Box sx={{ 
                     display: 'flex', 
                     flexWrap: 'wrap', 
-                    gap: 0.5,
-                    overflow: 'auto',
-                    maxHeight: '150px'
+                    gap: '8px',
+                    width: '100%'
                   }}>
                     {selected.map((value) => (
                       <Chip
                         key={value}
                         label={value}
-                        className="department-chip selected"
+                        className="department-chip"
                         size="medium"
                         sx={{ 
-                          m: '2px',
-                          '& .MuiChip-label': {
-                            fontSize: '0.9rem'
-                          }
+                          m: '2px !important',
+                          height: '32px !important'
                         }}
                       />
                     ))}
@@ -265,26 +267,35 @@ const StartupResourceAllocation = () => {
         {/* History Section */}
         <Grid item xs={12}>
           <Card className="history-card">
-            <Typography variant="h6" gutterBottom className="card-title">
+            <Typography variant="h5" className="history-section-title">
               Allocation History
             </Typography>
-            <Grid container spacing={2}>
+            <Box className="history-grid">
               {allocationHistory.map((history) => (
-                <Grid item xs={12} sm={6} md={4} key={history.id}>
-                  <Card 
-                    className={`history-item ${selectedHistory?.id === history.id ? 'selected' : ''}`}
-                    onClick={() => setSelectedHistory(history)}
-                  >
-                    <Typography variant="subtitle1" className="history-date">
-                      Date: {history.date}
-                    </Typography>
-                    <Typography variant="body2" className="history-amount">
-                      Total Funds: ${history.totalFunds}
-                    </Typography>
-                  </Card>
-                </Grid>
+                <Card 
+                  key={history.id}
+                  className={`history-item ${selectedHistory?.id === history.id ? 'selected' : ''}`}
+                  onClick={() => setSelectedHistory(history)}
+                >
+                  <Typography variant="h6" className="history-date">
+                    {history.date}
+                  </Typography>
+                  <Typography variant="body1" className="history-amount">
+                    Total Funds: ${Number(history.totalFunds).toLocaleString()}
+                  </Typography>
+                  <Box className="history-allocations">
+                    {history.allocations.map((alloc) => (
+                      <Chip
+                        key={alloc.name}
+                        label={`${alloc.name}: ${alloc.percentage.toFixed(1)}%`}
+                        size="small"
+                        className="history-allocation-chip"
+                      />
+                    ))}
+                  </Box>
+                </Card>
               ))}
-            </Grid>
+            </Box>
           </Card>
         </Grid>
       </Grid>
