@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Button, Modal, Row, Col, Typography, Space, Statistic, Progress, Avatar, Descriptions, Tabs, Tag } from "antd";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Cell, BarChart, Bar, Legend } from 'recharts';
-import { ArrowUpOutlined, LineChartOutlined, UserOutlined, PieChartOutlined, DollarOutlined, RiseOutlined, Badge, EyeOutlined, SafetyOutlined, FundOutlined, BarChartOutlined, UpOutlined, DownOutlined, InfoCircleOutlined, DotChartOutlined, StockOutlined, ThunderboltOutlined, GlobalOutlined, UserAddOutlined } from '@ant-design/icons';
+import { ArrowUpOutlined, LineChartOutlined, UserOutlined, PieChartOutlined, RiseOutlined, EyeOutlined, SafetyOutlined, FundOutlined, DotChartOutlined, StockOutlined, ThunderboltOutlined, GlobalOutlined, UserAddOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
 const { Title, Text } = Typography;
