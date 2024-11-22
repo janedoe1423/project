@@ -8,7 +8,7 @@ const ResearcherSidebar = () => {
             <Nav className="flex-column">
                 <Nav.Link href="#dashboard">Dashboard</Nav.Link>
                 <Nav.Link href="#profile">Profile</Nav.Link>
-                <Nav.Link href="#research-papers">Research Papers</Nav.Link>
+                <Nav.Link href="#research-papers">Works</Nav.Link>
                 <Nav.Link href="#ipr">IPR</Nav.Link>
                 <Nav.Link href="#collaboration-requests">Collaboration Requests</Nav.Link>
                 <Nav.Link href="#grants-funding">Grants & Funding</Nav.Link>
