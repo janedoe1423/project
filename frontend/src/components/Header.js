@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import './Header.css';
 import { FaHome, FaRocket, FaUsers, FaLightbulb, FaBrain, 
          FaClipboardList, FaCopyright, FaMoneyBillWave } from 'react-icons/fa';
-import './Header.css';
 
 function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
