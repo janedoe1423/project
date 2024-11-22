@@ -1294,6 +1294,7 @@
   integrity sha512-SITSV6aIXsuVNV3f3O0f2n/cgyEDWoSqtZMYiAmcsYHydcKrOz3gUxB/iXd/Qf08+IZX4KpgNbvUdMBmWz+kcA==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.7"
   resolved "https://registry.npmjs.org/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz"
@@ -1327,6 +1328,8 @@
     "@emotion/weak-memoize" "^0.4.0"
     stylis "4.2.0"
 
+=======
+>>>>>>> parent of 82dfa54 (Added schemes of startup Gujarat)
 =======
 >>>>>>> parent of 82dfa54 (Added schemes of startup Gujarat)
 "@emotion/hash@^0.8.0":
@@ -3666,6 +3669,7 @@ cliui@^7.0.2:
     wrap-ansi "^7.0.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 clone-deep@^4.0.1:
   version "4.0.1"
   resolved "https://registry.npmjs.org/clone-deep/-/clone-deep-4.0.1.tgz"
@@ -3676,6 +3680,9 @@ clone-deep@^4.0.1:
     shallow-clone "^3.0.0"
 
 clsx@^2.0.0, clsx@^2.1.1:
+=======
+clsx@^2.0.0:
+>>>>>>> parent of 82dfa54 (Added schemes of startup Gujarat)
 =======
 clsx@^2.0.0:
 >>>>>>> parent of 82dfa54 (Added schemes of startup Gujarat)
@@ -5389,6 +5396,7 @@ find-cache-dir@^3.3.1:
     pkg-dir "^4.1.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 find-cache-dir@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/find-cache-dir/-/find-cache-dir-4.0.0.tgz"
@@ -5402,6 +5410,8 @@ find-root@^1.1.0:
   resolved "https://registry.npmjs.org/find-root/-/find-root-1.1.0.tgz"
   integrity sha512-NKfW6bec6GfKc0SGx1e07QZY9PE99u0Bft/0rzSD5k3sO/vwkVUpDUKVm5Gpp5Ue3YfShPFTX2070tDs5kB9Ng==
 
+=======
+>>>>>>> parent of 82dfa54 (Added schemes of startup Gujarat)
 =======
 >>>>>>> parent of 82dfa54 (Added schemes of startup Gujarat)
 find-up@^3.0.0:
@@ -9922,6 +9932,7 @@ source-map-support@^0.5.6, source-map-support@~0.5.20:
     source-map "^0.6.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source-map@^0.5.7:
   version "0.5.7"
   resolved "https://registry.npmjs.org/source-map/-/source-map-0.5.7.tgz"
@@ -9934,6 +9945,8 @@ source-map@^0.6.0:
 
 source-map@^0.6.1, source-map@0.6.1:
 =======
+=======
+>>>>>>> parent of 82dfa54 (Added schemes of startup Gujarat)
 source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0, source-map@~0.6.1, source-map@0.6.1:
 >>>>>>> parent of 82dfa54 (Added schemes of startup Gujarat)
   version "0.6.1"
