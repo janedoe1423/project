@@ -17,6 +17,7 @@ import InvestorProfilePage from './pages/investor/investor_profile_page';
 import IPRProfilePage from './pages/ipr-professional/ipr_prof_profile_page';
 import InvestorDashboard from './pages/investor/InvestorDashboard'; // Import InvestorDashboard
 import 'antd/dist/reset.css'; // for antd v5
+import WomenEntrepreneurship from './pages/Schemes and policies/WomenEntrepreneurship';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/startup-profile" element={<StartupProfilePage />} />
           <Route path="/investor-profile" element={<InvestorProfilePage />} />
           <Route path="/ipr-professional-profile" element={<IPRProfilePage />} />
+          <Route path="/schemes/women-entrepreneurship" element={<WomenEntrepreneurship />} />
         </Routes>
       </div>
       <Footer />
