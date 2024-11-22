@@ -10,6 +10,8 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  Checkbox,
+  Chip,
 } from "@mui/material";
 import { Pie } from 'react-chartjs-2';
 import {
@@ -80,16 +82,13 @@ const StartupResourceAllocation = () => {
     ],
   });
 
-  // Handle department selection
+  // Modify handleDepartmentChange to remove automatic calculation
   const handleDepartmentChange = (event) => {
     setSelectedDepartments(event.target.value);
-    if (totalFunds) {
-      handleAllocation();
-    }
   };
 
   const handleAllocation = () => {
-    if (!totalFunds) return;
+    if (!totalFunds || selectedDepartments.length === 0) return;
     
     const allocations = calculateAllocations(parseFloat(totalFunds));
     const newAllocation = {
@@ -113,7 +112,7 @@ const StartupResourceAllocation = () => {
         {/* Input Section */}
         <Grid item xs={12} md={4}>
           <Card className="input-card">
-            <Typography variant="h6" gutterBottom className="card-title">
+            <Typography variant="h6" gutterBottom>
               Allocate Resources
             </Typography>
             <TextField
@@ -123,24 +122,107 @@ const StartupResourceAllocation = () => {
               value={totalFunds}
               onChange={(e) => setTotalFunds(e.target.value)}
               className="funds-input"
+              sx={{ 
+                '& .MuiInputBase-root': { 
+                  height: '56px'
+                },
+                '& .MuiInputBase-input': {
+                  fontSize: '1.1rem'
+                }
+              }}
             />
             
-            {/* Add Department Selection */}
             <FormControl fullWidth sx={{ mt: 2 }}>
-              <InputLabel>Select Departments</InputLabel>
+              <InputLabel 
+                id="department-select-label"
+                sx={{ 
+                  backgroundColor: 'white',
+                  px: 1,
+                  '&.Mui-focused': {
+                    backgroundColor: 'white',
+                  }
+                }}
+              >
+                Select Departments
+              </InputLabel>
               <Select
+                labelId="department-select-label"
                 multiple
                 value={selectedDepartments}
                 onChange={handleDepartmentChange}
-                renderValue={(selected) => selected.join(', ')}
+                className="department-select"
+                sx={{ 
+                  '& .MuiSelect-select': { 
+                    display: 'flex !important',
+                    flexWrap: 'wrap !important',
+                    gap: '8px !important',
+                    minHeight: '56px !important',
+                    height: 'auto !important',
+                    padding: '8px !important'
+                  },
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    height: 'auto !important'
+                  }
+                }}
+                renderValue={(selected) => (
+                  <Box sx={{ 
+                    display: 'flex', 
+                    flexWrap: 'wrap', 
+                    gap: '8px',
+                    width: '100%'
+                  }}>
+                    {selected.map((value) => (
+                      <Chip
+                        key={value}
+                        label={value}
+                        className="department-chip"
+                        size="medium"
+                        sx={{ 
+                          m: '2px !important',
+                          height: '32px !important'
+                        }}
+                      />
+                    ))}
+                  </Box>
+                )}
+                MenuProps={{
+                  PaperProps: {
+                    style: {
+                      maxHeight: 300,
+                      width: 350
+                    }
+                  }
+                }}
               >
                 {availableDepartments.map((dept) => (
-                  <MenuItem key={dept.name} value={dept.name}>
+                  <MenuItem 
+                    key={dept.name} 
+                    value={dept.name}
+                    className={`department-menu-item ${
+                      selectedDepartments.includes(dept.name) ? 'selected' : ''
+                    }`}
+                  >
+                    <Checkbox checked={selectedDepartments.includes(dept.name)} />
                     {dept.name}
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
+
+            {/* Add Calculate Button */}
+            <Button 
+              variant="contained" 
+              fullWidth 
+              sx={{ 
+                mt: 3,
+                height: '56px',
+                fontSize: '1.1rem'
+              }}
+              onClick={handleAllocation}
+              disabled={!totalFunds || selectedDepartments.length === 0}
+            >
+              Calculate Allocation
+            </Button>
           </Card>
         </Grid>
 
@@ -185,26 +267,35 @@ const StartupResourceAllocation = () => {
         {/* History Section */}
         <Grid item xs={12}>
           <Card className="history-card">
-            <Typography variant="h6" gutterBottom className="card-title">
+            <Typography variant="h5" className="history-section-title">
               Allocation History
             </Typography>
-            <Grid container spacing={2}>
+            <Box className="history-grid">
               {allocationHistory.map((history) => (
-                <Grid item xs={12} sm={6} md={4} key={history.id}>
-                  <Card 
-                    className={`history-item ${selectedHistory?.id === history.id ? 'selected' : ''}`}
-                    onClick={() => setSelectedHistory(history)}
-                  >
-                    <Typography variant="subtitle1" className="history-date">
-                      Date: {history.date}
-                    </Typography>
-                    <Typography variant="body2" className="history-amount">
-                      Total Funds: ${history.totalFunds}
-                    </Typography>
-                  </Card>
-                </Grid>
+                <Card 
+                  key={history.id}
+                  className={`history-item ${selectedHistory?.id === history.id ? 'selected' : ''}`}
+                  onClick={() => setSelectedHistory(history)}
+                >
+                  <Typography variant="h6" className="history-date">
+                    {history.date}
+                  </Typography>
+                  <Typography variant="body1" className="history-amount">
+                    Total Funds: ${Number(history.totalFunds).toLocaleString()}
+                  </Typography>
+                  <Box className="history-allocations">
+                    {history.allocations.map((alloc) => (
+                      <Chip
+                        key={alloc.name}
+                        label={`${alloc.name}: ${alloc.percentage.toFixed(1)}%`}
+                        size="small"
+                        className="history-allocation-chip"
+                      />
+                    ))}
+                  </Box>
+                </Card>
               ))}
-            </Grid>
+            </Box>
           </Card>
         </Grid>
       </Grid>

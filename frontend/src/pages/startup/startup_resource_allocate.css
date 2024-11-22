@@ -1,166 +1,166 @@
+/* Dashboard Layout */
 .resource-dashboard {
-    padding: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-    background: #f8f9fa;
-    min-height: 100vh;
-  }
-  
-  .dashboard-title {
-    color: #1976d2;
-    text-align: center;
-    margin-bottom: 2rem !important;
-    font-weight: 600 !important;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-  }
-  
-  /* Input Card Styles */
-  .input-card {
-    padding: 1.5rem !important;
-    background: linear-gradient(145deg, #ffffff, #f8f9fa) !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
-    border-radius: 15px !important;
-    transition: transform 0.3s ease;
-  }
-  
-  .input-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .card-title {
-    color: #2c3e50;
-    font-weight: 600 !important;
-    margin-bottom: 1.5rem !important;
-  }
-  
-  .funds-input {
-    margin-bottom: 1.5rem !important;
-  }
-  
-  .funds-input input {
-    font-size: 1.2rem;
-  }
-  
-  .calculate-btn {
-    background: linear-gradient(45deg, #1976d2, #2196f3) !important;
-    padding: 12px !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px;
-    transition: all 0.3s ease !important;
-  }
-  
-  .calculate-btn:hover {
-    background: linear-gradient(45deg, #1565c0, #1976d2) !important;
-    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3) !important;
-  }
-  
-  /* Departments List */
-  .departments-list {
-    margin-top: 2rem;
-    padding-top: 1rem;
-    border-top: 1px solid #e0e0e0;
-  }
-  
-  .dept-title {
-    color: #2c3e50;
-    margin-bottom: 1rem !important;
-    font-size: 1rem !important;
-  }
-  
-  .dept-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-    border-bottom: 1px dashed #e0e0e0;
-  }
-  
-  .dept-percentage {
-    font-weight: 600;
-    color: #1976d2;
-  }
-  
-  /* Graph Card Styles */
-  .graph-card {
-    padding: 1.5rem !important;
-    background: white !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
-    border-radius: 15px !important;
-    height: 100%;
-  }
-  
-  .chart-container {
-    position: relative;
-    height: 300px;
-    padding: 1rem;
-  }
-  
-  .empty-graph {
-    height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #9e9e9e;
-    text-align: center;
-    background: #f5f5f5;
-    border-radius: 10px;
-  }
-  
-  /* History Card Styles */
-  .history-card {
-    padding: 1.5rem !important;
-    background: white !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
-    border-radius: 15px !important;
-  }
-  
-  .history-item {
-    padding: 1rem !important;
-    cursor: pointer;
-    transition: all 0.3s ease !important;
-    border-radius: 10px !important;
-    border: 2px solid transparent;
-  }
-  
-  .history-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
-  }
-  
-  .history-item.selected {
-    border-color: #1976d2;
-    background-color: rgba(25, 118, 210, 0.05) !important;
-  }
-  
-  .history-date {
-    color: #2c3e50;
-    font-weight: 600 !important;
-  }
-  
-  .history-amount {
-    color: #1976d2;
-    margin-top: 0.5rem !important;
-  }
-  
-  /* Responsive Adjustments */
-  @media (max-width: 960px) {
-    .resource-dashboard {
-      padding: 1rem;
-    }
-    
-    .dashboard-title {
-      font-size: 1.8rem !important;
-    }
-  }
-  
-  @media (max-width: 600px) {
-    .dashboard-title {
-      font-size: 1.5rem !important;
-    }
-    
-    .input-card, .graph-card, .history-card {
-      padding: 1rem !important;
-    }
-  }
+  padding: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+.dashboard-title {
+  margin-bottom: 32px !important;
+  color: #1e293b;
+  font-weight: 600 !important;
+  text-align: center;
+  font-size: 2.2rem !important;
+  letter-spacing: 0.5px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.dashboard-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #0ea5e9;
+  border-radius: 2px;
+}
+
+/* Card Styles */
+.input-card, .graph-card, .history-card {
+  padding: 24px;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  background: white !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.input-card:hover, .graph-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+              0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Department Select Styles */
+.department-select .MuiOutlinedInput-root {
+  border-radius: 8px;
+  background: white;
+  border: 1px solid #e2e8f0;
+}
+
+.department-chip {
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  background: #0ea5e9 !important;
+  color: white !important;
+  box-shadow: none !important;
+}
+
+/* History Section Styles */
+.history-section-title {
+  color: #1e293b;
+  font-weight: 600 !important;
+  margin-bottom: 24px !important;
+  font-size: 1.5rem !important;
+  padding-left: 16px;
+}
+
+.history-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+  gap: 24px !important;
+  padding: 16px !important;
+}
+
+.history-item {
+  height: 200px !important; /* Fixed height */
+  background: white;
+  border-radius: 8px !important;
+  padding: 20px !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #e2e8f0;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.history-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  border-color: #0ea5e9;
+}
+
+.history-item.selected {
+  background: #f0f9ff;
+  border-color: #0ea5e9;
+}
+
+.history-date {
+  font-weight: 600 !important;
+  color: #0ea5e9 !important;
+  font-size: 1.1rem !important;
+  margin-bottom: 8px !important;
+}
+
+.history-amount {
+  color: #475569 !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+}
+
+.history-allocations {
+  margin-top: auto !important;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.history-allocation-chip {
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+  font-size: 0.85rem !important;
+  height: 24px !important;
+}
+
+/* Button Styles */
+.MuiButton-contained {
+  background: #0ea5e9 !important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.2s ease !important;
+}
+
+.MuiButton-contained:hover {
+  background: #0284c7 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Chart Styles */
+.chart-container {
+  padding: 24px;
+  background: white;
+  border-radius: 8px;
+  height: 400px !important;
+}
+
+/* Empty State Styles */
+.empty-graph {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  border-radius: 8px;
+  color: #64748b;
+}
