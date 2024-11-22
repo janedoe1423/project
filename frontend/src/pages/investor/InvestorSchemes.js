@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 const InvestorSchemes = () => {
-    return (
-        <div>
-            <h2>Schemes</h2>
-            <p>Government or private schemes for investors.</p>
-        </div>
-    );
+  return (
+    <div>
+      Remove this page
+    </div>
+  );
 };
 
 export default InvestorSchemes;

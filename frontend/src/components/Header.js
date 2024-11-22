@@ -31,10 +31,10 @@ function Header() {
                         </li>
                         <li className="nav-item dropdown-hover">
                             <Link to="/schemes" className="nav-link">
-                                Schemes
+                                Schemes and Policies
                             </Link>
                             <div className="dropdown-content">
-                                <Link to="/schemes/startup-india">Startup India Support</Link>
+                                <Link to="/schemes/startup-gujarat">Startup Gujarat Support</Link>
                                 <Link to="/schemes/women-entrepreneurship">Women Entrepreneurship</Link>
                                 <Link to="/schemes/incubator-framework">Incubator Framework</Link>
                             </div>

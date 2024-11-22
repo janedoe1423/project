@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import "./startup_schemes.css";
 
 const StartupSchemes = () => {
+
   return (
     <div>
-      <h2>Schemes</h2>
-      <p>List of government and private schemes will be shown here.</p>
+      Remove this page
     </div>
   );
 };
