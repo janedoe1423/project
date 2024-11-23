@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
-  FaHome, 
-  FaRocket, 
-  FaUsers, 
-  FaLightbulb, 
-  FaBrain, 
-  FaClipboardList, 
-  FaCopyright, 
-  FaMoneyBillWave 
+    FaHome, 
+    FaRocket, 
+    FaUsers, 
+    FaLightbulb, 
+    FaBrain, 
+    FaClipboardList, 
+    FaCopyright, 
+    FaMoneyBillWave 
 } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/Header.css';
 
 function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -30,96 +31,84 @@ function Header() {
         { path: '/investors', name: 'Investors', icon: <FaUsers /> },
         { path: '/innovations', name: 'Innovations', icon: <FaLightbulb /> },
         { path: '/innovators', name: 'Innovators', icon: <FaBrain /> },
-        { path: '/schemes', name: 'Schemes', icon: <FaClipboardList /> },
+        { 
+            path: '/schemes', 
+            name: 'Schemes', 
+            icon: <FaClipboardList />,
+            dropdown: [
+                { path: '/schemes/startup-india', name: 'Startup India Support' },
+                { path: '/schemes/women-entrepreneurship', name: 'Women Entrepreneurship' },
+                { path: '/schemes/incubator-framework', name: 'Incubator Framework' }
+            ]
+        },
         { path: '/ipr-rights', name: 'IPR', icon: <FaCopyright /> },
         { path: '/funding', name: 'Funding', icon: <FaMoneyBillWave /> }
     ];
 
     return (
         <>
-            <header className={`fixed-top bg-light border-bottom shadow-sm py-2 ${isScrolled ? 'scrolled' : ''}`}>
+            <header className={`fixed-top shadow-sm py-2 ${isScrolled ? 'scrolled' : ''}`}>
                 <div className="container d-flex justify-content-between align-items-center">
                     {/* Left - Logo */}
                     <div className="d-flex align-items-center">
-                        <h1 className="m-0" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>StartupHub</h1>
+                        <h1 className="m-0 logo-text">StartupHub</h1>
                     </div>
 
                     {/* Middle - Menu Bar */}
-                    <nav className="navbar navbar-expand">
-                        <ul className="navbar-nav mx-auto">
-                            {menuItems.map((item, index) => (
-                                <li className="nav-item" key={index}>
-                                    <Link 
-                                        to={item.path} 
-                                        className={`nav-link d-flex align-items-center ${
-                                            location.pathname === item.path ? 'active' : ''
-                                        }`}
-                                    >
-                                        <span className="me-1">{item.icon}</span>
-                                        {item.name}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
+                    <nav className="navbar navbar-expand-lg">
+                        <button 
+                            className="navbar-toggler" 
+                            type="button" 
+                            data-bs-toggle="collapse" 
+                            data-bs-target="#navbarNav"
+                        >
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+                        <div className="collapse navbar-collapse" id="navbarNav">
+                            <ul className="navbar-nav mx-auto">
+                                {menuItems.map((item, index) => (
+                                    <li className={`nav-item ${item.dropdown ? 'dropdown-hover' : ''}`} key={index}>
+                                        <Link 
+                                            to={item.path} 
+                                            className={`nav-link d-flex align-items-center ${
+                                                location.pathname === item.path ? 'active' : ''
+                                            }`}
+                                        >
+                                            <span className="me-1">{item.icon}</span>
+                                            {item.name}
+                                        </Link>
+                                        {item.dropdown && (
+                                            <div className="dropdown-content">
+                                                {item.dropdown.map((dropItem, dropIndex) => (
+                                                    <Link 
+                                                        key={dropIndex}
+                                                        to={dropItem.path}
+                                                        className={location.pathname === dropItem.path ? 'active' : ''}
+                                                    >
+                                                        {dropItem.name}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </nav>
-                {/* Middle - Menu Bar */}
-                <nav className="navbar navbar-expand">
-                    <ul className="navbar-nav mx-auto">
-                        <li className="nav-item">
-                            <Link to="/" className="nav-link">Home</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/startups" className="nav-link">Startups</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/investors" className="nav-link">Investors</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/innovations" className="nav-link">Innovations</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/innovators" className="nav-link">Innovators</Link>
-                        </li>
-                        <li className="nav-item dropdown-hover">
-                            <Link to="/schemes" className="nav-link">
-                                Schemes
-                            </Link>
-                            <div className="dropdown-content">
-                                <Link to="/schemes/startup-india">Startup India Support</Link>
-                                <Link to="/schemes/women-entrepreneurship">Women Entrepreneurship</Link>
-                                <Link to="/schemes/incubator-framework">Incubator Framework</Link>
-                            </div>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/ipr-rights" className="nav-link">IPR Rights</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/funding" className="nav-link">Funding</Link>
-                        </li>
-                    </ul>
-                </nav>
 
                     {/* Right - Auth Buttons */}
                     <div className="auth-buttons d-flex gap-2">
-                        <Link 
-                            to="/login" 
-                            className="btn btn-outline-primary"
-                            style={{ borderRadius: '20px' }}
-                        >
+                        <Link to="/login" className="btn btn-outline-primary">
                             Log In
                         </Link>
-                        <Link 
-                            to="/signup" 
-                            className="btn btn-primary"
-                            style={{ borderRadius: '20px' }}
-                        >
+                        <Link to="/signup" className="btn btn-primary">
                             Sign Up
                         </Link>
                     </div>
                 </div>
             </header>
             
-            {/* Spacer div to prevent content from hiding under fixed header */}
+            {/* Spacer div */}
             <div style={{ height: '70px' }}></div>
         </>
     );
