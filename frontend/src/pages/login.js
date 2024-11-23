@@ -15,7 +15,7 @@ const LoginPage = () => {
         } else if (userType === "ipr-professional"){
             navigate("/ipr-professional-profile");
         } else if (userType === "researcher"){
-            navigate("/researcher-profile");
+            navigate("/researcher");
         }
     };
 

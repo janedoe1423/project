@@ -1,0 +1,112 @@
+/* Variables */
+:root {
+    --purple: #6f42c1;
+    --purple-light: #f8f6fe;
+}
+
+/* General Styles */
+.researcher-profile {
+    background-color: var(--purple-light);
+}
+
+/* Profile Image */
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Cards */
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Social Links */
+.social-links a {
+    color: var(--purple);
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    opacity: 0.8;
+}
+
+/* Badges */
+.badge {
+    background-color: var(--purple);
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+}
+
+/* Info Items */
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Text Colors */
+.text-purple {
+    color: var(--purple) !important;
+}
+
+/* Collaboration Icon */
+.collab-icon {
+    font-size: 2rem;
+    color: var(--purple);
+}
+
+/* Publication Item */
+.publication-item {
+    margin-bottom: 1rem;
+}
+
+.publication-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Achievement Item */
+.achievement-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.achievement-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Custom Button */
+.btn-purple {
+    background-color: var(--purple);
+    border-color: var(--purple);
+    color: white;
+}
+
+.btn-purple:hover {
+    background-color: #5e35b1;
+    border-color: #5e35b1;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+}

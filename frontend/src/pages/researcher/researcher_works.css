@@ -1,0 +1,239 @@
+/* Main Container */
+.researcher-works {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* Neumorphic Card Styles */
+.neumorphic-card {
+    border: none;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 
+        8px 8px 16px rgba(111, 66, 193, 0.1),
+        -8px -8px 16px rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+    height: -webkit-fill-available;
+}
+
+.neumorphic-card .card-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(111, 66, 193, 0.1);
+    padding: 1.2rem;
+}
+
+/* Neumorphic Button Styles */
+.neumorphic-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem 1.5rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-purple {
+    background: linear-gradient(145deg, #6f42c1, #8b5cf6);
+    color: white;
+    box-shadow: 
+        4px 4px 8px rgba(111, 66, 193, 0.2),
+        -4px -4px 8px rgba(255, 255, 255, 0.9);
+}
+
+.btn-purple:hover {
+    background: linear-gradient(145deg, #8b5cf6, #6f42c1);
+    transform: translateY(-2px);
+    color: white;
+    box-shadow: 
+        6px 6px 12px rgba(111, 66, 193, 0.3),
+        -4px -4px 8px rgba(255, 255, 255, 0.9);
+}
+
+.btn-outline-purple {
+    background: white;
+    color: #6f42c1;
+    border: 1px solid #6f42c1;
+}
+
+.btn-outline-purple:hover {
+    background: linear-gradient(145deg, #6f42c1, #8b5cf6);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Search Input */
+.neumorphic-input {
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem 1.2rem;
+    background: #f8f9fa;
+    box-shadow: 
+        inset 4px 4px 8px rgba(111, 66, 193, 0.1),
+        inset -4px -4px 8px rgba(255, 255, 255, 0.9);
+}
+
+.neumorphic-input:focus {
+    box-shadow: 
+        inset 6px 6px 12px rgba(111, 66, 193, 0.15),
+        inset -4px -4px 8px rgba(255, 255, 255, 0.9);
+    border: none;
+    outline: none;
+}
+
+/* Category Filters */
+.category-filters .btn {
+    text-align: left;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.category-filters .btn-light {
+    background: white;
+    box-shadow: 
+        4px 4px 8px rgba(111, 66, 193, 0.1),
+        -4px -4px 8px rgba(255, 255, 255, 0.8);
+}
+
+.category-filters .btn-light:hover {
+    background: #f8f9fa;
+    transform: translateX(3px);
+}
+
+/* Research Table */
+.research-table {
+    margin: 0;
+}
+
+.research-table thead th {
+    background: #f8f9fa;
+    border: none;
+    padding: 1rem;
+    font-weight: 600;
+    color: #495057;
+}
+
+.research-table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(111, 66, 193, 0.1);
+}
+
+/* Citations Badge */
+.citations-badge {
+    background: rgba(111, 66, 193, 0.1);
+    color: #6f42c1;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+/* Key Findings & Collaboration Notes */
+.key-findings, .collaboration-notes {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+    color: #6c757d;
+}
+
+.text-purple {
+    color: #6f42c1;
+}
+
+/* Dropdown Menu */
+.dropdown-toggle.no-caret::after {
+    display: none;
+}
+
+.dropdown-menu {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 
+        6px 6px 12px rgba(111, 66, 193, 0.15),
+        -4px -4px 8px rgba(255, 255, 255, 0.8);
+}
+
+.dropdown-item:hover {
+    background: rgba(111, 66, 193, 0.1);
+    color: #6f42c1;
+}
+
+/* Modal Styles */
+.modal-content {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 
+        8px 8px 16px rgba(111, 66, 193, 0.15),
+        -8px -8px 16px rgba(255, 255, 255, 0.8);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(111, 66, 193, 0.1);
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(111, 66, 193, 0.1);
+}
+
+/* Badge Styles */
+.badge.bg-purple {
+    background: linear-gradient(145deg, #6f42c1, #8b5cf6) !important;
+    font-weight: 500;
+    padding: 0.5em 0.8em;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .neumorphic-card {
+        margin-bottom: 1rem;
+    }
+
+    .research-table td {
+        padding: 0.8rem;
+    }
+
+    .citations-badge {
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+/* Form Select Multiple */
+.form-select[multiple] {
+    padding: 0.8rem;
+    background: #f8f9fa;
+    box-shadow: 
+        inset 4px 4px 8px rgba(111, 66, 193, 0.1),
+        inset -4px -4px 8px rgba(255, 255, 255, 0.9);
+    border: none;
+}
+
+.form-select[multiple] option {
+    padding: 0.5rem;
+    margin: 0.2rem 0;
+    border-radius: 5px;
+}
+
+.form-select[multiple] option:checked {
+    background: linear-gradient(145deg, #6f42c1, #8b5cf6);
+    color: white;
+}
+
+/* Table Hover Effects */
+.research-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.research-table tbody tr:hover {
+    background: rgba(111, 66, 193, 0.05);
+    transform: translateX(3px);
+}
+
+/* External Link Icon */
+.fa-external-link-alt {
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+a:hover .fa-external-link-alt {
+    transform: translateY(-2px);
+}

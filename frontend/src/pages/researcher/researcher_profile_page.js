@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ResearcherDashboard from "./researcher_dashboard";
 import ResearcherProfile from "./researcher_profile";
 import ResearcherGrantsFunding from "./researcher_grantsfunding";
@@ -9,6 +9,20 @@ import ResearcherSidebar from "./researcher_sidebar";
 import ResearchersCollaborationRequests from "./researcher_collaboration";
 
 const Researcher = () => {
+    const [currentHash, setCurrentHash] = useState(window.location.hash || "#dashboard");
+
+    useEffect(() => {
+        const handleHashChange = () => {
+            setCurrentHash(window.location.hash);
+        };
+
+        window.addEventListener('hashchange', handleHashChange);
+        
+        return () => {
+            window.removeEventListener('hashchange', handleHashChange);
+        };
+    }, []);
+
     const renderPage = (hash) => {
         switch (hash) {
             case "#dashboard":
@@ -20,11 +34,11 @@ const Researcher = () => {
             case "#ipr":
                 return <ResearcherIPR />;
             case "#collaboration-requests":
-                return <ResearchersCollaborationRequests/>;
+                return <ResearchersCollaborationRequests />;
             case "#grants-funding":
                 return <ResearcherGrantsFunding />;
             case "#insights":
-                return <ResearcherInsights/>;
+                return <ResearcherInsights />;
             default:
                 return <ResearcherDashboard />;
         }
@@ -32,9 +46,9 @@ const Researcher = () => {
 
     return (
         <div className="d-flex">
-            <ResearcherSidebar />
+            <ResearcherSidebar currentHash={currentHash} />
             <div className="flex-grow-1 p-4">
-                {renderPage(window.location.hash)}
+                {renderPage(currentHash)}
             </div>
         </div>
     );
