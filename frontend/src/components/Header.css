@@ -66,26 +66,19 @@
 }
 
 .nav-link {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.85);
-    padding: 0.3rem 0.8rem;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
+    color: #666;
+    transition: color 0.3s ease;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
 }
 
 .nav-link:hover {
-    background: rgba(255, 255, 255, 0.15);
-    color: #ffffff;
+    color: #7B68EE;
 }
 
 .nav-link.active {
-    background: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    font-weight: 500;
+    color: #7B68EE;
+    font-weight: 600;
 }
 
 .nav-icon {
@@ -226,4 +219,35 @@
 
 .auth-buttons .btn:hover::before {
     left: 100%;
+}
+
+.auth-buttons .btn {
+    padding: 0.375rem 1.5rem;
+    font-weight: 500;
+}
+
+.btn-outline-primary {
+    border-color: #7B68EE;
+    color: #7B68EE;
+}
+
+.btn-outline-primary:hover {
+    background-color: #7B68EE;
+    border-color: #7B68EE;
+    color: white;
+}
+
+.btn-primary {
+    background-color: #7B68EE;
+    border-color: #7B68EE;
+}
+
+.btn-primary:hover {
+    background-color: #6c5ce7;
+    border-color: #6c5ce7;
+}
+
+.header.scrolled {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.9) !important;
 }

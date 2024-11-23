@@ -1,0 +1,518 @@
+/* Add these new styles at the top of your existing CSS file */
+
+.hero-image {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+.intro-text {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: justify;
+    color: #444;
+    line-height: 1.8;
+}
+
+.lead {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+h1 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+/* Button Styles */
+.government-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.government-btn {
+    min-width: 200px;
+    padding: 12px 24px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.government-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Search Input Styles */
+.search-input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.search-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+    border-color: #86b7fe;
+}
+
+/* Table Styles */
+.schemes-table {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+.schemes-table thead {
+    background-color: #f8f9fa;
+}
+
+.schemes-table th {
+    padding: 15px;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.schemes-table td {
+    padding: 15px;
+    vertical-align: middle;
+}
+
+.schemes-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Website Link Styles */
+.website-link {
+    color: #0d6efd;
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid #0d6efd;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.website-link:hover {
+    background-color: #0d6efd;
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .government-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .government-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .schemes-table {
+        font-size: 14px;
+    }
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 3rem 0;
+    background: linear-gradient(47deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
+    margin-bottom: 3rem;
+    animation: slide-down 0.5s ease-out;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    margin: 0 auto 2.5rem;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.hero-image:hover {
+    transform: scale(1.02);
+}
+
+/* Button Styles */
+.government-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.btn-government {
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+}
+
+.btn-government.active {
+    background-image: linear-gradient(47deg, rgb(238, 130, 25) 0px, rgb(239, 69, 89) 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(239, 69, 89, 0.3);
+}
+
+/* Search Section */
+.search-section {
+    margin-bottom: 2rem;
+}
+
+.form-control {
+    border-radius: 25px;
+    padding: 0.8rem 1.2rem;
+    border: 2px solid #e9ecef;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: rgb(238, 130, 25);
+    box-shadow: 0 0 0 0.2rem rgba(238, 130, 25, 0.25);
+}
+
+/* Table Styles */
+.schemes-table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    animation: fade-in 0.5s ease-out;
+}
+
+.schemes-table thead {
+    background-image: linear-gradient(47deg, rgb(238, 130, 25) 0px, rgb(239, 69, 89) 100%);
+    color: white;
+}
+
+.schemes-table th {
+    padding: 1.2rem 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.schemes-table td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.schemes-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.schemes-table tbody tr:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.01);
+}
+
+/* Website Link Button */
+.website-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background-image: linear-gradient(47deg, rgb(238, 130, 25) 0px, rgb(239, 69, 89) 100%);
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.website-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(239, 69, 89, 0.3);
+    color: white;
+    text-decoration: none;
+}
+
+/* Animations */
+@keyframes slide-down {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .government-buttons {
+        flex-direction: column;
+    }
+    
+    .btn-government {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .schemes-table {
+        font-size: 0.9rem;
+    }
+}
+
+/* State Policies Section */
+.state-policies-section {
+    margin-top: 4rem;
+    padding: 2rem 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+.states-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.state-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.state-card:hover {
+    transform: translateY(-5px);
+}
+
+.state-image-container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.state-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.state-card:hover .state-image {
+    transform: scale(1.05);
+}
+
+/* Introduction Section */
+.intro-section {
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+    animation: fade-in 0.8s ease-out;
+}
+
+.intro-title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    background: linear-gradient(47deg, #ee8219 0%, #ef4559 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.intro-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.intro-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.intro-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .intro-title {
+        font-size: 2rem;
+    }
+
+    .intro-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Blogs Section */
+.blogs-section {
+    padding: 4rem 0;
+    background: #fff;
+}
+
+.blogs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.blog-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.blog-image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.blog-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover .blog-image {
+    transform: scale(1.05);
+}
+
+.blog-content {
+    padding: 1.5rem;
+}
+
+.blog-date {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.blog-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.blog-author {
+    color: #28a745;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.see-all-blogs {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.see-all-button {
+    background: linear-gradient(47deg, #ee8219 0%, #ef4559 100%);
+    border: none;
+    padding: 0.8rem 2.5rem;
+    font-weight: 600;
+    border-radius: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.see-all-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(239, 69, 89, 0.3);
+    background: linear-gradient(47deg, #ef4559 0%, #ee8219 100%);
+}
+
+/* Navigation Arrows */
+.blogs-navigation {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.nav-arrow {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.nav-arrow:hover {
+    background: #f8f9fa;
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .blogs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .blogs-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .blog-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}

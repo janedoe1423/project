@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import './Header.css';
-import { FaHome, FaRocket, FaUsers, FaLightbulb, FaBrain, 
-         FaClipboardList, FaCopyright, FaMoneyBillWave } from 'react-icons/fa';
+import { 
+  FaHome, 
+  FaRocket, 
+  FaUsers, 
+  FaLightbulb, 
+  FaBrain, 
+  FaClipboardList, 
+  FaCopyright, 
+  FaMoneyBillWave 
+} from 'react-icons/fa';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -29,43 +37,90 @@ function Header() {
 
     return (
         <>
-            <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
-                <div className="header-container">
-                    {/* Logo */}
-                    <Link to="/" className="logo">
-                        <span className="logo-text">StartupHub</span>
-                    </Link>
+            <header className={`fixed-top bg-light border-bottom shadow-sm py-2 ${isScrolled ? 'scrolled' : ''}`}>
+                <div className="container d-flex justify-content-between align-items-center">
+                    {/* Left - Logo */}
+                    <div className="d-flex align-items-center">
+                        <h1 className="m-0" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>StartupHub</h1>
+                    </div>
 
-                    {/* Navigation Menu */}
-                    <nav className="nav-menu">
-                        <ul className="nav-list">
-                            {menuItems.map((item) => (
-                                <li key={item.path} className="nav-item">
+                    {/* Middle - Menu Bar */}
+                    <nav className="navbar navbar-expand">
+                        <ul className="navbar-nav mx-auto">
+                            {menuItems.map((item, index) => (
+                                <li className="nav-item" key={index}>
                                     <Link 
                                         to={item.path} 
-                                        className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
+                                        className={`nav-link d-flex align-items-center ${
+                                            location.pathname === item.path ? 'active' : ''
+                                        }`}
                                     >
-                                        <span className="nav-icon">{item.icon}</span>
-                                        <span className="nav-text">{item.name}</span>
+                                        <span className="me-1">{item.icon}</span>
+                                        {item.name}
                                     </Link>
                                 </li>
                             ))}
                         </ul>
                     </nav>
+                {/* Middle - Menu Bar */}
+                <nav className="navbar navbar-expand">
+                    <ul className="navbar-nav mx-auto">
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link">Home</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/startups" className="nav-link">Startups</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/investors" className="nav-link">Investors</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/innovations" className="nav-link">Innovations</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/innovators" className="nav-link">Innovators</Link>
+                        </li>
+                        <li className="nav-item dropdown-hover">
+                            <Link to="/schemes" className="nav-link">
+                                Schemes
+                            </Link>
+                            <div className="dropdown-content">
+                                <Link to="/schemes/startup-india">Startup India Support</Link>
+                                <Link to="/schemes/women-entrepreneurship">Women Entrepreneurship</Link>
+                                <Link to="/schemes/incubator-framework">Incubator Framework</Link>
+                            </div>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/ipr-rights" className="nav-link">IPR Rights</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/funding" className="nav-link">Funding</Link>
+                        </li>
+                    </ul>
+                </nav>
 
-                    {/* Auth Buttons */}
-                    <div className="auth-buttons">
-                        <Link to="/login" className="btn btn-login">
+                    {/* Right - Auth Buttons */}
+                    <div className="auth-buttons d-flex gap-2">
+                        <Link 
+                            to="/login" 
+                            className="btn btn-outline-primary"
+                            style={{ borderRadius: '20px' }}
+                        >
                             Log In
                         </Link>
-                        <Link to="/signup" className="btn btn-signup">
+                        <Link 
+                            to="/signup" 
+                            className="btn btn-primary"
+                            style={{ borderRadius: '20px' }}
+                        >
                             Sign Up
                         </Link>
                     </div>
                 </div>
             </header>
+            
             {/* Spacer div to prevent content from hiding under fixed header */}
-            <div className="header-spacer"></div>
+            <div style={{ height: '70px' }}></div>
         </>
     );
 }
