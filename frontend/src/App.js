@@ -19,6 +19,7 @@ import InvestorDashboard from './pages/investor/InvestorDashboard'; // Import In
 import 'antd/dist/reset.css'; // for antd v5
 import WomenEntrepreneurship from './pages/Schemes and policies/WomenEntrepreneurship';
 import StartupGujarat from './pages/Schemes and policies/StartupGujarat';
+import Incubator from './pages/Schemes and policies/Incubator';
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
       <Header />
       <div className="main-content">
         <Routes>
-          
+
           <Route path="/" element={<Home />} />
           <Route path="/startups" element={<Startups />} />
           <Route path="/investors" element={<Investors />} />
@@ -42,6 +43,7 @@ function App() {
           <Route path="/ipr-professional-profile" element={<IPRProfilePage />} />
           <Route path="/schemes/women-entrepreneurship" element={<WomenEntrepreneurship />} />
           <Route path="/schemes/startup-gujarat" element={<StartupGujarat />} />
+          <Route path="/schemes/incubator-framework" element={<Incubator />} />
         </Routes>
       </div>
       <Footer />
