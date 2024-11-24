@@ -18,9 +18,7 @@ function Header() {
     const location = useLocation();
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
-        };
+        const handleScroll = () => setIsScrolled(window.scrollY > 20);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -47,14 +45,12 @@ function Header() {
 
     return (
         <>
-            <header className={`fixed-top shadow-sm py-2 ${isScrolled ? 'scrolled' : ''}`}>
+            <header className={`fixed-top py-2 ${isScrolled ? 'scrolled' : ''}`}>
                 <div className="container d-flex justify-content-between align-items-center">
-                    {/* Left - Logo */}
                     <div className="d-flex align-items-center">
                         <h1 className="m-0 logo-text">StartupHub</h1>
                     </div>
 
-                    {/* Middle - Menu Bar */}
                     <nav className="navbar navbar-expand-lg">
                         <button 
                             className="navbar-toggler" 
@@ -96,20 +92,13 @@ function Header() {
                         </div>
                     </nav>
 
-                    {/* Right - Auth Buttons */}
                     <div className="auth-buttons d-flex gap-2">
-                        <Link to="/login" className="btn btn-outline-primary">
-                            Log In
-                        </Link>
-                        <Link to="/signup" className="btn btn-primary">
-                            Sign Up
-                        </Link>
+                        <Link to="/login" className="btn btn-outline-primary">Log In</Link>
+                        <Link to="/signup" className="btn btn-primary">Sign Up</Link>
                     </div>
                 </div>
             </header>
-            
-            {/* Spacer div */}
-            <div style={{ height: '70px' }}></div>
+            <div style={{ height: '60px' }} />
         </>
     );
 }

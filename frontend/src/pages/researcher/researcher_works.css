@@ -9,7 +9,7 @@
     border: none;
     border-radius: 15px;
     background: #ffffff;
-    box-shadow: 
+    box-shadow:
         8px 8px 16px rgba(111, 66, 193, 0.1),
         -8px -8px 16px rgba(255, 255, 255, 0.8);
     margin-bottom: 1.5rem;
@@ -34,7 +34,7 @@
 .btn-purple {
     background: linear-gradient(145deg, #6f42c1, #8b5cf6);
     color: white;
-    box-shadow: 
+    box-shadow:
         4px 4px 8px rgba(111, 66, 193, 0.2),
         -4px -4px 8px rgba(255, 255, 255, 0.9);
 }
@@ -43,7 +43,7 @@
     background: linear-gradient(145deg, #8b5cf6, #6f42c1);
     transform: translateY(-2px);
     color: white;
-    box-shadow: 
+    box-shadow:
         6px 6px 12px rgba(111, 66, 193, 0.3),
         -4px -4px 8px rgba(255, 255, 255, 0.9);
 }
@@ -66,13 +66,13 @@
     border-radius: 10px;
     padding: 0.8rem 1.2rem;
     background: #f8f9fa;
-    box-shadow: 
+    box-shadow:
         inset 4px 4px 8px rgba(111, 66, 193, 0.1),
         inset -4px -4px 8px rgba(255, 255, 255, 0.9);
 }
 
 .neumorphic-input:focus {
-    box-shadow: 
+    box-shadow:
         inset 6px 6px 12px rgba(111, 66, 193, 0.15),
         inset -4px -4px 8px rgba(255, 255, 255, 0.9);
     border: none;
@@ -88,7 +88,7 @@
 
 .category-filters .btn-light {
     background: white;
-    box-shadow: 
+    box-shadow:
         4px 4px 8px rgba(111, 66, 193, 0.1),
         -4px -4px 8px rgba(255, 255, 255, 0.8);
 }
@@ -129,7 +129,8 @@
 }
 
 /* Key Findings & Collaboration Notes */
-.key-findings, .collaboration-notes {
+.key-findings,
+.collaboration-notes {
     display: flex;
     align-items: center;
     margin-top: 0.5rem;
@@ -148,7 +149,7 @@
 .dropdown-menu {
     border: none;
     border-radius: 10px;
-    box-shadow: 
+    box-shadow:
         6px 6px 12px rgba(111, 66, 193, 0.15),
         -4px -4px 8px rgba(255, 255, 255, 0.8);
 }
@@ -162,7 +163,7 @@
 .modal-content {
     border: none;
     border-radius: 15px;
-    box-shadow: 
+    box-shadow:
         8px 8px 16px rgba(111, 66, 193, 0.15),
         -8px -8px 16px rgba(255, 255, 255, 0.8);
 }
@@ -201,7 +202,7 @@
 .form-select[multiple] {
     padding: 0.8rem;
     background: #f8f9fa;
-    box-shadow: 
+    box-shadow:
         inset 4px 4px 8px rgba(111, 66, 193, 0.1),
         inset -4px -4px 8px rgba(255, 255, 255, 0.9);
     border: none;
@@ -236,4 +237,178 @@
 
 a:hover .fa-external-link-alt {
     transform: translateY(-2px);
+}
+
+/* Update the table responsive styles */
+.table-responsive {
+    overflow-x: hidden;
+    /* Change from auto to hidden */
+}
+
+/* Update research table styles */
+.research-table {
+    width: 100%;
+    table-layout: fixed;
+    /* Add fixed layout */
+}
+
+.research-table th,
+.research-table td {
+    word-wrap: break-word;
+    /* Allow text wrapping */
+    white-space: normal;
+    /* Allow text wrapping */
+}
+
+/* Define column widths */
+.research-table th:nth-child(1),
+.research-table td:nth-child(1) {
+    width: 45%;
+    /* Title & Key Findings column */
+}
+
+.research-table th:nth-child(2),
+.research-table td:nth-child(2) {
+    width: 15%;
+    /* Citations column */
+}
+
+.research-table th:nth-child(3),
+.research-table td:nth-child(3) {
+    width: 30%;
+    /* Category column */
+}
+
+.research-table th:nth-child(4),
+.research-table td:nth-child(4) {
+    width: 10%;
+    /* Actions column */
+}
+
+/* Update badge styles for better wrapping */
+.badge {
+    display: inline-block;
+    margin-bottom: 0.25rem;
+    white-space: normal;
+    text-align: center;
+}
+
+/* Make the content more responsive */
+@media (max-width: 992px) {
+
+    .research-table th:nth-child(2),
+    .research-table td:nth-child(2) {
+        width: 20%;
+    }
+
+    .research-table th:nth-child(3),
+    .research-table td:nth-child(3) {
+        width: 25%;
+    }
+}
+
+/* Update the research table styles */
+.research-table tbody tr {
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    /* Add transparent border by default */
+}
+
+.research-table tbody tr:hover {
+    background: rgba(111, 66, 193, 0.05);
+    border-left: 3px solid #6f42c1;
+    /* Purple border on hover */
+    transform: translateX(3px);
+}
+
+/* Update hover effects for text elements */
+.research-table tbody tr:hover h6 {
+    color: #6f42c1;
+    /* Purple title on hover */
+}
+
+.research-table tbody tr:hover .text-muted {
+    color: #8b5cf6 !important;
+    /* Lighter purple for muted text on hover */
+}
+
+.research-table tbody tr:hover .key-findings,
+.research-table tbody tr:hover .collaboration-notes {
+    color: #6f42c1;
+    /* Purple text for findings and collaborators on hover */
+}
+
+/* Enhanced table styling */
+.research-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.research-table td {
+    padding: 1.2rem 1rem;
+    vertical-align: middle;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(111, 66, 193, 0.1);
+}
+
+/* Enhance the work details container */
+.work-details {
+    padding: 0.5rem 0;
+}
+
+/* Add hover effect to icons */
+.research-table tbody tr:hover .text-purple {
+    color: #8b5cf6 !important;
+    /* Brighter purple for icons on hover */
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+/* Enhanced badge hover effect */
+.research-table tbody tr:hover .badge.bg-purple {
+    background: linear-gradient(145deg, #8b5cf6, #6f42c1) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(111, 66, 193, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Citations badge hover effect */
+.research-table tbody tr:hover .citations-badge {
+    background: rgba(111, 66, 193, 0.15);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(111, 66, 193, 0.1);
+}
+
+/* Add subtle animation to the border */
+@keyframes borderPulse {
+    0% {
+        border-left-color: rgba(111, 66, 193, 0.7);
+    }
+
+    50% {
+        border-left-color: rgba(139, 92, 246, 0.9);
+    }
+
+    100% {
+        border-left-color: rgba(111, 66, 193, 0.7);
+    }
+}
+
+.research-table tbody tr:hover {
+    animation: borderPulse 2s infinite;
+}
+
+/* Enhance dropdown hover effect */
+.research-table tbody tr:hover .dropdown-toggle {
+    color: #6f42c1;
+    opacity: 1;
+}
+
+/* Add a subtle box shadow on hover */
+.research-table tbody tr:hover {
+    box-shadow: 0 2px 8px rgba(111, 66, 193, 0.1);
+    position: relative;
+    z-index: 1;
 }
