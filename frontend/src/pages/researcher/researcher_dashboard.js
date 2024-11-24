@@ -97,10 +97,10 @@ const ResearcherDashboard = () => {
                 <Col>
                     <Card className="quick-actions-card">
                         <Card.Body>
-                            <h2 className="section-title mb-3">
+                            <h4 className="section-title mb-3">
                                 <FaLightbulb className="me-2" />
                                 Quick Actions
-                            </h2>
+                            </h4>
                             <div className="quick-actions-grid">
                                 <Button variant="gradient-primary">
                                     <FaPlus className="action-icon" />

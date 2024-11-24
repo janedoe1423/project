@@ -10,7 +10,7 @@ import {
     FaBell, FaFolder, FaRobot, FaBook, FaPlus,
     FaDownload, FaExclamationTriangle, FaCheckCircle,
     FaHourglassHalf, FaTimesCircle, FaFileAlt,
-    FaCertificate, FaUsers, FaChevronDown
+    FaCertificate, FaUsers, FaChevronDown, FaCircle
 } from 'react-icons/fa';
 import './researcher_ipr.css';
 
@@ -18,6 +18,13 @@ const ResearcherIPR = () => {
     const [selectedStatus, setSelectedStatus] = useState('granted');
     const [selectedIPR, setSelectedIPR] = useState(null);
     const [showAddModal, setShowAddModal] = useState(false);
+    const [newIPR, setNewIPR] = useState({
+        title: '',
+        type: '',
+        description: '',
+        inventors: '',
+        filingDate: ''
+    });
 
     // Sample IPR Data
     const iprData = {
@@ -81,16 +88,6 @@ const ResearcherIPR = () => {
         ]
     };
 
-    // Status Badge Color
-    const getStatusBadgeColor = (status) => {
-        switch(status) {
-            case 'granted': return 'success';
-            case 'pending': return 'warning';
-            case 'rejected': return 'danger';
-            default: return 'secondary';
-        }
-    };
-
     // Render IPR List Item
     const renderIPRListItem = (ipr) => (
         <ListGroup.Item 
@@ -98,7 +95,7 @@ const ResearcherIPR = () => {
             action
             active={selectedIPR?.id === ipr.id}
             onClick={() => setSelectedIPR(ipr)}
-            className="border-0 p-3"
+            className="border-0 p-3 ipr-list-item"
         >
             <h6 className="mb-1">{ipr.title}</h6>
             <small className="text-muted d-block">
@@ -118,197 +115,190 @@ const ResearcherIPR = () => {
         </ListGroup.Item>
     );
 
-    // Render Details Based on Status
-    const renderIPRDetails = () => {
+    // Render Detail Content
+    const renderDetailContent = () => {
         if (!selectedIPR) return null;
 
-        switch(selectedStatus) {
+        switch (selectedStatus) {
             case 'granted':
                 return (
-                    <Card className="neumorphic-card h-100">
-                        <Card.Header className="bg-success bg-opacity-10">
-                            <h5 className="mb-0 text-success">
-                                <FaCheckCircle className="me-2" />
-                                Granted Patent Details
-                            </h5>
-                        </Card.Header>
-                        <Card.Body>
-                            <Row className="mb-4">
-                                <Col md={6}>
-                                    <ListGroup variant="flush">
-                                        <ListGroup.Item>
-                                            <strong>Patent Number:</strong> {selectedIPR.patentNumber}
-                                        </ListGroup.Item>
-                                        <ListGroup.Item>
-                                            <strong>Grant Date:</strong> {selectedIPR.grantDate}
-                                        </ListGroup.Item>
-                                        <ListGroup.Item>
-                                            <strong>Expiry Date:</strong> {selectedIPR.expiryDate}
-                                        </ListGroup.Item>
-                                    </ListGroup>
-                                </Col>
-                                <Col md={6}>
-                                    <ListGroup variant="flush">
-                                        <ListGroup.Item>
-                                            <strong>Citations:</strong> {selectedIPR.citations}
-                                        </ListGroup.Item>
-                                        <ListGroup.Item>
-                                            <strong>Inventors:</strong><br />
-                                            {selectedIPR.inventors?.join(", ")}
-                                        </ListGroup.Item>
-                                    </ListGroup>
-                                </Col>
-                            </Row>
-                            <div className="mt-4">
-                                <h6>Documents</h6>
-                                <div className="document-grid">
-                                    {selectedIPR.documents?.map((doc, index) => (
+                    <>
+                        <div className="detail-section">
+                            <h6>Patent Information</h6>
+                            <p className="mb-2">
+                                <strong>Patent Number:</strong> {selectedIPR.patentNumber}
+                            </p>
+                            <p className="mb-2">
+                                <strong>Grant Date:</strong> {selectedIPR.grantDate}
+                            </p>
+                            <p className="mb-2">
+                                <strong>Expiry Date:</strong> {selectedIPR.expiryDate}
+                            </p>
+                        </div>
+                        <div className="detail-section">
+                            <h6>Inventors</h6>
+                            <ListGroup variant="flush">
+                                {selectedIPR.inventors.map((inventor, index) => (
+                                    <ListGroup.Item key={index} className="px-0">
+                                        <FaUsers className="me-2 text-purple" />
+                                        {inventor}
+                                    </ListGroup.Item>
+                                ))}
+                            </ListGroup>
+                        </div>
+                        <div className="detail-section">
+                            <h6>Description</h6>
+                            <p>{selectedIPR.description}</p>
+                        </div>
+                        <div className="detail-section">
+                            <h6>Documents</h6>
+                            <ListGroup variant="flush">
+                                {selectedIPR.documents.map((doc, index) => (
+                                    <ListGroup.Item key={index} className="px-0">
+                                        <FaFileAlt className="me-2 text-purple" />
+                                        {doc.name}
                                         <Button 
-                                            key={index}
-                                            variant="light" 
-                                            className="neumorphic-btn-light me-2 mb-2"
+                                            variant="link" 
+                                            className="float-end p-0"
+                                            size="sm"
                                         >
-                                            <FaFileAlt className="me-2" />
-                                            {doc.name}
+                                            <FaDownload />
                                         </Button>
-                                    ))}
-                                </div>
-                            </div>
-                        </Card.Body>
-                    </Card>
+                                    </ListGroup.Item>
+                                ))}
+                            </ListGroup>
+                        </div>
+                    </>
                 );
 
             case 'pending':
                 return (
-                    <Card className="neumorphic-card h-100">
-                        <Card.Header className="bg-warning bg-opacity-10">
-                            <h5 className="mb-0 text-warning">
-                                <FaHourglassHalf className="me-2" />
-                                Application Status
-                            </h5>
-                        </Card.Header>
-                        <Card.Body>
-                            <Row className="mb-4">
-                                <Col md={6}>
-                                    <ListGroup variant="flush">
-                                        <ListGroup.Item>
-                                            <strong>Application Number:</strong><br />
-                                            {selectedIPR.applicationNumber}
-                                        </ListGroup.Item>
-                                        <ListGroup.Item>
-                                            <strong>Filing Date:</strong><br />
-                                            {selectedIPR.filingDate}
-                                        </ListGroup.Item>
-                                        <ListGroup.Item>
-                                            <strong>Current Stage:</strong><br />
-                                            {selectedIPR.currentStage?.name}
-                                        </ListGroup.Item>
-                                    </ListGroup>
-                                </Col>
-                                <Col md={6}>
-                                    <div className="status-timeline">
-                                        {selectedIPR.progressStages?.map((stage, index) => (
-                                            <div 
-                                                key={index}
-                                                className={`timeline-item ${stage.completed ? 'completed' : ''} 
-                                                    ${stage.current ? 'current' : ''}`}
-                                            >
-                                                <div className="timeline-marker">
-                                                    {stage.completed ? 
-                                                        <FaCheckCircle /> : 
-                                                        <FaHourglassHalf />
-                                                    }
-                                                </div>
-                                                <div className="timeline-content">
-                                                    <h6>{stage.name}</h6>
-                                                    {stage.date && 
-                                                        <small className="text-muted">
-                                                            {stage.date}
-                                                        </small>
-                                                    }
-                                                </div>
-                                            </div>
-                                        ))}
+                    <>
+                        <div className="detail-section">
+                            <h6>Application Status</h6>
+                            <p className="mb-2">
+                                <strong>Application Number:</strong> {selectedIPR.applicationNumber}
+                            </p>
+                            <p className="mb-2">
+                                <strong>Filing Date:</strong> {selectedIPR.filingDate}
+                            </p>
+                            <p className="mb-2">
+                                <strong>Current Stage:</strong> {selectedIPR.currentStage.name}
+                            </p>
+                        </div>
+                        <div className="detail-section">
+                            <h6>Progress Timeline</h6>
+                            <div className="timeline">
+                                {selectedIPR.progressStages.map((stage, index) => (
+                                    <div key={index} className="timeline-item">
+                                        <div className={`timeline-marker ${stage.completed ? 'completed' : ''}`}>
+                                            {stage.completed ? 
+                                                <FaCheckCircle /> : 
+                                                stage.current ? 
+                                                <FaHourglassHalf /> : 
+                                                <FaCircle />
+                                            }
+                                        </div>
+                                        <div className="timeline-content">
+                                            <h6>{stage.name}</h6>
+                                            {stage.date && <small>{stage.date}</small>}
+                                        </div>
                                     </div>
-                                </Col>
-                            </Row>
-                            <div className="mt-4">
-                                <h6>Application Documents</h6>
-                                <div className="document-grid">
-                                    {selectedIPR.documents?.map((doc, index) => (
-                                        <Button 
-                                            key={index}
-                                            variant="light" 
-                                            className="neumorphic-btn-light me-2 mb-2"
-                                        >
-                                            <FaFileAlt className="me-2" />
-                                            {doc.name}
-                                        </Button>
-                                    ))}
-                                </div>
+                                ))}
                             </div>
-                        </Card.Body>
-                    </Card>
+                        </div>
+                    </>
                 );
 
             case 'rejected':
                 return (
-                    <Card className="neumorphic-card h-100">
-                        <Card.Header className="bg-danger bg-opacity-10">
-                            <h5 className="mb-0 text-danger">
-                                <FaTimesCircle className="me-2" />
-                                Rejection Details
-                            </h5>
-                        </Card.Header>
-                        <Card.Body>
-                            <Row className="mb-4">
-                                <Col md={6}>
-                                    <ListGroup variant="flush">
-                                        <ListGroup.Item>
-                                            <strong>Application Number:</strong><br />
-                                            {selectedIPR.applicationNumber}
-                                        </ListGroup.Item>
-                                        <ListGroup.Item>
-                                            <strong>Filing Date:</strong><br />
-                                            {selectedIPR.filingDate}
-                                        </ListGroup.Item>
-                                        <ListGroup.Item>
-                                            <strong>Rejection Date:</strong><br />
-                                            {selectedIPR.rejectionDate}
-                                        </ListGroup.Item>
-                                    </ListGroup>
-                                </Col>
-                                <Col md={6}>
-                                    <h6>Rejection Reasons:</h6>
-                                    <ListGroup variant="flush">
-                                        {selectedIPR.rejectionReasons?.map((reason, index) => (
-                                            <ListGroup.Item key={index}>
-                                                • {reason}
-                                            </ListGroup.Item>
-                                        ))}
-                                    </ListGroup>
-                                </Col>
-                            </Row>
-                            <div className="mt-4">
-                                <h6>Related Documents</h6>
-                                <div className="document-grid">
-                                    {selectedIPR.documents?.map((doc, index) => (
-                                        <Button 
-                                            key={index}
-                                            variant="light" 
-                                            className="neumorphic-btn-light me-2 mb-2"
-                                        >
-                                            <FaFileAlt className="me-2" />
-                                            {doc.name}
-                                        </Button>
-                                    ))}
-                                </div>
-                            </div>
-                        </Card.Body>
-                    </Card>
+                    <>
+                        <div className="detail-section">
+                            <h6>Rejection Details</h6>
+                            <p className="mb-2">
+                                <strong>Application Number:</strong> {selectedIPR.applicationNumber}
+                            </p>
+                            <p className="mb-2">
+                                <strong>Filing Date:</strong> {selectedIPR.filingDate}
+                            </p>
+                            <p className="mb-2">
+                                <strong>Rejection Date:</strong> {selectedIPR.rejectionDate}
+                            </p>
+                        </div>
+                        <div className="detail-section">
+                            <h6>Rejection Reasons</h6>
+                            <ListGroup variant="flush">
+                                {selectedIPR.rejectionReasons.map((reason, index) => (
+                                    <ListGroup.Item key={index} className="px-0">
+                                        <FaExclamationTriangle className="me-2 text-danger" />
+                                        {reason}
+                                    </ListGroup.Item>
+                                ))}
+                            </ListGroup>
+                        </div>
+                    </>
                 );
+
             default:
                 return null;
+        }
+    };
+
+    // Render IPR Details
+    const renderIPRDetails = () => {
+        if (!selectedIPR) {
+            return (
+                <Card className="neumorphic-card h-100 empty-state">
+                    <Card.Body className="d-flex align-items-center justify-content-center">
+                        <div className="text-center text-muted">
+                            <FaFolder size={48} className="mb-3" />
+                            <h5>Select an IPR to view details</h5>
+                        </div>
+                    </Card.Body>
+                </Card>
+            );
+        }
+
+        return (
+            <Card className="neumorphic-card h-100">
+                <Card.Header className={`bg-${getStatusColor(selectedStatus)} bg-opacity-10`}>
+                    <h5 className={`mb-0 text-${getStatusColor(selectedStatus)}`}>
+                        {getStatusIcon(selectedStatus)}
+                        {getStatusTitle(selectedStatus)}
+                    </h5>
+                </Card.Header>
+                <Card.Body>
+                    {renderDetailContent()}
+                </Card.Body>
+            </Card>
+        );
+    };
+
+    // Helper functions for status
+    const getStatusColor = (status) => {
+        switch(status) {
+            case 'granted': return 'success';
+            case 'pending': return 'warning';
+            case 'rejected': return 'danger';
+            default: return 'secondary';
+        }
+    };
+
+    const getStatusIcon = (status) => {
+        switch(status) {
+            case 'granted': return <FaCheckCircle className="me-2" />;
+            case 'pending': return <FaHourglassHalf className="me-2" />;
+            case 'rejected': return <FaTimesCircle className="me-2" />;
+            default: return null;
+        }
+    };
+
+    const getStatusTitle = (status) => {
+        switch(status) {
+            case 'granted': return 'Granted Patent Details';
+            case 'pending': return 'Pending Application Details';
+            case 'rejected': return 'Rejected Application Details';
+            default: return 'IPR Details';
         }
     };
 
@@ -334,39 +324,34 @@ const ResearcherIPR = () => {
                 </Col>
             </Row>
 
+            {/* Status Header */}
+            <Row className="mb-4">
+                <Col>
+                    <div className="status-header">
+                        {Object.keys(iprData).map(status => (
+                            <div 
+                                key={status}
+                                className={`status-item ${status} ${selectedStatus === status ? 'active' : ''}`}
+                                onClick={() => {
+                                    setSelectedStatus(status);
+                                    setSelectedIPR(null);
+                                }}
+                            >
+                                <div className="status-count">
+                                    {iprData[status]?.length || 0}
+                                </div>
+                                <div className="status-label">
+                                    {status} IPRs
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </Col>
+            </Row>
+
             {/* Main Content */}
             <Row>
-                {/* Status Tabs */}
-                <Col md={3}>
-                    <Card className="neumorphic-card mb-4">
-                        <ListGroup variant="flush">
-                            {Object.keys(iprData).map(status => (
-                                <ListGroup.Item 
-                                    key={status}
-                                    action
-                                    active={selectedStatus === status}
-                                    onClick={() => {
-                                        setSelectedStatus(status);
-                                        setSelectedIPR(null);
-                                    }}
-                                    className="border-0"
-                                >
-                                    <div className="d-flex justify-content-between align-items-center">
-                                        <span className="text-capitalize">
-                                            {status} IPRs
-                                        </span>
-                                        <Badge bg={getStatusBadgeColor(status)}>
-                                            {iprData[status]?.length || 0}
-                                        </Badge>
-                                    </div>
-                                </ListGroup.Item>
-                            ))}
-                        </ListGroup>
-                    </Card>
-                </Col>
-
-                {/* IPR List */}
-                <Col md={4}>
+                <Col md={5}>
                     <Card className="neumorphic-card">
                         <Card.Header>
                             <h5 className="mb-0 text-capitalize">
@@ -379,8 +364,7 @@ const ResearcherIPR = () => {
                     </Card>
                 </Col>
 
-                {/* Details Panel */}
-                <Col md={5}>
+                <Col md={7}>
                     {renderIPRDetails()}
                 </Col>
             </Row>
@@ -390,6 +374,7 @@ const ResearcherIPR = () => {
                 show={showAddModal} 
                 onHide={() => setShowAddModal(false)} 
                 size="lg"
+                className="neumorphic-modal"
             >
                 <Modal.Header closeButton>
                     <Modal.Title>New IPR Application</Modal.Title>
@@ -399,66 +384,58 @@ const ResearcherIPR = () => {
                         <Form.Group className="mb-3">
                             <Form.Label>Title</Form.Label>
                             <Form.Control 
-                                type="text" 
+                                type="text"
+                                value={newIPR.title}
+                                onChange={(e) => setNewIPR({...newIPR, title: e.target.value})}
                                 placeholder="Enter IPR title"
-                                className="neumorphic-input"
                             />
                         </Form.Group>
-                        <Row>
-                            <Col md={6}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Type</Form.Label>
-                                    <Form.Select className="neumorphic-input">
-                                        <option>Patent</option>
-                                        <option>Trademark</option>
-                                        <option>Copyright</option>
-                                    </Form.Select>
-                                </Form.Group>
-                            </Col>
-                            <Col md={6}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Filing Date</Form.Label>
-                                    <Form.Control 
-                                        type="date"
-                                        className="neumorphic-input"
-                                    />
-                                </Form.Group>
-                            </Col>
-                        </Row>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Type</Form.Label>
+                            <Form.Select
+                                value={newIPR.type}
+                                onChange={(e) => setNewIPR({...newIPR, type: e.target.value})}
+                            >
+                                <option value="">Select type</option>
+                                <option value="patent">Patent</option>
+                                <option value="copyright">Copyright</option>
+                                <option value="trademark">Trademark</option>
+                            </Form.Select>
+                        </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Description</Form.Label>
                             <Form.Control 
                                 as="textarea" 
                                 rows={3}
-                                className="neumorphic-input"
+                                value={newIPR.description}
+                                onChange={(e) => setNewIPR({...newIPR, description: e.target.value})}
+                                placeholder="Enter description"
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Inventors</Form.Label>
                             <Form.Control 
-                                type="text" 
-                                placeholder="Add inventors (comma separated)"
-                                className="neumorphic-input"
+                                type="text"
+                                value={newIPR.inventors}
+                                onChange={(e) => setNewIPR({...newIPR, inventors: e.target.value})}
+                                placeholder="Enter inventors (comma separated)"
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Documents</Form.Label>
+                            <Form.Label>Filing Date</Form.Label>
                             <Form.Control 
-                                type="file" 
-                                multiple
-                                className="neumorphic-input"
+                                type="date"
+                                value={newIPR.filingDate}
+                                onChange={(e) => setNewIPR({...newIPR, filingDate: e.target.value})}
                             />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button 
-                        variant="secondary" 
-                        onClick={() => setShowAddModal(false)}
-                    >
+                    <Button variant="secondary" onClick={() => setShowAddModal(false)}>
                         Cancel
                     </Button>
-                    <Button variant="purple">
+                    <Button variant="purple" onClick={() => setShowAddModal(false)}>
                         Submit Application
                     </Button>
                 </Modal.Footer>
