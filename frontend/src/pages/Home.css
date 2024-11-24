@@ -1,0 +1,491 @@
+:root {
+    --primary-pink: #E91E63;
+    --primary-purple: #9C27B0;
+    --light-pink: #FCE4EC;
+    --light-purple: #F3E5F5;
+    --dark-purple: #6A1B9A;
+    --gradient: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+}
+
+/* Hero Section */
+.hero-slide {
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.slide-1 {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+        url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1470&q=80');
+}
+
+.slide-2 {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+        url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1470&q=80');
+}
+
+.slide-3 {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+        url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1470&q=80');
+}
+
+.carousel-caption {
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: auto;
+}
+
+/* Stats Section */
+.stats-section {
+    background: var(--gradient);
+    color: white;
+    padding: 3rem 0;
+}
+
+.stat-item h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #6A1B9A;
+    margin-bottom: 0.5rem;
+}
+
+/* Services Section */
+.service-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+}
+
+.service-icon {
+    font-size: 3rem;
+    color: var(--primary-purple);
+    margin-bottom: 1.5rem;
+}
+
+/* Feature Cards */
+.feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    height: 100%;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--primary-pink);
+    margin-bottom: 1rem;
+}
+
+/* Success Stories */
+.story-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.story-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.story-content {
+    padding: 1.5rem;
+}
+
+/* CTA Section */
+.cta-section {
+    background: var(--light-purple);
+    padding: 4rem 0;
+}
+
+/* Buttons */
+.btn-primary {
+    background: var(--gradient);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+}
+
+.btn-outline-primary {
+    border: 2px solid var(--primary-purple);
+    color: var(--primary-purple);
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+}
+
+.btn-outline-primary:hover {
+    background: var(--gradient);
+    border-color: transparent;
+}
+
+/* Section Titles */
+.section-title {
+    color: var(--primary-purple);
+    font-weight: bold;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--gradient);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-slide {
+        height: 400px;
+    }
+
+    .stat-item h2 {
+        font-size: 2rem;
+    }
+
+    .service-card, .feature-card {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Enhanced Features */
+.enhanced-feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.enhanced-feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 2rem;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 80px 0;
+    position: relative;
+}
+
+.testimonial-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    height: 100%;
+    margin-top: 60px; /* Added space for image overflow */
+    position: relative;
+}
+
+.testimonial-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: relative;
+    margin: 20px auto; /* Adjusted margin */
+    overflow: hidden;
+    border: 5px solid white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.testimonial-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonial-content {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.rating {
+    color: #FFD700;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.testimonial-content p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.testimonial-content h4 {
+    color: var(--primary-purple);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.designation {
+    color: var(--primary-purple);
+    font-style: italic;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .testimonial-card {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Contact Section */
+.contact-info-card, .contact-form-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    height: 100%;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+    color: var(--primary-purple);
+    background: var(--light-purple);
+    padding: 1rem;
+    border-radius: 50%;
+}
+
+.contact-item h4 {
+    margin-bottom: 0.5rem;
+    color: var(--primary-purple);
+}
+
+.contact-item p {
+    margin: 0;
+    color: var(--gray-600);
+}
+
+.form-control {
+    border: 2px solid var(--light-purple);
+    padding: 0.75rem;
+    border-radius: 10px;
+}
+
+.form-control:focus {
+    border-color: var(--primary-purple);
+    box-shadow: 0 0 0 0.2rem rgba(156, 39, 176, 0.25);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .testimonial-card {
+        margin-bottom: 4rem;
+    }
+    
+    .contact-info-card {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Hero Section/Carousel Styles */
+.carousel {
+    position: relative;
+    height: 80vh;
+    overflow: hidden;
+}
+
+.hero-slide {
+    height: 80vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.slide-1 {
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80');
+}
+
+.slide-2 {
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+        url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1920&q=80');
+}
+
+.slide-3 {
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+        url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1920&q=80');
+}
+
+/* Glowing Text Effects */
+.glow-text {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8),
+                 0 0 20px rgba(255,255,255,0.8),
+                 0 0 30px rgba(156, 39, 176, 0.8),
+                 0 0 40px rgba(156, 39, 176, 0.6),
+                 0 0 70px rgba(156, 39, 176, 0.4);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.glow-text-subtle {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255,255,255,0.6),
+                 0 0 20px rgba(156, 39, 176, 0.4);
+}
+
+/* Carousel Caption Positioning and Animation */
+.carousel-caption {
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: auto;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Pulse Button Animation */
+.pulse-button {
+    animation: pulse 1.5s infinite;
+    background: var(--gradient);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.pulse-button:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.2);
+    top: 0;
+    left: -100%;
+    transform: skewX(-20deg);
+    transition: all 0.6s ease;
+}
+
+.pulse-button:hover:before {
+    left: 100%;
+}
+
+/* Animations */
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px rgba(255,255,255,0.8),
+                     0 0 20px rgba(255,255,255,0.8),
+                     0 0 30px rgba(156, 39, 176, 0.8),
+                     0 0 40px rgba(156, 39, 176, 0.6),
+                     0 0 50px rgba(156, 39, 176, 0.4);
+    }
+    to {
+        text-shadow: 0 0 20px rgba(255,255,255,0.8),
+                     0 0 30px rgba(255,255,255,0.8),
+                     0 0 40px rgba(156, 39, 176, 0.8),
+                     0 0 50px rgba(156, 39, 176, 0.6),
+                     0 0 60px rgba(156, 39, 176, 0.4);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(156, 39, 176, 0.4);
+    }
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(156, 39, 176, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(156, 39, 176, 0);
+    }
+}
+
+/* Carousel Transitions */
+.carousel-fade .carousel-item {
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.carousel-fade .carousel-item.active {
+    opacity: 1;
+}
+
+/* Carousel Controls */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    opacity: 0.7;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+}
+
+.carousel-indicators {
+    bottom: 2rem;
+}
+
+.carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 5px;
+    background-color: rgba(255,255,255,0.7);
+}
+
+.carousel-indicators button.active {
+    background-color: var(--primary-purple);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .carousel, .hero-slide {
+        height: 60vh;
+    }
+
+    .carousel-caption {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    .glow-text {
+        font-size: 2rem;
+    }
+}

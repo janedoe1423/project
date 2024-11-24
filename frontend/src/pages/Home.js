@@ -1,161 +1,339 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Home.css';
+import { FaRocket, FaLightbulb, FaCertificate, FaHandshake, FaChartLine, FaShieldAlt, FaUsers, FaGlobe, FaAward, FaComments, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 function Home() {
     return (
-        <div>
-            {/* Carousel Section */}
-            <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
+        <div className="home-container">
+            {/* Hero Section */}
+            <div id="mainCarousel" className="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div className="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
+                    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" className="active"></button>
+                    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
                 </div>
                 <div className="carousel-inner">
                     <div className="carousel-item active">
-                        <img src="https://via.placeholder.com/1920x600" className="d-block w-100" alt="Slide 1" />
-                        <div className="carousel-caption d-none d-md-block">
-                            <h1>Welcome to StartupHub</h1>
-                            <p>Your one-stop platform to innovate, collaborate, and grow.</p>
+                        <div className="hero-slide slide-1">
+                            <div className="carousel-caption animate__animated animate__fadeInUp">
+                                <h1 className="display-4 fw-bold glow-text">Innovation Gateway India</h1>
+                                <p className="lead glow-text-subtle">Empowering Startups, Protecting Innovation, Building Future</p>
+                                <button className="btn btn-primary btn-lg pulse-button">Get Started</button>
+                            </div>
                         </div>
                     </div>
                     <div className="carousel-item">
-                        <img src="https://via.placeholder.com/1920x600" className="d-block w-100" alt="Slide 2" />
-                        <div className="carousel-caption d-none d-md-block">
-                            <h1>Empowering Innovation</h1>
-                            <p>Connect with investors, mentors, and industry leaders.</p>
+                        <div className="hero-slide slide-2">
+                            <div className="carousel-caption animate__animated animate__fadeInUp">
+                                <h1 className="display-4 fw-bold glow-text">Protect Your Innovation</h1>
+                                <p className="lead glow-text-subtle">Comprehensive IPR Management & Support</p>
+                                <button className="btn btn-primary btn-lg pulse-button">Explore IPR Services</button>
+                            </div>
                         </div>
                     </div>
                     <div className="carousel-item">
-                        <img src="https://via.placeholder.com/1920x600" className="d-block w-100" alt="Slide 3" />
-                        <div className="carousel-caption d-none d-md-block">
-                            <h1>Building a Sustainable Future</h1>
-                            <p>Access essential resources to grow and thrive.</p>
+                        <div className="hero-slide slide-3">
+                            <div className="carousel-caption animate__animated animate__fadeInUp">
+                                <h1 className="display-4 fw-bold glow-text">Connect & Collaborate</h1>
+                                <p className="lead glow-text-subtle">Join India's Largest Innovation Ecosystem</p>
+                                <button className="btn btn-primary btn-lg pulse-button">Join Network</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <button className="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+                    <span className="carousel-control-prev-icon"></span>
+                </button>
+                <button className="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+                    <span className="carousel-control-next-icon"></span>
+                </button>
             </div>
 
-            {/* About Us Section */}
-            <section className="py-5 bg-light">
+            {/* Stats Section */}
+            <section className="stats-section py-4">
                 <div className="container">
-                    <h2 className="text-center mb-4">About Us</h2>
-                    <p className="text-center">
-                        StartupHub is a collaborative digital ecosystem designed to streamline the growth journey for startups.
-                        By connecting startups with investors, mentors, policymakers, and IPR professionals, we foster innovation and sustainability.
-                    </p>
-                </div>
-            </section>
-
-            {/* Features Section */}
-            <section className="py-5">
-                <div className="container">
-                    <h2 className="text-center mb-4">Features We Provide</h2>
-                    <div className="row">
-                        {/* Feature Card 1 */}
-                        <div className="col-md-4 mb-4">
-                            <div className="card shadow-sm">
-                                <img src="https://via.placeholder.com/300x200" className="card-img-top" alt="Feature 1" />
-                                <div className="card-body">
-                                    <h5 className="card-title">Unified Data Repository</h5>
-                                    <p className="card-text">
-                                        Centralized data storage for startup profiles, funding history, and resource allocation.
-                                    </p>
-                                </div>
+                    <div className="row text-center">
+                        <div className="col-md-3 col-6 mb-4">
+                            <div className="stat-item">
+                                <h2>10,000+</h2>
+                                <p>Registered Startups</p>
                             </div>
                         </div>
-                        {/* Feature Card 2 */}
-                        <div className="col-md-4 mb-4">
-                            <div className="card shadow-sm">
-                                <img src="https://via.placeholder.com/300x200" className="card-img-top" alt="Feature 2" />
-                                <div className="card-body">
-                                    <h5 className="card-title">Predictive Resource Allocation</h5>
-                                    <p className="card-text">
-                                        ML-driven resource predictions to allocate funding, mentorship, and support effectively.
-                                    </p>
-                                </div>
+                        <div className="col-md-3 col-6 mb-4">
+                            <div className="stat-item">
+                                <h2>₹500Cr+</h2>
+                                <p>Funding Facilitated</p>
                             </div>
                         </div>
-                        {/* Feature Card 3 */}
-                        <div className="col-md-4 mb-4">
-                            <div className="card shadow-sm">
-                                <img src="https://via.placeholder.com/300x200" className="card-img-top" alt="Feature 3" />
-                                <div className="card-body">
-                                    <h5 className="card-title">Intelligent IPR Management</h5>
-                                    <p className="card-text">
-                                        Track intellectual property filings, renewal alerts, and status updates with AI support.
-                                    </p>
-                                </div>
+                        <div className="col-md-3 col-6 mb-4">
+                            <div className="stat-item">
+                                <h2>5,000+</h2>
+                                <p>Patents Filed</p>
                             </div>
                         </div>
-                        {/* Add more cards as necessary */}
+                        <div className="col-md-3 col-6 mb-4">
+                            <div className="stat-item">
+                                <h2>1,000+</h2>
+                                <p>Expert Mentors</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* FAQ Section */}
-            <section className="py-5 bg-light">
+            {/* Services Section */}
+            <section className="services-section py-5">
                 <div className="container">
-                    <h2 className="text-center mb-4">Frequently Asked Questions</h2>
-                    <div className="accordion" id="faqAccordion">
-                        <div className="accordion-item">
-                            <h2 className="accordion-header" id="faqHeadingOne">
-                                <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne">
-                                    What is StartupHub?
-                                </button>
-                            </h2>
-                            <div id="faqOne" className="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                                <div className="accordion-body">
-                                    StartupHub is a digital ecosystem aimed at streamlining the growth process for startups.
+                    <h2 className="section-title text-center mb-5">Our Services</h2>
+                    <div className="row">
+                        <div className="col-md-4 mb-4">
+                            <div className="service-card">
+                                <FaRocket className="service-icon" />
+                                <h3>Startup Support</h3>
+                                <p>Comprehensive support for startup registration, compliance, and growth</p>
+                                <button className="btn btn-outline-primary">Learn More</button>
+                            </div>
+                        </div>
+                        <div className="col-md-4 mb-4">
+                            <div className="service-card">
+                                <FaCertificate className="service-icon" />
+                                <h3>IPR Management</h3>
+                                <p>End-to-end intellectual property rights management and protection</p>
+                                <button className="btn btn-outline-primary">Learn More</button>
+                            </div>
+                        </div>
+                        <div className="col-md-4 mb-4">
+                            <div className="service-card">
+                                <FaHandshake className="service-icon" />
+                                <h3>Investor Connect</h3>
+                                <p>Connect with verified investors and secure funding opportunities</p>
+                                <button className="btn btn-outline-primary">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Features Grid */}
+            <section className="features-section py-5 bg-light">
+                <div className="container">
+                    <h2 className="section-title text-center mb-5">Platform Features</h2>
+                    <div className="row g-4">
+                        {[
+                            {
+                                icon: <FaLightbulb />,
+                                title: "Innovation Management",
+                                description: "Track and manage your innovation portfolio"
+                            },
+                            {
+                                icon: <FaChartLine />,
+                                title: "Growth Analytics",
+                                description: "Data-driven insights for startup growth"
+                            },
+                            {
+                                icon: <FaShieldAlt />,
+                                title: "Compliance Support",
+                                description: "Stay compliant with regulatory requirements"
+                            }
+                            // Add more features as needed
+                        ].map((feature, index) => (
+                            <div key={index} className="col-md-4">
+                                <div className="feature-card">
+                                    <div className="feature-icon">{feature.icon}</div>
+                                    <h3>{feature.title}</h3>
+                                    <p>{feature.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Success Stories */}
+            <section className="success-stories py-5">
+                <div className="container">
+                    <h2 className="section-title text-center mb-5">Success Stories</h2>
+                    <div className="row">
+                        <div className="col-md-4 mb-4">
+                            <div className="story-card">
+                                <img src="" alt="Success Story 1" className="story-image" />
+                                <div className="story-content">
+                                    <h4>TechInnovate Solutions</h4>
+                                    <p>Secured ₹10Cr funding through our platform</p>
+                                    <button className="btn btn-link">Read More →</button>
                                 </div>
                             </div>
                         </div>
-                        <div className="accordion-item">
-                            <h2 className="accordion-header" id="faqHeadingTwo">
-                                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo">
-                                    How can I register my startup on StartupHub?
-                                </button>
-                            </h2>
-                            <div id="faqTwo" className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div className="accordion-body">
-                                    You can register by signing up on our platform and creating a startup profile.
+                        {/* Add more success stories */}
+                    </div>
+                </div>
+            </section>
+
+            {/* Enhanced Features Section */}
+            <section className="enhanced-features py-5">
+                <div className="container">
+                    <h2 className="section-title text-center mb-5">Why Choose Us</h2>
+                    <div className="row g-4">
+                        {[
+                            {
+                                icon: <FaUsers />,
+                                title: "Expert Mentorship",
+                                description: "Access to industry experts and successful entrepreneurs"
+                            },
+                            {
+                                icon: <FaGlobe />,
+                                title: "Global Network",
+                                description: "Connect with international innovation ecosystems"
+                            },
+                            {
+                                icon: <FaAward />,
+                                title: "Government Recognition",
+                                description: "Official recognition and certification support"
+                            },
+                            {
+                                icon: <FaLightbulb />,
+                                title: "Innovation Labs",
+                                description: "Access to state-of-the-art testing facilities"
+                            },
+                            {
+                                icon: <FaChartLine />,
+                                title: "Market Access",
+                                description: "Support in reaching target markets and scaling"
+                            },
+                            {
+                                icon: <FaShieldAlt />,
+                                title: "Legal Support",
+                                description: "Comprehensive legal and compliance assistance"
+                            }
+                        ].map((feature, index) => (
+                            <div key={index} className="col-md-4 col-lg-4">
+                                <div className="enhanced-feature-card">
+                                    <div className="feature-icon-wrapper">
+                                        {feature.icon}
+                                    </div>
+                                    <h3>{feature.title}</h3>
+                                    <p>{feature.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Testimonials Section */}
+            <section className="testimonials-section">
+                <div className="container">
+                    <h2 className="section-title text-center mb-5">What Our Users Say</h2>
+                    <div className="row">
+                        <div className="col-md-4 mb-4">
+                            <div className="testimonial-card">
+                                <div className="testimonial-image">
+                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" 
+                                         alt="Testimonial 1" />
+                                </div>
+                                <div className="testimonial-content">
+                                    <div className="rating">★★★★★</div>
+                                    <p>"The platform's IPR support helped us secure our innovation effectively. Excellent guidance throughout the process."</p>
+                                    <h4>Rajesh Kumar</h4>
+                                    <p className="designation">CEO, TechStart India</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="accordion-item">
-                            <h2 className="accordion-header" id="faqHeadingThree">
-                                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree">
-                                    Who can invest through StartupHub?
-                                </button>
-                            </h2>
-                            <div id="faqThree" className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div className="accordion-body">
-                                    Accredited investors can view startup profiles and make funding decisions.
+                        <div className="col-md-4 mb-4">
+                            <div className="testimonial-card">
+                                <div className="testimonial-image">
+                                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=400&q=80" 
+                                         alt="Testimonial 2" />
+                                </div>
+                                <div className="testimonial-content">
+                                    <div className="rating">★★★★★</div>
+                                    <p>"Found amazing mentors through the platform. Their guidance was crucial for our startup's growth."</p>
+                                    <h4>Priya Sharma</h4>
+                                    <p className="designation">Founder, HealthTech Solutions</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="accordion-item">
-                            <h2 className="accordion-header" id="faqHeadingFour">
-                                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqFour">
-                                    Is my information secure?
-                                </button>
-                            </h2>
-                            <div id="faqFour" className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div className="accordion-body">
-                                    Yes, we implement robust security measures to protect user data.
+                        <div className="col-md-4 mb-4">
+                            <div className="testimonial-card">
+                                <div className="testimonial-image">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80" 
+                                         alt="Testimonial 3" />
+                                </div>
+                                <div className="testimonial-content">
+                                    <div className="rating">★★★★★</div>
+                                    <p>"The funding connect program helped us secure Series A funding. Incredible network of investors!"</p>
+                                    <h4>Amit Patel</h4>
+                                    <p className="designation">CTO, AI Innovations</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="accordion-item">
-                            <h2 className="accordion-header" id="faqHeadingFive">
-                                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqFive">
-                                    Can mentors access my startup's data?
-                                </button>
-                            </h2>
-                            <div id="faqFive" className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div className="accordion-body">
-                                    Mentors can access startup data only if given permission for mentoring purposes.
+                    </div>
+                </div>
+            </section>
+
+            {/* Contact Section */}
+            <section className="contact-section py-5 bg-light">
+                <div className="container">
+                    <h2 className="section-title text-center mb-5">Get In Touch</h2>
+                    <div className="row">
+                        <div className="col-md-6 mb-4">
+                            <div className="contact-info-card">
+                                <div className="row">
+                                    <div className="col-md-12 mb-4">
+                                        <div className="contact-item">
+                                            <FaPhone className="contact-icon" />
+                                            <div>
+                                                <h4>Call Us</h4>
+                                                <p>+91 1800-XXX-XXXX</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-12 mb-4">
+                                        <div className="contact-item">
+                                            <FaEnvelope className="contact-icon" />
+                                            <div>
+                                                <h4>Email Us</h4>
+                                                <p>support@innovationportal.gov.in</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-12">
+                                        <div className="contact-item">
+                                            <FaMapMarkerAlt className="contact-icon" />
+                                            <div>
+                                                <h4>Visit Us</h4>
+                                                <p>Innovation Hub, Technology Complex<br />New Delhi - 110001</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="contact-form-card">
+                                <form>
+                                    <div className="mb-3">
+                                        <input type="text" className="form-control" placeholder="Your Name" />
+                                    </div>
+                                    <div className="mb-3">
+                                        <input type="email" className="form-control" placeholder="Your Email" />
+                                    </div>
+                                    <div className="mb-3">
+                                        <select className="form-control">
+                                            <option>Select Query Type</option>
+                                            <option>Startup Registration</option>
+                                            <option>IPR Support</option>
+                                            <option>Funding Query</option>
+                                            <option>Technical Support</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    <div className="mb-3">
+                                        <textarea className="form-control" rows="4" placeholder="Your Message"></textarea>
+                                    </div>
+                                    <button type="submit" className="btn btn-primary w-100">Send Message</button>
+                                </form>
                             </div>
                         </div>
                     </div>

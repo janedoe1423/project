@@ -18,9 +18,7 @@ import IPRProfilePage from './pages/ipr-professional/ipr_prof_profile_page';
 import InvestorDashboard from './pages/investor/InvestorDashboard'; // Import InvestorDashboard
 import 'antd/dist/reset.css'; // for antd v5
 import Researcher from './pages/researcher/researcher_profile_page';
-
 import WomenEntrepreneurship from './pages/Schemes and policies/WomenEntrepreneurship';
-// import StartupGujarat from './pages/Schemes and policies/Incubator';
 import Incubator from './pages/Schemes and policies/Incubator';
 import StartupGujarat from './pages/Schemes and policies/StartupGUJ';
 
