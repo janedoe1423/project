@@ -1,0 +1,528 @@
+:root {
+    --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+    --success-gradient: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    --info-gradient: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+    --warning-gradient: linear-gradient(135deg, #d97706 0%, #fbbf24 100%);
+    --purple-gradient: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+    --pink-gradient: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
+    
+    /* Hover gradients */
+    --primary-hover: linear-gradient(135deg, #4338ca 0%, #4f46e5 100%);
+    --success-hover: linear-gradient(135deg, #047857 0%, #059669 100%);
+    --info-hover: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
+    --warning-hover: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+    --purple-hover: linear-gradient(135deg, #6d28d9 0%, #7c3aed 100%);
+    --pink-hover: linear-gradient(135deg, #be185d 0%, #db2777 100%);
+}
+
+.portfolio-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #f8fafc;
+}
+
+/* Portfolio Header */
+.portfolio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+}
+
+.portfolio-header h1 {
+    font-size: 2rem;
+    color: #1e293b;
+    font-weight: 700;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.portfolio-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    background: var(--primary-gradient);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--hover-shadow);
+}
+
+/* Metrics Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Base metric card styles */
+.metric-card {
+    padding: 2rem;
+    border-radius: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual card gradients */
+.metric-card.portfolio-value {
+    background: var(--purple-gradient);
+}
+.metric-card.portfolio-value:hover {
+    background: var(--purple-hover);
+}
+
+.metric-card.active-investments {
+    background: var(--success-gradient);
+}
+.metric-card.active-investments:hover {
+    background: var(--success-hover);
+}
+
+.metric-card.portfolio-irr {
+    background: var(--pink-gradient);
+}
+.metric-card.portfolio-irr:hover {
+    background: var(--pink-hover);
+}
+
+.metric-card.successful-exits {
+    background: var(--info-gradient);
+}
+.metric-card.successful-exits:hover {
+    background: var(--info-hover);
+}
+
+/* Enhanced hover effects */
+.metric-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Shimmer effect */
+.metric-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.metric-card:hover::after {
+    transform: translateX(100%);
+}
+
+.metric-icon {
+    font-size: 2.5rem;
+    opacity: 0.9;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.metric-card:hover .metric-icon {
+    transform: scale(1.1) rotate(5deg);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.metric-content {
+    flex: 1;
+}
+
+.metric-content h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    opacity: 0.9;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+}
+
+.metric-trend {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.metric-trend.positive {
+    color: #a7f3d0;
+}
+
+.metric-trend.negative {
+    color: #fecaca;
+}
+
+/* Chart Section */
+.chart-section {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.chart-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary-gradient);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.chart-header h2 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.time-filter {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    color: #1e293b;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.time-filter:hover {
+    border-color: #6366f1;
+}
+
+/* Companies Section */
+.companies-section {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.filter-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.search-box svg {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+}
+
+.filter-select, .sort-select {
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+    color: #1e293b;
+    font-size: 0.875rem;
+    min-width: 150px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-select:hover, .sort-select:hover,
+.search-box input:hover {
+    border-color: #6366f1;
+}
+
+.filter-select:focus, .sort-select:focus,
+.search-box input:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.no-results {
+    text-align: center;
+    padding: 3rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    color: #64748b;
+}
+
+.companies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.company-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.company-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--primary-gradient);
+    transition: all 0.3s ease;
+}
+
+.company-card:nth-child(4n+1)::before {
+    background: var(--purple-gradient);
+}
+
+.company-card:nth-child(4n+2)::before {
+    background: var(--teal-gradient);
+}
+
+.company-card:nth-child(4n+3)::before {
+    background: var(--indigo-gradient);
+}
+
+.company-card:nth-child(4n+4)::before {
+    background: var(--rose-gradient);
+}
+
+.company-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.company-card:hover::before {
+    height: 100%;
+    opacity: 0.05;
+}
+
+.company-header {
+    padding: 1.5rem;
+    position: relative;
+    background: #f8fafc;
+}
+
+.company-header img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.status-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+}
+
+.status-badge.active {
+    background: var(--success-gradient);
+}
+
+.status-badge.exited {
+    background: var(--purple-gradient);
+}
+
+.status-badge.acquired {
+    background: var(--teal-gradient);
+}
+
+.company-info {
+    padding: 1.5rem;
+}
+
+.company-info h3 {
+    font-size: 1.25rem;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.sector {
+    color: #64748b;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+.investment-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.detail span {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.detail strong {
+    color: #1e293b;
+    font-size: 0.875rem;
+}
+
+.performance-metrics {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background: linear-gradient(
+        to right,
+        rgba(99, 102, 241, 0.1),
+        rgba(168, 85, 247, 0.1)
+    );
+}
+
+.trend {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.trend.up {
+    background: var(--success-gradient);
+    color: white;
+}
+
+.trend.down {
+    background: var(--danger-gradient);
+    color: white;
+}
+
+/* Animations */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .portfolio-actions {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .companies-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-controls {
+        flex-direction: column;
+    }
+}

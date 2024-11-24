@@ -125,10 +125,74 @@ const InvestorDashboard = () => {
 
     // Generate current period KPI data
     const kpiData = {
-        cashBalance: getCurrentPeriodData('cashBalance'),
-        grossBurn: getCurrentPeriodData('grossBurn'),
-        ebitda: getCurrentPeriodData('ebitda'),
-        revenue: getCurrentPeriodData('revenue')
+        cashBalance: {
+            value: 2500000,
+            change: 12,
+            graphData: {
+                title: "Cash Balance Trend",
+                type: "line",
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                    datasets: [{
+                        label: "Cash Balance",
+                        data: [2200000, 2300000, 2400000, 2450000, 2480000, 2500000],
+                        borderColor: "#6f42c1",
+                        tension: 0.4
+                    }]
+                }
+            }
+        },
+        grossBurn: {
+            value: 150000,
+            change: -5,
+            graphData: {
+                title: "Gross Burn Trend",
+                type: "line",
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                    datasets: [{
+                        label: "Gross Burn",
+                        data: [160000, 155000, 153000, 151000, 152000, 150000],
+                        borderColor: "#dc2626",
+                        tension: 0.4
+                    }]
+                }
+            }
+        },
+        ebitda: {
+            value: 300000,
+            change: 8,
+            graphData: {
+                title: "EBITDA Trend",
+                type: "line",
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                    datasets: [{
+                        label: "EBITDA",
+                        data: [270000, 280000, 285000, 290000, 295000, 300000],
+                        borderColor: "#059669",
+                        tension: 0.4
+                    }]
+                }
+            }
+        },
+        revenue: {
+            value: 1200000,
+            change: 15,
+            graphData: {
+                title: "Revenue Trend",
+                type: "line",
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                    datasets: [{
+                        label: "Revenue",
+                        data: [1000000, 1050000, 1100000, 1150000, 1180000, 1200000],
+                        borderColor: "#2563eb",
+                        tension: 0.4
+                    }]
+                }
+            }
+        }
     };
 
     // Update graphOptions based on timeFilter
@@ -261,47 +325,29 @@ const InvestorDashboard = () => {
                     <span className="trend-value">{Math.abs(data.change)}%</span>
                 </div>
             </div>
-            <div className="kpi-value">${data.value.toLocaleString()}</div>
+            <div className="kpi-value">{formatCurrency(data.value)}</div>
             <div className="kpi-details">
                 <span className="kpi-period">vs last month</span>
-                {data.graphData && (
-                    <button 
-                        className="kpi-view-analysis"
-                        onClick={() => setSelectedGraph(data.graphData)}
+                <button 
+                    className="kpi-view-analysis"
+                    onClick={() => setSelectedGraph(data.graphData)}
+                >
+                    View Analysis
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="16" 
+                        height="16" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
                     >
-                        View Analysis
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
-                        </svg>
-                    </button>
-                )}
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
             </div>
-            {data.graphData && (
-                <div className="kpi-mini-graph">
-                    <Line 
-                        data={{
-                            ...data.graphData.data,
-                            datasets: data.graphData.data.datasets.map(dataset => ({
-                                ...dataset,
-                                pointRadius: 0,
-                                borderWidth: 1.5,
-                            }))
-                        }}
-                        options={{
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: { display: false },
-                                tooltip: { enabled: false }
-                            },
-                            scales: {
-                                x: { display: false },
-                                y: { display: false }
-                            }
-                        }}
-                    />
-                </div>
-            )}
         </div>
     );
 
@@ -361,6 +407,16 @@ const InvestorDashboard = () => {
         }
 
         return baseOptions;
+    };
+
+    // Add a helper function to format currency
+    const formatCurrency = (value) => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(value);
     };
 
     return (
