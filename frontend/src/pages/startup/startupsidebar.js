@@ -1,20 +1,52 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
+import "./startup_sidebar.css";
 
 const StartupSidebar = () => {
     return (
-        <div className="d-flex flex-column bg-light p-3 vh-100" style={{ width: "250px" }}>
-            <h4 className="text-center">Startup Dashboard</h4>
-            <Nav className="flex-column">
-                <Nav.Link href="#dashboard">Dashboard</Nav.Link>
-                <Nav.Link href="#profile">Profile</Nav.Link>
-                <Nav.Link href="#resource-allocation">Resource Allocation</Nav.Link>
-                <Nav.Link href="#ipr-rights">IPR Rights</Nav.Link>
-                <Nav.Link href="#collaboration-tools">Collaboration Tools</Nav.Link>
-                <Nav.Link href="#notify">Notifications</Nav.Link>
-                <Nav.Link href="#funding">Funding</Nav.Link>
-                <Nav.Link href="#schemes">Schemes</Nav.Link>
-                <Nav.Link href="#reports">Reports</Nav.Link>
+        <div className="sidebar-container">
+            <div className="sidebar-header">
+                <h4>Startup Dashboard</h4>
+            </div>
+            <Nav className="sidebar-nav">
+                <Nav.Link className="sidebar-link" href="#dashboard">
+                    <div className="icon-container">
+                        {/* Add icon here if desired */}
+                    </div>
+                    <span>Dashboard</span>
+                </Nav.Link>
+                <Nav.Link className="sidebar-link" href="#profile">
+                    <div className="icon-container"></div>
+                    <span>Profile</span>
+                </Nav.Link>
+                <Nav.Link className="sidebar-link" href="#resource-allocation">
+                    <div className="icon-container"></div>
+                    <span>Resource Allocation</span>
+                </Nav.Link>
+                <Nav.Link className="sidebar-link" href="#ipr-rights">
+                    <div className="icon-container"></div>
+                    <span>IPR Rights</span>
+                </Nav.Link>
+                <Nav.Link className="sidebar-link" href="#collaboration-tools">
+                    <div className="icon-container"></div>
+                    <span>Collaboration Tools</span>
+                </Nav.Link>
+                <Nav.Link className="sidebar-link" href="#notify">
+                    <div className="icon-container"></div>
+                    <span>Notifications</span>
+                </Nav.Link>
+                <Nav.Link className="sidebar-link" href="#funding">
+                    <div className="icon-container"></div>
+                    <span>Funding</span>
+                </Nav.Link>
+                <Nav.Link className="sidebar-link" href="#schemes">
+                    <div className="icon-container"></div>
+                    <span>Schemes</span>
+                </Nav.Link>
+                <Nav.Link className="sidebar-link" href="#reports">
+                    <div className="icon-container"></div>
+                    <span>Reports</span>
+                </Nav.Link>
             </Nav>
         </div>
     );

@@ -36,7 +36,7 @@ function Header() {
             name: 'Schemes', 
             icon: <FaClipboardList />,
             dropdown: [
-                { path: '/schemes/startup-india', name: 'Startup India Support' },
+                { path: '/schemes/startup-gujarat', name: 'Startup Gujarat Support' },
                 { path: '/schemes/women-entrepreneurship', name: 'Women Entrepreneurship' },
                 { path: '/schemes/incubator-framework', name: 'Incubator Framework' }
             ]

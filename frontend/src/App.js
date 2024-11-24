@@ -22,6 +22,7 @@ import Researcher from './pages/researcher/researcher_profile_page';
 import WomenEntrepreneurship from './pages/Schemes and policies/WomenEntrepreneurship';
 // import StartupGujarat from './pages/Schemes and policies/Incubator';
 import Incubator from './pages/Schemes and policies/Incubator';
+import StartupGujarat from './pages/Schemes and policies/StartupGUJ';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
           <Route path="/schemes/women-entrepreneurship" element={<WomenEntrepreneurship />} />
           {/* <Route path="/schemes/startup-gujarat" element={<StartupGujarat />} /> */}
           <Route path="/schemes/incubator-framework" element={<Incubator />} />
+          <Route path="/schemes/startup-gujarat" element={<StartupGujarat />} />
         </Routes>
       </div>
       <Footer />
