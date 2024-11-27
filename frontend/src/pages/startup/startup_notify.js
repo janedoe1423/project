@@ -8,6 +8,8 @@ import {
     IconButton,
     Button,
 } from '@mui/material';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import ClearIcon from '@mui/icons-material/Clear';
 import './startup_notify.css';
 // ... (keep other imports)
 
