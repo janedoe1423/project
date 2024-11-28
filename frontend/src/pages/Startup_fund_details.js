@@ -14,7 +14,8 @@ import {
     TableCell,
     TableContainer,
     TableHead,
-    TableRow
+    TableRow,
+    CircularProgress
 } from "@mui/material";
 import {
     Chart as ChartJS,
@@ -22,6 +23,7 @@ import {
     LinearScale,
     PointElement,
     LineElement,
+    BarElement,
     Title,
     Tooltip,
     Filler,
@@ -57,6 +59,7 @@ ChartJS.register(
     LinearScale,
     PointElement,
     LineElement,
+    BarElement,
     Title,
     Tooltip,
     Filler,
@@ -956,11 +959,692 @@ const FinancialTable = () => {
     );
 };
 
+// Add this component before FinancialTable
+const AboutSection = () => (
+    <Box sx={{ 
+        mt: 4, 
+        mb: 6,
+        p: 4,
+        borderRadius: 2,
+        bgcolor: 'background.paper',
+        boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+    }}>
+        <Typography 
+            variant="h4" 
+            sx={{ 
+                color: 'purple',
+                mb: 3,
+                fontWeight: 'bold'
+            }}
+        >
+            About EVEEIO Electric
+        </Typography>
+
+        <Box component="ul" sx={{ 
+            pl: 3,
+            '& li': { 
+                mb: 2,
+                color: '#333',
+                fontSize: '1.1rem',
+                lineHeight: 1.6
+            }
+        }}>
+            <li>
+                EVEEIO Electric (under the brand name of "Zenrate Technologies Private Limited") operates as a third-party logistics service provider (3PL) utilizing electric vehicle (EV) fleet and harnessing state-of-the-art technology to revolutionize traditional logistics into a smooth, efficient, and sustainable process, facilitated by its fleet management software.
+            </li>
+            <li>
+                EVEEIO Electric (The company) fleet management software provides comprehensive insights into fleet operations, vehicle performance, and driver behavior. With features such as vehicle diagnostics, maintenance scheduling, and driver analytics, we optimize fleet utilization, minimize downtime, and enhance driver safety and productivity.
+            </li>
+            <li>
+                The company offers mid-mile and last-mile connectivity to its customers to renowned customers such as Zomato, Blinkit, Zepto, Flipkart, Delivery, Uber, etc.
+            </li>
+            <li>
+                The company boasts a team of 125 dedicated driver and rider partners who are integral to the company's operations. With a fleet consisting of over 80 vehicles, EVEEIO Electric has collectively covered an impressive distance of 1,875,000 kilometers.
+            </li>
+            <li>
+                The company has completed 262,500 deliveries, emphasizing cleanliness and sustainability throughout its operations. Serving a diverse clientele, EVEEIO Electric has successfully catered to over 10 clients, showcasing its reliability and commitment to excellence in service provision.
+            </li>
+            <li>
+                The company is in the growth stage and is in the process of increasing its fleet operating size from 80 to 1000, enabling it to achieve a revenue of ₹21 Cr.
+            </li>
+            <li>
+                The company was incorporated on April 15, 2022, at ROC in Delhi.
+            </li>
+            <li>
+                <Typography component="span" sx={{ fontWeight: 'bold' }}>
+                    EVVEIO Electric has transferred its entire business operations to Shiplog.
+                </Typography>
+            </li>
+        </Box>
+    </Box>
+);
+
+const GrowthCharts = () => {
+    // Sample data for Revenue Growth
+    const revenueData = {
+        labels: ['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+        datasets: [{
+            label: 'Revenue (in Cr)',
+            data: [0, 20, 80, 270, 550, 1200, 1200],
+            fill: true,
+            backgroundColor: 'rgba(156, 39, 176, 0.1)',
+            borderColor: '#D6168B',
+            tension: 0.4,
+            pointRadius: 6,
+            pointBackgroundColor: '#D6168B',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointHoverRadius: 8,
+            pointHoverBackgroundColor: '#D6168B',
+            pointHoverBorderColor: '#fff',
+            pointHoverBorderWidth: 2,
+        }]
+    };
+
+    // Sample data for Net Profit Growth
+    const profitData = {
+        labels: ['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+        datasets: [{
+            label: 'Net Profit (in Cr)',
+            data: [0, 1, 3, 8, 25, 65, 65],
+            fill: true,
+            backgroundColor: 'rgba(214, 22, 139, 0.1)',
+            borderColor: '#8B1EA7',
+            tension: 0.4,
+            pointRadius: 6,
+            pointBackgroundColor: '#8B1EA7',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointHoverRadius: 8,
+            pointHoverBackgroundColor: '#8B1EA7',
+            pointHoverBorderWidth: 2,
+        }]
+    };
+
+    // Enhanced chart options for better interactivity
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                enabled: true,
+                mode: 'index',
+                intersect: false,
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                titleColor: '#8B1EA7',
+                titleFont: {
+                    size: 16,
+                    weight: 'bold'
+                },
+                bodyColor: '#666',
+                bodyFont: {
+                    size: 14
+                },
+                borderColor: 'rgba(139, 30, 167, 0.1)',
+                borderWidth: 1,
+                padding: 12,
+                boxPadding: 6,
+                usePointStyle: true,
+                callbacks: {
+                    label: function(context) {
+                        return `₹${context.parsed.y} Cr`;
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                grid: {
+                    display: true,
+                    color: 'rgba(0, 0, 0, 0.05)'
+                },
+                ticks: {
+                    color: '#666',
+                    font: {
+                        size: 12
+                    }
+                }
+            },
+            y: {
+                grid: {
+                    display: true,
+                    color: 'rgba(0, 0, 0, 0.05)'
+                },
+                ticks: {
+                    color: '#666',
+                    font: {
+                        size: 12
+                    },
+                    callback: function(value) {
+                        return `₹${value} Cr`;
+                    }
+                }
+            }
+        },
+        interaction: {
+            intersect: false,
+            mode: 'nearest'
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: false,
+            animationDuration: 150
+        },
+        animation: {
+            duration: 1000,
+            easing: 'easeInOutQuart'
+        }
+    };
+
+    // Updated Growth Metric component with better styling
+    const GrowthMetric = ({ percentage, years }) => (
+        <Box
+            sx={{
+                display: 'inline-flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                p: 2,
+                borderRadius: 2,
+                bgcolor: 'rgba(156, 39, 176, 0.03)',
+                border: '1px solid rgba(156, 39, 176, 0.1)',
+                transition: 'all 0.3s ease',
+                cursor: 'pointer',
+                '&:hover': {
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 4px 12px rgba(156, 39, 176, 0.1)',
+                    bgcolor: 'rgba(156, 39, 176, 0.05)'
+                }
+            }}
+        >
+            <Typography
+                variant="h4"
+                sx={{
+                    color: '#D6168B',
+                    fontWeight: 'bold',
+                    fontSize: { xs: '1.5rem', sm: '2rem' }
+                }}
+            >
+                {percentage}%
+            </Typography>
+            <Typography
+                variant="body2"
+                sx={{
+                    color: '#666',
+                    fontWeight: 500,
+                    whiteSpace: 'nowrap'
+                }}
+            >
+                {years} Year Growth
+            </Typography>
+        </Box>
+    );
+
+    return (
+        <Box sx={{ mt: 6, mb: 6 }}>
+            <Grid container spacing={4}>
+                {/* Revenue Growth Chart */}
+                <Grid item xs={12} lg={6}>
+                    <Paper
+                        elevation={3}
+                        sx={{
+                            p: 4,
+                            borderRadius: 3,
+                            height: '100%',
+                            background: 'linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)',
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}
+                    >
+                        <Typography
+                            variant="h5"
+                            sx={{
+                                mb: 3,
+                                color: '#8B1EA7',
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            EVEEIO Electric Revenue Growth
+                        </Typography>
+                        <Box sx={{ flex: 1, minHeight: '300px', mb: 4 }}>
+                            <Line data={revenueData} options={chartOptions} />
+                        </Box>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                gap: 2,
+                                flexWrap: 'wrap',
+                                justifyContent: 'space-around',
+                                mt: 'auto'
+                            }}
+                        >
+                            <GrowthMetric percentage="41.72" years="1" />
+                            <GrowthMetric percentage="94.82" years="4" />
+                            <GrowthMetric percentage="243.49" years="7" />
+                        </Box>
+                    </Paper>
+                </Grid>
+
+                {/* Net Profit Growth Chart */}
+                <Grid item xs={12} lg={6}>
+                    <Paper
+                        elevation={3}
+                        sx={{
+                            p: 4,
+                            borderRadius: 3,
+                            height: '100%',
+                            background: 'linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)',
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}
+                    >
+                        <Typography
+                            variant="h5"
+                            sx={{
+                                mb: 3,
+                                color: '#8B1EA7',
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            EVEEIO Electric Net Profit Growth (PAT)
+                        </Typography>
+                        <Box sx={{ flex: 1, minHeight: '300px', mb: 4 }}>
+                            <Line data={profitData} options={chartOptions} />
+                        </Box>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                gap: 2,
+                                flexWrap: 'wrap',
+                                justifyContent: 'space-around',
+                                mt: 'auto'
+                            }}
+                        >
+                            <GrowthMetric percentage="50.95" years="1" />
+                            <GrowthMetric percentage="127.01" years="4" />
+                        </Box>
+                    </Paper>
+                </Grid>
+            </Grid>
+        </Box>
+    );
+};
+
+const OperatingAndEbitdaCharts = () => {
+    // Operating Profit Data
+    const operatingProfitData = {
+        labels: ['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+        datasets: [{
+            label: 'Operating Profit (in Cr)',
+            data: [0, 0, 1, 2, 8, 25, 65, 65],
+            backgroundColor: 'rgba(214, 22, 139, 0.8)',
+            borderColor: 'rgba(214, 22, 139, 1)',
+            borderWidth: 1,
+            borderRadius: 8,
+            hoverBackgroundColor: 'rgba(139, 30, 167, 0.9)',
+            barThickness: 40,
+        }]
+    };
+
+    // EBITDA Data
+    const ebitdaData = {
+        labels: ['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+        datasets: [{
+            label: 'EBITDA (in Cr)',
+            data: [0, 0, 1, 2, 8, 25, 65, 65],
+            backgroundColor: 'rgba(139, 30, 167, 0.8)',
+            borderColor: 'rgba(139, 30, 167, 1)',
+            borderWidth: 1,
+            borderRadius: 8,
+            hoverBackgroundColor: 'rgba(214, 22, 139, 0.9)',
+            barThickness: 40,
+        }]
+    };
+
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                enabled: true,
+                mode: 'index',
+                intersect: false,
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                titleColor: '#8B1EA7',
+                titleFont: {
+                    size: 14,
+                    weight: 'bold'
+                },
+                bodyColor: '#666',
+                bodyFont: {
+                    size: 12
+                },
+                borderColor: 'rgba(139, 30, 167, 0.1)',
+                borderWidth: 1,
+                padding: 10,
+                callbacks: {
+                    label: function(context) {
+                        return `₹${context.parsed.y} Cr`;
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    color: '#666',
+                    font: {
+                        size: 11,
+                        weight: '500'
+                    }
+                }
+            },
+            y: {
+                grid: {
+                    color: 'rgba(0, 0, 0, 0.05)',
+                    drawBorder: false
+                },
+                ticks: {
+                    color: '#666',
+                    font: {
+                        size: 11,
+                        weight: '500'
+                    },
+                    callback: function(value) {
+                        return `₹${value} Cr`;
+                    }
+                },
+                beginAtZero: true
+            }
+        },
+        animation: {
+            duration: 2000,
+            easing: 'easeInOutQuart'
+        }
+    };
+
+    const GrowthMetricCard = ({ percentage, years }) => (
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                p: { xs: 1.5, sm: 2 },
+                borderRadius: 2,
+                bgcolor: 'rgba(156, 39, 176, 0.03)',
+                border: '1px solid rgba(156, 39, 176, 0.1)',
+                transition: 'all 0.3s ease',
+                minWidth: { xs: '120px', sm: '150px' },
+                '&:hover': {
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 4px 12px rgba(156, 39, 176, 0.1)',
+                    bgcolor: 'rgba(156, 39, 176, 0.05)'
+                }
+            }}
+        >
+            <Typography
+                variant="h5"
+                sx={{
+                    color: '#D6168B',
+                    fontWeight: 'bold',
+                    fontSize: { xs: '1.5rem', sm: '1.8rem' }
+                }}
+            >
+                {percentage}%
+            </Typography>
+            <Typography
+                variant="body2"
+                sx={{
+                    color: '#666',
+                    fontSize: { xs: '0.8rem', sm: '0.9rem' }
+                }}
+            >
+                {years} Year
+            </Typography>
+        </Box>
+    );
+
+    return (
+        <Box sx={{ 
+            mt: 6, 
+            mb: 6,
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: 3,
+            width: '100%'
+        }}>
+            {/* Operating Profit Card */}
+            <Paper
+                elevation={2}
+                sx={{
+                    flex: 1,
+                    borderRadius: '24px',
+                    overflow: 'hidden',
+                    bgcolor: '#fff',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: { xs: '100%', md: '48%' }
+                }}
+            >
+                <Box sx={{ p: 3 }}>
+                    <Typography
+                        variant="h5"
+                        sx={{
+                            color: '#8B1EA7',
+                            fontWeight: 600,
+                            textAlign: 'center',
+                            mb: 3
+                        }}
+                    >
+                        Operating Profit Growth
+                    </Typography>
+                    
+                    {/* Chart Container */}
+                    <Box sx={{ 
+                        height: '280px',
+                        mb: 3,
+                        '& canvas': {
+                            maxWidth: '100%'
+                        }
+                    }}>
+                        <Bar data={operatingProfitData} options={chartOptions} />
+                    </Box>
+
+                    {/* Growth Metrics */}
+                    <Box sx={{
+                        display: 'flex',
+                        gap: 2,
+                        justifyContent: 'center'
+                    }}>
+                        {[
+                            { percentage: '50.95', period: '1 Year' },
+                            { percentage: '127.01', period: '4 Year' }
+                        ].map((metric, index) => (
+                            <Box
+                                key={index}
+                                sx={{
+                                    bgcolor: 'rgba(214, 22, 139, 0.05)',
+                                    borderRadius: '16px',
+                                    p: 2,
+                                    minWidth: '140px',
+                                    textAlign: 'center'
+                                }}
+                            >
+                                <Typography
+                                    variant="h4"
+                                    sx={{
+                                        color: '#D6168B',
+                                        fontWeight: 'bold',
+                                        fontSize: { xs: '1.8rem', sm: '2rem' },
+                                        mb: 0.5
+                                    }}
+                                >
+                                    {metric.percentage}%
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        color: '#666',
+                                        fontSize: '0.9rem'
+                                    }}
+                                >
+                                    {metric.period}
+                                </Typography>
+                            </Box>
+                        ))}
+                    </Box>
+                </Box>
+            </Paper>
+
+            {/* EBITDA Card */}
+            <Paper
+                elevation={2}
+                sx={{
+                    flex: 1,
+                    borderRadius: '24px',
+                    overflow: 'hidden',
+                    bgcolor: '#fff',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: { xs: '100%', md: '48%' }
+                }}
+            >
+                <Box sx={{ p: 3 }}>
+                    <Typography
+                        variant="h5"
+                        sx={{
+                            color: '#8B1EA7',
+                            fontWeight: 600,
+                            textAlign: 'center',
+                            mb: 3
+                        }}
+                    >
+                        EBITDA Growth
+                    </Typography>
+                    
+                    {/* Chart Container */}
+                    <Box sx={{ 
+                        height: '280px',
+                        mb: 3,
+                        '& canvas': {
+                            maxWidth: '100%'
+                        }
+                    }}>
+                        <Bar data={ebitdaData} options={chartOptions} />
+                    </Box>
+
+                    {/* Growth Metrics */}
+                    <Box sx={{
+                        display: 'flex',
+                        gap: 2,
+                        justifyContent: 'center'
+                    }}>
+                        {[
+                            { percentage: '50.95', period: '1 Year' },
+                            { percentage: '127.01', period: '4 Year' }
+                        ].map((metric, index) => (
+                            <Box
+                                key={index}
+                                sx={{
+                                    bgcolor: 'rgba(139, 30, 167, 0.05)',
+                                    borderRadius: '16px',
+                                    p: 2,
+                                    minWidth: '140px',
+                                    textAlign: 'center'
+                                }}
+                            >
+                                <Typography
+                                    variant="h4"
+                                    sx={{
+                                        color: '#8B1EA7',
+                                        fontWeight: 'bold',
+                                        fontSize: { xs: '1.8rem', sm: '2rem' },
+                                        mb: 0.5
+                                    }}
+                                >
+                                    {metric.percentage}%
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        color: '#666',
+                                        fontSize: '0.9rem'
+                                    }}
+                                >
+                                    {metric.period}
+                                </Typography>
+                            </Box>
+                        ))}
+                    </Box>
+                </Box>
+            </Paper>
+        </Box>
+    );
+};
+
 const StartupFundDetails = () => {
     const { name } = useParams();
     const [tabValue, setTabValue] = React.useState(0);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [startup, setStartup] = useState(null);
 
-    const startup = startups.find(s => s.name === decodeURIComponent(name));
+    useEffect(() => {
+        try {
+            const decodedName = decodeURIComponent(name);
+            const foundStartup = startups.find(s => s.name === decodedName);
+            
+            if (!foundStartup) {
+                setError('Startup not found');
+            } else {
+                setStartup(foundStartup);
+            }
+        } catch (err) {
+            setError('Error loading startup details');
+        } finally {
+            setLoading(false);
+        }
+    }, [name]);
+
+    if (loading) {
+        return (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <CircularProgress />
+            </Box>
+        );
+    }
+
+    if (error || !startup) {
+        return (
+            <Box sx={{ 
+                p: 3, 
+                textAlign: 'center', 
+                height: '100vh', 
+                display: 'flex', 
+                flexDirection: 'column', 
+                justifyContent: 'center' 
+            }}>
+                <Typography variant="h5" color="error" gutterBottom>
+                    {error || 'Startup not found'}
+                </Typography>
+                <Button 
+                    variant="contained" 
+                    onClick={() => window.history.back()}
+                    sx={{ mt: 2, alignSelf: 'center' }}
+                >
+                    Go Back
+                </Button>
+            </Box>
+        );
+    }
 
     // Sample data points to match the graph pattern
     const data = {
@@ -1033,8 +1717,6 @@ const StartupFundDetails = () => {
         },
     };
 
-    if (!startup) return <div>Startup not found</div>;
-
     return (
         <Box sx={{ p: 3, maxWidth: '1200px', margin: '0 auto' }}>
             <Typography 
@@ -1058,13 +1740,8 @@ const StartupFundDetails = () => {
                 <Tab label="Pitch" />
                 <Tab label="Snapshot" />
                 <Tab label="Key Ratio" />
-                <Tab label="News" />
-                <Tab label="Peers" />
                 <Tab label="Financial" />
-                <Tab label="Ownership" />
-                <Tab label="Gallery" />
-                <Tab label="Events" />
-                <Tab label="FAQs" />
+               
             </Tabs>
 
             <Grid container spacing={3}>
@@ -1220,6 +1897,9 @@ const StartupFundDetails = () => {
 
                 <BusinessRating />
                 <ImageTitle />
+                <AboutSection />
+                <GrowthCharts />
+                <OperatingAndEbitdaCharts />
                 <FinancialTable />
             </Grid>
         </Box>
