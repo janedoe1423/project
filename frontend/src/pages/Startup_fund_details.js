@@ -28,7 +28,7 @@ import {
     Legend
 } from 'chart.js';
 import { Line } from "react-chartjs-2";
-import { startups } from "./startup/startup_funding";
+import { startups } from "./Funding.js";
 import Rating from '@mui/material/Rating';
 // Import icons for each category
 import BusinessIcon from '@mui/icons-material/Business';

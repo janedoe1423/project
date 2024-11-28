@@ -10,12 +10,12 @@ const LoginPage = () => {
             navigate("/startup-profile");
         } else if (userType === "investor") {
             navigate("/investor-profile");
-        } else if (userType === "innovator") {
-            navigate("/innovator-profile");
         } else if (userType === "ipr-professional"){
             navigate("/ipr-professional-profile");
         } else if (userType === "researcher"){
             navigate("/researcher");
+        }else if (userType === "admin"){
+            navigate("/admin");
         }
     };
 
@@ -31,14 +31,14 @@ const LoginPage = () => {
                     <button className="btn btn-success" onClick={() => handleLogin("investor")}>
                         Login as Investor
                     </button>
-                    <button className="btn btn-info" onClick={() => handleLogin("innovator")}>
-                        Login as Innovator
-                    </button>
                     <button className="btn btn-info" onClick={() => handleLogin("ipr-professional")}>
                         Login as IPR Professional
                     </button>
                     <button className="btn btn-info" onClick={() => handleLogin("researcher")}>
                         Login as Researcher
+                    </button>
+                    <button className="btn btn-info" onClick={() => handleLogin("admin")}>
+                        Login as Admin
                     </button>
                 </div>
             </div>
