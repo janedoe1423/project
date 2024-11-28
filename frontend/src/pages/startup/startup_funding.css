@@ -1,0 +1,95 @@
+/* Timeline styling */
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 120px;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 3px solid #8884d8;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: 130px;
+    top: 50%;
+    width: 50px;
+    height: 2px;
+    background: #8884d8;
+}
+
+.timeline-date {
+    width: 120px;
+    padding-right: 20px;
+    text-align: right;
+    font-weight: 500;
+    color: #666;
+}
+
+.timeline-content {
+    flex: 1;
+    padding-left: 70px;
+    padding-top: 3px;
+}
+
+/* Card styling */
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Badge styling */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 10px;
+}
+
+/* Modal styling */
+.modal-body table {
+    margin-bottom: 0;
+}
+
+.modal-body td:first-child {
+    font-weight: 500;
+    width: 40%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .timeline-item::before {
+        left: 90px;
+    }
+    
+    .timeline-item::after {
+        left: 100px;
+    }
+    
+    .timeline-date {
+        width: 90px;
+    }
+    
+    .timeline-content {
+        padding-left: 60px;
+    }
+}

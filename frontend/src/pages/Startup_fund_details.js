@@ -29,7 +29,7 @@ import {
     Filler,
     Legend
 } from 'chart.js';
-import { Line, Bar } from 'react-chartjs-2';
+import { Line, Bar } from "react-chartjs-2";
 import { startups } from "./Funding.js";
 import Rating from '@mui/material/Rating';
 // Import icons for each category
