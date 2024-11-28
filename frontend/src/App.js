@@ -22,7 +22,7 @@ import WomenEntrepreneurship from './pages/Schemes and policies/WomenEntrepreneu
 import Incubator from './pages/Schemes and policies/Incubator';
 import StartupGujarat from './pages/Schemes and policies/StartupGUJ';
 import StartupFunding from "./pages/startup/startup_funding";
-import StartupFundDetails from "./pages/startup/Startup_fund_details";
+import StartupFundDetails from "./pages/Startup_fund_details";
 
 function App() {
   return (

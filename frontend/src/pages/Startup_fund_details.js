@@ -28,7 +28,7 @@ import {
     Legend
 } from 'chart.js';
 import { Line } from "react-chartjs-2";
-import { startups } from "./startup_funding";
+import { startups } from "./startup/startup_funding";
 import Rating from '@mui/material/Rating';
 // Import icons for each category
 import BusinessIcon from '@mui/icons-material/Business';
@@ -47,6 +47,9 @@ import DownloadIcon from '@mui/icons-material/Download';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import marketOpportunityImg from "../assets/images/Marketoppotunity.jpg"
+import shipVlogImg from "../assets/images/shipvlog.jpg"
+import marketChallengeImg from "../assets/images/MarketChallenge.jpg"
 
 // Register ChartJS components
 ChartJS.register(
@@ -486,9 +489,9 @@ const StartupBanner = () => (
 // Add ImageTitle component
 const ImageTitle = () => {
     const images = [
-        require("../../assets/images/shipvlog.jpg"),
-        require("../../assets/images/MarketChallenge.jpg"),
-        require("../../assets/images/Marketoppotunity.jpg")
+        require("../assets/images/shipvlog.jpg"),
+        require("../assets/images/MarketChallenge.jpg"),
+        require("../assets/images/Marketoppotunity.jpg")
     ];
 
     return (
