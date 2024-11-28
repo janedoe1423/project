@@ -13,6 +13,7 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import GroupIcon from '@mui/icons-material/Group';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import './startup_dashboard.css';
+import StartupMetricsDashboard from './startup_metrics';
 
 const StartupDashboard = () => {
     const metricCards = [
@@ -51,6 +52,7 @@ const StartupDashboard = () => {
     ];
 
     return (
+        <>
         <Container maxWidth="xl" sx={{ py: 4 }}>
             <Typography 
                 variant="h4" 
@@ -158,7 +160,9 @@ const StartupDashboard = () => {
                     </Grid>
                 ))}
             </Grid>
-        </Container>
+            </Container>
+            <StartupMetricsDashboard />
+        </>
     );
 };
 
