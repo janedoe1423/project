@@ -1,331 +1,230 @@
 import React, { useState } from 'react';
-import { Line, Bar } from 'react-chartjs-2';
+import { Card, Badge, Button, Modal } from 'react-bootstrap';
+import { FaFileAlt, FaChartLine, FaCalendarAlt, FaCheckCircle, FaTimesCircle, FaHourglassHalf } from 'react-icons/fa';
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { useNavigate } from 'react-router-dom';
-
-// Register ChartJS components
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+    AreaChart,
+    Area,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    ResponsiveContainer
+} from 'recharts';
 
 const StartupFunding = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    companyName: '',
-    fundingNeeded: '',
-    revenueHistory: ['', '', ''], // Last 3 years
-    projectedGrowth: ['', '', ''], // Next 3 years
-    marketSize: '',
-    currentValuation: '',
-    sector: '',
-    subSector: '',
-    totalShares: '',
-    faceValue: '',
-    description: '',
-    keyMetrics: {
-      totalRiders: '',
-      totalDeliveries: '',
-      totalKilometers: '',
-      activeClients: ''
-    },
-    financialProjections: {
-      revenue: ['', '', ''], // Next 3 years
-      profit: ['', '', ''], // Next 3 years
-      margins: ['', '', ''] // Next 3 years
-    }
-  });
+    const [showDetails, setShowDetails] = useState(false);
+    const [selectedFunding, setSelectedFunding] = useState(null);
 
-  const [showGraphs, setShowGraphs] = useState(false);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleArrayInputChange = (e, index, field) => {
-    const { value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [field]: prev[field].map((item, i) => (i === index ? value : item)),
-    }));
-  };
-
-  const generateGraphData = () => {
-    const revenueData = {
-      labels: ['Year -3', 'Year -2', 'Year -1', 'Current', 'Year +1', 'Year +2', 'Year +3'],
-      datasets: [
+    // Sample data - replace with actual API data
+    const fundingApplications = [
         {
-          label: 'Revenue & Projections',
-          data: [...formData.revenueHistory, formData.currentValuation, ...formData.projectedGrowth],
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1,
+            id: 1,
+            applicationDate: '2024-03-15',
+            requestedAmount: 500000,
+            status: 'approved',
+            fundingType: 'Seed Funding',
+            investorType: 'Angel Investor',
+            valuation: 5000000,
+            equityOffered: 10,
+            purpose: 'Market Expansion',
+            timeline: '12 months',
+            milestones: [
+                { title: 'Product Launch', date: '2024-06-01' },
+                { title: 'Market Entry', date: '2024-09-01' },
+                { title: 'Break Even', date: '2025-03-01' }
+            ],
+            financialProjections: [
+                { month: 'Jan', revenue: 50000 },
+                { month: 'Feb', revenue: 65000 },
+                { month: 'Mar', revenue: 80000 },
+                { month: 'Apr', revenue: 95000 },
+                { month: 'May', revenue: 120000 },
+                { month: 'Jun', revenue: 150000 }
+            ]
         },
         {
-          label: 'Profit Margins',
-          data: [...formData.financialProjections.margins],
-          borderColor: 'rgb(255, 99, 132)',
-          tension: 0.1,
+            id: 2,
+            applicationDate: '2024-03-20',
+            requestedAmount: 1000000,
+            status: 'pending',
+            fundingType: 'Series A',
+            investorType: 'Venture Capital',
+            valuation: 10000000,
+            equityOffered: 15,
+            purpose: 'Technology Development',
+            timeline: '18 months'
+        },
+        // Add more sample applications as needed
+    ];
+
+    const getStatusBadge = (status) => {
+        switch (status) {
+            case 'approved':
+                return <Badge bg="success"><FaCheckCircle /> Approved</Badge>;
+            case 'rejected':
+                return <Badge bg="danger"><FaTimesCircle /> Rejected</Badge>;
+            case 'pending':
+                return <Badge bg="warning"><FaHourglassHalf /> Pending</Badge>;
+            default:
+                return <Badge bg="secondary">Unknown</Badge>;
         }
-      ],
     };
 
-    return revenueData;
-  };
-
-  const handleGenerateReport = () => {
-    setShowGraphs(true);
-  };
-
-  const handlePublish = () => {
-    // Create the report object
-    const report = {
-      ...formData,
-      graphs: generateGraphData(),
-      dateGenerated: new Date().toISOString(),
+    const handleShowDetails = (funding) => {
+        setSelectedFunding(funding);
+        setShowDetails(true);
     };
 
-    // Here you would typically save the report to your backend
-    // For now, we'll just navigate to the funding page
-    navigate('/funding', { state: { report } });
-  };
-
-  return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Startup Funding Application</h1>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Basic Information */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-semibold">Company Information</h2>
-          
-          <div className="form-group">
-            <label>Company Name</label>
-            <input
-              type="text"
-              name="companyName"
-              value={formData.companyName}
-              onChange={handleInputChange}
-              className="form-control"
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Sector</label>
-            <input
-              type="text"
-              name="sector"
-              value={formData.sector}
-              onChange={handleInputChange}
-              className="form-control"
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Sub-sector</label>
-            <input
-              type="text"
-              name="subSector"
-              value={formData.subSector}
-              onChange={handleInputChange}
-              className="form-control"
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Company Description</label>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
-              className="form-control"
-              rows={4}
-            />
-          </div>
-        </div>
-
-        {/* Financial Information */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-semibold">Financial Information</h2>
-          
-          <div className="form-group">
-            <label>Funding Needed ($)</label>
-            <input
-              type="number"
-              name="fundingNeeded"
-              value={formData.fundingNeeded}
-              onChange={handleInputChange}
-              className="form-control"
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Current Valuation ($)</label>
-            <input
-              type="number"
-              name="currentValuation"
-              value={formData.currentValuation}
-              onChange={handleInputChange}
-              className="form-control"
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Face Value per Share ($)</label>
-            <input
-              type="number"
-              name="faceValue"
-              value={formData.faceValue}
-              onChange={handleInputChange}
-              className="form-control"
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Total Shares</label>
-            <input
-              type="number"
-              name="totalShares"
-              value={formData.totalShares}
-              onChange={handleInputChange}
-              className="form-control"
-            />
-          </div>
-        </div>
-
-        {/* Key Metrics */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-semibold">Key Metrics</h2>
-          
-          <div className="grid grid-cols-2 gap-4">
-            <div className="form-group">
-              <label>Total Riders</label>
-              <input
-                type="number"
-                name="keyMetrics.totalRiders"
-                value={formData.keyMetrics.totalRiders}
-                onChange={handleInputChange}
-                className="form-control"
-              />
+    return (
+        <div className="p-4">
+            <div className="d-flex justify-content-between align-items-center mb-4">
+                <h2 className="mb-0">Funding Applications Overview</h2>
+                <Button 
+                    variant="primary" 
+                    href="#funding/new"
+                    className="d-flex align-items-center gap-2"
+                >
+                    <FaFileAlt /> New Application
+                </Button>
             </div>
 
-            <div className="form-group">
-              <label>Total Deliveries</label>
-              <input
-                type="number"
-                name="keyMetrics.totalDeliveries"
-                value={formData.keyMetrics.totalDeliveries}
-                onChange={handleInputChange}
-                className="form-control"
-              />
+            <div className="row">
+                {fundingApplications.map((funding) => (
+                    <div key={funding.id} className="col-md-6 col-lg-4 mb-4">
+                        <Card className="h-100 shadow-sm">
+                            <Card.Body>
+                                <div className="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <h5 className="mb-1">{funding.fundingType}</h5>
+                                        <div className="text-muted small">
+                                            <FaCalendarAlt className="me-1" />
+                                            {new Date(funding.applicationDate).toLocaleDateString()}
+                                        </div>
+                                    </div>
+                                    {getStatusBadge(funding.status)}
+                                </div>
+
+                                <div className="mb-3">
+                                    <div className="d-flex justify-content-between mb-2">
+                                        <span>Requested Amount:</span>
+                                        <strong>${funding.requestedAmount.toLocaleString()}</strong>
+                                    </div>
+                                    <div className="d-flex justify-content-between mb-2">
+                                        <span>Valuation:</span>
+                                        <strong>${funding.valuation.toLocaleString()}</strong>
+                                    </div>
+                                    <div className="d-flex justify-content-between">
+                                        <span>Equity Offered:</span>
+                                        <strong>{funding.equityOffered}%</strong>
+                                    </div>
+                                </div>
+
+                                <Button 
+                                    variant="outline-primary" 
+                                    className="w-100"
+                                    onClick={() => handleShowDetails(funding)}
+                                >
+                                    View Details
+                                </Button>
+                            </Card.Body>
+                        </Card>
+                    </div>
+                ))}
             </div>
 
-            <div className="form-group">
-              <label>Total Kilometers</label>
-              <input
-                type="number"
-                name="keyMetrics.totalKilometers"
-                value={formData.keyMetrics.totalKilometers}
-                onChange={handleInputChange}
-                className="form-control"
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Active Clients</label>
-              <input
-                type="number"
-                name="keyMetrics.activeClients"
-                value={formData.keyMetrics.activeClients}
-                onChange={handleInputChange}
-                className="form-control"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Historical & Projected Data */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-semibold">Financial History & Projections</h2>
-          
-          <div className="form-group">
-            <label>Revenue History (Last 3 Years)</label>
-            {formData.revenueHistory.map((value, index) => (
-              <input
-                key={index}
-                type="number"
-                value={value}
-                onChange={(e) => handleArrayInputChange(e, index, 'revenueHistory')}
-                className="form-control mt-2"
-                placeholder={`Year ${-3 + index}`}
-              />
-            ))}
-          </div>
-
-          <div className="form-group">
-            <label>Projected Growth (Next 3 Years)</label>
-            {formData.projectedGrowth.map((value, index) => (
-              <input
-                key={index}
-                type="number"
-                value={value}
-                onChange={(e) => handleArrayInputChange(e, index, 'projectedGrowth')}
-                className="form-control mt-2"
-                placeholder={`Year ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Buttons */}
-      <div className="mt-8 space-x-4">
-        <button
-          onClick={handleGenerateReport}
-          className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600"
-        >
-          Preview Report
-        </button>
-
-        {showGraphs && (
-          <>
-            <div className="mt-8">
-              <h2 className="text-2xl font-bold mb-4">Financial Projections</h2>
-              <div className="h-96">
-                <Line data={generateGraphData()} />
-              </div>
-            </div>
-
-            <button
-              onClick={handlePublish}
-              className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 mt-4"
+            <Modal 
+                show={showDetails} 
+                onHide={() => setShowDetails(false)}
+                size="lg"
             >
-              Publish Report
-            </button>
-          </>
-        )}
-      </div>
-    </div>
-  );
+                {selectedFunding && (
+                    <>
+                        <Modal.Header closeButton>
+                            <Modal.Title>{selectedFunding.fundingType} Application Details</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <div className="row mb-4">
+                                <div className="col-md-6">
+                                    <h6>Application Overview</h6>
+                                    <table className="table table-sm">
+                                        <tbody>
+                                            <tr>
+                                                <td>Status:</td>
+                                                <td>{getStatusBadge(selectedFunding.status)}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Requested Amount:</td>
+                                                <td>${selectedFunding.requestedAmount.toLocaleString()}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Investor Type:</td>
+                                                <td>{selectedFunding.investorType}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Purpose:</td>
+                                                <td>{selectedFunding.purpose}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Timeline:</td>
+                                                <td>{selectedFunding.timeline}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div className="col-md-6">
+                                    <h6>Financial Metrics</h6>
+                                    {selectedFunding.financialProjections && (
+                                        <div style={{ height: '200px' }}>
+                                            <ResponsiveContainer width="100%" height="100%">
+                                                <AreaChart
+                                                    data={selectedFunding.financialProjections}
+                                                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                                                >
+                                                    <CartesianGrid strokeDasharray="3 3" />
+                                                    <XAxis dataKey="month" />
+                                                    <YAxis />
+                                                    <Tooltip />
+                                                    <Area 
+                                                        type="monotone" 
+                                                        dataKey="revenue" 
+                                                        stroke="#8884d8" 
+                                                        fill="#8884d8" 
+                                                    />
+                                                </AreaChart>
+                                            </ResponsiveContainer>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {selectedFunding.milestones && (
+                                <div className="mb-4">
+                                    <h6>Key Milestones</h6>
+                                    <div className="timeline">
+                                        {selectedFunding.milestones.map((milestone, index) => (
+                                            <div key={index} className="timeline-item">
+                                                <div className="timeline-date">
+                                                    {new Date(milestone.date).toLocaleDateString()}
+                                                </div>
+                                                <div className="timeline-content">
+                                                    {milestone.title}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={() => setShowDetails(false)}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </>
+                )}
+            </Modal>
+        </div>
+    );
 };
 
 export default StartupFunding;
