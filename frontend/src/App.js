@@ -22,6 +22,8 @@ import Incubator from './pages/Schemes and policies/Incubator';
 import StartupGujarat from './pages/Schemes and policies/StartupGUJ';
 import StartupFundDetails from "./pages/Startup_fund_details";
 import Admin_profile_page from './pages/admin/admin_profile_page';
+import InvestorProfilePage from './pages/investor/investor_profile_page';
+import StartupProfile from './Startup_profile';
 
 function App() {
   return (
@@ -48,6 +50,8 @@ function App() {
           <Route path="/schemes/startup-gujarat" element={<StartupGujarat />} />
           <Route path="/startup/:name" element={<StartupFundDetails />} />
           <Route path="/admin" element={<Admin_profile_page />} />
+          <Route path="/investor-profile" element={<InvestorProfilePage />}/>
+          <Route path="/startup-profile/:id" element={<StartupProfile />} />
         </Routes>
       </div>
       <Footer />
