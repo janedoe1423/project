@@ -6,8 +6,8 @@ import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import SearchIcon from '@mui/icons-material/Search';
+import topStartupsImage from '../assets/images/startupsgujarat.jpg';
 
-// Styled Components
 const StartupCard = styled.div`
   background: rgba(255, 255, 255, 0.03);
   border-radius: 16px;
@@ -471,6 +471,106 @@ function Startup() {
                     zIndex: 4
                 }}
             />
+
+            <Box
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: { xs: '40px 20px', md: '60px 80px' },
+                    background: 'linear-gradient(90deg, rgba(11,9,16,0.95) 0%, rgba(11,9,16,0.8) 100%)',
+                    position: 'relative',
+                    zIndex: 3,
+                }}
+            >
+                <Box sx={{ flex: 1, maxWidth: '600px' }}>
+                    <Typography
+                        variant="h1"
+                        sx={{
+                            fontSize: { xs: '2.5rem', md: '3.5rem' },
+                            fontWeight: 700,
+                            color: '#FFFFFF',
+                            mb: 2,
+                            '& .highlight': {
+                                color: '#C2FA4F',
+                            }
+                        }}
+                    >
+                        The true <span className="highlight">start-up</span><br />
+                        of a business is what<br />
+                        happens <span className="highlight">before</span> you start-up.
+                    </Typography>
+                    
+                    <Typography
+                        sx={{
+                            color: 'rgba(255,255,255,0.8)',
+                            fontSize: '1.1rem',
+                            lineHeight: 1.6,
+                            mb: 4,
+                            maxWidth: '90%'
+                        }}
+                    >
+                        Discover Gujarat's vibrant startup ecosystem where ideas transform into 
+                        impactful ventures. Whether you're an aspiring entrepreneur or an 
+                        established founder, explore resources, connect with mentors, and 
+                        access the support you need to turn your vision into reality.
+                    </Typography>
+
+                    <Box sx={{ display: 'flex', gap: 3 }}>
+                        <Button
+                            variant="contained"
+                            sx={{
+                                bgcolor: '#C2FA4F',
+                                color: '#0B0910',
+                                fontSize: '1rem',
+                                padding: '12px 32px',
+                                '&:hover': {
+                                    bgcolor: '#9BCD3D'
+                                }
+                            }}
+                        >
+                            Start Up
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            sx={{
+                                borderColor: 'rgba(255,255,255,0.3)',
+                                color: '#FFFFFF',
+                                fontSize: '1rem',
+                                padding: '12px 32px',
+                                '&:hover': {
+                                    borderColor: '#FFFFFF',
+                                    bgcolor: 'rgba(255,255,255,0.1)'
+                                }
+                            }}
+                        >
+                            PROJECTS
+                        </Button>
+                    </Box>
+                </Box>
+
+                <Box
+                    sx={{
+                        flex: 1,
+                        display: { xs: 'none', md: 'block' },
+                        position: 'relative',
+                        height: '500px',
+                    }}
+                >
+                    <Box
+                        component="img"
+                        src={topStartupsImage}
+                        alt="Startup Investment"
+                        sx={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            borderRadius: '20px',
+                            boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+                        }}
+                    />
+                </Box>
+            </Box>
 
             <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 3, pt: 8, pb: 8 }}>
                 <Typography
