@@ -477,3 +477,79 @@ class InvestorPerformanceMetric(models.Model):
 
     class Meta:
         verbose_name_plural = 'Investor Performance Metrics'
+
+from django.db import models
+import uuid
+
+class InvestmentCompany(models.Model):
+    """Model to store details of companies in the investor's portfolio"""
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+    investor = models.ForeignKey(
+        'Investor',  # Assuming 'Investor' is the main investor model
+        on_delete=models.CASCADE,
+        related_name='investment_companies'
+    )
+    name = models.CharField(max_length=255, unique=True)
+    logo = models.ImageField(upload_to='investor/company_logos/')
+    sector = models.CharField(max_length=100)
+    description = models.TextField()
+    current_value = models.DecimalField(max_digits=20, decimal_places=2)
+    returns = models.DecimalField(max_digits=5, decimal_places=2)
+    investment_date = models.DateField()
+
+    # Additional Details
+    founded_year = models.PositiveIntegerField()
+    location = models.CharField(max_length=255)
+    employee_count = models.PositiveIntegerField()
+    funding_round = models.CharField(max_length=50)
+
+    # Key Metrics
+    market_share = models.DecimalField(max_digits=5, decimal_places=2)
+    growth_rate = models.DecimalField(max_digits=5, decimal_places=2)
+    customer_retention = models.DecimalField(max_digits=5, decimal_places=2)
+    ltv = models.DecimalField(max_digits=10, decimal_places=2)  # Lifetime Value
+
+    # Market Analysis
+    market_position = models.CharField(max_length=100)
+    target_market_size = models.DecimalField(max_digits=10, decimal_places=2)
+    market_growth_rate = models.DecimalField(max_digits=5, decimal_places=2)
+    geographic_presence = models.JSONField(default=list)
+
+    class Meta:
+        unique_together = ('investor', 'name')
+        ordering = ['-investment_date']
+
+    def __str__(self):
+        return self.name
+
+class PerformanceData(models.Model):
+    """Model to store performance data for graphing"""
+    company = models.ForeignKey(
+        InvestmentCompany,
+        on_delete=models.CASCADE,
+        related_name='performance_data'
+    )
+    date = models.DateField()
+    revenue = models.DecimalField(max_digits=10, decimal_places=2)
+    projection = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.company.name} - {self.date}"
+
+class RiskData(models.Model):
+    """Model to store risk data for graphing"""
+    company = models.ForeignKey(
+        InvestmentCompany,
+        on_delete=models.CASCADE,
+        related_name='risk_data'
+    )
+    subject = models.CharField(max_length=100)
+    value = models.DecimalField(max_digits=5, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.company.name} - {self.subject}"
+

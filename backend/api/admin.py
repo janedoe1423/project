@@ -12,7 +12,10 @@ from .models import (
     InvestorFinancialMetric,
     InvestorGrowthMetric,
     InvestorFundingRound,
-    InvestorTeamGrowth
+    InvestorTeamGrowth,
+    InvestorPortfolio,
+    InvestorCompany,
+    InvestorPerformanceMetric
 )
 
 @admin.register(Investor)
@@ -87,14 +90,14 @@ class InvestmentThesisAdmin(admin.ModelAdmin):
     raw_id_fields = ('investor',)
 
 @admin.register(InvestorExpertise)
-class ExpertiseAdmin(admin.ModelAdmin):
+class InvestorExpertiseAdmin(admin.ModelAdmin):
     list_display = ('investor', 'name', 'years_of_experience')
     list_filter = ('name', 'years_of_experience')
     search_fields = ('investor__email', 'name')
     raw_id_fields = ('investor',)
 
 @admin.register(InvestorComplianceDocument)
-class ComplianceDocumentAdmin(admin.ModelAdmin):
+class InvestorComplianceDocumentAdmin(admin.ModelAdmin):
     list_display = ('investor', 'document_type', 'uploaded_at', 'is_verified', 'expiry_date')
     list_filter = ('document_type', 'is_verified', 'uploaded_at')
     search_fields = ('investor__email', 'verification_notes')
@@ -108,7 +111,7 @@ class ComplianceDocumentAdmin(admin.ModelAdmin):
     document_preview.short_description = 'Document Preview'
 
 @admin.register(InvestorInvestmentPreference)
-class InvestmentPreferenceAdmin(admin.ModelAdmin):
+class InvestorInvestmentPreferenceAdmin(admin.ModelAdmin):
     list_display = ('investor', 'created_at', 'updated_at')
     search_fields = ('investor__email', 'investment_philosophy')
     raw_id_fields = ('investor',)
@@ -163,7 +166,7 @@ class InvestorTeamGrowthAdmin(admin.ModelAdmin):
 @admin.register(InvestorPortfolio)
 class InvestorPortfolioAdmin(admin.ModelAdmin):
     list_display = ('investor', 'total_value', 'total_companies', 'active_investments', 'exits', 'irr')
-    search_fields = ('investor__email',)
+    search_fields = ('investor__name', 'total_value')
     raw_id_fields = ('investor',)
 
 @admin.register(InvestorCompany)
