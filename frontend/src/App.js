@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import Startups from './pages/Startups';
 import Investors from './pages/Investors';
 import Innovations from './pages/Innovations';
-import Innovators from './pages/Innovators';
+
 import Schemes from './pages/Schemes';
 import IPR from './pages/IPR';
 import Funding from './pages/Funding';
@@ -38,7 +38,7 @@ function App() {
           <Route path="/investors" element={<Investors />} />
           <Route path="/investor-dashboard" element={<InvestorDashboard />} /> {/* Add route for Investor Dashboard */}
           <Route path="/innovations" element={<Innovations />} />
-          <Route path="/innovators" element={<Innovators />} />
+         
           <Route path="/schemes" element={<Schemes />} />
           <Route path="/ipr-rights" element={<IPR />} />
           <Route path="/funding" element={<Funding />} />
