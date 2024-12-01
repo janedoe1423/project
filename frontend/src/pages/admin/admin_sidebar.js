@@ -3,7 +3,7 @@ import { Nav } from "react-bootstrap";
 import {
     FaHome, FaUser, FaLayerGroup, FaCopyright,
     FaUsers, FaBell, FaMoneyBill, FaLightbulb,
-    FaChartBar, FaCog, FaUserShield, FaUserTie, FaChalkboardTeacher, FaFlask
+    FaChartBar, FaCog, FaUserShield, FaUserTie, FaChalkboardTeacher, FaFlask, FaHandshake, FaFileContract
 } from "react-icons/fa";
 import "./admin_sidebar.css"; // We'll create this next
 
@@ -137,6 +137,28 @@ const AdminSidebar = () => {
                             <FaFlask />
                         </div>
                         <span>Researchers Management</span>
+                    </Nav.Link>
+
+                    <Nav.Link
+                        href="#collaboration-management"
+                        className={`sidebar-link ${activeLink === '#collaboration-management' ? 'active' : ''}`}
+                        onClick={() => setActiveLink('#collaboration-management')}
+                    >
+                        <div className="icon-container">
+                            <FaHandshake />
+                        </div>
+                        <span>Collaboration Management</span>
+                    </Nav.Link>
+
+                    <Nav.Link
+                        href="#policy-management"
+                        className={`sidebar-link ${activeLink === '#policy-management' ? 'active' : ''}`}
+                        onClick={() => setActiveLink('#policy-management')}
+                    >
+                        <div className="icon-container">
+                            <FaFileContract />
+                        </div>
+                        <span>Policy Management</span>
                     </Nav.Link>
 
                     <Nav.Link
