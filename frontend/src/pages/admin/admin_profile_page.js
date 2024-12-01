@@ -9,6 +9,10 @@ const AdminSchemeManagement = React.lazy(() => import("./admin_scheme_management
 const AdminStartupManagement = React.lazy(() => import("./admin_startup_management"));
 const AdminNotifications = React.lazy(() => import("./admin_notifications"));
 const AdminFundingManagement = React.lazy(() => import("./admin_funding_management"));
+const AdminUserManagement = React.lazy(() => import("./admin_user_management"));
+const AdminInvestorsManagement = React.lazy(() => import("./admin_investors_management"));
+const AdminMentorsManagement = React.lazy(() => import("./admin_mentors_management"));
+const AdminResearchersManagement = React.lazy(() => import("./admin_researchers_management"));
 
 const Admin_profile_page = () => {
     const [currentPage, setCurrentPage] = useState(window.location.hash || "#dashboard");
@@ -44,6 +48,14 @@ const Admin_profile_page = () => {
                             return <AdminNotifications />;
                         case "#funding-management":
                             return <AdminFundingManagement />;
+                        case "#user-management":
+                            return <AdminUserManagement />;
+                        case "#investors-management":
+                            return <AdminInvestorsManagement />;
+                        case "#mentors-management":
+                            return <AdminMentorsManagement />;
+                        case "#researchers-management":
+                            return <AdminResearchersManagement />;
                         default:
                             return <AdminDashboard />;
                     }
