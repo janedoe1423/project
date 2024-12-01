@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const AdminStartupManagement = () => {
     return (
@@ -9,4 +9,4 @@ const AdminStartupManagement = () => {
     );
 };
 
-export default AdminStartupManagement;
+export default AdminStartupManagement;  
