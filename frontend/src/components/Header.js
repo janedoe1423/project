@@ -28,7 +28,6 @@ function Header() {
         { path: '/startups', name: 'Startups', icon: <FaRocket /> },
         { path: '/investors', name: 'Investors', icon: <FaUsers /> },
         { path: '/innovations', name: 'Innovations', icon: <FaLightbulb /> },
-        { path: '/innovators', name: 'Innovators', icon: <FaBrain /> },
         { 
             path: '/schemes', 
             name: 'Schemes', 
