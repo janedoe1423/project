@@ -10,12 +10,14 @@ const LoginPage = () => {
             navigate("/startup-profile");
         } else if (userType === "investor") {
             navigate("/investor-profile");
-        } else if (userType === "ipr-professional"){
+        } else if (userType === "ipr-professional") {
             navigate("/ipr-professional-profile");
-        } else if (userType === "researcher"){
+        } else if (userType === "researcher") {
             navigate("/researcher");
-        }else if (userType === "admin"){
+        } else if (userType === "admin") {
             navigate("/admin");
+        } else if (userType === "mentor") {
+            navigate("/mentor-profile");
         }
     };
 
@@ -39,6 +41,9 @@ const LoginPage = () => {
                     </button>
                     <button className="btn btn-info" onClick={() => handleLogin("admin")}>
                         Login as Admin
+                    </button>
+                    <button className="btn btn-warning" onClick={() => handleLogin("mentor")}>
+                        Login as Mentor
                     </button>
                 </div>
             </div>

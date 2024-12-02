@@ -3,7 +3,7 @@ import { Nav } from "react-bootstrap";
 import {
     FaHome, FaUser, FaLayerGroup, FaCopyright,
     FaUsers, FaBell, FaMoneyBill, FaLightbulb,
-    FaChartBar, FaCog, FaUserShield
+    FaChartBar, FaCog, FaUserShield, FaUserTie, FaChalkboardTeacher, FaFlask, FaHandshake, FaFileContract
 } from "react-icons/fa";
 import "./admin_sidebar.css"; // We'll create this next
 
@@ -104,6 +104,61 @@ const AdminSidebar = () => {
                             <FaUserShield />
                         </div>
                         <span>User Management</span>
+                    </Nav.Link>
+
+                    <Nav.Link
+                        href="#investors-management"
+                        className={`sidebar-link ${activeLink === '#investors-management' ? 'active' : ''}`}
+                        onClick={() => setActiveLink('#investors-management')}
+                    >
+                        <div className="icon-container">
+                            <FaUserTie />
+                        </div>
+                        <span>Investors Management</span>
+                    </Nav.Link>
+
+                    <Nav.Link
+                        href="#mentors-management"
+                        className={`sidebar-link ${activeLink === '#mentors-management' ? 'active' : ''}`}
+                        onClick={() => setActiveLink('#mentors-management')}
+                    >
+                        <div className="icon-container">
+                            <FaChalkboardTeacher />
+                        </div>
+                        <span>Mentors Management</span>
+                    </Nav.Link>
+
+                    <Nav.Link
+                        href="#researchers-management"
+                        className={`sidebar-link ${activeLink === '#researchers-management' ? 'active' : ''}`}
+                        onClick={() => setActiveLink('#researchers-management')}
+                    >
+                        <div className="icon-container">
+                            <FaFlask />
+                        </div>
+                        <span>Researchers Management</span>
+                    </Nav.Link>
+
+                    <Nav.Link
+                        href="#collaboration-management"
+                        className={`sidebar-link ${activeLink === '#collaboration-management' ? 'active' : ''}`}
+                        onClick={() => setActiveLink('#collaboration-management')}
+                    >
+                        <div className="icon-container">
+                            <FaHandshake />
+                        </div>
+                        <span>Collaboration Management</span>
+                    </Nav.Link>
+
+                    <Nav.Link
+                        href="#policy-management"
+                        className={`sidebar-link ${activeLink === '#policy-management' ? 'active' : ''}`}
+                        onClick={() => setActiveLink('#policy-management')}
+                    >
+                        <div className="icon-container">
+                            <FaFileContract />
+                        </div>
+                        <span>Policy Management</span>
                     </Nav.Link>
 
                     <Nav.Link
