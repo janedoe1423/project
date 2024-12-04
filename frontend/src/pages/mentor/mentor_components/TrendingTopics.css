@@ -1,0 +1,33 @@
+.mentor-trending-topics {
+    padding: 20px;
+}
+
+.topics-header {
+    margin-bottom: 20px;
+}
+
+.topics-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.topics-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.topic-item {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.topic-item:hover {
+    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.1);
+}

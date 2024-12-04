@@ -1,0 +1,45 @@
+.mentor-session-analytics {
+    padding: 20px;
+}
+
+.analytics-header {
+    margin-bottom: 20px;
+}
+
+.analytics-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.analytics-chart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 150px;
+}
+
+.analytics-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+}
+
+.bar {
+    width: 100%;
+    background: rgba(142, 68, 173, 0.6);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.bar:hover {
+    background: rgba(142, 68, 173, 0.8);
+}
+
+.day-label {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+}
