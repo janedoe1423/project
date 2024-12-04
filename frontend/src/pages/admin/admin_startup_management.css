@@ -1,0 +1,54 @@
+.dashboard {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fa;
+}
+
+.bar-chart-section, .radar-chart-section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.bar-chart-section h3, .radar-chart-section h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.bar-chart-container, .radar-chart-container {
+    height: 600px;
+    position: relative;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.success-rates-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-top: 20px;
+}
+
+.success-rates-table th, .success-rates-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.success-rates-table th {
+    background: #f9fafb;
+    font-weight: 600;
+    color: #555;
+}
+
+.success-rates-table tr:hover {
+    background-color: #f1f1f1;
+}

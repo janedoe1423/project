@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Container, Grid, Card, Typography, Box,
     LinearProgress, IconButton, Tooltip, Tabs, Tab,
@@ -11,7 +11,8 @@ import {
     TrendingUp, NotificationsActive, MonetizationOn,
     Business, AccountBalance, Gavel, AttachMoney,
     Dashboard, People, Assignment, Notifications,
-    Assessment, Menu as MenuIcon
+    Assessment, Menu as MenuIcon, Feedback, SupportAgent,
+    Security, Engineering
 } from '@mui/icons-material';
 import { Line, Pie, Bar } from 'react-chartjs-2';
 import {
@@ -217,6 +218,197 @@ const AdminDashboard = () => {
         }]
     };
 
+    const startups = [
+        {
+            id: 1,
+            name: "MediTech Solutions",
+            sector: "Healthcare",
+            stage: "Growth Stage",
+            country: "India",
+            state: "Gujarat",
+            city: "Ahmedabad",
+            zone: "West"
+        },
+        {
+            id: 2,
+            name: "EduLearn AI",
+            sector: "Education",
+            stage: "Early Stage",
+            country: "India",
+            state: "Karnataka",
+            city: "Bengaluru",
+            zone: "South"
+        },
+        {
+            id: 3,
+            name: "FinSecure",
+            sector: "Finance",
+            stage: "Mature Stage",
+            country: "USA",
+            state: "California",
+            city: "San Francisco",
+            zone: "West"
+        },
+        {
+            id: 4,
+            name: "TechCloud Solutions",
+            sector: "Technology",
+            stage: "Growth Stage",
+            country: "India",
+            state: "Maharashtra",
+            city: "Mumbai",
+            zone: "West"
+        },
+        {
+            id: 5,
+            name: "AgriTech Innovations",
+            sector: "Others",
+            stage: "Ideate Stage",
+            country: "India",
+            state: "Punjab",
+            city: "Chandigarh",
+            zone: "North"
+        },
+        {
+            id: 6,
+            name: "HealthCare Connect",
+            sector: "Healthcare",
+            stage: "Early Stage",
+            country: "India",
+            state: "Tamil Nadu",
+            city: "Chennai",
+            zone: "South"
+        },
+        {
+            id: 7,
+            name: "EduVR Tech",
+            sector: "Education",
+            stage: "Growth Stage",
+            country: "USA",
+            state: "Texas",
+            city: "Austin",
+            zone: "South"
+        },
+        {
+            id: 8,
+            name: "BlockChain Solutions",
+            sector: "Technology",
+            stage: "Early Stage",
+            country: "India",
+            state: "Telangana",
+            city: "Hyderabad",
+            zone: "South"
+        },
+        {
+            id: 9,
+            name: "Green Energy Tech",
+            sector: "Others",
+            stage: "Mature Stage",
+            country: "India",
+            state: "Delhi",
+            city: "New Delhi",
+            zone: "North"
+        },
+        {
+            id: 10,
+            name: "FinTech Pay",
+            sector: "Finance",
+            stage: "Growth Stage",
+            country: "USA",
+            state: "New York",
+            city: "New York City",
+            zone: "East"
+        },
+        {
+            id: 11,
+            name: "AI Research Labs",
+            sector: "Technology",
+            stage: "Early Stage",
+            country: "India",
+            state: "Karnataka",
+            city: "Bengaluru",
+            zone: "South"
+        },
+        {
+            id: 12,
+            name: "EduTech Solutions",
+            sector: "Education",
+            stage: "Ideate Stage",
+            country: "India",
+            state: "Maharashtra",
+            city: "Pune",
+            zone: "West"
+        },
+        {
+            id: 13,
+            name: "BioTech Research",
+            sector: "Healthcare",
+            stage: "Mature Stage",
+            country: "USA",
+            state: "Massachusetts",
+            city: "Boston",
+            zone: "East"
+        },
+        {
+            id: 14,
+            name: "Smart Manufacturing",
+            sector: "Others",
+            stage: "Growth Stage",
+            country: "India",
+            state: "Gujarat",
+            city: "Vadodara",
+            zone: "West"
+        },
+        {
+            id: 15,
+            name: "CryptoFinance",
+            sector: "Finance",
+            stage: "Early Stage",
+            country: "India",
+            state: "Maharashtra",
+            city: "Mumbai",
+            zone: "West"
+        }
+    ];
+
+    // Add summary statistics
+    const startupStats = {
+        totalCount: startups.length,
+        bySector: {
+            Healthcare: startups.filter(s => s.sector === "Healthcare").length,
+            Technology: startups.filter(s => s.sector === "Technology").length,
+            Finance: startups.filter(s => s.sector === "Finance").length,
+            Education: startups.filter(s => s.sector === "Education").length,
+            Others: startups.filter(s => s.sector === "Others").length
+        },
+        byStage: {
+            'Ideate Stage': startups.filter(s => s.stage === "Ideate Stage").length,
+            'Early Stage': startups.filter(s => s.stage === "Early Stage").length,
+            'Growth Stage': startups.filter(s => s.stage === "Growth Stage").length,
+            'Mature Stage': startups.filter(s => s.stage === "Mature Stage").length
+        },
+        byRegion: {
+            India: startups.filter(s => s.country === "India").length,
+            USA: startups.filter(s => s.country === "USA").length
+        },
+        byZone: {
+            North: startups.filter(s => s.zone === "North").length,
+            South: startups.filter(s => s.zone === "South").length,
+            East: startups.filter(s => s.zone === "East").length,
+            West: startups.filter(s => s.zone === "West").length
+        }
+    };
+
+    const [visibleStartups, setVisibleStartups] = useState(5);
+
+    const handleShowMore = () => {
+        setVisibleStartups(prev => prev + 5);
+    };
+
+    const handleShowLess = () => {
+        setVisibleStartups(5);
+    };
+
     // Add renderCharts function
     const renderCharts = () => (
         <Grid container spacing={3} sx={{ mt: 3 }}>
@@ -320,32 +512,142 @@ const AdminDashboard = () => {
         </Grid>
     );
 
-    const renderActivityLog = () => (
-        <ActivityLog>
-            <Typography variant="h6" sx={{ mb: 3 }}>Recent Activity</Typography>
-            <List>
-                {[
-                    { action: 'New Startup Registration', time: '5 minutes ago', icon: <Business sx={{ color: '#6366f1' }} /> },
-                    { action: 'Funding Request Approved', time: '2 hours ago', icon: <AttachMoney sx={{ color: '#14b8a6' }} /> },
-                    { action: 'IPR Application Submitted', time: '4 hours ago', icon: <Gavel sx={{ color: '#8b5cf6' }} /> },
-                    { action: 'New Investor Joined', time: '1 day ago', icon: <AccountBalance sx={{ color: '#f59e0b' }} /> }
-                ].map((item, index) => (
-                    <LogItem key={index}>
-                        <ListItemAvatar>
-                            <Avatar sx={{ bgcolor: 'rgba(99, 102, 241, 0.1)' }}>
-                                {item.icon}
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText 
-                            primary={item.action}
-                            secondary={item.time}
-                            primaryTypographyProps={{ fontWeight: 500 }}
+    const RecentActivity = () => {
+        const [currentSlide, setCurrentSlide] = useState(0);
+        const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+        const activities = [
+            {
+                icon: <Business className="activity-icon" />,
+                title: "New Startup Registration",
+                time: "5 minutes ago",
+                bgColor: "#F3F6FF"
+            },
+            {
+                icon: <MonetizationOn className="activity-icon" />,
+                title: "Funding Request Approved",
+                time: "2 hours ago",
+                bgColor: "#F0FDF4"
+            },
+            {
+                icon: <Gavel className="activity-icon" />,
+                title: "IPR Application Submitted",
+                time: "4 hours ago",
+                bgColor: "#FAF5FF"
+            },
+            {
+                icon: <AccountBalance className="activity-icon" />,
+                title: "New Investor Joined",
+                time: "1 day ago",
+                bgColor: "#FEF9C3"
+            },
+            {
+                icon: <Feedback className="activity-icon" />,
+                title: "Feedback Received",
+                description: "Startup 'NextGenTech' submitted feedback about the platform UI",
+                time: "3 hours ago",
+                bgColor: "#F0F9FF"
+            },
+            {
+                icon: <SupportAgent className="activity-icon" />,
+                title: "Support Ticket Raised",
+                description: "Startup 'AgriFuture' raised a ticket regarding grant application delays",
+                time: "6 hours ago",
+                bgColor: "#FFF1F2"
+            },
+            {
+                icon: <Security className="activity-icon" />,
+                title: "Security Alert",
+                description: "Suspicious login detected for Startup 'TechPioneers' account",
+                time: "30 minutes ago",
+                bgColor: "#FEF2F2"
+            },
+            {
+                icon: <Engineering className="activity-icon" />,
+                title: "System Maintenance",
+                description: "Scheduled downtime completed successfully on December 1, 2024",
+                time: "1 day ago",
+                bgColor: "#F0F9FF"
+            }
+        ];
+
+        // Auto-play functionality
+        useEffect(() => {
+            let interval;
+            if (isAutoPlaying) {
+                interval = setInterval(() => {
+                    setCurrentSlide((prev) => (prev + 1) % activities.length);
+                }, 3000);
+            }
+            return () => clearInterval(interval);
+        }, [isAutoPlaying, activities.length]);
+
+        const nextSlide = () => {
+            setCurrentSlide((prev) => (prev + 1) % activities.length);
+        };
+
+        const prevSlide = () => {
+            setCurrentSlide((prev) => (prev - 1 + activities.length) % activities.length);
+        };
+
+        const goToSlide = (index) => {
+            setCurrentSlide(index);
+        };
+
+        return (
+            <div className="recent-activity-container">
+                <h2 className="activity-title">Recent Activity</h2>
+                <div className="title-underline">
+                    <div className="line-gradient"></div>
+                </div>
+                
+                <div className="carousel-wrapper">
+                    <button className="nav-button prev" onClick={prevSlide}>
+                        <span>‹</span>
+                    </button>
+                    
+                    <div className="carousel-content">
+                        <div 
+                            className="carousel-track"
+                            style={{
+                                transform: `translateX(-${currentSlide * 100}%)`
+                            }}
+                        >
+                            {activities.map((activity, index) => (
+                                <div 
+                                    key={index}
+                                    className="activity-slide"
+                                    style={{ backgroundColor: activity.bgColor }}
+                                >
+                                    <div className="activity-icon-wrapper">
+                                        {activity.icon}
+                                    </div>
+                                    <div className="activity-info">
+                                        <h3>{activity.title}</h3>
+                                        <span className="activity-time">{activity.time}</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <button className="nav-button next" onClick={nextSlide}>
+                        <span>›</span>
+                    </button>
+                </div>
+
+                <div className="carousel-indicators">
+                    {activities.map((_, index) => (
+                        <button
+                            key={index}
+                            className={`indicator ${currentSlide === index ? 'active' : ''}`}
+                            onClick={() => goToSlide(index)}
                         />
-                    </LogItem>
-                ))}
-            </List>
-        </ActivityLog>
-    );
+                    ))}
+                </div>
+            </div>
+        );
+    };
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -356,12 +658,54 @@ const AdminDashboard = () => {
                         {renderCharts()}
                         <Grid container spacing={3} sx={{ mt: 3 }}>
                             <Grid item xs={12} md={6}>
-                                {renderActivityLog()}
+                                <RecentActivity />
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 {/* Add your Top Campaigns component here */}
                             </Grid>
                         </Grid>
+                        <div className="dashboard">
+                            <div className="table-section">
+                                <h2 className="table-title">Total Startups Registered</h2>
+                                <div className="table-container">
+                                    <table className="startups-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Sector</th>
+                                                <th>Stage</th>
+                                                <th>Country</th>
+                                                <th>State</th>
+                                                <th>City</th>
+                                                <th>Zone</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {startups.slice(0, visibleStartups).map(startup => (
+                                                <tr key={startup.id}>
+                                                    <td>{startup.name}</td>
+                                                    <td>{startup.sector}</td>
+                                                    <td>{startup.stage}</td>
+                                                    <td>{startup.country}</td>
+                                                    <td>{startup.state}</td>
+                                                    <td>{startup.city}</td>
+                                                    <td>{startup.zone}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {visibleStartups < startups.length ? (
+                                    <button className="more-btn" onClick={handleShowMore}>
+                                        More
+                                    </button>
+                                ) : (
+                                    <button className="less-btn" onClick={handleShowLess}>
+                                        Less
+                                    </button>
+                                )}
+                            </div>
+                        </div>
                     </Container>
                 )}
             </Box>
@@ -447,5 +791,292 @@ const LogItem = styled(ListItem)(({ theme }) => ({
         transform: 'translateX(5px)',
     }
 }));
+
+// Update the styles
+const styles = `
+    .dashboard {
+        padding: 2rem;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .table-section {
+        margin: 2rem 0;
+    }
+
+    .table-title {
+        font-size: 1.75rem;
+        color: #1e2f4d;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        padding-left: 0.5rem;
+    }
+
+    .table-container {
+        overflow-x: auto;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .startups-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        min-width: 800px;
+    }
+
+    .startups-table th,
+    .startups-table td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid #E5E7EB;
+    }
+
+    .startups-table th {
+        background-color: #F9FAFB;
+        font-weight: 600;
+        color: #374151;
+        position: sticky;
+        top: 0;
+    }
+
+    .startups-table th:first-child,
+    .startups-table td:first-child {
+        padding-left: 24px;
+    }
+
+    .startups-table th:last-child,
+    .startups-table td:last-child {
+        padding-right: 24px;
+    }
+
+    .startups-table tr:nth-child(even) {
+        background-color: #F9FAFB;
+    }
+
+    .startups-table tr:hover {
+        background-color: #F3F4F6;
+    }
+
+    /* Fixed column widths */
+    .startups-table th:nth-child(1) { width: 20%; } /* Name */
+    .startups-table th:nth-child(2) { width: 15%; } /* Sector */
+    .startups-table th:nth-child(3) { width: 15%; } /* Stage */
+    .startups-table th:nth-child(4) { width: 12%; } /* Country */
+    .startups-table th:nth-child(5) { width: 15%; } /* State */
+    .startups-table th:nth-child(6) { width: 13%; } /* City */
+    .startups-table th:nth-child(7) { width: 10%; } /* Zone */
+
+    .more-btn, .less-btn {
+        margin-top: 1rem;
+        padding: 0.5rem 1.5rem;
+        background-color: #4F46E5;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+    }
+
+    .more-btn:hover, .less-btn:hover {
+        background-color: #4338CA;
+    }
+
+    @media (max-width: 768px) {
+        .table-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .startups-table th, 
+        .startups-table td {
+            padding: 8px 12px;
+        }
+    }
+
+    .security-alert {
+        border-left: 4px solid #DC2626;
+    }
+
+    .activity-icon-wrapper .activity-icon {
+        font-size: 24px;
+        color: #4B5563;
+    }
+
+    .security-alert .activity-icon {
+        color: #DC2626;
+    }
+
+    @media (min-width: 768px) {
+        .activity-track {
+            grid-template-columns: repeat(8, 1fr); /* Updated to show all 8 activities */
+        }
+    }
+
+    /* Add animation for security alerts */
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+        100% { transform: scale(1); }
+    }
+
+    .security-alert {
+        animation: pulse 2s infinite;
+    }
+
+    .recent-activity-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .activity-title {
+        font-size: 2.5rem;
+        color: #1e2f4d;
+        text-align: center;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+    .title-underline {
+        position: relative;
+        height: 2px;
+        margin-bottom: 2rem;
+    }
+
+    .line-gradient {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, #e9d5ff, #e11d48, #e9d5ff);
+    }
+
+    .carousel-wrapper {
+        position: relative;
+        padding: 0 40px;
+        margin: 2rem 0;
+    }
+
+    .carousel-content {
+        overflow: hidden;
+        border-radius: 16px;
+    }
+
+    .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+
+    .activity-slide {
+        flex: 0 0 100%;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        background-color: #fef9c3;
+        border-radius: 16px;
+        min-height: 100px;
+    }
+
+    .activity-icon-wrapper {
+        background: white;
+        padding: 12px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .activity-icon-wrapper svg {
+        font-size: 24px;
+        color: #4b5563;
+    }
+
+    .activity-info h3 {
+        font-size: 1.25rem;
+        color: #1e2f4d;
+        margin: 0 0 0.5rem 0;
+        font-weight: 500;
+    }
+
+    .activity-time {
+        font-size: 0.875rem;
+        color: #6b7280;
+    }
+
+    .nav-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: white;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: #4b5563;
+        z-index: 2;
+    }
+
+    .nav-button.prev {
+        left: 0;
+    }
+
+    .nav-button.next {
+        right: 0;
+    }
+
+    .carousel-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 1.5rem;
+    }
+
+    .indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        border: none;
+        background-color: #d1d5db;
+        cursor: pointer;
+        padding: 0;
+        transition: all 0.3s ease;
+    }
+
+    .indicator.active {
+        background-color: #4f46e5;
+        transform: scale(1.2);
+    }
+
+    @media (max-width: 640px) {
+        .activity-title {
+            font-size: 2rem;
+        }
+
+        .activity-slide {
+            padding: 1.5rem;
+        }
+
+        .nav-button {
+            width: 32px;
+            height: 32px;
+            font-size: 1.25rem;
+        }
+    }
+`;
+
+// Inject styles
+const styleSheet = document.createElement("style");
+styleSheet.type = "text/css";
+styleSheet.innerText = styles;
+document.head.appendChild(styleSheet);
 
 export default AdminDashboard;
