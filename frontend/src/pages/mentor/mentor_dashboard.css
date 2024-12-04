@@ -1,0 +1,157 @@
+/* mentor_dashboard.css */
+
+.mentor-dashboard-container {
+    min-height: 100vh;
+    padding: 2rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.mentor-dashboard-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mentor-dashboard-card {
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mentor-dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.47);
+}
+
+.mentor-section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mentor-notifications .notification-item {
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 12px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.mentor-notifications .notification-item:hover {
+    transform: translateX(5px);
+}
+
+.mentor-resources-list {
+    list-style: none;
+    padding: 0;
+}
+
+.mentor-resources-list li {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mentor-resources-list li:hover {
+    transform: translateX(10px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.mentor-progress {
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.mentor-progress-bar {
+    transition: width 0.6s ease;
+}
+
+.mentor-stats-card {
+    text-align: center;
+    padding: 20px;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.mentor-stats-card:hover {
+    transform: translateY(-5px);
+}
+
+.mentor-stats-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mentor-stats-label {
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 5px;
+}
+
+.mentor-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-right: 10px;
+}
+
+/* Animation classes */
+.mentor-fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.mentor-slide-up {
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .mentor-dashboard-container {
+        padding: 1rem;
+    }
+
+    .mentor-dashboard-title {
+        font-size: 2rem;
+    }
+
+    .mentor-stats-card {
+        margin-bottom: 1rem;
+    }
+}
