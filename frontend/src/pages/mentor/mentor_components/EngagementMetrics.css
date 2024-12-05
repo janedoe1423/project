@@ -1,0 +1,78 @@
+.mentor-engagement-metrics {
+    padding: 20px;
+}
+
+.metrics-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.metrics-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.metrics-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.metric-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+}
+
+.metric-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 5px;
+}
+
+.metric-change {
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.metric-change.positive {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+.metric-change.negative {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+.metrics-chart {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .metrics-summary {
+        grid-template-columns: 1fr;
+    }
+}
