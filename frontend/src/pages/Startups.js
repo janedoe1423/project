@@ -4,151 +4,351 @@ import { Box, Container, Typography, CircularProgress, FormControlLabel, Checkbo
 import gujaratBg from '../assets/images/Gujaratpicture.jpg';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
-import styled from '@emotion/styled';
 import SearchIcon from '@mui/icons-material/Search';
 import topStartupsImage from '../assets/images/startupsgujarat.jpg';
+import { styled as muiStyled } from '@mui/material/styles';  // Rename the import to avoid conflict
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, AreaChart, Area, ComposedChart } from 'recharts';
 
-const StartupCard = styled.div`
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 16px;
-  padding: 24px;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(148, 112, 248, 0.1);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
+// Replace all instances of `styled` in your component definitions with `muiStyled`
+const StartupCard = muiStyled('div')(({ theme }) => ({
+  background: 'rgba(255, 255, 255, 0.03)',
+  borderRadius: '16px',
+  padding: '24px',
+  transition: 'all 0.3s ease',
+  border: '1px solid rgba(148, 112, 248, 0.1)',
+  cursor: 'pointer',
+  position: 'relative',
+  overflow: 'hidden',
+  backdropFilter: 'blur(10px)',
 
-  &:hover {
-    transform: translateY(-5px);
-    border-color: #9470F8;
-    box-shadow: 0 8px 30px rgba(148, 112, 248, 0.15);
+  '&:hover': {
+    transform: 'translateY(-5px)',
+    borderColor: '#9470F8',
+    boxShadow: '0 8px 30px rgba(148, 112, 248, 0.15)',
     
-    .startup-stage {
-      background: #9470F8;
-      color: white;
-    }
+    '& .startup-stage': {
+      background: '#9470F8',
+      color: 'white',
+    },
     
-    .startup-name {
-      color: #C2FA4F;
+    '& .startup-name': {
+      color: '#C2FA4F',
     }
+  },
+
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '3px',
+    background: 'linear-gradient(90deg, #9470F8, #C2FA4F)',
+    opacity: 0,
+    transition: 'opacity 0.3s ease',
+  },
+
+  '&:hover::before': {
+    opacity: 1,
   }
+}));
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #9470F8, #C2FA4F);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+const StartupStage = muiStyled('span')(({ theme }) => ({
+  background: 'rgba(148, 112, 248, 0.1)',
+  color: '#9470F8',
+  padding: '6px 12px',
+  borderRadius: '20px',
+  fontSize: '0.85rem',
+  fontWeight: 500,
+  transition: 'all 0.3s ease',
+}));
+
+const StartupName = muiStyled('h3')(({ theme }) => ({
+  color: '#FFFFFF',
+  fontSize: '1.2rem',
+  margin: '16px 0',
+  fontWeight: 600,
+  transition: 'color 0.3s ease',
+}));
+
+const StartupLocation = muiStyled('div')(({ theme }) => ({
+  color: 'rgba(255, 255, 255, 0.7)',
+  fontSize: '0.9rem',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
+  margin: '8px 0',
+
+  '& svg': {
+    color: '#C2FA4F',
   }
+}));
 
-  &:hover::before {
-    opacity: 1;
-  }
-`;
+const StartupIndustry = muiStyled('div')(({ theme }) => ({
+  background: 'rgba(194, 250, 79, 0.1)',
+  color: '#C2FA4F',
+  padding: '6px 12px',
+  borderRadius: '20px',
+  fontSize: '0.85rem',
+  display: 'inline-block',
+  marginTop: '12px',
+}));
 
-const StartupStage = styled.span`
-  background: rgba(148, 112, 248, 0.1);
-  color: #9470F8;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-`;
+const StartupGrid = muiStyled('div')(({ theme }) => ({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+  gap: '24px',
+  padding: '24px',
+}));
 
-const StartupName = styled.h3`
-  color: #FFFFFF;
-  font-size: 1.2rem;
-  margin: 16px 0;
-  font-weight: 600;
-  transition: color 0.3s ease;
-`;
+const SearchContainer = muiStyled('div')(({ theme }) => ({
+  margin: '24px auto',
+  maxWidth: '600px',
+  position: 'relative',
+}));
 
-const StartupLocation = styled.div`
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 8px 0;
-
-  svg {
-    color: #C2FA4F;
-  }
-`;
-
-const StartupIndustry = styled.div`
-  background: rgba(194, 250, 79, 0.1);
-  color: #C2FA4F;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  display: inline-block;
-  margin-top: 12px;
-`;
-
-const StartupGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-  padding: 24px;
-`;
-
-const SearchContainer = styled.div`
-  margin: 24px auto;
-  max-width: 600px;
-  position: relative;
-`;
-
-const SearchField = styled(TextField)`
-  width: 150%;
+const SearchField = muiStyled(TextField)(({ theme }) => ({
+  width: '150%',
   
-  .MuiOutlinedInput-root {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
+  '& .MuiOutlinedInput-root': {
+    background: 'rgba(255, 255, 255, 0.05)',
+    borderRadius: '12px',
+    backdropFilter: 'blur(10px)',
     
-    fieldset {
-      border-color: rgba(148, 112, 248, 0.2);
-    }
+    '& fieldset': {
+      borderColor: 'rgba(148, 112, 248, 0.2)',
+    },
     
-    &:hover fieldset {
-      border-color: rgba(148, 112, 248, 0.4);
-    }
+    '&:hover fieldset': {
+      borderColor: 'rgba(148, 112, 248, 0.4)',
+    },
     
-    &.Mui-focused fieldset {
-      border-color: #9470F8;
+    '&.Mui-focused fieldset': {
+      borderColor: '#9470F8',
     }
-  }
+  },
   
-  .MuiOutlinedInput-input {
-    color: #FFFFFF;
-    padding: 16px;
+  '& .MuiOutlinedInput-input': {
+    color: '#FFFFFF',
+    padding: '16px',
     
-    &::placeholder {
-      color: rgba(255, 255, 255, 0.5);
-      opacity: 1;
+    '&::placeholder': {
+      color: 'rgba(255, 255, 255, 0.5)',
+      opacity: 1,
+    }
+  },
+  
+  '& .MuiInputAdornment-root .MuiSvgIcon-root': {
+    color: 'rgba(255, 255, 255, 0.5)',
+  }
+}));
+
+const NoResultsMessage = muiStyled(Typography)(({ theme }) => ({
+  textAlign: 'center',
+  color: 'rgba(255, 255, 255, 0.7)',
+  margin: '48px 0',
+  fontSize: '1.2rem',
+}));
+
+const StatsSection = muiStyled('div')(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  background: 'linear-gradient(90deg, rgba(26, 26, 29, 0.9), rgba(78, 78, 80, 0.9))',
+  borderRadius: '20px',
+  padding: '40px 20px',
+  margin: '40px 0',
+  color: '#FFFFFF',
+  fontFamily: 'Raleway, sans-serif',
+  backdropFilter: 'blur(10px)',
+  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+  border: '1px solid rgba(255, 255, 255, 0.1)',
+  
+  '@media (max-width: 1024px)': {
+    flexWrap: 'wrap',
+    gap: '20px',
+  },
+  
+  '@media (max-width: 768px)': {
+    flexDirection: 'column',
+    padding: '20px',
+  }
+}));
+
+const StatCard = muiStyled('div')(({ theme }) => ({
+  textAlign: 'center',
+  padding: '30px',
+  background: 'rgba(255, 255, 255, 0.05)',
+  borderRadius: '20px',
+  transition: 'all 0.3s ease',
+  border: '1px solid rgba(255, 255, 255, 0.1)',
+  minWidth: '200px',
+  
+  '&:hover': {
+    transform: 'translateY(-5px)',
+    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)',
+    background: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(194, 250, 79, 0.3)',
+  },
+  
+  '@media (max-width: 1024px)': {
+    flex: '1 1 calc(50% - 20px)',
+    minWidth: '150px',
+  },
+  
+  '@media (max-width: 768px)': {
+    width: '100%',
+    margin: '10px 0',
+  }
+}));
+
+const StatIcon = muiStyled('div')(({ theme }) => ({
+  fontSize: '3.5rem',
+  marginBottom: '15px',
+  transition: 'transform 0.3s ease',
+  
+  '&:hover': {
+    transform: 'scale(1.1)',
+  }
+}));
+
+const StatValue = muiStyled('div')(({ theme }) => ({
+  fontSize: '2.5rem',
+  fontWeight: 700,
+  marginBottom: '10px',
+  background: 'linear-gradient(135deg, #C2FA4F, #9470F8)',
+  '-webkit-background-clip': 'text',
+  '-webkit-text-fill-color': 'transparent',
+  
+  '&:hover': {
+    background: 'linear-gradient(135deg, #9470F8, #C2FA4F)',
+    '-webkit-background-clip': 'text',
+    '-webkit-text-fill-color': 'transparent',
+  }
+}));
+
+const StatLabel = muiStyled('div')(({ theme }) => ({
+  fontSize: '1.1rem',
+  color: 'rgba(255, 255, 255, 0.8)',
+  fontWeight: 500,
+  letterSpacing: '0.5px',
+  
+  '&:hover': {
+    color: '#FFFFFF',
+  }
+}));
+
+// Updated colors with more attractive palette
+const COLORS = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEEAD'];
+
+// Custom styles for the Statistics Section
+const StatisticsSection = muiStyled('div')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  background: 'linear-gradient(90deg, rgba(26, 26, 29, 0.9), rgba(78, 78, 80, 0.9))',
+  borderRadius: '20px',
+  padding: '40px',
+  margin: '40px 0',
+  color: '#FFFFFF',
+  fontFamily: 'Raleway, sans-serif',
+  backdropFilter: 'blur(10px)',
+  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+  border: '1px solid rgba(255, 255, 255, 0.1)',
+  
+  '& .graphs-container': {
+    display: 'flex',
+    gap: '30px',
+    width: '100%',
+    flexWrap: 'wrap',
+  },
+  
+  '& .graph-item': {
+    flex: '1 1 45%',
+    minWidth: '400px',
+  },
+  
+  '@media (max-width: 968px)': {
+    '& .graph-item': {
+      flex: '1 1 100%',
     }
   }
+}));
+
+const StatItem = muiStyled('div')(({ theme }) => ({
+  width: '100%',
+  margin: '20px 0',
+  padding: '20px',
+  background: 'rgba(255, 255, 255, 0.05)',
+  borderRadius: '15px',
+  transition: 'all 0.3s ease',
   
-  .MuiInputAdornment-root .MuiSvgIcon-root {
-    color: rgba(255, 255, 255, 0.5);
+  '&:hover': {
+    transform: 'translateY(-5px)',
+    boxShadow: '0 8px 25px rgba(0, 0, 0, 0.2)',
   }
-`;
+}));
 
-const NoResultsMessage = styled(Typography)`
-  text-align: center;
-  color: rgba(255, 255, 255, 0.7);
-  margin: 48px 0;
-  font-size: 1.2rem;
-`;
+const StatTitle = muiStyled('div')(({ theme }) => ({
+  fontSize: '1.5rem',
+  fontWeight: 600,
+  textAlign: 'center',
+  marginBottom: '20px',
+  color: '#C2FA4F',
+  textShadow: '0 2px 10px rgba(194, 250, 79, 0.3)',
+}));
 
-function Startup() {
+// Custom renderer for the pie chart labels
+const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index, name }) => {
+  const RADIAN = Math.PI / 180;
+  const radius = outerRadius * 1.2;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text 
+      x={x} 
+      y={y} 
+      fill="#FFFFFF"
+      textAnchor={x > cx ? 'start' : 'end'} 
+      dominantBaseline="central"
+      style={{ 
+        fontSize: '12px',
+        fontWeight: 500,
+        textShadow: '0 2px 4px rgba(0,0,0,0.5)'
+      }}
+    >
+      {`${name} (${(percent * 100).toFixed(0)}%)`}
+    </text>
+  );
+};
+
+// Updated sample data with more sectors
+const sectorData = [
+  { name: 'Technology', value: 35 },
+  { name: 'Healthcare', value: 25 },
+  { name: 'FinTech', value: 20 },
+  { name: 'E-commerce', value: 15 },
+  { name: 'Others', value: 5 }
+];
+
+// Add this growth data
+const growthData = [
+  { month: 'Jan', monthlyGrowth: 35, annualGrowth: 20, sectorGrowth: 25 },
+  { month: 'Feb', monthlyGrowth: 52, annualGrowth: 32, sectorGrowth: 40 },
+  { month: 'Mar', monthlyGrowth: 32, annualGrowth: 45, sectorGrowth: 30 },
+  { month: 'Apr', monthlyGrowth: 31, annualGrowth: 78, sectorGrowth: 55 },
+  { month: 'May', monthlyGrowth: 28, annualGrowth: 69, sectorGrowth: 48 },
+  { month: 'Jun', monthlyGrowth: 26, annualGrowth: 65, sectorGrowth: 52 },
+  { month: 'Jul', monthlyGrowth: 37, annualGrowth: 85, sectorGrowth: 58 },
+  { month: 'Aug', monthlyGrowth: 35, annualGrowth: 65, sectorGrowth: 45 },
+  { month: 'Sep', monthlyGrowth: 31, annualGrowth: 45, sectorGrowth: 48 },
+  { month: 'Oct', monthlyGrowth: 39, annualGrowth: 80, sectorGrowth: 62 },
+  { month: 'Nov', monthlyGrowth: 20, annualGrowth: 25, sectorGrowth: 28 },
+  { month: 'Dec', monthlyGrowth: 72, annualGrowth: 75, sectorGrowth: 70 }
+];
+
+function Startup({ themeMode = 'light' }) {
     const navigate = useNavigate();
     const [startups, setStartups] = useState([
         {
@@ -436,6 +636,21 @@ function Startup() {
         </Box>
     );
 
+    function StatCardComponent({ icon, value, label }) {
+        const [isHovered, setIsHovered] = useState(false);
+
+        return (
+            <StatCard 
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                <StatIcon>{icon}</StatIcon>
+                <StatValue isHovered={isHovered}>{value}</StatValue>
+                <StatLabel isHovered={isHovered}>{label}</StatLabel>
+            </StatCard>
+        );
+    }
+
     return (
         <Box
             sx={{
@@ -572,7 +787,31 @@ function Startup() {
                 </Box>
             </Box>
 
-            <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 3, pt: 8, pb: 8 }}>
+            <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 3, pt: 6, pb: 8 }}>
+                {/* Centered Stats Section */}
+                <StatsSection>
+                    <StatCardComponent 
+                        icon="💡"
+                        value="350+"
+                        label="Grassroot Startups"
+                    />
+                    <StatCardComponent 
+                        icon="🚀"
+                        value="12,656+"
+                        label="Active Startups"
+                    />
+                    <StatCardComponent 
+                        icon="🏆"
+                        value="210+"
+                        label="Incubators"
+                    />
+                    <StatCardComponent 
+                        icon="📊"
+                        value="318+"
+                        label="Expert Mentors"
+                    />
+                </StatsSection>
+
                 <Typography
                     variant="h2"
                     sx={{
@@ -797,6 +1036,128 @@ function Startup() {
                     ))}
                 </Box>
 
+                <StatisticsSection>
+                    <div className="graphs-container">
+                        {/* Pie Chart */}
+                        <StatItem className="graph-item">
+                            <StatTitle>Startup Sector Distribution</StatTitle>
+                            <ResponsiveContainer width="100%" height={400}>
+                                <PieChart>
+                                    <Pie
+                                        data={sectorData}
+                                        dataKey="value"
+                                        nameKey="name"
+                                        cx="50%"
+                                        cy="50%"
+                                        innerRadius={80}
+                                        outerRadius={140}
+                                        fill="#8884d8"
+                                        paddingAngle={5}
+                                        labelLine={true}
+                                        label={renderCustomizedLabel}
+                                        animationBegin={0}
+                                        animationDuration={1500}
+                                        animationEasing="ease-out"
+                                    >
+                                        {sectorData.map((entry, index) => (
+                                            <Cell 
+                                                key={`cell-${index}`} 
+                                                fill={COLORS[index % COLORS.length]}
+                                                style={{
+                                                    filter: 'drop-shadow(0px 0px 10px rgba(0,0,0,0.3))',
+                                                    cursor: 'pointer',
+                                                }}
+                                            />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip 
+                                        contentStyle={{
+                                            background: 'rgba(0, 0, 0, 0.8)',
+                                            border: 'none',
+                                            borderRadius: '8px',
+                                            padding: '10px',
+                                            boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                                        }}
+                                        itemStyle={{ color: '#FFFFFF' }}
+                                    />
+                                    <Legend 
+                                        verticalAlign="bottom" 
+                                        height={36}
+                                        wrapperStyle={{
+                                            padding: '20px 0',
+                                            borderRadius: '8px',
+                                            color: '#FFFFFF',
+                                        }}
+                                    />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </StatItem>
+
+                        {/* Growth Trends Chart */}
+                        <StatItem className="graph-item">
+                            <StatTitle>Growth Trends Analysis</StatTitle>
+                            <ResponsiveContainer width="100%" height={400}>
+                                <ComposedChart data={growthData}>
+                                    <CartesianGrid 
+                                        strokeDasharray="3 3" 
+                                        stroke="rgba(255,255,255,0.1)"
+                                    />
+                                    <XAxis 
+                                        dataKey="month" 
+                                        stroke="#FFFFFF"
+                                        tick={{ fill: '#FFFFFF' }}
+                                    />
+                                    <YAxis 
+                                        stroke="#FFFFFF"
+                                        tick={{ fill: '#FFFFFF' }}
+                                    />
+                                    <Tooltip
+                                        contentStyle={{
+                                            background: 'rgba(0, 0, 0, 0.8)',
+                                            border: 'none',
+                                            borderRadius: '8px',
+                                            padding: '10px',
+                                            boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                                        }}
+                                        itemStyle={{ color: '#FFFFFF' }}
+                                    />
+                                    <Legend 
+                                        wrapperStyle={{
+                                            padding: '20px 0',
+                                            color: '#FFFFFF',
+                                        }}
+                                    />
+                                    <Bar 
+                                        dataKey="monthlyGrowth" 
+                                        name="Monthly Growth"
+                                        fill="#FF6B6B"
+                                        radius={[4, 4, 0, 0]}
+                                    />
+                                    <Line
+                                        type="monotone"
+                                        dataKey="annualGrowth"
+                                        name="Annual Growth"
+                                        stroke="#4ECDC4"
+                                        strokeWidth={2}
+                                        dot={{ fill: '#4ECDC4', r: 4 }}
+                                        activeDot={{ r: 6, stroke: '#4ECDC4', strokeWidth: 2 }}
+                                    />
+                                    <Area
+                                        type="monotone"
+                                        dataKey="sectorGrowth"
+                                        name="Sector Growth"
+                                        fill="#45B7D1"
+                                        fillOpacity={0.3}
+                                        stroke="#45B7D1"
+                                        strokeWidth={2}
+                                    />
+                                </ComposedChart>
+                            </ResponsiveContainer>
+                        </StatItem>
+                    </div>
+                </StatisticsSection>
+           
+
                 <Box sx={{ display: 'flex', gap: 4, mb: 8 }}>
                     {/* Left Sidebar - Filters */}
                     <Box
@@ -970,7 +1331,9 @@ function Startup() {
                         </Box>
                     </Box>
                 </Box>
-            </Container>
+
+                {/* New Statistics Section with Pie Chart */}
+                 </Container>
         </Box>
     );
 }

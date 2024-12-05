@@ -293,6 +293,58 @@ const filterOptions = {
     CITY: ['Ahmedabad', 'Gandhinagar', 'Surat', 'Rajkot', 'Vadodara']
 };
 
+// Sample data for sectors
+const sectors = [
+  { name: 'Technology', insights: 'Tech insights here...' },
+  { name: 'Healthcare', insights: 'Healthcare insights here...' },
+  { name: 'FinTech', insights: 'FinTech insights here...' },
+  { name: 'E-commerce', insights: 'E-commerce insights here...' },
+  { name: 'Manufacturing', insights: 'Manufacturing insights here...' },
+];
+
+// Styled components
+const OverviewSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px 0;
+`;
+
+const WheelContainer = styled.div`
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.5s ease;
+  transform: rotate(${props => props.rotation}deg);
+`;
+
+const Sector = styled.div`
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background: ${props => props.color};
+  transform-origin: 100% 100%;
+  transition: background 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: #9470F8;
+  }
+`;
+
+const Insights = styled.div`
+  margin-top: 20px;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+`;
+
 function Investors() {
     const navigate = useNavigate();
     const initialCount = 6;
@@ -335,6 +387,8 @@ function Investors() {
         STATE: false,
         CITY: false
     });
+    const [selectedSector, setSelectedSector] = useState(null);
+    const [rotation, setRotation] = useState(0);
 
     // Sorting options
     const sortOptions = [
@@ -710,6 +764,11 @@ function Investors() {
             default:
                 return null;
         }
+    };
+
+    const handleSectorClick = (index) => {
+        setSelectedSector(sectors[index]);
+        setRotation(rotation + 72); // Adjust rotation based on number of sectors
     };
 
     return (
