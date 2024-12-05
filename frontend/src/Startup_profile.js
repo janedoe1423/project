@@ -48,25 +48,25 @@ const StartupProfile = () => {
     {
       icon: <FaUniversity />,
       title: "Government Scheme",
-      description: "Government schemes on Startup India Portal aid Indian startups, sourced publicly.",
+      description: "Government schemes on this  Portal aid Indian startups, sourced publicly.",
       color: "#FF6B35"
     },
     {
       icon: <FaBullseye />,
       title: "Programs and Challenges",
-      description: "Startup India collaborates for diverse programs aiding startup growth and success.",
+      description: "Startup collaborates for diverse programs aiding startup growth and success.",
       color: "#FF6B35"
     },
     {
       icon: <FaMap />,
       title: "Digital Maps",
-      description: "Startup India collaborates for diverse programs aiding startup growth and success.",
+      description: "Startup  collaborates for diverse programs aiding startup growth and success.",
       color: "#FF6B35"
     },
     {
       icon: <FaCogs />,
       title: "Bharat Startup Ecosystem Registry",
-      description: "Startup India unifies stakeholders, fosters coordination, and facilitates networking opportunities.",
+      description: "Startup unifies stakeholders, fosters coordination, and facilitates networking opportunities.",
       color: "#FF6B35"
     }
   ];
