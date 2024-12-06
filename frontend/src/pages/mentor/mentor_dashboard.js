@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Row, Col } from 'react-bootstrap';
 import { 
@@ -19,6 +19,12 @@ import TrendingTopics from './mentor_components/TrendingTopics';
 import QuickAccessPanel from './mentor_components/QuickAccessPanel';
 
 const MentorDashboard = () => {
+    const [showNotifications, setShowNotifications] = useState(false);
+
+    const toggleNotifications = () => {
+        setShowNotifications(!showNotifications);
+    };
+
     const cardVariants = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0 }
@@ -26,7 +32,13 @@ const MentorDashboard = () => {
 
     return (
         <div className="mentor-dashboard-container">
-            <h1 className="mentor-dashboard-title">Mentor Dashboard</h1>
+            <div className="mentor-dashboard-header">
+                <div className="mentor-dashboard-bell-container">
+                    <FaBell className="mentor-dashboard-bell-icon" onClick={toggleNotifications} />
+                    {showNotifications && <NotificationsPanel />}
+                </div>
+                <h1 className="mentor-dashboard-title">Mentor Dashboard</h1>
+            </div>
             
             <Row className="mentor-dashboard-grid">
                 {/* Overview Section */}
@@ -41,21 +53,8 @@ const MentorDashboard = () => {
                     </motion.div>
                 </Col>
 
-                {/* Quick Notifications */}
-                <Col lg={4}>
-                    <motion.div
-                        className="mentor-dashboard-card"
-                        variants={cardVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ delay: 0.2 }}
-                    >
-                        <NotificationsPanel />
-                    </motion.div>
-                </Col>
-
                 {/* Engagement Metrics */}
-                <Col lg={6}>
+                <Col lg={4}>
                     <motion.div
                         className="mentor-dashboard-card"
                         variants={cardVariants}
@@ -81,7 +80,7 @@ const MentorDashboard = () => {
                 </Col>
 
                 {/* Achievements Panel */}
-                <Col lg={4}>
+                <Col lg={6}>
                     <motion.div
                         className="mentor-dashboard-card"
                         variants={cardVariants}

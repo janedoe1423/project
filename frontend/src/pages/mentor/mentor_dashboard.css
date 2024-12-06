@@ -70,3 +70,62 @@
         font-size: 1.5rem;
     }
 }
+
+.mentor-dashboard-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.mentor-dashboard-card {
+    background: #f0f0f3;
+    border-radius: 15px;
+    box-shadow: 9px 9px 16px #d1d1d1, -9px -9px 16px #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.mentor-dashboard-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 12px 12px 24px #d1d1d1, -12px -12px 24px #ffffff;
+}
+
+.mentor-dashboard-card-content {
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .mentor-dashboard-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.mentor-dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+.mentor-dashboard-bell-container {
+    position: relative;
+}
+
+.mentor-dashboard-bell-icon {
+    font-size: 1.5rem;
+    color: #8e44ad;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.mentor-dashboard-bell-icon:hover {
+    color: #9b59b6;
+}
+
+.mentor-dashboard-title {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #2d3436;
+}
