@@ -1,0 +1,1361 @@
+.mentor-profile {
+    padding: 2rem;
+    background: linear-gradient(145deg, #f8fafc, #f1f5f9);
+    min-height: 100vh;
+    color: #1e3a8a;
+}
+
+/* Header Styles */
+.mentor-profile-header {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.mentor-profile-cover {
+    height: 240px;
+    background: linear-gradient(45deg, #3b82f6, #2563eb);
+    position: relative;
+    transition: all 0.3s ease;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.mentor-profile-cover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0, 0, 0, 0.4)
+    );
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 1.5rem;
+}
+
+.mentor-profile-edit-cover {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.mentor-profile-edit-cover:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.mentor-profile-header-content {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    margin-top: -80px;
+    z-index: 2;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.mentor-profile-avatar-container {
+    position: relative;
+    z-index: 1;
+}
+
+.mentor-profile-avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 4px solid white;
+    position: relative;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.mentor-profile-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.mentor-profile-avatar:hover img {
+    transform: scale(1.05);
+}
+
+.mentor-profile-edit-avatar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: rgba(59, 130, 246, 0.9);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(5px);
+}
+
+.mentor-profile-avatar:hover .mentor-profile-edit-avatar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mentor-profile-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mentor-profile-info h1 {
+    color: #1e40af;
+    margin: 0;
+    font-size: 2rem;
+}
+
+.mentor-profile-info h2 {
+    color: #64748b;
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+}
+
+.mentor-profile-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.mentor-profile-tag {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.mentor-profile-edit-button {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+}
+
+/* Card Styles */
+.mentor-profile-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.mentor-profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mentor-profile-card:hover::before {
+    opacity: 1;
+}
+
+.mentor-profile-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: #1e40af;
+    font-size: 1.1rem;
+    margin: 0;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+}
+
+/* Skills Section */
+.mentor-profile-skill-item {
+    margin-bottom: 0.75rem;
+}
+
+.mentor-profile-skill-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+    color: #1e40af;
+    font-size: 0.9rem;
+}
+
+.mentor-profile-skill-bar {
+    height: 6px;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.mentor-profile-skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    border-radius: 5px;
+    transition: width 1s ease-in-out;
+    position: relative;
+}
+
+.mentor-profile-skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+}
+
+/* Certifications */
+.mentor-profile-certification-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.mentor-profile-certification-item:hover {
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.mentor-profile-certification-icon {
+    color: #3b82f6;
+    font-size: 1.5rem;
+}
+
+.mentor-profile-certification-content h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.mentor-profile-certification-content p {
+    font-size: 0.85rem;
+}
+
+/* Session History */
+.mentor-profile-session-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.mentor-profile-session-item:hover {
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.mentor-profile-star {
+    color: #f59e0b;
+    filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.2));
+}
+
+/* Stats */
+.mentor-profile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.mentor-profile-stat-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.mentor-profile-stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mentor-profile-stat-item:hover::before {
+    opacity: 1;
+}
+
+.mentor-profile-stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e40af;
+    display: block;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, #3b82f6, #2563eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mentor-profile-stat-label {
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Availability */
+.mentor-profile-availability-day {
+    margin-bottom: 1rem;
+}
+
+.mentor-profile-availability-day h4 {
+    color: #1e40af;
+    margin-bottom: 0.5rem;
+}
+
+.mentor-profile-time-slot {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+/* Updated Achievements Section */
+.mentor-profile-achievements {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0.5rem;
+}
+
+.mentor-profile-achievement-item {
+    background: white;
+    border-radius: 12px;
+    padding: 0.75rem;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.05);
+}
+
+.mentor-profile-achievement-icon {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.mentor-profile-achievement-content {
+    flex: 1;
+    min-width: 0; /* Prevents text overflow */
+}
+
+.mentor-profile-achievement-content h4 {
+    color: #1e40af;
+    font-size: 0.95rem;
+    margin: 0 0 0.2rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mentor-profile-achievement-content p {
+    color: #64748b;
+    font-size: 0.85rem;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mentor-profile-achievement-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.1);
+    background: linear-gradient(to right bottom, white, #f8fafc);
+}
+
+@media (max-width: 768px) {
+    .mentor-profile-achievements {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Reviews */
+.mentor-profile-review-item {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.mentor-profile-review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.mentor-profile-review-rating {
+    color: #f59e0b;
+}
+
+/* Social Links Animation */
+.mentor-profile-social {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.mentor-profile-social-link {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: #3b82f6;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.mentor-profile-social-link:hover {
+    transform: translateY(-5px) rotate(360deg);
+    background: #3b82f6;
+    color: white;
+    box-shadow: 0 8px 16px -4px rgba(59, 130, 246, 0.3);
+}
+
+/* Metrics Cards */
+.mentor-profile-metrics {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+.mentor-profile-metric-item {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+    animation: slideInRight 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.mentor-profile-metric-item:nth-child(even) {
+    animation: slideInLeft 0.5s ease-out forwards;
+}
+
+.mentor-profile-metric-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.mentor-profile-metric-content {
+    flex: 1;
+}
+
+.mentor-profile-metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, #3b82f6, #2563eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mentor-profile-metric-label {
+    color: #64748b;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Card Headers with Actions */
+.mentor-profile-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+}
+
+.mentor-profile-card-actions {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.mentor-profile-action-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    transition: all 0.3s ease;
+}
+
+.mentor-profile-action-btn:hover {
+    background: #3b82f6;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Combined Sessions & Reviews */
+.mentor-profile-session-review-item {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    transition: all 0.3s ease;
+}
+
+.mentor-profile-session-review-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px -4px rgba(59, 130, 246, 0.15);
+}
+
+.mentor-profile-session-review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mentor-profile-card {
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+.mentor-profile-metric-item {
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .mentor-profile-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .mentor-profile-metrics {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Hover Effects */
+.mentor-profile-edit-button:hover,
+.mentor-profile-edit-cover:hover,
+.mentor-profile-edit-avatar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.mentor-profile-card:hover,
+.mentor-profile-stat-item:hover,
+.mentor-profile-achievement-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px -8px rgba(59, 130, 246, 0.2);
+}
+
+/* Neumorphic Edit Profile Modal */
+.mentor-profile-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(248, 250, 252, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.mentor-profile-modal-content {
+    background: #f0f4f8;
+    border-radius: 20px;
+    padding: 1.5rem;
+    width: 80%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.mentor-profile-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.mentor-profile-form-section {
+    background: white;
+    border-radius: 15px;
+    padding: 1rem;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.mentor-profile-form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.mentor-profile-form-group {
+    flex: 1;
+    margin-bottom: 0.75rem;
+}
+
+.mentor-profile-form-group label {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.mentor-profile-form-input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+    background: white;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.mentor-profile-form-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Modal Tabs */
+.mentor-profile-modal-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    background: white;
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+.modal-tab {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-tab.active {
+    background: #3b82f6;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .mentor-profile-form-row {
+        flex-direction: column;
+    }
+    
+    .mentor-profile-modal-content {
+        width: 95%;
+        padding: 1.5rem;
+    }
+}
+
+/* Enhanced Animations */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Card hover effects */
+.mentor-profile-metric-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 24px -8px rgba(59, 130, 246, 0.25);
+}
+
+/* Skill bars animation */
+.mentor-profile-skill-progress {
+    animation: skillProgress 1s ease-out forwards;
+    transform-origin: left;
+}
+
+@keyframes skillProgress {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* About Me Section */
+.mentor-profile-about {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+}
+
+/* Updated Layout Styles */
+.mentor-profile-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.mentor-profile-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+    transition: all 0.3s ease;
+}
+
+.mentor-profile-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+/* About Section */
+.mentor-profile-about {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.mentor-profile-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+/* Skills Section */
+.mentor-profile-skills {
+    display: grid;
+    gap: 1rem;
+}
+
+/* Certifications & Achievements Combined */
+.mentor-profile-cert-achieve {
+    display: grid;
+    gap: 2rem;
+}
+
+.mentor-profile-certifications,
+.mentor-profile-achievements {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+/* Availability Section */
+.mentor-profile-availability {
+    display: grid;
+    gap: 1rem;
+}
+
+/* Session History */
+.mentor-profile-sessions-reviews {
+    display: grid;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .mentor-profile-content {
+        padding: 0.75rem;
+    }
+    
+    .mentor-profile-certifications,
+    .mentor-profile-achievements {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Edit Profile Modal Buttons */
+.mentor-profile-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mentor-profile-modal-button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Cancel Button */
+.mentor-profile-modal-cancel {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.mentor-profile-modal-cancel:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+}
+
+/* Save Button */
+.mentor-profile-modal-save {
+    background: #3b82f6;
+    color: white;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.mentor-profile-modal-save:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
+}
+
+/* Button Animations */
+.mentor-profile-modal-button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.mentor-profile-modal-button:hover::after {
+    left: 100%;
+}
+
+/* Button Click Animation */
+.mentor-profile-modal-button:active {
+    transform: scale(0.95);
+}
+
+/* Loading State Animation */
+@keyframes buttonLoading {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.mentor-profile-modal-save.loading {
+    position: relative;
+    color: transparent;
+}
+
+.mentor-profile-modal-save.loading::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-top: -8px;
+    margin-left: -8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: buttonLoading 0.8s linear infinite;
+}
+
+/* Disabled State */
+.mentor-profile-modal-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Success Animation */
+@keyframes successPop {
+    0% { transform: scale(0.8); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.mentor-profile-modal-save.success {
+    background: #22c55e;
+    animation: successPop 0.3s ease-out;
+}
+
+/* Error Animation */
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+.mentor-profile-modal-save.error {
+    background: #ef4444;
+    animation: errorShake 0.3s ease-in-out;
+}
+
+/* Button Icon Animation */
+.mentor-profile-modal-button svg {
+    margin-right: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.mentor-profile-modal-button:hover svg {
+    transform: rotate(360deg);
+}
+
+/* Focus States */
+.mentor-profile-modal-button:focus {
+    outline: none;
+    ring: 2px solid rgba(59, 130, 246, 0.5);
+    ring-offset: 2px;
+}
+
+/* Group Animation */
+.mentor-profile-modal-footer {
+    animation: slideUpIn 0.3s ease-out;
+}
+
+@keyframes slideUpIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .mentor-profile-header-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .mentor-profile-info {
+        align-items: center;
+    }
+
+    .mentor-profile-edit-button {
+        align-self: center;
+        margin-top: 1rem;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mentor-profile-header-content {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.mentor-profile-cover:hover .mentor-profile-cover-overlay {
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0, 0, 0, 0.5)
+    );
+}
+
+/* Experience Section Styles */
+.mentor-profile-experience {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.mentor-profile-experience-item {
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    transition: all 0.3s ease;
+}
+
+.mentor-profile-experience-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.1);
+}
+
+.experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.experience-header h4 {
+    color: var(--primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.experience-duration {
+    color: var(--gray-medium);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.experience-subheader {
+    display: flex;
+    gap: 1rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.experience-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.industry-tag {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.experience-description {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.experience-achievements {
+    list-style-type: none;
+    padding-left: 1.5rem;
+}
+
+.experience-achievements li {
+    position: relative;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.experience-achievements li::before {
+    content: "•";
+    color: var(--primary);
+    position: absolute;
+    left: -1.5rem;
+    font-weight: bold;
+}
+
+/* Education Section Styles */
+.mentor-profile-education {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.mentor-profile-education-item {
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    transition: all 0.3s ease;
+}
+
+.mentor-profile-education-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.1);
+}
+
+.education-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.education-header h4 {
+    color: var(--primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.education-year {
+    color: var(--gray-medium);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.education-subheader {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.education-recognition {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--warning);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.recognition-icon {
+    font-size: 1.1rem;
+}
+
+.education-description {
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .experience-header,
+    .education-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .experience-subheader {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+}
+
+/* Additional Form Styles */
+.mentor-profile-add-button,
+.mentor-profile-delete-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.mentor-profile-add-button {
+    background: var(--success);
+    color: white;
+    border: none;
+    margin-top: 1rem;
+}
+
+.mentor-profile-delete-button {
+    background: var(--danger);
+    color: white;
+    border: none;
+    margin-top: 0.5rem;
+}
+
+.mentor-profile-form-group {
+    background: var(--gray-light);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.mentor-profile-form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--gray-medium);
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+.mentor-profile-form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .mentor-profile-form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .mentor-profile-modal-content {
+        width: 95%;
+        max-height: 95vh;
+    }
+}
