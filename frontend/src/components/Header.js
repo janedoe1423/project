@@ -25,21 +25,24 @@ function Header() {
 
     const menuItems = [
         { path: '/', name: 'Home', icon: <FaHome /> },
-        { path: '/startups', name: 'Startups', icon: <FaRocket /> },
-        { path: '/investors', name: 'Investors', icon: <FaUsers /> },
-        { path: '/innovations', name: 'Innovations', icon: <FaLightbulb /> },
         { 
-            path: '/schemes', 
-            name: 'Schemes', 
-            icon: <FaClipboardList />,
+            path: '/network', 
+            name: 'Network', 
+            icon: <FaUsers />,
             dropdown: [
-                { path: '/schemes/startup-gujarat', name: 'Startup Gujarat Support' },
-                { path: '/schemes/women-entrepreneurship', name: 'Women Entrepreneurship' },
-                { path: '/schemes/incubator-framework', name: 'Incubator Framework' }
+                { path: '/startups', name: 'Startups' },
+                { path: '/investors', name: 'Investors' },
+                { path: '/innovations', name: 'Innovations' }
             ]
         },
+        { path: '/schemes', name: 'Schemes', icon: <FaClipboardList />, dropdown: [
+            { path: '/schemes/startup-gujarat', name: 'Startup Gujarat Support' },
+            { path: '/schemes/women-entrepreneurship', name: 'Women Entrepreneurship' },
+            { path: '/schemes/incubator-framework', name: 'Incubator Framework' }
+        ] },
         { path: '/ipr-rights', name: 'IPR', icon: <FaCopyright /> },
-        { path: '/funding', name: 'Funding', icon: <FaMoneyBillWave /> }
+        { path: '/funding', name: 'Funding', icon: <FaMoneyBillWave /> },
+        { path: '/market-analysis', name: 'Market Analysis', icon: <FaBrain /> }
     ];
 
     return (
