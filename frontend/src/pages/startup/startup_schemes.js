@@ -97,16 +97,16 @@ const StartupSchemes = () => {
   });
 
   return (
-    <div className="schemes-container">
-      <div className="page-header">
-        <div className="header-content">
+    <div className="startup_schemes_container">
+      <div className="startup_schemes_page-header">
+        <div className="startup_schemes_header-content">
           <h1>Government & Private Schemes</h1>
           <p>Explore various schemes and programs available for startups</p>
         </div>
       </div>
 
-      <div className="search-bar">
-        <div className="search-input">
+      <div className="startup_schemes_search-bar">
+        <div className="startup_schemes_search-input">
           <FaSearch />
           <input
             type="text"
@@ -116,7 +116,7 @@ const StartupSchemes = () => {
           />
         </div>
         <button 
-          className={`filter-button ${showFilters ? 'active' : ''}`}
+          className={`startup_schemes_filter-button ${showFilters ? 'active' : ''}`}
           onClick={() => setShowFilters(!showFilters)}
         >
           {showFilters ? <FaTimes /> : <FaFilter />}
@@ -125,12 +125,12 @@ const StartupSchemes = () => {
       </div>
 
       {showFilters && (
-        <div className="filter-panel">
-          <div className="filter-groups">
-            <div className="filter-group">
+        <div className="startup_schemes_filter-panel">
+          <div className="startup_schemes_filter-groups">
+            <div className="startup_schemes_filter-group">
               <h3>Type</h3>
               {filterOptions.type.map(type => (
-                <label key={type} className="filter-option">
+                <label key={type} className="startup_schemes_filter-option">
                   <input
                     type="checkbox"
                     checked={filters.type.includes(type)}
@@ -141,10 +141,10 @@ const StartupSchemes = () => {
               ))}
             </div>
 
-            <div className="filter-group">
+            <div className="startup_schemes_filter-group">
               <h3>Category</h3>
               {filterOptions.category.map(category => (
-                <label key={category} className="filter-option">
+                <label key={category} className="startup_schemes_filter-option">
                   <input
                     type="checkbox"
                     checked={filters.category.includes(category)}
@@ -155,10 +155,10 @@ const StartupSchemes = () => {
               ))}
             </div>
 
-            <div className="filter-group">
+            <div className="startup_schemes_filter-group">
               <h3>Status</h3>
               {filterOptions.status.map(status => (
-                <label key={status} className="filter-option">
+                <label key={status} className="startup_schemes_filter-option">
                   <input
                     type="checkbox"
                     checked={filters.status.includes(status)}
@@ -170,26 +170,26 @@ const StartupSchemes = () => {
             </div>
           </div>
 
-          <button className="reset-filters" onClick={resetFilters}>
+          <button className="startup_schemes_reset-filters" onClick={resetFilters}>
             Reset All Filters
           </button>
         </div>
       )}
 
-      <div className="schemes-grid">
+      <div className="startup_schemes_schemes-grid">
         {filteredSchemes.map((scheme) => (
-          <div key={scheme.id} className="scheme-card">
-            <div className={`scheme-type ${scheme.type}`}>
+          <div key={scheme.id} className="startup_schemes_scheme-card">
+            <div className={`startup_schemes_scheme-type ${scheme.type}`}>
               <scheme.icon />
               {scheme.type.charAt(0).toUpperCase() + scheme.type.slice(1)}
             </div>
             <h3>{scheme.title}</h3>
             <p>{scheme.description}</p>
-            <div className="scheme-footer">
-              <span className="deadline">Deadline: {scheme.deadline}</span>
+            <div className="startup_schemes_scheme-footer">
+              <span className="startup_schemes_deadline">Deadline: {scheme.deadline}</span>
               <button 
                 onClick={() => navigate(scheme.path)} 
-                className="learn-more"
+                className="startup_schemes_learn-more"
               >
                 Learn More <FaExternalLinkAlt />
               </button>

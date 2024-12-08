@@ -215,7 +215,7 @@ const EditDialog = memo(({
 // Memoize individual chart card
 const ChartCard = memo(({ chart, onEditClick }) => (
     <Card 
-        className="startup-dashboard-chart-card"
+        className="startup_metrics_dashboard-chart-card"
         sx={{ 
             height: '450px',
             borderRadius: '16px',
@@ -503,7 +503,7 @@ const StartupMetricsDashboard = () => {
     };
 
     return (
-        <Container maxWidth="xl" sx={{ py: 4 }}>
+        <Container maxWidth="xl" sx={{ py: 4 }} className="startup_metrics_dashboard-container">
             <Grid container spacing={4}>
                 {charts.map((chart) => (
                     <Grid item xs={12} md={6} key={chart.id}>
@@ -523,6 +523,7 @@ const StartupMetricsDashboard = () => {
                 onSave={handleSave}
                 onDataChange={handleDataChange}
                 onPreview={handlePreview}
+                className="startup_metrics_chart-modal"
             />
         </Container>
     );

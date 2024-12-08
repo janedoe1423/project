@@ -11,19 +11,19 @@ const StartupSidebar = () => {
     const [activeLink, setActiveLink] = useState('#dashboard');
 
     return (
-        <div className="sidebar-wrapper">
-            <div className="sidebar-container">
-                <div className="sidebar-header">
+        <div className="startup_sidebar_wrapper">
+            <div className="startup_sidebar_container">
+                <div className="startup_sidebar_header">
                     <h4>Startup Dashboard</h4>
                 </div>
 
-                <Nav className="sidebar-nav">
+                <Nav className="startup_sidebar_nav">
                     <Nav.Link
                         href="#dashboard"
-                        className={`sidebar-link ${activeLink === '#dashboard' ? 'active' : ''}`}
+                        className={`startup_sidebar_link ${activeLink === '#dashboard' ? 'active' : ''}`}
                         onClick={() => setActiveLink('#dashboard')}
                     >
-                        <div className="icon-container">
+                        <div className="startup_sidebar_icon-container">
                             <FaHome />
                         </div>
                         <span>Dashboard</span>
@@ -31,10 +31,10 @@ const StartupSidebar = () => {
 
                     <Nav.Link
                         href="#profile"
-                        className={`sidebar-link ${activeLink === '#profile' ? 'active' : ''}`}
+                        className={`startup_sidebar_link ${activeLink === '#profile' ? 'active' : ''}`}
                         onClick={() => setActiveLink('#profile')}
                     >
-                        <div className="icon-container">
+                        <div className="startup_sidebar_icon-container">
                             <FaUser />
                         </div>
                         <span>Profile</span>
@@ -42,10 +42,10 @@ const StartupSidebar = () => {
 
                     <Nav.Link
                         href="#resource-allocation"
-                        className={`sidebar-link ${activeLink === '#resource-allocation' ? 'active' : ''}`}
+                        className={`startup_sidebar_link ${activeLink === '#resource-allocation' ? 'active' : ''}`}
                         onClick={() => setActiveLink('#resource-allocation')}
                     >
-                        <div className="icon-container">
+                        <div className="startup_sidebar_icon-container">
                             <FaLayerGroup />
                         </div>
                         <span>Resource Allocation</span>
@@ -53,10 +53,10 @@ const StartupSidebar = () => {
 
                     <Nav.Link
                         href="#ipr-rights"
-                        className={`sidebar-link ${activeLink === '#ipr-rights' ? 'active' : ''}`}
+                        className={`startup_sidebar_link ${activeLink === '#ipr-rights' ? 'active' : ''}`}
                         onClick={() => setActiveLink('#ipr-rights')}
                     >
-                        <div className="icon-container">
+                        <div className="startup_sidebar_icon-container">
                             <FaCopyright />
                         </div>
                         <span>IPR Rights</span>
@@ -64,10 +64,10 @@ const StartupSidebar = () => {
 
                     <Nav.Link
                         href="#collaboration-tools"
-                        className={`sidebar-link ${activeLink === '#collaboration-tools' ? 'active' : ''}`}
+                        className={`startup_sidebar_link ${activeLink === '#collaboration-tools' ? 'active' : ''}`}
                         onClick={() => setActiveLink('#collaboration-tools')}
                     >
-                        <div className="icon-container">
+                        <div className="startup_sidebar_icon-container">
                             <FaHandshake />
                         </div>
                         <span>Collaboration Tools</span>
@@ -75,10 +75,10 @@ const StartupSidebar = () => {
 
                     <Nav.Link
                         href="#notify"
-                        className={`sidebar-link ${activeLink === '#notify' ? 'active' : ''}`}
+                        className={`startup_sidebar_link ${activeLink === '#notify' ? 'active' : ''}`}
                         onClick={() => setActiveLink('#notify')}
                     >
-                        <div className="icon-container">
+                        <div className="startup_sidebar_icon-container">
                             <FaBell />
                         </div>
                         <span>Notifications</span>
@@ -86,10 +86,10 @@ const StartupSidebar = () => {
 
                     <Nav.Link
                         href="#funding"
-                        className={`sidebar-link ${activeLink === '#funding' ? 'active' : ''}`}
+                        className={`startup_sidebar_link ${activeLink === '#funding' ? 'active' : ''}`}
                         onClick={() => setActiveLink('#funding')}
                     >
-                        <div className="icon-container">
+                        <div className="startup_sidebar_icon-container">
                             <FaMoneyBill />
                         </div>
                         <span>Funding</span>
@@ -97,10 +97,10 @@ const StartupSidebar = () => {
 
                     <Nav.Link
                         href="#schemes"
-                        className={`sidebar-link ${activeLink === '#schemes' ? 'active' : ''}`}
+                        className={`startup_sidebar_link ${activeLink === '#schemes' ? 'active' : ''}`}
                         onClick={() => setActiveLink('#schemes')}
                     >
-                        <div className="icon-container">
+                        <div className="startup_sidebar_icon-container">
                             <FaLightbulb />
                         </div>
                         <span>Schemes</span>
@@ -108,17 +108,17 @@ const StartupSidebar = () => {
 
                     <Nav.Link
                         href="#reports"
-                        className={`sidebar-link ${activeLink === '#reports' ? 'active' : ''}`}
+                        className={`startup_sidebar_link ${activeLink === '#reports' ? 'active' : ''}`}
                         onClick={() => setActiveLink('#reports')}
                     >
-                        <div className="icon-container">
+                        <div className="startup_sidebar_icon-container">
                             <FaChartBar />
                         </div>
                         <span>Reports</span>
                     </Nav.Link>
                 </Nav>
 
-                <div className="sidebar-footer">
+                <div className="startup_sidebar_footer">
                     <small>© 2024 Startup Portal</small>
                 </div>
             </div>

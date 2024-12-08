@@ -103,15 +103,15 @@ const StartupResourceAllocation = () => {
   };
 
   return (
-    <Box className="resource-dashboard">
-      <Typography variant="h4" gutterBottom className="dashboard-title">
+    <Box className="startup_resource_dashboard">
+      <Typography variant="h4" gutterBottom className="startup_resource_dashboard-title">
         Startup Resource Allocation Dashboard
       </Typography>
 
       <Grid container spacing={3}>
         {/* Input Section */}
         <Grid item xs={12} md={4}>
-          <Card className="input-card">
+          <Card className="startup_resource_input-card">
             <Typography variant="h6" gutterBottom>
               Allocate Resources
             </Typography>
@@ -150,7 +150,7 @@ const StartupResourceAllocation = () => {
                 multiple
                 value={selectedDepartments}
                 onChange={handleDepartmentChange}
-                className="department-select"
+                className="startup_resource_department-select"
                 sx={{ 
                   '& .MuiSelect-select': { 
                     display: 'flex !important',
@@ -198,7 +198,7 @@ const StartupResourceAllocation = () => {
                   <MenuItem 
                     key={dept.name} 
                     value={dept.name}
-                    className={`department-menu-item ${
+                    className={`startup_resource_department-menu-item ${
                       selectedDepartments.includes(dept.name) ? 'selected' : ''
                     }`}
                   >
@@ -228,13 +228,13 @@ const StartupResourceAllocation = () => {
 
         {/* Graph Section - Update to Pie chart */}
         <Grid item xs={12} md={8}>
-          <Card className="graph-card">
+          <Card className="startup_resource_graph-card">
             {selectedHistory ? (
               <>
-                <Typography variant="h6" gutterBottom className="card-title">
+                <Typography variant="h6" gutterBottom className="startup_resource_card-title">
                   Allocation Distribution - {selectedHistory.date}
                 </Typography>
-                <div className="chart-container">
+                <div className="startup_resource_chart-container">
                   <Pie
                     data={getChartData(selectedHistory.allocations)}
                     options={{
@@ -255,7 +255,7 @@ const StartupResourceAllocation = () => {
                 </div>
               </>
             ) : (
-              <div className="empty-graph">
+              <div className="startup_resource_empty-graph">
                 <Typography variant="h6">
                   Select departments and enter funds to view the allocation
                 </Typography>
@@ -266,30 +266,32 @@ const StartupResourceAllocation = () => {
 
         {/* History Section */}
         <Grid item xs={12}>
-          <Card className="history-card">
-            <Typography variant="h5" className="history-section-title">
+          <Card className="startup_resource_history-card">
+            <Typography variant="h5" className="startup_resource_history-section-title">
               Allocation History
             </Typography>
-            <Box className="history-grid">
+            <Box className="startup_resource_history-grid">
               {allocationHistory.map((history) => (
                 <Card 
                   key={history.id}
-                  className={`history-item ${selectedHistory?.id === history.id ? 'selected' : ''}`}
+                  className={`startup_resource_history-item ${
+                    selectedHistory?.id === history.id ? 'selected' : ''
+                  }`}
                   onClick={() => setSelectedHistory(history)}
                 >
-                  <Typography variant="h6" className="history-date">
+                  <Typography variant="h6" className="startup_resource_history-date">
                     {history.date}
                   </Typography>
-                  <Typography variant="body1" className="history-amount">
+                  <Typography variant="body1" className="startup_resource_history-amount">
                     Total Funds: ${Number(history.totalFunds).toLocaleString()}
                   </Typography>
-                  <Box className="history-allocations">
+                  <Box className="startup_resource_history-allocations">
                     {history.allocations.map((alloc) => (
                       <Chip
                         key={alloc.name}
                         label={`${alloc.name}: ${alloc.percentage.toFixed(1)}%`}
                         size="small"
-                        className="history-allocation-chip"
+                        className="startup_resource_history-allocation-chip"
                       />
                     ))}
                   </Box>

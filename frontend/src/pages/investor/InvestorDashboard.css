@@ -15,7 +15,7 @@
     --blue-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
 }
 
-.dashboard-container {
+.investor_dashboard-container {
     padding: 24px;
     max-width: 1400px;
     margin: 0 auto;
@@ -23,7 +23,7 @@
     min-height: 100vh;
 }
 
-.dashboard-header {
+.investor_dashboard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -34,7 +34,7 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.dashboard-header h2 {
+.investor_dashboard-header h2 {
     font-size: 1.8rem;
     color: var(--text-primary);
     font-weight: 600;
@@ -60,62 +60,63 @@
 }
 
 /* KPI Cards */
-.kpi-overview {
+.investor_dashboard-kpi-overview {
     margin-bottom: 32px;
 }
 
-.kpi-overview h3 {
+.investor_dashboard-kpi-overview h3 {
     color: #1e293b;
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 24px;
 }
 
-.kpi-grid {
+.investor_dashboard-kpi-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 
-.kpi-card {
+.investor_dashboard-kpi-card {
     position: relative;
     padding: 24px;
     border-radius: 16px;
-    height: 180px;
+    height: -webkit-fill-available;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    width: -webkit-fill-available;
 }
 
-.kpi-card:nth-child(1) {
+.investor_dashboard-kpi-card:nth-child(1) {
     background: var(--purple-gradient);
     box-shadow: 0 10px 20px rgba(111, 66, 193, 0.2);
 }
 
-.kpi-card:nth-child(2) {
+.investor_dashboard-kpi-card:nth-child(2) {
     background: var(--red-gradient);
     box-shadow: 0 10px 20px rgba(220, 38, 38, 0.2);
 }
 
-.kpi-card:nth-child(3) {
+.investor_dashboard-kpi-card:nth-child(3) {
     background: var(--green-gradient);
     box-shadow: 0 10px 20px rgba(5, 150, 105, 0.2);
 }
 
-.kpi-card:nth-child(4) {
+.investor_dashboard-kpi-card:nth-child(4) {
     background: var(--blue-gradient);
     box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
 }
 
-.kpi-card:hover {
+.investor_dashboard-kpi-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
 }
 
-.kpi-card h4 {
+.investor_dashboard-kpi-card h4 {
     color: rgba(255, 255, 255, 0.9);
     font-size: 1.1rem;
     font-weight: 500;
@@ -124,7 +125,7 @@
     letter-spacing: 1px;
 }
 
-.kpi-value {
+.investor_dashboard-kpi-value {
     color: #ffffff;
     font-size: 2.4rem;
     font-weight: 700;
@@ -133,7 +134,7 @@
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.kpi-trend-indicator {
+.investor_dashboard-kpi-trend-indicator {
     display: inline-flex;
     align-items: center;
     background: rgba(255, 255, 255, 0.15);
@@ -143,20 +144,20 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.trend-value {
+.investor_dashboard-trend-value {
     color: #ffffff;
     font-weight: 600;
     font-size: 0.9rem;
 }
 
-.kpi-details {
+.investor_dashboard-kpi-details {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: auto;
 }
 
-.kpi-view-analysis {
+.investor_dashboard-kpi-view-analysis {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
@@ -172,19 +173,19 @@
     font-size: 0.9rem;
 }
 
-.kpi-view-analysis:hover {
+.investor_dashboard-kpi-view-analysis:hover {
     background: rgba(255, 255, 255, 0.25);
     transform: translateX(5px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.kpi-view-analysis svg {
+.investor_dashboard-kpi-view-analysis svg {
     width: 16px;
     height: 16px;
     transition: transform 0.3s ease;
 }
 
-.kpi-view-analysis:hover svg {
+.investor_dashboard-kpi-view-analysis:hover svg {
     transform: translateX(3px);
 }
 
@@ -199,16 +200,16 @@
     }
 }
 
-.kpi-card {
+.investor_dashboard-kpi-card {
     animation: fadeInUp 0.5s ease forwards;
 }
 
-.kpi-card:nth-child(1) { animation-delay: 0.1s; }
-.kpi-card:nth-child(2) { animation-delay: 0.2s; }
-.kpi-card:nth-child(3) { animation-delay: 0.3s; }
-.kpi-card:nth-child(4) { animation-delay: 0.4s; }
+.investor_dashboard-kpi-card:nth-child(1) { animation-delay: 0.1s; }
+.investor_dashboard-kpi-card:nth-child(2) { animation-delay: 0.2s; }
+.investor_dashboard-kpi-card:nth-child(3) { animation-delay: 0.3s; }
+.investor_dashboard-kpi-card:nth-child(4) { animation-delay: 0.4s; }
 
-.kpi-card::after {
+.investor_dashboard-kpi-card::after {
     content: '';
     position: absolute;
     top: 0;
@@ -225,11 +226,11 @@
     transition: transform 0.6s;
 }
 
-.kpi-card:hover::after {
+.investor_dashboard-kpi-card:hover::after {
     transform: translateX(100%);
 }
 
-.kpi-mini-graph {
+.investor_dashboard-kpi-mini-graph {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -239,23 +240,23 @@
     transition: opacity 0.3s ease;
 }
 
-.kpi-card:hover .kpi-mini-graph {
+.investor_dashboard-kpi-card:hover .investor_dashboard-kpi-mini-graph {
     opacity: 0.2;
 }
 
 @media (max-width: 1200px) {
-    .kpi-grid {
+    .investor_dashboard-kpi-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
     }
 }
 
 @media (max-width: 768px) {
-    .kpi-grid {
+    .investor_dashboard-kpi-grid {
         grid-template-columns: 1fr;
     }
     
-    .kpi-card {
+    .investor_dashboard-kpi-card {
         height: 160px;
     }
 }
@@ -416,11 +417,11 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .dashboard-container {
+    .investor_dashboard-container {
         padding: 16px;
     }
     
-    .kpi-grid {
+    .investor_dashboard-kpi-grid {
         grid-template-columns: 1fr;
     }
     
@@ -455,7 +456,7 @@
     }
 }
 
-.kpi-card::before {
+.investor_dashboard-kpi-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -472,6 +473,68 @@
     transition: transform 0.6s;
 }
 
-.kpi-card:hover::before {
+.investor_dashboard-kpi-card:hover::before {
     animation: shimmer 2s infinite;
+}
+
+/* Update grid layouts */
+.investor_dashboard-graphs-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* Two equal columns */
+    gap: 24px;
+    padding: 24px;
+}
+
+.investor_dashboard-graph-box {
+    background: var(--card-background);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    height: 400px; /* Fixed height for graphs */
+    display: flex;
+    flex-direction: column;
+}
+
+.investor_dashboard-graph-box h3 {
+    margin-bottom: 16px;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+}
+
+.investor_dashboard-graph-container {
+    flex: 1;
+    position: relative;
+    min-height: 300px;
+}
+
+/* Add these styles for edit functionality */
+.investor_dashboard-graph-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.investor_dashboard-edit-button {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+}
+
+.investor_dashboard-edit-button:hover {
+    background: var(--background-color);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Update graph container styles */
+.investor_dashboard-graph-container {
+    height: 300px;
+    position: relative;
 }
