@@ -63,3 +63,38 @@
 .negative-change {
     color: #f44336;
 }
+
+/* Add these new styles */
+.metric-action-button {
+    background: white !important;
+    border: 2px solid rgba(99, 102, 241, 0.1) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04) !important;
+    transition: all 0.3s ease !important;
+    border-radius: 12px !important;
+    padding: 8px 16px !important;
+}
+
+.metric-action-button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(99, 102, 241, 0.2) !important;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15) !important;
+}
+
+.metric-action-button.preview {
+    background: rgba(99, 102, 241, 0.05) !important;
+    color: #6366f1 !important;
+}
+
+.metric-action-button.save {
+    background: #6366f1 !important;
+    color: white !important;
+}
+
+.metric-action-button.save:hover {
+    background: #4f46e5 !important;
+}
+
+.metric-action-button.add-month {
+    color: #6366f1 !important;
+    border-color: #6366f1 !important;
+}
