@@ -661,8 +661,9 @@ const generateReport = async (reportType, selectedMetrics, dateRange) => {
 
     return reportData;
   } catch (error) {
-    console.error('Report generation failed:', error);
-    throw new Error(`Failed to generate ${reportType} report: ${error.message}`);
+    console.error('Error generating report:', error);
+    // Optionally, you can show an alert or set an error state
+    alert('Failed to generate report. Please try again.');
   }
 };
 
@@ -2978,6 +2979,18 @@ const StartupReports = () => {
     });
   };
 
+  const handleDownloadReport = (report) => {
+    const doc = new jsPDF();
+    
+    // Add content to the PDF
+    doc.text(`Report Title: ${report.title}`, 10, 10);
+    doc.text(`Description: ${report.description}`, 10, 20);
+    // Add more content as needed, e.g., metrics, summaries, etc.
+
+    // Save the PDF
+    doc.save(`${report.title}.pdf`);
+  };
+
   return (
     <Container>
       <PageHeader>
@@ -3057,7 +3070,7 @@ const StartupReports = () => {
         />
       )}
 
-      {/* <ReportsGrid>
+      <ReportsGrid>
         {generatedReports.map((report) => (
           <ReportCard key={report.id}>
             <div className="card-header">
@@ -3072,9 +3085,10 @@ const StartupReports = () => {
                 </div>
               ))}
             </div>
+            <button onClick={() => handleDownloadReport(report)}>Download</button> {/* Add Download Button */}
           </ReportCard>
         ))}
-      </ReportsGrid> */}
+      </ReportsGrid>
 
       <AnimatePresence>
         {selectedReport && (
