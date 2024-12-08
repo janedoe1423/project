@@ -538,3 +538,42 @@
     height: 300px;
     position: relative;
 }
+
+/* Add these styles for the edit modal */
+.investor_dashboard-edit-grid {
+    display: grid;
+    gap: 1.5rem;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.investor_dashboard-edit-row {
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--background-color);
+}
+
+.investor_dashboard-dataset-input {
+    margin-bottom: 1rem;
+}
+
+.investor_dashboard-dataset-input label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.investor_dashboard-dataset-input input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.investor_dashboard-dataset-input input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { Card, Button, Modal, Row, Col, Typography, Space, Statistic, Progress, Avatar, Descriptions, Tabs, Tag } from "antd";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Cell, BarChart, Bar, Legend } from 'recharts';
+import {
+    LineChart, Line, BarChart, Bar, PieChart, Pie,
+    RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
+    CartesianGrid, XAxis, YAxis, Tooltip, Legend, Cell, ResponsiveContainer
+} from 'recharts';
 import { ArrowUpOutlined, LineChartOutlined, UserOutlined, PieChartOutlined, DollarOutlined, RiseOutlined, Badge, EyeOutlined, SafetyOutlined, FundOutlined, BarChartOutlined, UpOutlined, DownOutlined, InfoCircleOutlined, DotChartOutlined, StockOutlined, ThunderboltOutlined, GlobalOutlined, UserAddOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
 const { Title, Text } = Typography;
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 
 const sampleData = {
     performanceData: [
@@ -91,15 +95,13 @@ const analysisCategories = {
                 id: "marketShare",
                 title: "Market Distribution",
                 description: "Geographic and demographic market share breakdown",
-                icon: <PieChartOutlined />,
-                data: sampleData.marketData
+                icon: <PieChartOutlined />
             },
             {
-                id: "competitiveLandscape",
+                id: "competitive",
                 title: "Competitive Position",
                 description: "Analysis of market position relative to competitors",
-                icon: <DotChartOutlined />,
-                data: sampleData.competitorData
+                icon: <DotChartOutlined />
             }
         ]
     },
@@ -111,8 +113,7 @@ const analysisCategories = {
                 id: "riskMetrics",
                 title: "Risk Metrics",
                 description: "Multi-dimensional risk assessment visualization",
-                icon: <SafetyOutlined />,
-                data: sampleData.riskData
+                icon: <SafetyOutlined />
             }
         ]
     },
@@ -121,18 +122,16 @@ const analysisCategories = {
         description: "Key growth metrics and future projections",
         graphs: [
             {
-                id: "customerGrowth",
+                id: "acquisition",
                 title: "Customer Acquisition",
                 description: "Customer growth trends and retention rates",
-                icon: <StockOutlined />,
-                data: sampleData.customerData
+                icon: <StockOutlined />
             },
             {
-                id: "marketExpansion",
+                id: "expansion",
                 title: "Market Expansion",
                 description: "Geographic expansion and market penetration analysis",
-                icon: <GlobalOutlined />,
-                data: sampleData.expansionData
+                icon: <GlobalOutlined />
             }
         ]
     }
@@ -232,7 +231,7 @@ const InvestorInvestments = () => {
     const [detailsModal, setDetailsModal] = useState(false);
     const [analysisModal, setAnalysisModal] = useState(false);
     const [selectedCompany, setSelectedCompany] = useState(null);
-    const [graphModal, setGraphModal] = useState({ visible: false, type: null });
+    const [graphModal, setGraphModal] = useState({ visible: false, type: 'revenue' });
 
     const showDetails = (company) => {
         setSelectedCompany(company);
@@ -244,171 +243,140 @@ const InvestorInvestments = () => {
         setAnalysisModal(true);
     };
 
-    const renderGraph = (graph) => {
-        switch (graph.id) {
-            case "revenue":
-                return <LineChart data={graph.data}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line type="monotone" dataKey="revenue" stroke="#1890ff" name="Actual Revenue" />
-                    <Line type="monotone" dataKey="projection" stroke="#52c41a" strokeDasharray="5 5" name="Projected" />
-                </LineChart>;
-            case "profitMargins":
-                return <BarChart data={graph.data}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="actual" fill="#1890ff" name="Actual" />
-                    <Bar dataKey="target" fill="#52c41a" name="Target" />
-                </BarChart>;
-            case "marketShare":
-                return <PieChart data={graph.data}>
-                    <Pie
-                        data={graph.data}
-                        innerRadius={60}
-                        outerRadius={100}
-                        paddingAngle={5}
-                        dataKey="value"
-                        nameKey="name"
-                    >
-                        {graph.data.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                        ))}
-                    </Pie>
-                    <Tooltip />
-                    <Legend />
-                </PieChart>;
-            case "competitiveLandscape":
-                return <RadarChart data={graph.data}>
-                    <PolarGrid />
-                    <PolarAngleAxis dataKey="subject" />
-                    <PolarRadiusAxis />
-                    <Radar name="Risk Level" dataKey="value" stroke="#1890ff" fill="#1890ff" fillOpacity={0.6} />
-                    <Tooltip />
-                    <Legend />
-                </RadarChart>;
-            case "riskMetrics":
-                return <RadarChart data={graph.data}>
-                    <PolarGrid />
-                    <PolarAngleAxis dataKey="subject" />
-                    <PolarRadiusAxis />
-                    <Radar name="Risk Level" dataKey="value" stroke="#1890ff" fill="#1890ff" fillOpacity={0.6} />
-                    <Tooltip />
-                    <Legend />
-                </RadarChart>;
-            case "customerGrowth":
-                return <LineChart data={graph.data}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line type="monotone" dataKey="value" stroke="#1890ff" name="Actual" />
-                    <Line type="monotone" dataKey="projection" stroke="#52c41a" strokeDasharray="5 5" name="Projected" />
-                </LineChart>;
-            case "marketExpansion":
-                return <LineChart data={graph.data}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line type="monotone" dataKey="value" stroke="#1890ff" name="Actual" />
-                    <Line type="monotone" dataKey="projection" stroke="#52c41a" strokeDasharray="5 5" name="Projected" />
-                </LineChart>;
-            case 'competitive':
-                return (
-                    <ResponsiveContainer width="100%" height={300}>
-                        <LineChart data={sampleData.competitivePosition}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Line 
-                                type="monotone" 
-                                dataKey="market" 
-                                stroke="#1890ff" 
-                                name="Our Position"
-                                strokeWidth={2}
-                            />
-                            <Line 
-                                type="monotone" 
-                                dataKey="competitor1" 
-                                stroke="#13c2c2" 
-                                name="Competitor 1"
-                            />
-                            <Line 
-                                type="monotone" 
-                                dataKey="competitor2" 
-                                stroke="#52c41a" 
-                                name="Competitor 2"
-                            />
-                        </LineChart>
-                    </ResponsiveContainer>
-                );
-            
-            case 'acquisition':
-                return (
-                    <ResponsiveContainer width="100%" height={300}>
-                        <AreaChart data={sampleData.customerAcquisition}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Area 
-                                type="monotone" 
-                                dataKey="customers" 
-                                stroke="#1890ff"
-                                fill="#1890ff"
-                                fillOpacity={0.3}
-                                name="New Customers"
-                            />
-                        </AreaChart>
-                    </ResponsiveContainer>
-                );
-            
-            case 'expansion':
-                return (
-                    <ResponsiveContainer width="100%" height={300}>
-                        <PieChart>
-                            <Pie
-                                data={sampleData.marketExpansion}
-                                dataKey="value"
-                                nameKey="name"
-                                cx="50%"
-                                cy="50%"
-                                outerRadius={100}
-                                fill="#1890ff"
-                                label
-                            >
-                                {sampleData.marketExpansion.map((entry, index) => (
-                                    <Cell 
-                                        key={`cell-${index}`} 
-                                        fill={[
-                                            '#1890ff', 
-                                            '#13c2c2', 
-                                            '#52c41a', 
-                                            '#faad14', 
-                                            '#722ed1'
-                                        ][index % 5]} 
-                                    />
-                                ))}
-                            </Pie>
-                            <Tooltip />
-                            <Legend />
-                        </PieChart>
-                    </ResponsiveContainer>
-                );
+    const showGraph = (type) => {
+        setGraphModal({ visible: true, type: type || 'revenue' });
+    };
 
-            default:
-                return null;
+    const renderGraph = (graph) => {
+        // Debug logging
+        console.log('Graph object:', graph);
+        
+        // Early return if graph is null/undefined
+        if (!graph) {
+            console.log('Graph is null or undefined');
+            return <div>No graph configuration available</div>;
+        }
+
+        // Handle data with more detailed logging
+        let data;
+        try {
+            switch(graph.id) {
+                case 'competitive':
+                    data = sampleData.competitivePosition;
+                    return (
+                        <ResponsiveContainer width="100%" height={300}>
+                            <LineChart data={data}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Line type="monotone" dataKey="market" stroke="#1890ff" name="Market" />
+                                <Line type="monotone" dataKey="competitor1" stroke="#52c41a" name="Competitor 1" />
+                                <Line type="monotone" dataKey="competitor2" stroke="#ff4d4f" name="Competitor 2" />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    );
+
+                case 'acquisition':
+                    data = sampleData.customerAcquisition;
+                    return (
+                        <ResponsiveContainer width="100%" height={300}>
+                            <LineChart data={data}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Line type="monotone" dataKey="customers" stroke="#1890ff" name="Customers" />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    );
+
+                case 'expansion':
+                    data = sampleData.marketExpansion;
+                    return (
+                        <ResponsiveContainer width="100%" height={300}>
+                            <PieChart>
+                                <Pie
+                                    data={data}
+                                    innerRadius={60}
+                                    outerRadius={100}
+                                    paddingAngle={5}
+                                    dataKey="value"
+                                    nameKey="name"
+                                >
+                                    {data.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    ))}
+                                </Pie>
+                                <Tooltip />
+                                <Legend />
+                            </PieChart>
+                        </ResponsiveContainer>
+                    );
+
+                case 'revenue':
+                    data = sampleData.performanceData;
+                    return (
+                        <ResponsiveContainer width="100%" height={300}>
+                            <LineChart data={data}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="date" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Line type="monotone" dataKey="revenue" stroke="#1890ff" name="Actual Revenue" />
+                                <Line type="monotone" dataKey="projection" stroke="#52c41a" strokeDasharray="5 5" name="Projected" />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    );
+
+                case 'marketShare':
+                    data = sampleData.marketData;
+                    return (
+                        <ResponsiveContainer width="100%" height={300}>
+                            <PieChart>
+                                <Pie
+                                    data={data}
+                                    innerRadius={60}
+                                    outerRadius={100}
+                                    paddingAngle={5}
+                                    dataKey="value"
+                                    nameKey="name"
+                                >
+                                    {data.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    ))}
+                                </Pie>
+                                <Tooltip />
+                                <Legend />
+                            </PieChart>
+                        </ResponsiveContainer>
+                    );
+
+                case 'riskMetrics':
+                    data = sampleData.riskData;
+                    return (
+                        <ResponsiveContainer width="100%" height={300}>
+                            <RadarChart data={data}>
+                                <PolarGrid />
+                                <PolarAngleAxis dataKey="subject" />
+                                <PolarRadiusAxis />
+                                <Radar name="Risk Metrics" dataKey="value" stroke="#1890ff" fill="#1890ff" fillOpacity={0.6} />
+                                <Tooltip />
+                                <Legend />
+                            </RadarChart>
+                        </ResponsiveContainer>
+                    );
+
+                default:
+                    console.log(`No rendering logic for graph type: ${graph.id}`);
+                    return <div>Unsupported graph type</div>;
+            }
+        } catch (error) {
+            console.error('Error rendering graph:', error);
+            return <div>Error rendering graph</div>;
         }
     };
 
@@ -419,7 +387,7 @@ const InvestorInvestments = () => {
                 {investments.map((company) => (
                     <Card 
                         key={company.id}
-                        className="investment-card"
+                        className="investor_investment-investment-card"
                         style={{ 
                             borderRadius: '12px',
                             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
@@ -497,18 +465,18 @@ const InvestorInvestments = () => {
                 onCancel={() => setDetailsModal(false)}
                 footer={null}
                 width={1000}
-                className="details-modal"
+                className="investor_investment-details-modal"
             >
                 {selectedCompany && (
                     <>
                         {/* Header Section */}
-                        <div className="company-header">
+                        <div className="investor_investment-company-header">
                             <Row align="middle" gutter={24}>
                                 <Col span={4}>
                                     <img 
                                         src={selectedCompany.logo} 
                                         alt={selectedCompany.companyName}
-                                        className="company-logo"
+                                        className="investor_investment-company-logo"
                                     />
                                 </Col>
                                 <Col span={20}>
@@ -520,14 +488,14 @@ const InvestorInvestments = () => {
                         </div>
 
                         {/* Quick Stats */}
-                        <Row gutter={[16, 16]} className="quick-stats">
+                        <Row gutter={[16, 16]} className="investor_investment-quick-stats">
                             <Col span={6}>
                                 <Statistic 
                                     title="Investment Value"
                                     value={selectedCompany.currentValue}
                                     prefix="$"
                                     formatter={value => `${(value / 1000000).toFixed(2)}M`}
-                                    className="stat-card"
+                                    className="investor_investment-stat-card"
                                 />
                             </Col>
                             <Col span={6}>
@@ -536,14 +504,14 @@ const InvestorInvestments = () => {
                                     value={selectedCompany.returns}
                                     suffix="%"
                                     valueStyle={{ color: '#3f8600' }}
-                                    className="stat-card"
+                                    className="investor_investment-stat-card"
                                 />
                             </Col>
                             <Col span={6}>
                                 <Statistic
                                     title="Investment Period"
                                     value={moment(selectedCompany.investmentDate).fromNow(true)}
-                                    className="stat-card"
+                                    className="investor_investment-stat-card"
                                 />
                             </Col>
                             <Col span={6}>
@@ -551,17 +519,17 @@ const InvestorInvestments = () => {
                                     title="Market Share"
                                     value={selectedCompany.additionalDetails.keyMetrics.marketShare}
                                     suffix="%"
-                                    className="stat-card"
+                                    className="investor_investment-stat-card"
                                 />
                             </Col>
                         </Row>
 
                         {/* Detailed Information */}
-                        <Tabs defaultActiveKey="1" className="details-tabs">
+                        <Tabs defaultActiveKey="1" className="investor_investment-details-tabs">
                             <Tabs.TabPane tab="Company Overview" key="1">
                                 <Row gutter={[24, 24]}>
                                     <Col span={12}>
-                                        <Card title="Company Information" className="info-card">
+                                        <Card title="Company Information" className="investor_investment-info-card">
                                             <Descriptions column={1}>
                                                 <Descriptions.Item label="Founded">{selectedCompany.additionalDetails.foundedYear}</Descriptions.Item>
                                                 <Descriptions.Item label="Location">{selectedCompany.additionalDetails.location}</Descriptions.Item>
@@ -571,7 +539,7 @@ const InvestorInvestments = () => {
                                         </Card>
                                     </Col>
                                     <Col span={12}>
-                                        <Card title="Key Metrics" className="info-card">
+                                        <Card title="Key Metrics" className="investor_investment-info-card">
                                             <Row gutter={[16, 16]}>
                                                 <Col span={12}>
                                                     <Progress 
@@ -600,7 +568,7 @@ const InvestorInvestments = () => {
                                 <Row gutter={[24, 24]}>
                                     {selectedCompany.additionalDetails.teamInfo.executiveTeam.map(member => (
                                         <Col span={8} key={member.name}>
-                                            <Card className="team-card">
+                                            <Card className="investor_investment-team-card">
                                                 <Avatar size={64} icon={<UserOutlined />} />
                                                 <Title level={4}>{member.name}</Title>
                                                 <Text type="secondary">{member.role}</Text>
@@ -614,7 +582,7 @@ const InvestorInvestments = () => {
                             <Tabs.TabPane tab="Market Analysis" key="3">
                                 <Row gutter={[24, 24]}>
                                     <Col span={12}>
-                                        <Card title="Market Size & Growth" className="market-card">
+                                        <Card title="Market Size & Growth" className="investor_investment-market-card">
                                             <Statistic
                                                 title="Target Market Size"
                                                 value={selectedCompany.additionalDetails.marketAnalysis.targetMarketSize}
@@ -629,7 +597,7 @@ const InvestorInvestments = () => {
                                         </Card>
                                     </Col>
                                     <Col span={12}>
-                                        <Card title="Geographic Presence" className="market-card">
+                                        <Card title="Geographic Presence" className="investor_investment-market-card">
                                             {selectedCompany.additionalDetails.marketAnalysis.geographicPresence.map(region => (
                                                 <Tag color="blue" key={region}>{region}</Tag>
                                             ))}
@@ -649,23 +617,23 @@ const InvestorInvestments = () => {
                 onCancel={() => setAnalysisModal(false)}
                 footer={null}
                 width={1200}
-                className="analysis-modal"
+                className="investor_investment-analysis-modal"
             >
                 {selectedCompany && (
                     <>
                         {/* Analysis Modal Content */}
                         <div className="analysis-dashboard">
-                            <div className="analysis-summary">
-                                <div className="summary-header">
-                                    <div className="title-container">
-                                        <Title level={3} className="dashboard-title">
+                            <div className="investor_investment-analysis-summary">
+                                <div className="investor_investment-summary-header">
+                                    <div className="investor_investment-title-container">
+                                        <Title level={3} className="investor_investment-dashboard-title">
                                             Investment Analysis Dashboard
                                         </Title>
-                                        <Tag color="blue" className="dashboard-tag">
+                                        <Tag color="blue" className="investor_investment-dashboard-tag">
                                             {selectedCompany?.sector}
                                         </Tag>
                                     </div>
-                                    <Text className="dashboard-subtitle">
+                                    <Text className="investor_investment-dashboard-subtitle">
                                         Comprehensive performance metrics and analytical insights
                                     </Text>
                                 </div>
@@ -850,13 +818,13 @@ const InvestorInvestments = () => {
                             </div>
 
                             {/* Analysis Categories */}
-                            <div className="analysis-cards">
+                            <div className="investor_investment-analysis-cards">
                                 {Object.entries(analysisCategories).map(([key, category]) => (
-                                    <div key={key} className="analysis-section">
-                                        <div className="category-header">
-                                            <Title level={4} className="section-title">
+                                    <div key={key} className="investor_investment-analysis-section">
+                                        <div className="investor_investment-category-header">
+                                            <Title level={4} className="investor_investment-section-title">
                                                 {category.title}
-                                                <Text type="secondary" className="section-description">
+                                                <Text type="secondary" className="investor_investment-section-description">
                                                     {category.description}
                                                 </Text>
                                             </Title>
@@ -865,19 +833,19 @@ const InvestorInvestments = () => {
                                         <Row gutter={[24, 24]}>
                                             {category.graphs.map(graph => (
                                                 <Col span={12} key={graph.id}>
-                                                    <Card className="analysis-card">
-                                                        <div className="card-header">
-                                                            <div className="header-content">
-                                                                <span className="card-icon">{graph.icon}</span>
-                                                                <div className="header-text">
+                                                    <Card className="investor_investment-analysis-card">
+                                                        <div className="investor_investment-card-header">
+                                                            <div className="investor_investment-header-content">
+                                                                <span className="investor_investment-card-icon">{graph.icon}</span>
+                                                                <div className="investor_investment-header-text">
                                                                     <Title level={5}>{graph.title}</Title>
                                                                     <Text type="secondary">{graph.description}</Text>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         
-                                                        <div className="card-content">
-                                                            <div className="graph-container">
+                                                        <div className="investor_investment-card-content">
+                                                            <div className="investor_investment-graph-container">
                                                                 <ResponsiveContainer width="100%" height={300}>
                                                                     {renderGraph(graph)}
                                                                 </ResponsiveContainer>
@@ -897,38 +865,31 @@ const InvestorInvestments = () => {
 
             {/* Graph Detail Modal */}
             <Modal
-                title={null}
+                title="Graph Details"
                 open={graphModal.visible}
-                onCancel={() => setGraphModal({ visible: false, type: null })}
+                onCancel={() => setGraphModal({ visible: false, type: 'revenue' })}
                 footer={null}
                 width={1000}
-                className="graph-detail-modal"
+                className="investor-investment-graph-detail-modal"
             >
-                {graphModal.type === 'revenue' && (
-                    <div className="graph-detail">
-                        <div className="graph-header">
-                            <Title level={3}>Revenue Growth Analysis</Title>
-                            <Text type="secondary">Detailed view of revenue trends and patterns</Text>
-                        </div>
-                        <div className="graph-content">
-                            <ResponsiveContainer width="100%" height={400}>
-                                <LineChart data={selectedCompany.performanceData}>
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="date" />
-                                    <YAxis />
-                                    <Tooltip />
-                                    <Legend />
-                                    <Line 
-                                        type="monotone" 
-                                        dataKey="value" 
-                                        stroke="#1890ff" 
-                                        strokeWidth={2}
-                                    />
-                                </LineChart>
-                            </ResponsiveContainer>
-                        </div>
-                    </div>
-                )}
+                <div className="investor-investment-graph-detail">
+                    {graphModal.type && (
+                        <>
+                            <div className="investor-investment-graph-header">
+                                <Title level={3}>
+                                    {graphModal.type === 'revenue' ? 'Revenue Growth Analysis' : 'Performance Analysis'}
+                                </Title>
+                                <Text type="secondary">Detailed view of trends and patterns</Text>
+                            </div>
+                            <div className="investor-investment-graph-content">
+                                {renderGraph({
+                                    id: graphModal.type,
+                                    data: sampleData[`${graphModal.type}Data`] || []
+                                })}
+                            </div>
+                        </>
+                    )}
+                </div>
             </Modal>
         </div>
     );
