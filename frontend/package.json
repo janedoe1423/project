@@ -17,7 +17,7 @@
         "@testing-library/user-event": "^13.5.0",
         "antd": "^5.22.1",
         "bootstrap": "^5.3.3",
-        "chart.js": "^4.4.6",
+        "chart.js": "^4.4.7",
         "date-fns": "^4.1.0",
         "fast-equals": "^5.0.1",
         "file-saver": "^2.0.5",
@@ -38,6 +38,7 @@
         "react-scripts": "5.0.1",
         "react-smooth": "^4.0.1",
         "react-toastify": "^10.0.6",
+        "react-transition-group": "^4.4.5",
         "recharts": "^2.14.1",
         "styled-components": "^6.1.13",
         "web-vitals": "^2.1.4",
@@ -72,6 +73,8 @@
         "@types/node": "^22.9.1",
         "@types/react": "^18.3.12",
         "@types/react-dom": "^18.3.1",
-        "typescript": "^3.9.10"
+        "typescript": "^3.9.10",
+        "webpack": "^5.97.1",
+        "webpack-sources": "^3.2.3"
     }
 }
