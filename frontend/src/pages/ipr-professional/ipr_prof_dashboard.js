@@ -1,199 +1,115 @@
-import React, { useState } from "react";
-import { ChevronDown, FileText } from "lucide-react";
-import './ipr_dashboard.css';
+// Import necessary libraries
+import React from 'react';
+import { FaPlus, FaFileAlt, FaChartLine } from 'react-icons/fa'; // Import icons for quick actions
+import './ipr_dashboard.css'; // Import your CSS
 
-const mockData = [
-  {
-    industry: "Technology",
-    type: "trademark",
-    status: "Granted",
-    image: "https://via.placeholder.com/150",
-    description: "Advanced Machine Learning System",
-    owner: "Tech Innovations Inc.",
-    date: "2024-01-15",
-  },
-  {
-    industry: "Healthcare",
-    type: "trademark",
-    status: "Pending",
-    image: "https://via.placeholder.com/150",
-    description: "EcoGreen™ - Sustainable packaging solutions",
-    owner: "Green Solutions LLC",
-    date: "2024-02-20",
-  },
-];
+const IPRProfessionalDashboard = () => {
+    // Sample data for demonstration
+    const performanceMetrics = [
+        { label: 'Filing Success Rate', value: '85%' },
+        { label: 'Pending Cases', value: '15%' },
+    ];
 
-const IPRDashboard = () => {
-  const [selectedTab, setSelectedTab] = useState("Trademarks");
-  const [selectedIndustry, setSelectedIndustry] = useState("All");
-  const [selectedSector, setSelectedSector] = useState("All");
-  const [selectedStage, setSelectedStage] = useState("All");
+    const caseUpdates = [
+        "Patent #12345 filed successfully.",
+        "Trademark application #67890 is under review.",
+        "Copyright renewal for #54321 completed.",
+    ];
 
-  const filterCategories = {
-    Industry: [
-      "Technology",
-      "Healthcare",
-      "Manufacturing",
-      "Automotive",
-      "Finance",
-      "Retail",
-      "Energy",
-    ],
-    Sector: [
-      "Information Technology",
-      "Biotechnology",
-      "Clean Energy",
-      "Artificial Intelligence",
-      "E-commerce",
-      "Telecommunications",
-      "Pharmaceuticals",
-    ],
-    Stage: [
-      "Pending",
-      "Under Review",
-      "Granted",
-      "Rejected",
-      "Expired",
-      "Opposition Filed",
-    ],
-  };
+    const clientRequests = [
+        "Startup A needs help with trademark filing.",
+        "Startup B is looking for copyright advice.",
+    ];
 
-  // Filtered data based on selected filters
-  const filteredData = mockData.filter(
-    (item) =>
-      (selectedIndustry === "All" || item.industry === selectedIndustry) &&
-      (selectedStage === "All" || item.status === selectedStage)
-  );
+    const revenueInsights = {
+        totalRevenue: "$300,000",
+        revenueFromFilings: "$150,000",
+    };
 
-  const FilterSelect = ({ label, value, onChange, options }) => {
+    const trendsAnalysis = [
+        "Increase in trademark filings in tech sector.",
+        "Rise in copyright registrations for digital content.",
+    ];
+
+    const educationalLinks = [
+        { title: "IPR Policies", url: "/ipr-policies" },
+        { title: "Filing Guides", url: "/filing-guides" },
+    ];
+
     return (
-      <div className="filter-select-container">
-        <label className="filter-label">
-          {label}
-        </label>
-        <div className="relative">
-          <select
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            className="filter-select"
-          >
-            <option value="All">All {label}s</option>
-            {options.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          <ChevronDown className="select-icon" />
-        </div>
-      </div>
-    );
-  };
+        <div id="ipr-professional-dashboard">
+            <h2>IPR Professional Dashboard</h2>
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header Section */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4">
-        <h1 className="text-2xl font-bold text-gray-900">IPR Management Dashboard</h1>
-      </header>
-
-      <main className="p-6">
-        {/* Tabs */}
-        <div className="flex gap-4 mb-6">
-          {["Patents", "Trademarks", "Copyrights"].map((tab) => (
-            <button
-              key={tab}
-              className={`px-4 py-2 rounded-md border ${
-                selectedTab === tab
-                  ? "bg-green-50 border-green-200 text-green-700"
-                  : "bg-white border-gray-200 hover:bg-gray-50"
-              }`}
-              onClick={() => setSelectedTab(tab)}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-
-        {/* Filter Section */}
-        <div className="filter-container">
-          <div className="filter-header">
-            <h2 className="filter-title">Filters</h2>
-          </div>
-          <div className="filters-wrapper">
-            <FilterSelect
-              label="Industry"
-              value={selectedIndustry}
-              onChange={setSelectedIndustry}
-              options={filterCategories.Industry}
-            />
-            <FilterSelect
-              label="Sector"
-              value={selectedSector}
-              onChange={setSelectedSector}
-              options={filterCategories.Sector}
-            />
-            <FilterSelect
-              label="Stage"
-              value={selectedStage}
-              onChange={setSelectedStage}
-              options={filterCategories.Stage}
-            />
-          </div>
-        </div>
-
-        {/* Card Section */}
-        <section className="cards-grid">
-          {filteredData.map((data, index) => (
-            <div key={index} className="card">
-              <div className="card-content">
-                <div>
-                  <h2 className="card-title">{data.description}</h2>
-                </div>
-                
-                <div className="card-footer">
-                  <div className="footer-company">
-                    <svg 
-                      className="company-icon" 
-                      fill="currentColor" 
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
-                    </svg>
-                    <span className="company-name">{data.owner}</span>
-                  </div>
-                  
-                  <div className="footer-details">
-                    <span className={`status-badge ${data.status.toLowerCase()}`}>
-                      {data.status}
-                    </span>
-                    <div className="card-date">
-                      {new Date(data.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
-                      })}
-                    </div>
-                  </div>
-                </div>
-
-                {/* New Button Section */}
-                <div className="card-actions">
-                  <button 
-                    className="view-docs-button"
-                    onClick={() => {/* Add your view documents handler here */}}
-                  >
-                    <FileText className="button-icon" />
-                    View Documents
-                  </button>
-                </div>
-              </div>
+            {/* Performance Metrics */}
+            <div className="performance-metrics">
+                <h3>Performance Metrics</h3>
+                <ul>
+                    {performanceMetrics.map((metric, index) => (
+                        <li key={index}>
+                            {metric.label}: {metric.value}
+                        </li>
+                    ))}
+                </ul>
             </div>
-          ))}
-        </section>
-      </main>
-    </div>
-  );
+
+            {/* Case Updates */}
+            <div className="case-updates">
+                <h3>Case Updates</h3>
+                <ul>
+                    {caseUpdates.map((update, index) => (
+                        <li key={index}>{update}</li>
+                    ))}
+                </ul>
+            </div>
+
+            {/* Quick Actions */}
+            <div className="quick-actions">
+                <h3>Quick Actions</h3>
+                <button><FaPlus /> Add New Case</button>
+                <button><FaFileAlt /> File Application</button>
+            </div>
+
+            {/* Client Requests */}
+            <div className="client-requests">
+                <h3>Client Requests</h3>
+                <ul>
+                    {clientRequests.map((request, index) => (
+                        <li key={index}>{request}</li>
+                    ))}
+                </ul>
+            </div>
+
+            {/* Revenue Insights */}
+            <div className="revenue-insights">
+                <h3>Revenue Insights</h3>
+                <p>Total Revenue: {revenueInsights.totalRevenue}</p>
+                <p>Revenue from Filings: {revenueInsights.revenueFromFilings}</p>
+            </div>
+
+            {/* Trends Analysis */}
+            <div className="trends-analysis">
+                <h3>Trends Analysis</h3>
+                <ul>
+                    {trendsAnalysis.map((trend, index) => (
+                        <li key={index}>{trend}</li>
+                    ))}
+                </ul>
+            </div>
+
+            {/* Educational Links */}
+            <div className="educational-links">
+                <h3>Educational Links</h3>
+                <ul>
+                    {educationalLinks.map((link, index) => (
+                        <li key={index}>
+                            <a href={link.url}>{link.title}</a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    );
 };
 
-export default IPRDashboard;
+// Export the component
+export default IPRProfessionalDashboard;

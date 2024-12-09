@@ -1,0 +1,176 @@
+.ipr-support {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+}
+
+.ipr-support-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+}
+
+.ipr-support-header h1 {
+    font-size: 2.5rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.ipr-support-header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
+    border-radius: 2px;
+}
+
+.ipr-support-header p {
+    font-size: 1.2rem;
+    color: #64748b;
+}
+
+.ipr-support-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.ipr-support-card {
+    flex: 0 1 calc(50% - 2rem);
+    min-width: 400px;
+    max-width: 600px;
+    background: white;
+    border-radius: 1rem;
+    padding: 2.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.ipr-support-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--feature-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.ipr-support-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.ipr-support-card:hover::before {
+    transform: scaleX(1);
+}
+
+.ipr-support-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.ipr-support-card:hover .ipr-support-icon {
+    transform: scale(1.1);
+}
+
+.ipr-support-card h3 {
+    font-size: 1.75rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+}
+
+.ipr-support-card p {
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.ipr-support-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.ipr-support-features li {
+    padding: 0.5rem 0;
+    color: #4b5563;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.ipr-support-features li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--feature-color);
+}
+
+.ipr-support-button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ipr-support-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1400px) {
+    .ipr-support-card {
+        flex: 0 1 calc(100% - 2rem);
+        min-width: 300px;
+    }
+}
+
+@media (max-width: 640px) {
+    .ipr-support-grid {
+        padding: 0 1rem;
+    }
+    
+    .ipr-support-card {
+        padding: 1.5rem;
+        min-width: 100%;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ipr-support-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+    animation-delay: calc(var(--animation-order) * 0.1s);
+}

@@ -8,7 +8,14 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    ResponsiveContainer
+    ResponsiveContainer,
+    PieChart,
+    Pie,
+    Cell,
+    Legend,
+    BarChart,
+    Bar,
+    LabelList
 } from 'recharts';
 
 const StartupFunding = () => {
@@ -55,6 +62,22 @@ const StartupFunding = () => {
             timeline: '18 months'
         },
         // Add more sample applications as needed
+    ];
+
+    const sectorWiseAllocation = [
+        { sector: 'Technology', amount: 300000 },
+        { sector: 'Healthcare', amount: 200000 },
+        { sector: 'Finance', amount: 150000 },
+        { sector: 'Education', amount: 50000 },
+        { sector: 'Retail', amount: 100000 },
+    ];
+
+    const sectorAllocation = [
+        { sector: 'R&D', amount: 200000 },
+        { sector: 'Marketing', amount: 150000 },
+        { sector: 'Operations', amount: 100000 },
+        { sector: 'HR', amount: 50000 },
+        { sector: 'Sales', amount: 75000 },
     ];
 
     const getStatusBadge = (status) => {
@@ -197,8 +220,8 @@ const StartupFunding = () => {
                                 </div>
                             </div>
 
-                            {selectedFunding.milestones && (
-                                <div className="mb-4">
+                            <div className="row mb-4">
+                                <div className="col-md-6">
                                     <h6>Key Milestones</h6>
                                     <div className="timeline">
                                         {selectedFunding.milestones.map((milestone, index) => (
@@ -213,7 +236,24 @@ const StartupFunding = () => {
                                         ))}
                                     </div>
                                 </div>
-                            )}
+
+                                <div className="col-md-6">
+                                    <h6>Sector Allocation</h6>
+                                    <div style={{ height: '300px' }}>
+                                        <ResponsiveContainer width="100%" height="100%">
+                                            <BarChart data={sectorAllocation}>
+                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <XAxis dataKey="sector" />
+                                                <YAxis />
+                                                <Tooltip />
+                                                <Bar dataKey="amount" fill="#8884d8">
+                                                    <LabelList dataKey="amount" position="top" />
+                                                </Bar>
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </div>
+                                </div>
+                            </div>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={() => setShowDetails(false)}>

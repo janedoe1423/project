@@ -674,7 +674,7 @@ function Startup() {
                             }
                         }}
                     >
-                        The <strong>Startup Gujarat</strong> main page serves as a centralized hub for fostering innovation 
+                        The <strong>Startup Gujarat</strong>  serves as a centralized hub for fostering innovation 
                         and entrepreneurship in Gujarat. It provides <strong>resources</strong>, <strong>funding opportunities</strong>, 
                         and <strong>support</strong> for startups, enabling them to thrive in a dynamic ecosystem. With a focus 
                         on <strong>networking</strong>, <strong>mentorship</strong>, and <strong>government schemes</strong>, 

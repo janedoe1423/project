@@ -1,0 +1,295 @@
+.investor-reports-container {
+    padding: 2rem;
+}
+
+.report-section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f8fafc; /* Light background */
+    border-radius: 8px;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.report-section h2 {
+    color: #1e40af; /* Dark blue */
+    margin-bottom: 1rem;
+}
+
+.report-section p {
+    margin-top: 0.5rem;
+    color: #4b5563; /* Gray */
+}
+
+.portfolio-performance {
+    background: #f8fafc; /* Light background */
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container {
+    margin-bottom: 1.5rem;
+}
+
+.summary {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary h3 {
+    margin-bottom: 1rem;
+}
+
+.summary ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+.investment-trends {
+    background: #f8fafc; /* Light background */
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.charts-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.chart-container {
+    flex: 1;
+    min-width: 300px;
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary {
+    margin-top: 1.5rem;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary h3 {
+    margin-bottom: 1rem;
+}
+
+.summary ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+.funding-analytics {
+    background: #f8fafc; /* Light background */
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filter-container {
+    margin-bottom: 1.5rem;
+}
+
+.filter-container label {
+    margin-right: 1rem;
+}
+
+.filter-container select {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.chart-container {
+    margin-bottom: 1.5rem;
+}
+
+.summary {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary h3 {
+    margin-bottom: 1rem;
+}
+
+.summary ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+.collaboration-outcomes {
+    background: #f8fafc; /* Light background */
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container {
+    margin-bottom: 1.5rem;
+}
+
+.summary {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary h3 {
+    margin-bottom: 1rem;
+}
+
+.summary ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+.startup-growth-reports {
+    background: #f8fafc; /* Light background */
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container {
+    margin-bottom: 1.5rem;
+}
+
+.summary {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary h3 {
+    margin-bottom: 1rem;
+}
+
+.summary ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+.market-trends {
+    background: #f8fafc; /* Light background */
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container {
+    margin-bottom: 1.5rem;
+}
+
+.summary {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary h3 {
+    margin-bottom: 1rem;
+}
+
+.summary ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+.policy-impact-reports {
+    background: #f8fafc; /* Light background */
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container {
+    margin-bottom: 1.5rem;
+}
+
+.summary {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary h3 {
+    margin-bottom: 1rem;
+}
+
+.summary ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+.risk-assessment-reports {
+    background: #f8fafc; /* Light background */
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container {
+    margin-bottom: 1.5rem;
+}
+
+.summary {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary h3 {
+    margin-bottom: 1rem;
+}
+
+.summary ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.customization-container {
+    margin-bottom: 1rem;
+}
+
+.customization-container label {
+    margin-right: 0.5rem;
+}
