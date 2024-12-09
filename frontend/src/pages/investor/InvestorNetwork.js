@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Bar } from 'react-chartjs-2';
 import './InvestorNetwork.css';
-import { FaUsers, FaRocket, FaRegClock, FaChevronDown, FaChevronUp, FaCheckCircle, FaTimesCircle, FaCalendarAlt, FaComments, FaVideo, FaEnvelope } from 'react-icons/fa';
+import { FaUsers, FaRocket, FaRegClock, FaChevronDown, FaChevronUp, FaCheckCircle, FaTimesCircle, FaCalendarAlt, FaComments, FaVideo, FaEnvelope, FaChartLine, FaHandshake, FaLightbulb, FaUserFriends } from 'react-icons/fa';
 
 const collaborations = [
     {
@@ -212,6 +212,16 @@ const InvestorNetwork = () => {
     const [newMessage, setNewMessage] = useState(""); // State for new message input
     const [newFeedback, setNewFeedback] = useState({ rating: 0, review: "" }); // State for new feedback
     const [feedbackList, setFeedbackList] = useState(feedbacks); // State for feedback list
+    const [activeSection, setActiveSection] = useState('collaborators'); // New state for active section
+
+    const menuItems = [
+        { id: 'collaborators', label: 'Active Collaborations', icon: <FaHandshake /> },
+        { id: 'requests', label: 'Collaboration Requests', icon: <FaUsers /> },
+        { id: 'recommendations', label: 'Startup Recommendations', icon: <FaLightbulb /> },
+        { id: 'mentorship', label: 'Mentorship', icon: <FaUserFriends /> },
+        { id: 'communication', label: 'Communication', icon: <FaComments /> },
+        { id: 'events', label: 'Events', icon: <FaCalendarAlt /> }
+    ];
 
     const toggleRequest = (id) => {
         setExpandedRequest(expandedRequest === id ? null : id);
@@ -274,173 +284,108 @@ const InvestorNetwork = () => {
         }
     };
 
-    return (
-        <div className="investor-network-container">
-            <header className="dashboard-header">
-                <h2 className="investor-network-title">Collaborators Dashboard</h2>
-                <div className="dashboard-controls">
-                    <button className="control-button active">Week</button>
-                    <button className="control-button">Month</button>
-                    <button className="control-button">Year</button>
-                    <div className="notification-icon">🔔</div>
-                </div>
-            </header>
-            <p className="investor-network-description">Active collaborations with startups and co-investors.</p>
-            
-            <div className="collaborators-section">
-                <div className="collaborators-list">
-                    {collaborations.map(collab => (
-                        <div key={collab.id} className="collaborator-card">
-                            <img src={collab.logo} alt={`${collab.startupName} logo`} className="collaborator-logo" />
-                            <h3 className="collaborator-name">{collab.startupName}</h3>
-                            <p className="project-title">{collab.projectTitle}</p>
-                            <p className="collaboration-type">
-                                <FaRocket /> {collab.collaborationType}
-                            </p>
-                            <p className={`status ${collab.status.toLowerCase()}`}>
-                                {collab.status === "Active" ? <FaUsers /> : <FaRegClock />} {collab.status}
-                            </p>
-                            <p className="change">{collab.change}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Collaboration Requests Section */}
-            <div className="collaboration-requests-section">
-                <h2 className="requests-title">Collaboration Requests</h2>
-                {collaborationRequests.map(request => (
-                    <div key={request.id} className="request-card">
-                        <div className="request-header" onClick={() => toggleRequest(request.id)}>
-                            <h3 className="requesting-entity">{request.requestingEntity}</h3>
-                            <p className="request-purpose">{request.purpose}</p>
-                            <p className="request-deadline">Deadline: {request.deadline}</p>
-                            {expandedRequest === request.id ? <FaChevronUp /> : <FaChevronDown />}
-                        </div>
-                        {expandedRequest === request.id && (
-                            <div className="request-details">
-                                <button className="action-button accept" onClick={handleAccept}>Accept</button>
-                                <button className="action-button decline" onClick={handleDecline}>Decline</button>
-                            </div>
-                        )}
-                    </div>
-                ))}
-            </div>
-
-            {/* Startup Recommendations Section */}
-            <div className="startup-recommendations-section">
-                <h2 className="recommendations-title">Startup Recommendations</h2>
-                <div className="recommendations-list">
-                    {startupRecommendations.map(startup => (
-                        <div key={startup.id} className="recommendation-card">
-                            <img src={startup.logo} alt={`${startup.name} logo`} className="recommendation-logo" />
-                            <h3 className="recommendation-name">{startup.name}</h3>
-                            <p className="recommendation-sector">{startup.sector}</p>
-                            <p className="recommendation-achievements">{startup.achievements}</p>
-                            <p className="recommendation-reason">{startup.reason}</p>
-                            <div className="button-group">
-                                <button className="explore-button" onClick={() => handleExplore(startup)}>Explore</button>
-                                <button className="contact-button" onClick={() => handleContact(startup)}>Contact Founder</button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Mentorship Involvement Section */}
-            <div className="mentorship-involvement-section">
-                <h2 className="mentorship-title">Mentorship Involvement</h2>
-                <div className="mentorship-calendar">
-                    {mentorshipSessions.map(session => (
-                        <div key={session.id} className={`mentorship-card ${session.status}`} onClick={() => handleSessionClick(session)}>
-                            <h3>{session.topic}</h3>
-                            <p><strong>Date:</strong> {session.date}</p>
-                            <p><strong>Duration:</strong> {session.duration}</p>
-                            <p><strong>Participants:</strong> {session.participants}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Communication Tools Section */}
-            <div className="communication-tools-section">
-                <h2 className="communication-title">Communication Tools</h2>
-                <div className="communication-list">
-                    {communicationTools.map(tool => (
-                        <div key={tool.id} className="communication-card">
-                            <div className="user-info">
-                                <div className="user-initials">{tool.name.split(' ').map(n => n[0]).join('')}</div>
-                                <div className="user-details">
-                                    <h3 className="user-name">{tool.name}</h3>
-                                    <p className="user-role">{tool.role}</p>
+    const renderSection = () => {
+        switch(activeSection) {
+            case 'collaborators':
+                return (
+                    <div className="investor_network-collaborators-section">
+                        <div className="investor_network-collaborators-list">
+                            {collaborations.map(collab => (
+                                <div key={collab.id} className="investor_network-collaborator-card">
+                                    <img src={collab.logo} alt={`${collab.startupName} logo`} className="investor_network-collaborator-logo" />
+                                    <h3 className="investor_network-collaborator-name">{collab.startupName}</h3>
+                                    <p className="investor_network-project-title">{collab.projectTitle}</p>
+                                    <p className="investor_network-collaboration-type">
+                                        <FaRocket /> {collab.collaborationType}
+                                    </p>
+                                    <p className={`investor_network-status ${collab.status.toLowerCase()}`}>
+                                        {collab.status === "Active" ? <FaUsers /> : <FaRegClock />} {collab.status}
+                                    </p>
+                                    <p className="investor_network-change">{collab.change}</p>
                                 </div>
-                            </div>
-                            <div className="user-status">
-                                <span className={`status ${tool.status.toLowerCase().replace(' ', '-')}`}>{tool.status}</span>
-                                <p className="last-activity">Last activity: {tool.lastActivity}</p>
-                            </div>
-                            <div className="user-actions">
-                                <button className="action-button message" onClick={handleMessageClick}>Message</button>
-                                <button className="action-button schedule">{tool.nextMeeting}</button>
-                            </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Feedback Exchange Section */}
-            <div className="feedback-exchange-section">
-                <h2 className="feedback-title">Feedback Exchange</h2>
-                <div className="feedback-form">
-                    <h3>Rate and Review</h3>
-                    <div className="rating-input">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                            <span
-                                key={star}
-                                className={`star ${newFeedback.rating >= star ? 'filled' : ''}`}
-                                onClick={() => setNewFeedback({ ...newFeedback, rating: star })}
-                            >
-                                ★
-                            </span>
+                    </div>
+                );
+            case 'requests':
+                return (
+                    <div className="investor_network-collaboration-requests-section">
+                        <h2 className="investor_network-requests-title">Collaboration Requests</h2>
+                        {collaborationRequests.map(request => (
+                            <div key={request.id} className="investor_network-request-card">
+                                <div className="investor_network-request-header" onClick={() => toggleRequest(request.id)}>
+                                    <h3 className="investor_network-requesting-entity">{request.requestingEntity}</h3>
+                                    <p className="investor_network-request-purpose">{request.purpose}</p>
+                                    <p className="investor_network-request-deadline">Deadline: {request.deadline}</p>
+                                    {expandedRequest === request.id ? <FaChevronUp /> : <FaChevronDown />}
+                                </div>
+                                {expandedRequest === request.id && (
+                                    <div className="investor_network-request-details">
+                                        <button className="investor_network-action-button accept" onClick={handleAccept}>Accept</button>
+                                        <button className="investor_network-action-button decline" onClick={handleDecline}>Decline</button>
+                                    </div>
+                                )}
+                            </div>
                         ))}
                     </div>
-                    <textarea
-                        value={newFeedback.review}
-                        onChange={(e) => setNewFeedback({ ...newFeedback, review: e.target.value })}
-                        placeholder="Write your review..."
-                    />
-                    <button onClick={handleFeedbackSubmit}>Submit Feedback</button>
-                </div>
-                <div className="feedback-history">
-                    <h3>Feedback History</h3>
-                    {feedbackList.map((feedback) => (
-                        <div key={feedback.id} className="feedback-card">
-                            <h4>{feedback.startupName}</h4>
-                            <div className="rating">{'★'.repeat(feedback.rating)}</div>
-                            <p>{feedback.review}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
+                );
+            // ... Add other cases for each section
+        }
+    };
 
-            {/* Event Invitations Section */}
-            <div className="event-invitations-section">
-                <h2 className="event-title">Event Invitations</h2>
-                <div className="event-list">
-                    {events.map((event) => (
-                        <div key={event.id} className="event-card">
-                            <h3>{event.name}</h3>
-                            <p><strong>Date:</strong> {event.date}</p>
-                            <p><strong>Location:</strong> {event.location}</p>
-                            <button className="rsvp-button">RSVP</button>
+    return (
+        <div className="investor_network-container">
+            <header className="investor_network-dashboard-header">
+                <div className="investor_network-header-content">
+                    <div className="investor_network-header-left">
+                        <h1 className="investor_network-title">Investor Network</h1>
+                        <p className="investor_network-subtitle">Welcome back, John Doe</p>
+                    </div>
+                    <div className="investor_network-header-right">
+                        <div className="investor_network-stats">
+                            <div className="investor_network-stat-item">
+                                <FaChartLine />
+                                <div className="investor_network-stat-content">
+                                    <span className="investor_network-stat-value">$2.5M</span>
+                                    <span className="investor_network-stat-label">Total Investment</span>
+                                </div>
+                            </div>
+                            <div className="investor_network-stat-item">
+                                <FaHandshake />
+                                <div className="investor_network-stat-content">
+                                    <span className="investor_network-stat-value">12</span>
+                                    <span className="investor_network-stat-label">Active Collaborations</span>
+                                </div>
+                            </div>
                         </div>
-                    ))}
+                        <div className="investor_network-profile">
+                            <div className="investor_network-notification-icon">🔔</div>
+                            <div className="investor_network-avatar">JD</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+                <nav className="investor_network-menu-bar">
+                    {menuItems.map(item => (
+                        <button
+                            key={item.id}
+                            className={`investor_network-menu-item ${activeSection === item.id ? 'active' : ''}`}
+                            onClick={() => setActiveSection(item.id)}
+                        >
+                            {item.icon}
+                            <span>{item.label}</span>
+                        </button>
+                    ))}
+                </nav>
+            </header>
+
+            <main className="investor_network-main-content">
+                {renderSection()}
+            </main>
 
             {/* Notification Pop-up */}
             {notification.visible && (
-                <div className={`notification ${notification.type}`} style={{ top: notification.position.top, left: notification.position.left }}>
+                <div className={`investor_network-notification ${notification.type}`} style={{ top: notification.position.top, left: notification.position.left }}>
                     {notification.type === 'success' ? <FaCheckCircle /> : <FaTimesCircle />}
                     <span>{notification.message}</span>
                 </div>
@@ -448,9 +393,9 @@ const InvestorNetwork = () => {
 
             {/* Startup Details Modal */}
             {selectedStartup && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close" onClick={handleCloseDetails}>&times;</span>
+                <div className="investor_network-modal">
+                    <div className="investor_network-modal-content">
+                        <span className="investor_network-close" onClick={handleCloseDetails}>&times;</span>
                         <h2>{selectedStartup.name}</h2>
                         <p><strong>Sector:</strong> {selectedStartup.sector}</p>
                         <p><strong>Achievements:</strong> {selectedStartup.achievements}</p>
@@ -461,9 +406,9 @@ const InvestorNetwork = () => {
 
             {/* Contact Details Modal */}
             {contactDetails && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close" onClick={handleCloseDetails}>&times;</span>
+                <div className="investor_network-modal">
+                    <div className="investor_network-modal-content">
+                        <span className="investor_network-close" onClick={handleCloseDetails}>&times;</span>
                         <h2>Contact Information</h2>
                         <p><strong>Email:</strong> {contactDetails.email}</p>
                         <p><strong>Phone:</strong> {contactDetails.phone}</p>
@@ -474,14 +419,14 @@ const InvestorNetwork = () => {
 
             {/* Insights Modal for Mentorship Sessions */}
             {selectedSession && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close" onClick={() => setSelectedSession(null)}>&times;</span>
+                <div className="investor_network-modal">
+                    <div className="investor_network-modal-content">
+                        <span className="investor_network-close" onClick={() => setSelectedSession(null)}>&times;</span>
                         <h2>Insights for {selectedSession.topic}</h2>
                         <p><strong>Date:</strong> {selectedSession.date}</p>
                         <p><strong>Duration:</strong> {selectedSession.duration}</p>
                         <p><strong>Participants:</strong> {selectedSession.participants}</p>
-                        <div className="insights-graph">
+                        <div className="investor_network-insights-graph">
                             <Bar
                                 data={{
                                     labels: insightsData[selectedSession.id].labels,
@@ -510,23 +455,23 @@ const InvestorNetwork = () => {
 
             {/* Chat Modal */}
             {chatVisible && (
-                <div className="chat-modal">
-                    <div className="chat-header">
+                <div className="investor_network-chat-modal">
+                    <div className="investor_network-chat-header">
                         <h3>Chat with John Doe</h3>
                         <div>
-                            <button className="cancel-chat" onClick={() => setChatVisible(false)}>Cancel</button>
-                            <button className="close-chat" onClick={() => setChatVisible(false)}>×</button>
+                            <button className="investor_network-cancel-chat" onClick={() => setChatVisible(false)}>Cancel</button>
+                            <button className="investor_network-close-chat" onClick={() => setChatVisible(false)}>×</button>
                         </div>
                     </div>
-                    <div className="chat-messages">
+                    <div className="investor_network-chat-messages">
                         {messages.map((msg, index) => (
-                            <div key={index} className={`chat-message ${msg.sender === "You" ? "sent" : "received"}`}>
+                            <div key={index} className={`investor_network-chat-message ${msg.sender === "You" ? "sent" : "received"}`}>
                                 <span>{msg.sender}: {msg.text}</span>
-                                <span className="message-time">{msg.time}</span>
+                                <span className="investor_network-message-time">{msg.time}</span>
                             </div>
                         ))}
                     </div>
-                    <div className="chat-input">
+                    <div className="investor_network-chat-input">
                         <input
                             type="text"
                             value={newMessage}

@@ -288,6 +288,7 @@ const useStartupId = () => {
 
 // Styled Components
 const Container = styled.div`
+  className: "startup_reports_container";
   padding: 32px;
   max-width: 1400px;
   margin: 0 auto;
@@ -296,6 +297,7 @@ const Container = styled.div`
 `;
 
 const PageHeader = styled.div`
+  className: "startup_reports_page-header";
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -305,7 +307,7 @@ const PageHeader = styled.div`
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
-  .header-content {
+  .startup_reports_header-content {
     h1 {
       font-size: 28px;
       color: #1a365d;
@@ -321,7 +323,7 @@ const PageHeader = styled.div`
     }
   }
 
-  .header-actions {
+  .startup_reports_header-actions {
     display: flex;
     gap: 16px;
   }
@@ -2994,11 +2996,11 @@ const StartupReports = () => {
   return (
     <Container>
       <PageHeader>
-        <div className="header-content">
+        <div className="startup_reports_header-content">
           <h1>Startup Reports</h1>
           <p>Generate and analyze comprehensive startup reports</p>
         </div>
-        <div className="header-actions">
+        <div className="startup_reports_header-actions">
           <ActionButton onClick={() => navigate('/reports/customize')}>
             <FaCog /> Customize
           </ActionButton>

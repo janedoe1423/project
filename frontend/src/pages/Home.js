@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css';
 import { FaRocket, FaLightbulb, FaCertificate, FaHandshake, FaChartLine, FaShieldAlt, FaUsers, FaGlobe, FaAward, FaComments, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 function Home() {
+    const [showMap, setShowMap] = useState(false);
+
     return (
         <div className="home-container">
             {/* Hero Section */}
@@ -92,7 +94,7 @@ function Home() {
                                 <FaRocket className="service-icon" />
                                 <h3>Startup Support</h3>
                                 <p>Comprehensive support for startup registration, compliance, and growth</p>
-                                <button className="btn btn-outline-primary">Learn More</button>
+                                <button className="btn btn-outline-primary" onClick={() => setShowMap(true)}>Learn More</button>
                             </div>
                         </div>
                         <div className="col-md-4 mb-4">
@@ -100,7 +102,7 @@ function Home() {
                                 <FaCertificate className="service-icon" />
                                 <h3>IPR Management</h3>
                                 <p>End-to-end intellectual property rights management and protection</p>
-                                <button className="btn btn-outline-primary">Learn More</button>
+                                <button className="btn btn-outline-primary" onClick={() => setShowMap(true)}>Learn More</button>
                             </div>
                         </div>
                         <div className="col-md-4 mb-4">
@@ -114,6 +116,13 @@ function Home() {
                     </div>
                 </div>
             </section>
+
+            {/* Conditional Rendering of Gujarat Map */}
+            {showMap && (
+                <div className="map-container">
+                    <button className="btn btn-secondary" onClick={() => setShowMap(false)}>Close Map</button>
+                </div>
+            )}
 
             {/* Features Grid */}
             <section className="features-section py-5 bg-light">

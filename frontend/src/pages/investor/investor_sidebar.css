@@ -6,12 +6,12 @@
     --shadow-dark: rgba(163, 177, 198, 0.6);
 }
 
-.sidebar-wrapper {
+.investor_sidebar-wrapper {
     min-height: 100vh;
     background: var(--light-bg);
 }
 
-.sidebar-container {
+.investor_sidebar-container {
     width: 220px;
     background: linear-gradient(145deg, #ffffff, var(--light-bg));
     padding: 1.5rem 1rem;
@@ -23,12 +23,12 @@
         -8px -8px 16px var(--shadow-light);
 }
 
-.sidebar-header {
+.investor_sidebar-header {
     margin-bottom: 2rem;
     padding: 0 0.5rem;
 }
 
-.sidebar-header h4 {
+.investor_sidebar-header h4 {
     margin: 0;
     font-weight: 700;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -36,11 +36,11 @@
     -webkit-text-fill-color: transparent;
 }
 
-.sidebar-nav {
+.investor_sidebar-nav {
     flex: 1;
 }
 
-.sidebar-link {
+.investor_sidebar-link {
     display: flex;
     align-items: center;
     padding: 0.8rem 1rem;
@@ -49,9 +49,11 @@
     margin-bottom: 0.5rem;
     transition: all 0.3s ease;
     font-weight: 500;
-}
+    position: relative;
+    overflow: hidden;
+}   
 
-.sidebar-link:hover {
+.investor_sidebar-link:hover {
     color: var(--primary-color);
     background: linear-gradient(145deg, #ffffff, var(--light-bg));
     box-shadow: 
@@ -59,28 +61,76 @@
         -4px -4px 8px var(--shadow-light);
 }
 
-.sidebar-link.active {
-    color: #fff;
+.investor_sidebar-link:active {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    transform: scale(0.98);
+}
+
+.investor_sidebar-link.active {
+    color: white;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     box-shadow: 
-        inset 3px 3px 6px rgba(0, 0, 0, 0.1),
+        inset 3px 3px 6px rgba(0, 0, 0, 0.2),
         inset -3px -3px 6px rgba(255, 255, 255, 0.1);
 }
 
-.icon-container {
+.investor_sidebar-link.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.investor_sidebar-link.active:hover::before {
+    opacity: 1;
+}
+
+.investor_sidebar-icon-container {
     width: 24px;
     height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 0.8rem;
+    position: relative;
+    z-index: 1;
 }
 
-.sidebar-link svg {
+.investor_sidebar-link svg {
     font-size: 1.1rem;
+    transition: all 0.3s ease;
 }
 
-.sidebar-footer {
+.investor_sidebar-link:active svg,
+.investor_sidebar-link.active svg {
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Add animation for click effect */
+@keyframes clickEffect {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.investor_sidebar-link:active {
+    animation: clickEffect 0.3s ease;
+}
+
+.investor_sidebar-footer {
     padding: 1rem 0.5rem;
     text-align: center;
     color: #666;
@@ -88,17 +138,17 @@
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-    .sidebar-container {
+    .investor_sidebar-container {
         width: 180px;
         padding: 1rem 0.8rem;
     }
 
-    .sidebar-link {
+    .investor_sidebar-link {
         padding: 0.6rem 0.8rem;
         font-size: 0.9rem;
     }
 
-    .icon-container {
+    .investor_sidebar-icon-container {
         width: 20px;
         height: 20px;
         margin-right: 0.6rem;
