@@ -1,0 +1,241 @@
+.ipr-overview {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+}
+
+.ipr-overview-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+}
+
+.ipr-overview-header h1 {
+    font-size: 2.5rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.ipr-overview-header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
+    border-radius: 2px;
+}
+
+.ipr-overview-header p {
+    font-size: 1.2rem;
+    color: #64748b;
+}
+
+.ipr-overview-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.ipr-overview-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.ipr-overview-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--section-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.ipr-overview-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.ipr-overview-card:hover::before {
+    transform: scaleX(1);
+}
+
+.ipr-overview-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.ipr-overview-card:hover .ipr-overview-icon {
+    transform: scale(1.1);
+}
+
+.ipr-overview-card h2 {
+    font-size: 1.75rem;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+}
+
+.ipr-overview-card p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* Types Section */
+.ipr-overview-types {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.ipr-overview-type {
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 0.5rem;
+}
+
+.ipr-overview-type h4 {
+    color: var(--section-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Benefits List */
+.ipr-overview-benefits {
+    list-style: none;
+    padding: 0;
+}
+
+.ipr-overview-benefits li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.ipr-overview-benefits li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--section-color);
+}
+
+/* Comparison Table */
+.ipr-overview-comparison {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.comparison-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0.75rem;
+    background: #f8fafc;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+/* Myths Section */
+.myth-item {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.myth {
+    color: #ef4444;
+    margin-bottom: 0.5rem;
+}
+
+.reality {
+    color: #059669;
+}
+
+/* Success Stories */
+.story-item {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.story-item h4 {
+    color: var(--section-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Timeline */
+.ipr-overview-timeline {
+    position: relative;
+}
+
+.timeline-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.timeline-item .phase {
+    color: var(--section-color);
+    font-weight: 500;
+}
+
+.timeline-item .duration {
+    color: #64748b;
+}
+
+@media (max-width: 1400px) {
+    .ipr-overview-grid {
+        grid-template-columns: 1fr;
+        max-width: 800px;
+    }
+}
+
+@media (max-width: 640px) {
+    .ipr-overview-card {
+        padding: 1.5rem;
+    }
+
+    .ipr-overview-types {
+        grid-template-columns: 1fr;
+    }
+
+    .ipr-overview-header h1 {
+        font-size: 2rem;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ipr-overview-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+    animation-delay: calc(var(--animation-order) * 0.1s);
+}

@@ -56,104 +56,124 @@ const StartupDashboard = () => {
         <Container maxWidth="xl" sx={{ py: 4 }}>
             <Typography 
                 variant="h4" 
-                className="dashboard-title"
-                sx={{ mb: 4, color: 'var(--text-primary)', fontWeight: 600 }}
+                className="startup-dashboard-title"
+                sx={{ 
+                    mb: 4, 
+                    color: 'var(--text-primary)', 
+                    fontWeight: 700,
+                    letterSpacing: '0.5px',
+                    textAlign: 'center',
+                    fontSize: { xs: '1.8rem', md: '2.2rem' }
+                }}
             >
                 Startup Metrics Dashboard
             </Typography>
             
-            <Grid container spacing={3}>
+            <Grid container spacing={4}>
                 {metricCards.map((card, index) => (
                     <Grid item xs={12} sm={6} md={3} key={index}>
                         <Card 
-                            className="metric-card"
+                            className="startup-dashboard-metric-card"
                             sx={{ 
                                 background: card.gradient,
-                                minHeight: 200,
+                                minHeight: 220,
                                 position: 'relative',
-                                overflow: 'hidden'
+                                overflow: 'hidden',
+                                borderRadius: '16px'
                             }}
                         >
                             <CardContent>
-                                {/* Header */}
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+                                {/* Header with enhanced styling */}
+                                <Box sx={{ 
+                                    display: 'flex', 
+                                    justifyContent: 'space-between', 
+                                    alignItems: 'center', 
+                                    mb: 3 
+                                }}>
                                     <Typography 
                                         variant="h6" 
                                         sx={{ 
                                             color: '#fff',
-                                            fontSize: '1.1rem',
-                                            fontWeight: 500
+                                            fontSize: '1.2rem',
+                                            fontWeight: 600,
+                                            textShadow: '0 2px 4px rgba(0,0,0,0.1)'
                                         }}
                                     >
                                         {card.title}
                                     </Typography>
                                     <Box 
                                         sx={{ 
-                                            backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                                            borderRadius: '50%',
-                                            p: 1,
-                                            display: 'flex'
+                                            backgroundColor: 'rgba(255, 255, 255, 0.25)',
+                                            borderRadius: '12px',
+                                            p: 1.2,
+                                            display: 'flex',
+                                            backdropFilter: 'blur(4px)'
                                         }}
                                     >
                                         {React.cloneElement(card.icon, { 
-                                            sx: { color: '#fff', fontSize: 28 } 
+                                            sx: { color: '#fff', fontSize: 32 } 
                                         })}
                                     </Box>
                                 </Box>
 
-                                {/* Value */}
+                                {/* Value with enhanced styling */}
                                 <Typography 
                                     variant="h4" 
                                     sx={{ 
                                         color: '#fff',
-                                        fontWeight: 'bold',
-                                        mb: 1
+                                        fontWeight: 800,
+                                        mb: 1,
+                                        fontSize: '2.2rem',
+                                        textShadow: '0 2px 4px rgba(0,0,0,0.1)'
                                     }}
                                 >
                                     {card.value}
                                 </Typography>
 
-                                {/* Description */}
-                                <Typography 
-                                    variant="body2" 
-                                    sx={{ 
-                                        color: 'rgba(255, 255, 255, 0.8)',
-                                        mb: 2,
-                                        fontSize: '0.9rem'
-                                    }}
-                                >
-                                    {card.description}
-                                </Typography>
-
-                                {/* Trend */}
-                                <Box 
-                                    sx={{ 
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: 1,
-                                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                                        p: 1,
-                                        borderRadius: 1,
-                                        width: 'fit-content'
-                                    }}
-                                >
+                                {/* Description in glass container */}
+                                <Box className="startup-dashboard-metric-card-content">
                                     <Typography 
                                         variant="body2" 
                                         sx={{ 
-                                            color: '#fff',
+                                            color: 'rgba(255, 255, 255, 0.9)',
+                                            mb: 2,
+                                            fontSize: '0.95rem',
                                             fontWeight: 500
                                         }}
                                     >
-                                        {card.trend}
+                                        {card.description}
                                     </Typography>
-                                    <Typography 
-                                        variant="body2" 
+
+                                    {/* Trend indicator */}
+                                    <Box 
                                         sx={{ 
-                                            color: 'rgba(255, 255, 255, 0.8)'
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: 1,
+                                            backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                                            p: 1,
+                                            borderRadius: '8px',
+                                            width: 'fit-content'
                                         }}
                                     >
-                                        vs last month
-                                    </Typography>
+                                        <Typography 
+                                            variant="body2" 
+                                            sx={{ 
+                                                color: '#fff',
+                                                fontWeight: 600
+                                            }}
+                                        >
+                                            {card.trend}
+                                        </Typography>
+                                        <Typography 
+                                            variant="body2" 
+                                            sx={{ 
+                                                color: 'rgba(255, 255, 255, 0.9)'
+                                            }}
+                                        >
+                                            vs last month
+                                        </Typography>
+                                    </Box>
                                 </Box>
                             </CardContent>
                         </Card>

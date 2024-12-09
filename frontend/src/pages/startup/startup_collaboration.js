@@ -38,7 +38,7 @@ const styles = {
         minHeight: "100vh",
         padding: "2rem 0",
     },
-    gradientCard: {
+    startup_collaboration_gradientCard: {
         background: "linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%)",
         borderRadius: "16px",
         boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
@@ -48,21 +48,21 @@ const styles = {
             boxShadow: "0 8px 25px rgba(0, 0, 0, 0.12)",
         },
     },
-    statsCard: {
+    startup_collaboration_statsCard: {
         padding: "1.5rem",
         background: "linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)",
         color: "white",
         borderRadius: "16px",
         boxShadow: "0 4px 20px rgba(99, 102, 241, 0.2)",
     },
-    actionButton: {
+    startup_collaboration_actionButton: {
         borderRadius: "12px",
         textTransform: "none",
         padding: "10px 20px",
         fontWeight: 600,
         boxShadow: "0 2px 10px rgba(0, 0, 0, 0.08)",
     },
-    searchField: {
+    startup_collaboration_searchField: {
         "& .MuiOutlinedInput-root": {
             borderRadius: "12px",
             backgroundColor: "white",
@@ -182,7 +182,7 @@ const StartupCollaboration = () => {
                                 fullWidth
                                 value={collaboratorType}
                                 onChange={(e) => setCollaboratorType(e.target.value)}
-                                sx={styles.searchField}
+                                sx={styles.startup_collaboration_searchField}
                             >
                                 <MenuItem value="all">All Types</MenuItem>
                                 <MenuItem value="mentor">Mentors</MenuItem>
@@ -199,7 +199,7 @@ const StartupCollaboration = () => {
                                 InputProps={{
                                     startAdornment: <SearchIcon sx={{ color: 'action.active', mr: 1 }} />,
                                 }}
-                                sx={styles.searchField}
+                                sx={styles.startup_collaboration_searchField}
                             />
                         </Grid>
                     </Grid>
@@ -436,7 +436,7 @@ const StartupCollaboration = () => {
 
     // Render collaboration card based on type
     const renderCollaborationCard = (collab) => (
-        <Card key={collab.id} sx={{ mb: 2, p: 3, ...styles.gradientCard }}>
+        <Card key={collab.id} sx={{ mb: 2, p: 3, ...styles.startup_collaboration_gradientCard }}>
             <Grid container spacing={2} alignItems="center">
                 <Grid item>
                     <Avatar 
@@ -479,7 +479,7 @@ const StartupCollaboration = () => {
                                 setCurrentChat(collab);
                                 setChatDialogOpen(true);
                             }}
-                            sx={styles.actionButton}
+                            sx={styles.startup_collaboration_actionButton}
                         >
                             Message
                         </Button>
@@ -487,7 +487,7 @@ const StartupCollaboration = () => {
                             startIcon={<CalendarTodayIcon />}
                             variant="outlined"
                             size="small"
-                            sx={styles.actionButton}
+                            sx={styles.startup_collaboration_actionButton}
                         >
                             {collab.nextMeeting}
                         </Button>
@@ -535,7 +535,7 @@ const StartupCollaboration = () => {
                         { title: "Pending Requests", count: "8", trend: "3 new" },
                     ].map((stat, index) => (
                         <Grid item xs={12} md={4} key={index}>
-                            <Card sx={styles.statsCard}>
+                            <Card sx={styles.startup_collaboration_statsCard}>
                                 <Typography variant="h6" sx={{ opacity: 0.9 }}>
                                     {stat.title}
                                 </Typography>
@@ -551,7 +551,7 @@ const StartupCollaboration = () => {
                 </Grid>
 
                 {/* Main Content */}
-                <Card sx={{ ...styles.gradientCard, p: 0 }}>
+                <Card sx={{ ...styles.startup_collaboration_gradientCard, p: 0 }}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider', px: 3 }}>
                         <Tabs 
                             value={activeTab} 
@@ -598,7 +598,7 @@ const StartupCollaboration = () => {
                                 startIcon={action.icon}
                                 onClick={action.onClick}
                                 sx={{
-                                    ...styles.actionButton,
+                                    ...styles.startup_collaboration_actionButton,
                                     color: action.color,
                                     backgroundColor: 'white',
                                     border: `1px solid ${action.color}20`,

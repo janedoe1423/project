@@ -1,0 +1,214 @@
+.ipr-insights {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+}
+
+.ipr-insights-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+}
+
+.ipr-insights-header h1 {
+    font-size: 2.5rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.ipr-insights-header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
+    border-radius: 2px;
+}
+
+.ipr-insights-header p {
+    font-size: 1.2rem;
+    color: #64748b;
+}
+
+.ipr-insights-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.ipr-insights-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    width: 500px;
+}
+
+.ipr-insights-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--insight-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.ipr-insights-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.ipr-insights-card:hover::before {
+    transform: scaleX(1);
+}
+
+.ipr-insights-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+}
+
+.ipr-insights-card:hover .ipr-insights-icon {
+    transform: scale(1.1);
+}
+
+.ipr-insights-card h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #1e293b;
+}
+
+.ipr-insights-card p {
+    font-size: 1.1rem;
+    color: #64748b;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.ipr-insights-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 0.75rem;
+}
+
+.ipr-insights-metric-item {
+    text-align: center;
+    padding: 0.5rem;
+    transition: transform 0.2s ease;
+}
+
+.ipr-insights-metric-item:hover {
+    transform: translateY(-2px);
+}
+
+.ipr-insights-metric-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.ipr-insights-metric-label {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.ipr-insights-metric-trend {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 1rem;
+    background: #f1f5f9;
+    color: #059669;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.ipr-insights-button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ipr-insights-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 640px) {
+    .ipr-insights-card {
+        padding: 1.5rem;
+    }
+
+    .ipr-insights-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .ipr-insights-card p {
+        font-size: 1rem;
+    }
+}
+
+@keyframes ipr-insights-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ipr-insights-card {
+    animation: ipr-insights-fadeInUp 0.5s ease-out forwards;
+    animation-delay: calc(var(--animation-order) * 0.1s);
+}
+
+.ipr-insights-metric-item {
+    transition: all 0.3s ease;
+}
+
+.ipr-insights-metric-value, 
+.ipr-insights-metric-label, 
+.ipr-insights-metric-trend {
+    transition: all 0.2s ease;
+}

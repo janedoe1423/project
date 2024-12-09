@@ -1,263 +1,280 @@
-// frontend/src/pages/mentor/mentor_dashboard.js
-import React from 'react';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { Card, Row, Col, Badge } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Row, Col } from 'react-bootstrap';
 import { 
-    FaUsers, FaCalendarAlt, FaStar, 
-    FaLightbulb, FaChartLine, FaBullseye,
-    FaBell, FaHandshake, FaHistory, FaBook 
+    FaUsers, FaChartLine, FaTrophy, FaBell,
+    FaCalendarAlt, FaLightbulb, FaRocket, 
+    FaBookReader, FaBrain, FaStar, FaGraduationCap,
+    FaChalkboardTeacher, FaClock, FaCheckCircle,
+    FaUserGraduate, FaAward, FaCertificate, FaComments, FaTimes
 } from 'react-icons/fa';
 import './mentor_dashboard.css';
 
-// Styled Components
-const MentorDashboardContainer = styled.div`
-    padding: 2rem;
-    min-height: 100vh;
-`;
-
-const MentorDashboardCard = styled(motion.div)`
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    }
-`;
-
-const MentorSectionTitle = styled.h3`
-    color: white;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-`;
-
 const MentorDashboard = () => {
-    const cardVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0 }
-    };
+    const [selectedTimeframe, setSelectedTimeframe] = useState('week');
+    const [showAllNotifications, setShowAllNotifications] = useState(false);
+    const [showNotificationDropdown, setShowNotificationDropdown] = useState(false);
+    const [showFullNotifications, setShowFullNotifications] = useState(false);
 
-    // Sample data
-    const activeMentorships = [
-        { id: 1, name: "TechStart Inc.", progress: 75 },
-        { id: 2, name: "InnovateLab", progress: 45 },
-        { id: 3, name: "DataVision AI", progress: 60 }
+    const mentorStats = [
+        { icon: <FaUsers />, value: '45', label: 'Active Mentees', trend: '+12%' },
+        { icon: <FaStar />, value: '4.9', label: 'Average Rating', trend: '+0.3' },
+        { icon: <FaChalkboardTeacher />, value: '128', label: 'Sessions Completed', trend: '+15%' },
+        { icon: <FaClock />, value: '256', label: 'Hours Mentored', trend: '+8%' }
     ];
 
     const upcomingSessions = [
-        { id: 1, title: "Product Strategy Review", date: "2024-03-15", time: "10:00 AM" },
-        { id: 2, title: "Technical Architecture Discussion", date: "2024-03-16", time: "2:00 PM" }
+        { id: 1, mentee: 'John Doe', topic: 'Machine Learning Basics', time: '2:00 PM', date: '2024-03-20' },
+        { id: 2, mentee: 'Jane Smith', topic: 'Data Structures', time: '4:30 PM', date: '2024-03-21' },
+        { id: 3, mentee: 'Mike Johnson', topic: 'Web Development', time: '1:00 PM', date: '2024-03-22' }
     ];
 
-    const mentorshipFeedback = [
-        { id: 1, mentee: "John Doe", rating: 4.5, comment: "Great insights and support!" },
-        { id: 2, mentee: "Jane Smith", rating: 4.8, comment: "Very helpful and knowledgeable." }
+    const recentAchievements = [
+        { id: 1, title: 'Top Mentor', description: 'Ranked #1 in Machine Learning category', icon: <FaTrophy /> },
+        { id: 2, title: '100 Sessions', description: 'Completed 100 successful sessions', icon: <FaAward /> },
+        { id: 3, title: 'Perfect Rating', description: 'Maintained 5-star rating for 3 months', icon: <FaStar /> }
     ];
 
-    const engagementOpportunities = [
-        { id: 1, opportunity: "AI Startup Mentorship", expertise: "Artificial Intelligence" },
-        { id: 2, opportunity: "Blockchain Workshop", expertise: "Blockchain Technology" }
+    const notifications = [
+        { id: 1, message: 'New session request from John', time: '2 hours ago', isNew: true },
+        { id: 2, message: 'Review reminder for last session', time: '5 hours ago', isNew: true },
+        { id: 10, message: 'Review reminder for last session', time: '5 hours ago', isNew: true },
+        { id: 3, message: 'Achievement unlocked: 50 sessions', time: '1 day ago', isNew: false },
+        { id: 4, message: 'New resource recommendation', time: '2 days ago', isNew: false },
+        { id: 6, message: 'New resource recommendation', time: '2 days ago', isNew: false },
+        { id: 5, message: 'New resource recommendation', time: '2 days ago', isNew: false }
     ];
+
+    const trendingTopics = [
+        { topic: 'Machine Learning', sessions: 45, growth: '+25%' },
+        { topic: 'Web Development', sessions: 38, growth: '+18%' },
+        { topic: 'Data Science', sessions: 32, growth: '+20%' },
+        { topic: 'Mobile Development', sessions: 28, growth: '+15%' }
+    ];
+
+    const menteeProgress = [
+        { mentee: 'John Doe', progress: 75, topics: ['ML', 'AI'], status: 'On Track' },
+        { mentee: 'Jane Smith', progress: 60, topics: ['Web Dev'], status: 'Needs Attention' },
+        { mentee: 'Mike Johnson', progress: 90, topics: ['Data Science'], status: 'Excellent' }
+    ];
+
+    const handleNotificationClick = () => {
+        setShowNotificationDropdown(!showNotificationDropdown);
+    };
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (!event.target.closest('.mentor-dashboard-notification-dropdown-container')) {
+                setShowNotificationDropdown(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     return (
-        <MentorDashboardContainer>
-            <h1 className="mentor-dashboard-title mb-4">Mentor Dashboard</h1>
-            
+        <div className="mentor-dashboard">
+            {/* Header Section */}
+            <div className="mentor-dashboard-header">
+                <h1><FaBrain /> Mentor Dashboard</h1>
+                <div className="mentor-dashboard-controls">
+                    <div className="mentor-dashboard-timeframe">
+                        {['week', 'month', 'year'].map((timeframe) => (
+                            <button
+                                key={timeframe}
+                                className={`mentor-dashboard-timeframe-button ${selectedTimeframe === timeframe ? 'active' : ''}`}
+                                onClick={() => setSelectedTimeframe(timeframe)}
+                            >
+                                {timeframe.charAt(0).toUpperCase() + timeframe.slice(1)}
+                            </button>
+                        ))}
+                    </div>
+                    <div className="mentor-dashboard-notification-dropdown-container">
+                        <button 
+                            className="mentor-dashboard-notification-button"
+                            onClick={handleNotificationClick}
+                        >
+                            <FaBell />
+                            {notifications.some(n => n.isNew) && (
+                                <span className="mentor-dashboard-notification-badge"></span>
+                            )}
+                        </button>
+                        {showNotificationDropdown && (
+                            <div className="mentor-dashboard-notification-dropdown">
+                                <div className="mentor-dashboard-notification-header">
+                                    <h3>Notifications</h3>
+                                    <small>{notifications.filter(n => n.isNew).length} new</small>
+                                </div>
+                                <div className="mentor-dashboard-notification-list-dropdown">
+                                    {notifications.slice(0, 4).map((notification, index) => (
+                                        <div key={index} className="mentor-dashboard-notification-item-dropdown">
+                                            <span className={`mentor-dashboard-notification-dot ${notification.isNew ? 'new' : ''}`}></span>
+                                            <div className="mentor-dashboard-notification-content">
+                                                <p>{notification.message}</p>
+                                                <small>{notification.time}</small>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <button 
+                                    className="mentor-dashboard-view-all"
+                                    onClick={() => {
+                                        setShowNotificationDropdown(false);
+                                        setShowFullNotifications(true);
+                                    }}
+                                >
+                                    View All Notifications
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            {/* Stats Section */}
+            <Row className="mentor-dashboard-stats">
+                {mentorStats.map((stat, index) => (
+                    <Col lg={3} md={6} key={index}>
+                        <div className="mentor-dashboard-stat-card">
+                            <div className="mentor-dashboard-stat-icon">{stat.icon}</div>
+                            <div className="mentor-dashboard-stat-value">{stat.value}</div>
+                            <div className="mentor-dashboard-stat-label">{stat.label}</div>
+                            <div className="mentor-dashboard-stat-trend">{stat.trend}</div>
+                        </div>
+                    </Col>
+                ))}
+            </Row>
+
             <Row>
-                {/* Active Mentorships */}
-                <Col lg={6}>
-                    <MentorDashboardCard
-                        as={motion.div}
-                        variants={cardVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ delay: 0.1 }}
-                    >
-                        <MentorSectionTitle>
-                            <FaUsers /> Active Mentorships
-                        </MentorSectionTitle>
-                        {activeMentorships.map(mentorship => (
-                            <div key={`mentor-mentorship-${mentorship.id}`} className="mb-3">
-                                <h5>{mentorship.name}</h5>
-                                <div className="mentor-progress">
+                <Col lg={8}>
+                    {/* Engagement Chart */}
+                    <div className="mentor-dashboard-card">
+                        <h2><FaChartLine /> Engagement Metrics</h2>
+                        <div className="mentor-dashboard-chart-container">
+                            <div className="mentor-dashboard-chart-bars">
+                                {[60, 80, 40, 90, 70, 85, 55].map((height, index) => (
                                     <div 
-                                        className="mentor-progress-bar" 
-                                        role="progressbar" 
-                                        style={{ width: `${mentorship.progress}%` }}
+                                        key={index}
+                                        className="mentor-dashboard-chart-bar"
+                                        style={{ height: `${height}%` }}
                                     >
-                                        {mentorship.progress}%
+                                        <span className="mentor-dashboard-chart-value">{height}%</span>
                                     </div>
-                                </div>
+                                ))}
                             </div>
-                        ))}
-                    </MentorDashboardCard>
-                </Col>
-
-                {/* Schedule Overview */}
-                <Col lg={6}>
-                    <MentorDashboardCard
-                        as={motion.div}
-                        variants={cardVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ delay: 0.2 }}
-                    >
-                        <MentorSectionTitle>
-                            <FaCalendarAlt /> Upcoming Sessions
-                        </MentorSectionTitle>
-                        {upcomingSessions.map(session => (
-                            <Card key={`mentor-session-${session.id}`} className="mb-3 bg-transparent text-white">
-                                <Card.Body>
-                                    <Card.Title>{session.title}</Card.Title>
-                                    <Card.Text>
-                                        {session.date} at {session.time}
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        ))}
-                    </MentorDashboardCard>
-                </Col>
-
-                {/* Mentorship Feedback */}
-                <Col lg={6}>
-                    <MentorDashboardCard
-                        as={motion.div}
-                        variants={cardVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ delay: 0.3 }}
-                    >
-                        <MentorSectionTitle>
-                            <FaStar /> Mentorship Feedback
-                        </MentorSectionTitle>
-                        {mentorshipFeedback.map(feedback => (
-                            <div key={`mentor-feedback-${feedback.id}`} className="mb-3">
-                                <h5>{feedback.mentee}</h5>
-                                <p>Rating: {feedback.rating} <FaStar /></p>
-                                <p>"{feedback.comment}"</p>
-                            </div>
-                        ))}
-                    </MentorDashboardCard>
-                </Col>
-
-                {/* Opportunities for Engagement */}
-                <Col lg={6}>
-                    <MentorDashboardCard
-                        as={motion.div}
-                        variants={cardVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ delay: 0.4 }}
-                    >
-                        <MentorSectionTitle>
-                            <FaLightbulb /> Opportunities for Engagement
-                        </MentorSectionTitle>
-                        {engagementOpportunities.map(opportunity => (
-                            <div key={`mentor-opportunity-${opportunity.id}`} className="mb-3">
-                                <h5>{opportunity.opportunity}</h5>
-                                <p>Expertise: {opportunity.expertise}</p>
-                            </div>
-                        ))}
-                    </MentorDashboardCard>
-                </Col>
-
-                {/* Impact Overview */}
-                <Col lg={12}>
-                    <MentorDashboardCard
-                        as={motion.div}
-                        variants={cardVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ delay: 0.5 }}
-                    >
-                        <MentorSectionTitle>
-                            <FaChartLine /> Impact Overview
-                        </MentorSectionTitle>
-                        <Row>
-                            <Col md={3}>
-                                <div className="text-center">
-                                    <h2>15</h2>
-                                    <p>Active Mentees</p>
-                                </div>
-                            </Col>
-                            <Col md={3}>
-                                <div className="text-center">
-                                    <h2>4.8</h2>
-                                    <p>Average Rating</p>
-                                </div>
-                            </Col>
-                            <Col md={3}>
-                                <div className="text-center">
-                                    <h2>45</h2>
-                                    <p>Sessions Completed</p>
-                                </div>
-                            </Col>
-                            <Col md={3}>
-                                <div className="text-center">
-                                    <h2>89%</h2>
-                                    <p>Success Rate</p>
-                                </div>
-                            </Col>
-                        </Row>
-                    </MentorDashboardCard>
-                </Col>
-
-                {/* Notifications */}
-                <Col lg={6}>
-                    <MentorDashboardCard
-                        as={motion.div}
-                        variants={cardVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ delay: 0.6 }}
-                    >
-                        <MentorSectionTitle>
-                            <FaBell /> Recent Notifications
-                        </MentorSectionTitle>
-                        <div className="mentor-notifications">
-                            <div className="notification-item">
-                                <Badge bg="primary">New</Badge> Feedback received from TechStart Inc.
-                            </div>
-                            <div className="notification-item">
-                                <Badge bg="warning">Reminder</Badge> Upcoming session with InnovateLab
-                            </div>
-                            <div className="notification-item">
-                                <Badge bg="success">Update</Badge> DataVision AI completed milestone
+                            <div className="mentor-dashboard-chart-labels">
+                                {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, index) => (
+                                    <span key={index} className="mentor-dashboard-chart-label">{day}</span>
+                                ))}
                             </div>
                         </div>
-                    </MentorDashboardCard>
+                    </div>
+
+                    {/* Mentee Progress */}
+                    <div className="mentor-dashboard-card">
+                        <h2><FaUserGraduate /> Mentee Progress</h2>
+                        <div className="mentor-dashboard-progress-grid">
+                            {menteeProgress.map((mentee, index) => (
+                                <div key={index} className="mentor-dashboard-progress-card">
+                                    <h4>{mentee.mentee}</h4>
+                                    <div className="mentor-dashboard-progress-bar">
+                                        <div 
+                                            className="mentor-dashboard-progress-fill"
+                                            style={{ width: `${mentee.progress}%` }}
+                                        ></div>
+                                    </div>
+                                    <div className="mentor-dashboard-topics">
+                                        {mentee.topics.map((topic, i) => (
+                                            <span key={i} className="mentor-dashboard-topic-tag">{topic}</span>
+                                        ))}
+                                    </div>
+                                    <span className={`mentor-dashboard-status-badge ${mentee.status.toLowerCase().replace(' ', '-')}`}>
+                                        {mentee.status}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Trending Topics */}
+                    <div className="mentor-dashboard-card">
+                        <h2><FaLightbulb /> Trending Topics</h2>
+                        <div className="mentor-dashboard-trending-grid">
+                            {trendingTopics.map((topic, index) => (
+                                <div key={index} className="mentor-dashboard-trending-card">
+                                    <h4>{topic.topic}</h4>
+                                    <div className="mentor-dashboard-trending-stats">
+                                        <span>{topic.sessions} sessions</span>
+                                        <span className="mentor-dashboard-trending-growth">{topic.growth}</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </Col>
 
-                {/* Resource Recommendations */}
-                <Col lg={6}>
-                    <MentorDashboardCard
-                        as={motion.div}
-                        variants={cardVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ delay: 0.7 }}
-                    >
-                        <MentorSectionTitle>
-                            <FaBook /> Resource Recommendations
-                        </MentorSectionTitle>
-                        <ul className="mentor-resources-list">
-                            <li>Startup Growth Strategies Guide</li>
-                            <li>Technical Architecture Best Practices</li>
-                            <li>Leadership Development Framework</li>
-                            <li>Innovation Management Toolkit</li>
-                        </ul>
-                    </MentorDashboardCard>
+                <Col lg={4}>
+                    {/* Quick Actions */}
+                    <div className="mentor-dashboard-card">
+                        <h2><FaRocket /> Quick Actions</h2>
+                        <div className="mentor-dashboard-quick-actions">
+                            <button className="mentor-dashboard-button primary">
+                                <FaCalendarAlt /> Schedule Session
+                            </button>
+                            <button className="mentor-dashboard-button secondary">
+                                <FaComments /> View Messages
+                            </button>
+                            <button className="mentor-dashboard-button secondary">
+                                <FaBookReader /> Add Resources
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Upcoming Sessions */}
+                    <div className="mentor-dashboard-card">
+                        <h2><FaCalendarAlt /> Upcoming Sessions</h2>
+                        <div className="mentor-dashboard-sessions-list">
+                            {upcomingSessions.map((session, index) => (
+                                <div key={index} className="mentor-dashboard-session-item">
+                                    <div className="mentor-dashboard-session-header">
+                                        <h4>{session.mentee}</h4>
+                                        <span>{session.time}</span>
+                                    </div>
+                                    <p>{session.topic}</p>
+                                    <span className="mentor-dashboard-session-date">{session.date}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </Col>
             </Row>
-        </MentorDashboardContainer>
+
+            {showFullNotifications && (
+                <div className="mentor-dashboard-full-notifications">
+                    <div className="mentor-dashboard-full-notifications-content">
+                        <button 
+                            className="mentor-dashboard-close-button"
+                            onClick={() => setShowFullNotifications(false)}
+                        >
+                            <FaTimes />
+                        </button>
+                        <h2><FaBell /> All Notifications</h2>
+                        <div className="mentor-dashboard-full-notifications-list">
+                            {notifications.map((notification, index) => (
+                                <div key={index} className="mentor-dashboard-notification-item">
+                                    <span className={`mentor-dashboard-notification-dot ${notification.isNew ? 'new' : ''}`}></span>
+                                    <div className="mentor-dashboard-notification-content">
+                                        <p>{notification.message}</p>
+                                        <small>{notification.time}</small>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 };
 

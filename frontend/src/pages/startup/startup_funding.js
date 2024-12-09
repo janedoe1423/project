@@ -8,7 +8,14 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    ResponsiveContainer
+    ResponsiveContainer,
+    PieChart,
+    Pie,
+    Cell,
+    Legend,
+    BarChart,
+    Bar,
+    LabelList
 } from 'recharts';
 
 const StartupFunding = () => {
@@ -57,6 +64,22 @@ const StartupFunding = () => {
         // Add more sample applications as needed
     ];
 
+    const sectorWiseAllocation = [
+        { sector: 'Technology', amount: 300000 },
+        { sector: 'Healthcare', amount: 200000 },
+        { sector: 'Finance', amount: 150000 },
+        { sector: 'Education', amount: 50000 },
+        { sector: 'Retail', amount: 100000 },
+    ];
+
+    const sectorAllocation = [
+        { sector: 'R&D', amount: 200000 },
+        { sector: 'Marketing', amount: 150000 },
+        { sector: 'Operations', amount: 100000 },
+        { sector: 'HR', amount: 50000 },
+        { sector: 'Sales', amount: 75000 },
+    ];
+
     const getStatusBadge = (status) => {
         switch (status) {
             case 'approved':
@@ -76,22 +99,22 @@ const StartupFunding = () => {
     };
 
     return (
-        <div className="p-4">
-            <div className="d-flex justify-content-between align-items-center mb-4">
+        <div className="startup_funding_container p-4">
+            <div className="startup_funding_header d-flex justify-content-between align-items-center mb-4">
                 <h2 className="mb-0">Funding Applications Overview</h2>
                 <Button 
                     variant="primary" 
                     href="#funding/new"
-                    className="d-flex align-items-center gap-2"
+                    className="startup_funding_new-button d-flex align-items-center gap-2"
                 >
                     <FaFileAlt /> New Application
                 </Button>
             </div>
 
-            <div className="row">
-                {fundingApplications.map((funding) => (
+            <div className="startup_funding_applications row">
+                {fundingApplications && fundingApplications.map((funding) => (
                     <div key={funding.id} className="col-md-6 col-lg-4 mb-4">
-                        <Card className="h-100 shadow-sm">
+                        <Card className="startup_funding_card h-100 shadow-sm">
                             <Card.Body>
                                 <div className="d-flex justify-content-between align-items-start mb-3">
                                     <div>
@@ -136,13 +159,14 @@ const StartupFunding = () => {
                 show={showDetails} 
                 onHide={() => setShowDetails(false)}
                 size="lg"
+                className="startup_funding_modal"
             >
                 {selectedFunding && (
                     <>
                         <Modal.Header closeButton>
                             <Modal.Title>{selectedFunding.fundingType} Application Details</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>
+                        <Modal.Body className="startup_funding_modal-body">
                             <div className="row mb-4">
                                 <div className="col-md-6">
                                     <h6>Application Overview</h6>
@@ -197,23 +221,40 @@ const StartupFunding = () => {
                                 </div>
                             </div>
 
-                            {selectedFunding.milestones && (
-                                <div className="mb-4">
+                            <div className="row mb-4">
+                                <div className="col-md-6">
                                     <h6>Key Milestones</h6>
-                                    <div className="timeline">
-                                        {selectedFunding.milestones.map((milestone, index) => (
-                                            <div key={index} className="timeline-item">
-                                                <div className="timeline-date">
+                                    <div className="startup_funding_timeline">
+                                        {selectedFunding.milestones && selectedFunding.milestones.map((milestone, index) => (
+                                            <div key={index} className="startup_funding_timeline-item">
+                                                <div className="startup_funding_timeline-date">
                                                     {new Date(milestone.date).toLocaleDateString()}
                                                 </div>
-                                                <div className="timeline-content">
+                                                <div className="startup_funding_timeline-content">
                                                     {milestone.title}
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
-                            )}
+
+                                <div className="col-md-6">
+                                    <h6>Sector Allocation</h6>
+                                    <div style={{ height: '300px' }}>
+                                        <ResponsiveContainer width="100%" height="100%">
+                                            <BarChart data={sectorAllocation}>
+                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <XAxis dataKey="sector" />
+                                                <YAxis />
+                                                <Tooltip />
+                                                <Bar dataKey="amount" fill="#8884d8">
+                                                    <LabelList dataKey="amount" position="top" />
+                                                </Bar>
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </div>
+                                </div>
+                            </div>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={() => setShowDetails(false)}>

@@ -2,52 +2,52 @@
     padding: 24px;
 }
 
-.page-header {
+.investor_investment-page-header {
     margin-bottom: 32px;
 }
 
-.portfolio-summary {
+.investor_investment-portfolio-summary {
     margin-top: 24px;
 }
 
-.amount, .count, .percentage {
+.investor_investment-amount, .investor_investment-count, .investor_investment-percentage {
     font-size: 24px;
     font-weight: bold;
     color: #1890ff;
 }
 
-.investment-card {
+.investor_investment-investment-card {
     border: none !important;
     background: linear-gradient(145deg, #ffffff, #f0f2f5);
     box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
 }
 
-.investment-card .ant-card-body {
+.investor_investment-investment-card .ant-card-body {
     padding: 16px !important;
     border-radius: 15px;
     transition: all 0.3s ease;
 }
 
-.investment-card:hover .ant-card-body {
+.investor_investment-investment-card:hover .ant-card-body {
     background: linear-gradient(145deg, #f8f9fa, #ffffff);
     transform: translateY(-5px);
 }
 
-.investment-card img {
+.investor_investment-investment-card img {
     max-width: 100px;
     height: auto;
     margin-bottom: 16px;
 }
 
-.metrics {
+.investor_investment-metrics {
     margin-top: 16px;
 }
 
-.performance {
+.investor_investment-performance {
     text-align: center;
 }
 
-.analysis-summary {
+.investor_investment-analysis-summary {
     background: #ffffff;
     border-radius: 24px;
     padding: 40px;
@@ -55,7 +55,7 @@
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.graph-card {
+.investor_investment-graph-card {
     border: none !important;
     background: white;
     border-radius: 16px;
@@ -63,23 +63,23 @@
     margin-bottom: 24px;
 }
 
-.graph-card .ant-card-head {
+.investor_investment-graph-card .ant-card-head {
     border-bottom: none;
     padding: 16px 24px;
 }
 
-.graph-card .ant-card-body {
+.investor_investment-graph-card .ant-card-body {
     padding: 0 24px 24px;
 }
 
-.graph-description {
+.investor_investment-graph-description {
     padding: 16px;
     background: #f8f9fa;
     border-radius: 8px;
     margin: 16px 0;
 }
 
-.metric-card {
+.investor_investment-metric-card {
     background: linear-gradient(145deg, #ffffff, #f0f2f5);
     border-radius: 16px;
     padding: 24px;
@@ -87,27 +87,27 @@
     transition: all 0.3s ease;
 }
 
-.metric-card:hover {
+.investor_investment-metric-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 /* Modal Styles */
-.details-modal .ant-modal-content,
-.analysis-modal .ant-modal-content {
+.investor_investment-details-modal .ant-modal-content,
+.investor_investment-analysis-modal .ant-modal-content {
     border-radius: 16px;
     overflow: hidden;
 }
 
 /* Company Header */
-.company-header {
+.investor_investment-company-header {
     padding: 24px;
     background: linear-gradient(135deg, #1890ff 0%, #722ed1 100%);
     margin: -24px -24px 24px -24px;
     color: white;
 }
 
-.company-logo {
+.investor_investment-company-logo {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -115,7 +115,7 @@
 }
 
 /* Quick Stats */
-.quick-stats .stat-card {
+.investor_investment-quick-stats .investor_investment-stat-card {
     background: white;
     padding: 24px;
     border-radius: 12px;
@@ -123,48 +123,48 @@
 }
 
 /* Info Cards */
-.info-card {
+.investor_investment-info-card {
     height: 100%;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 /* Team Cards */
-.team-card {
+.investor_investment-team-card {
     text-align: center;
     border-radius: 12px;
     padding: 24px;
 }
 
 /* Analysis Summary Cards */
-.analysis-summary .summary-card {
+.investor_investment-analysis-summary .investor_investment-summary-card {
     border-radius: 12px;
     padding: 24px;
 }
 
-.gradient-primary {
+.investor_investment-gradient-primary {
     background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
 }
 
-.gradient-success {
+.investor_investment-gradient-success {
     background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);
 }
 
-.gradient-warning {
+.investor_investment-gradient-warning {
     background: linear-gradient(135deg, #faad14 0%, #d48806 100%);
 }
 
-.gradient-info {
+.investor_investment-gradient-info {
     background: linear-gradient(135deg, #13c2c2 0%, #08979c 100%);
 }
 
 /* Graph Cards */
-.graph-card {
+.investor_investment-graph-card {
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.graph-container {
+.investor_investment-graph-container {
     background: #fafafa;
     padding: 16px;
     border-radius: 8px;
@@ -172,40 +172,40 @@
 }
 
 /* Tabs */
-.details-tabs .ant-tabs-nav,
-.analysis-tabs .ant-tabs-nav {
+.investor_investment-details-tabs .ant-tabs-nav,
+.investor_investment-analysis-tabs .ant-tabs-nav {
     margin-bottom: 24px;
 }
 
-.details-tabs .ant-tabs-tab,
-.analysis-tabs .ant-tabs-tab {
+.investor_investment-details-tabs .ant-tabs-tab,
+.investor_investment-analysis-tabs .ant-tabs-tab {
     padding: 12px 24px;
 }
 
-.analysis-modal {
-    .analysis-summary {
+.investor_investment-analysis-modal {
+    .investor_investment-analysis-summary {
         padding: 32px;
         background: #ffffff;
         border-radius: 24px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
 
-    .summary-header {
+    .investor_investment-summary-header {
         margin-bottom: 32px;
 
-        .company-title {
+        .investor_investment-company-title {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 0 !important;
         }
 
-        .company-subtitle {
+        .investor_investment-company-subtitle {
             display: flex;
             align-items: center;
             gap: 12px;
             
-            .company-logo {
+            .investor_investment-company-logo {
                 width: 40px;
                 height: 40px;
                 border-radius: 8px;
@@ -214,7 +214,7 @@
         }
     }
 
-    .metric-box {
+    .investor_investment-metric-box {
         padding: 24px;
         border-radius: 20px;
         height: 100%;
@@ -229,7 +229,7 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
         }
 
-        .metric-icon {
+        .investor_investment-metric-icon {
             width: 48px;
             height: 48px;
             border-radius: 12px;
@@ -241,25 +241,25 @@
             color: white;
         }
 
-        .metric-content {
+        .investor_investment-metric-content {
             flex: 1;
             color: white;
 
-            .metric-title {
+            .investor_investment-metric-title {
                 font-size: 14px;
                 opacity: 0.85;
                 margin-bottom: 8px;
                 font-weight: 500;
             }
 
-            .metric-value {
+            .investor_investment-metric-value {
                 font-size: 36px;
                 font-weight: bold;
                 margin-bottom: 8px;
                 line-height: 1;
             }
 
-            .metric-trend {
+            .investor_investment-metric-trend {
                 font-size: 14px;
                 opacity: 0.8;
                 display: flex;
@@ -272,7 +272,7 @@
     .analysis-cards {
         margin-top: 32px;
 
-        .analysis-card {
+        .investor_investment-analysis-card {
             background: white;
             border-radius: 16px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -284,7 +284,7 @@
                 box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
             }
 
-            .card-header {
+            .investor_investment-card-header {
                 padding: 20px;
                 border-bottom: 1px solid #f0f0f0;
                 display: flex;
@@ -292,7 +292,7 @@
                 gap: 12px;
                 background: #fafafa;
 
-                .card-icon {
+                .investor_investment-card-icon {
                     font-size: 24px;
                     color: #1890ff;
                 }
@@ -302,7 +302,7 @@
                 }
             }
 
-            .card-content {
+            .investor_investment-card-content {
                 padding: 20px;
                 background: white;
             }
@@ -310,20 +310,20 @@
     }
 }
 
-.graphs-container {
+.investor_investment-graphs-container {
     padding: 24px;
 }
 
-.graph-detail-modal {
-    .graph-detail {
+.investor_investment-graph-detail-modal {
+    .investor_investment-graph-detail {
         padding: 32px;
 
-        .graph-header {
+        .investor_investment-graph-header {
             margin-bottom: 32px;
             text-align: center;
         }
 
-        .graph-content {
+        .investor_investment-graph-content {
             background: white;
             padding: 32px;
             border-radius: 16px;
@@ -333,15 +333,15 @@
 }
 
 /* Gradients and Colors */
-.primary-gradient { background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%); }
-.success-gradient { background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%); }
-.info-gradient { background: linear-gradient(135deg, #13c2c2 0%, #08979c 100%); }
-.warning-gradient { background: linear-gradient(135deg, #faad14 0%, #d48806 100%); }
+.investor_investment-primary-gradient { background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%); }
+.investor_investment-success-gradient { background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%); }
+.investor_investment-info-gradient { background: linear-gradient(135deg, #13c2c2 0%, #08979c 100%); }
+.investor_investment-warning-gradient { background: linear-gradient(135deg, #faad14 0%, #d48806 100%); }
 
-.primary-light { background: #e6f7ff; }
-.success-light { background: #f6ffed; }
-.info-light { background: #e6fffb; }
-.warning-light { background: #fff7e6; }
+.investor_investment-primary-light { background: #e6f7ff; }
+.investor_investment-success-light { background: #f6ffed; }
+.investor_investment-info-light { background: #e6fffb; }
+.investor_investment-warning-light { background: #fff7e6; }
 
 /* Enhanced tooltips */
 .recharts-tooltip-wrapper {
@@ -363,52 +363,52 @@
     }
 }
 
-.analysis-dashboard {
+.investor_investment-analysis-dashboard {
     padding: 20px;
     background: #f0f2f5;
 }
 
-.analysis-summary-container {
+.investor_investment-analysis-summary-container {
     background: white;
     border-radius: 20px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 
-.analysis-header {
+.investor_investment-analysis-header {
     padding: 30px;
     background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%);
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-.header-content {
+.investor_investment-header-content {
     text-align: center;
 }
 
-.header-content h3 {
+.investor_investment-header-content h3 {
     margin: 0 0 8px 0 !important;
     color: #1a1a1a;
     font-weight: 600 !important;
 }
 
-.header-content .ant-tag {
+.investor_investment-header-content .ant-tag {
     font-size: 14px;
     padding: 4px 16px;
     border-radius: 20px;
     margin: 8px 0;
 }
 
-.header-subtitle {
+.investor_investment-header-subtitle {
     color: #666;
     font-size: 15px;
     margin-top: 8px;
 }
 
-.metrics-container {
+.investor_investment-metrics-container {
     padding: 30px;
 }
 
-.metric-card {
+.investor_investment-metric-card {
     padding: 24px;
     border-radius: 16px;
     height: 100%;
@@ -417,12 +417,12 @@
     transition: all 0.3s ease;
 }
 
-.metric-card:hover {
+.investor_investment-metric-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
-.metric-icon {
+.investor_investment-metric-icon {
     width: 48px;
     height: 48px;
     background: rgba(255, 255, 255, 0.2);
@@ -433,30 +433,30 @@
     margin-bottom: 16px;
 }
 
-.metric-icon .anticon {
+.investor_investment-metric-icon .anticon {
     font-size: 24px;
     color: white;
 }
 
-.metric-details {
+.investor_investment-metric-details {
     color: white;
 }
 
-.metric-label {
+.investor_investment-metric-label {
     font-size: 16px;
     opacity: 0.9;
     margin-bottom: 8px;
     font-weight: 500;
 }
 
-.metric-value {
+.investor_investment-metric-value {
     font-size: 36px;
     font-weight: bold;
     margin: 12px 0;
     line-height: 1;
 }
 
-.metric-trend {
+.investor_investment-metric-trend {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -467,24 +467,24 @@
 }
 
 /* Gradients */
-.primary-gradient {
+.investor_investment-primary-gradient {
     background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
 }
 
-.success-gradient {
+.investor_investment-success-gradient {
     background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);
 }
 
-.info-gradient {
+.investor_investment-info-gradient {
     background: linear-gradient(135deg, #13c2c2 0%, #08979c 100%);
 }
 
-.warning-gradient {
+.investor_investment-warning-gradient {
     background: linear-gradient(135deg, #faad14 0%, #d48806 100%);
 }
 
 /* Add glass effect to cards */
-.metric-card::before {
+.investor_investment-metric-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -501,31 +501,31 @@
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
-    .metric-value {
+    .investor_investment-metric-value {
         font-size: 30px;
     }
 }
 
 @media (max-width: 768px) {
-    .analysis-header {
+    .investor_investment-analysis-header {
         padding: 20px;
     }
     
-    .metrics-container {
+    .investor_investment-metrics-container {
         padding: 20px;
     }
     
-    .metric-card {
+    .investor_investment-metric-card {
         padding: 20px;
     }
 }
 
 /* Add these new styles for the enhanced metrics */
-.metrics-row {
+.investor_investment-metrics-row {
     margin: 24px 0 !important;
 }
 
-.enhanced-metric-box {
+.investor_investment-enhanced-metric-box {
     border-radius: 16px;
     padding: 24px;
     height: 100%;
@@ -536,24 +536,24 @@
     margin: 12px !important;
 }
 
-.enhanced-metric-box:hover {
+.investor_investment-enhanced-metric-box:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
-.metric-inner {
+.investor_investment-metric-inner {
     position: relative;
     z-index: 1;
 }
 
-.metric-header {
+.investor_investment-metric-header {
     display: flex;
     align-items: center;
     gap: 12px;
     margin-bottom: 16px;
 }
 
-.icon-wrapper {
+.investor_investment-icon-wrapper {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     width: 44px;
@@ -565,13 +565,13 @@
     color: white;
 }
 
-.metric-name {
+.investor_investment-metric-name {
     color: rgba(255, 255, 255, 0.9);
     font-size: 16px;
     font-weight: 500;
 }
 
-.metric-main-value {
+.investor_investment-metric-main-value {
     font-size: 36px;
     font-weight: bold;
     color: white;
@@ -579,7 +579,7 @@
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.metric-trend-indicator {
+.investor_investment-metric-trend-indicator {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -591,24 +591,24 @@
 }
 
 /* Gradients */
-.primary-gradient {
+.investor_investment-primary-gradient {
     background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
 }
 
-.success-gradient {
+.investor_investment-success-gradient {
     background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);
 }
 
-.info-gradient {
+.investor_investment-info-gradient {
     background: linear-gradient(135deg, #13c2c2 0%, #08979c 100%);
 }
 
-.warning-gradient {
+.investor_investment-warning-gradient {
     background: linear-gradient(135deg, #faad14 0%, #d48806 100%);
 }
 
 /* Add glass effect */
-.enhanced-metric-box::before {
+.investor_investment-enhanced-metric-box::before {
     content: '';
     position: absolute;
     top: 0;
@@ -621,17 +621,17 @@
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
-    .metric-main-value {
+    .investor_investment-metric-main-value {
         font-size: 30px;
     }
 }
 
 @media (max-width: 768px) {
-    .enhanced-metric-box {
+    .investor_investment-enhanced-metric-box {
         padding: 20px;
     }
     
-    .icon-wrapper {
+    .investor_investment-icon-wrapper {
         width: 36px;
         height: 36px;
         font-size: 18px;
@@ -639,7 +639,7 @@
 }
 
 /* Override Ant Design Row styles */
-.analysis-dashboard .ant-row {
+.investor_investment-analysis-dashboard .ant-row {
     margin: 0 !important;
     display: flex !important;
     flex-flow: row wrap !important;
@@ -647,6 +647,6 @@
 }
 
 /* Override Column styles */
-.analysis-dashboard .ant-col {
+.investor_investment-analysis-dashboard .ant-col {
     padding: 0 !important;
 }

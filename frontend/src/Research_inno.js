@@ -113,7 +113,7 @@ function Research_inno() {
         setActiveTab(newValue);
     };
 
-    // Sample data for each section
+  
     const researchAreas = [
         {
             icon: <ScienceIcon sx={{ fontSize: 40 }} />,
@@ -141,7 +141,7 @@ function Research_inno() {
         }
     ];
 
-    // Sample data for Resources
+  
     const resourcesList = [
         {
             icon: <MenuBookIcon sx={{ fontSize: 40 }} />,

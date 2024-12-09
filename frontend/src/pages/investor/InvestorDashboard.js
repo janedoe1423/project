@@ -13,6 +13,8 @@ import {
 } from 'chart.js';
 import { Line, Bar, Pie } from "react-chartjs-2";
 import "./InvestorDashboard.css";
+import { FaEdit } from 'react-icons/fa';
+import { Modal, Button, Form } from 'react-bootstrap';
 
 // Register ChartJS components
 ChartJS.register(
@@ -61,9 +63,18 @@ const getPeriodLabels = (period) => {
     }
 };
 
+// Add this number formatting helper function
+const formatNumber = (num) => {
+    if (num >= 1000000) {
+        return `${(num / 1000000).toFixed(1)}M`;
+    } else if (num >= 1000) {
+        return `${(num / 1000).toFixed(1)}K`;
+    }
+    return num.toString();
+};
+
 const InvestorDashboard = () => {
     const [timeFilter, setTimeFilter] = useState('monthly');
-    const [selectedGraph, setSelectedGraph] = useState(null);
 
     // Create base data object
     const baseData = {
@@ -314,117 +325,143 @@ const InvestorDashboard = () => {
         }
     ];
 
-    const renderKPICard = (title, data) => (
-        <div className="kpi-card">
-            <div className="kpi-header">
-                <h4>{title}</h4>
-                <div className="kpi-trend-indicator">
-                    <span className={`trend-arrow ${data.change >= 0 ? 'positive' : 'negative'}`}>
-                        {data.change >= 0 ? '↑' : '↓'}
-                    </span>
-                    <span className="trend-value">{Math.abs(data.change)}%</span>
-                </div>
-            </div>
-            <div className="kpi-value">{formatCurrency(data.value)}</div>
-            <div className="kpi-details">
-                <span className="kpi-period">vs last month</span>
-                <button 
-                    className="kpi-view-analysis"
-                    onClick={() => setSelectedGraph(data.graphData)}
-                >
-                    View Analysis
-                    <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        strokeWidth="2" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                    >
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    );
-
-    const renderGraphBox = (graph) => (
-        <div key={graph.id} className="graph-box">
-            <h3>{graph.title}</h3>
-            <p className="graph-description">{graph.description}</p>
-            <button 
-                className="view-graph-btn"
-                onClick={() => setSelectedGraph(graph)}
-            >
-                View Graph
-            </button>
-        </div>
-    );
-
-    // Add these chart options
-    const chartOptions = {
+    // Chart options helper function
+    const getChartOptions = (graph) => ({
         responsive: true,
         maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        },
         plugins: {
             legend: {
                 position: 'top',
+            },
+            title: {
+                display: true,
+                text: graph.title
             }
         }
+    });
+
+    // Render KPI Card helper function
+    const renderKPICard = (title, data) => (
+        <div className="investor_dashboard-kpi-card">
+            <h4>{title}</h4>
+            <div className="investor_dashboard-kpi-value">
+                ${formatNumber(data.value)}
+            </div>
+            <div className="investor_dashboard-kpi-trend-indicator">
+                <span className="investor_dashboard-trend-value">
+                    {data.change}% from previous period
+                </span>
+            </div>
+        </div>
+    );
+
+    // Add this state for edit mode
+    const [editMode, setEditMode] = useState(false);
+    const [editingData, setEditingData] = useState(null);
+
+    // Add edit button and functionality to graph boxes
+    const renderGraphBox = (graph) => (
+        <div key={graph.id} className="investor_dashboard-graph-box">
+            <div className="investor_dashboard-graph-header">
+                <h3>{graph.title}</h3>
+                <button 
+                    className="investor_dashboard-edit-button"
+                    onClick={() => handleEditGraph(graph)}
+                >
+                    <FaEdit /> Edit
+                </button>
+            </div>
+            <div className="investor_dashboard-graph-container">
+                {graph.type === "line" && (
+                    <Line 
+                        data={graph.data} 
+                        options={getChartOptions(graph)}
+                    />
+                )}
+                {graph.type === "bar" && (
+                    <Bar 
+                        data={graph.data} 
+                        options={getChartOptions(graph)}
+                    />
+                )}
+                {graph.type === "pie" && (
+                    <Pie 
+                        data={graph.data} 
+                        options={{
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                }
+                            }
+                        }}
+                    />
+                )}
+            </div>
+        </div>
+    );
+
+    // Add edit modal
+    const EditDataModal = ({ show, onHide, data, onSave }) => {
+        const [editedData, setEditedData] = useState(data);
+
+        return (
+            <Modal show={show} onHide={onHide}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Graph Data</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        {data?.datasets?.[0]?.data.map((value, index) => (
+                            <Form.Group key={index}>
+                                <Form.Label>{data.labels[index]}</Form.Label>
+                                <Form.Control 
+                                    type="number"
+                                    value={editedData.datasets[0].data[index]}
+                                    onChange={(e) => {
+                                        const newData = {...editedData};
+                                        newData.datasets[0].data[index] = Number(e.target.value);
+                                        setEditedData(newData);
+                                    }}
+                                />
+                            </Form.Group>
+                        ))}
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={onHide}>Cancel</Button>
+                    <Button variant="primary" onClick={() => onSave(editedData)}>Save Changes</Button>
+                </Modal.Footer>
+            </Modal>
+        );
     };
 
-    // Add this function to determine which options to use
-    const getChartOptions = (graph) => {
-        const baseOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'top',
-                }
-            }
-        };
-
-        if (graph.type === 'bar' && graph.stacked) {
-            return {
-                ...baseOptions,
-                scales: {
-                    x: {
-                        stacked: true,
-                    },
-                    y: {
-                        stacked: true,
-                    }
-                }
-            };
-        }
-
-        return baseOptions;
+    // Add these functions to handle edit functionality
+    const handleEditGraph = (graph) => {
+        setEditingData(graph);
+        setEditMode(true);
     };
 
-    // Add a helper function to format currency
-    const formatCurrency = (value) => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        }).format(value);
+    const handleSaveEdit = (newData) => {
+        // Update the graph data in your state/backend
+        const updatedGraphs = graphOptions.map(graph => 
+            graph.id === editingData.id ? {...graph, data: newData} : graph
+        );
+        // Update your state/backend with the new data
+        setEditMode(false);
+        setEditingData(null);
     };
 
     return (
-        <div className="dashboard-container">
-            <div className="dashboard-header">
+        <div className="investor_dashboard-container">
+            <div className="investor_dashboard-header">
                 <h2>Investment Analytics Dashboard</h2>
-                <div className="time-filter">
-                    <select value={timeFilter} onChange={(e) => setTimeFilter(e.target.value)}>
+                <div className="investor_dashboard-time-filter">
+                    <select 
+                        value={timeFilter} 
+                        onChange={(e) => setTimeFilter(e.target.value)}
+                    >
                         <option value="monthly">Monthly</option>
                         <option value="quarterly">Quarterly</option>
                         <option value="yearly">Yearly</option>
@@ -432,76 +469,28 @@ const InvestorDashboard = () => {
                 </div>
             </div>
 
-            {/* KPI Overview Section */}
-            <section className="kpi-overview">
+            {/* KPI Cards Section */}
+            <section className="investor_dashboard-kpi-overview">
                 <h3>Key Performance Indicators</h3>
-                <div className="kpi-grid">
-                    {renderKPICard("Cash Balance", kpiData.cashBalance)}
-                    {renderKPICard("Gross Burn", kpiData.grossBurn)}
-                    {renderKPICard("EBITDA", kpiData.ebitda)}
-                    {renderKPICard("Revenue", kpiData.revenue)}
+                <div className="investor_dashboard-kpi-grid">
+                    {renderKPICard("Cash Balance", getCurrentPeriodData('cashBalance'))}
+                    {renderKPICard("Gross Burn", getCurrentPeriodData('grossBurn'))}
+                    {renderKPICard("EBITDA", getCurrentPeriodData('ebitda'))}
+                    {renderKPICard("Revenue", getCurrentPeriodData('revenue'))}
                 </div>
             </section>
 
             {/* Graphs Grid */}
-            <div className="graphs-container">
-                {["Financial Health", "Growth Metrics", "Funding & Team"].map(section => (
-                    <section key={section} className="metric-section">
-                        <h3>{section}</h3>
-                        <div className="graph-grid">
-                            {graphOptions
-                                .filter(graph => graph.section === section)
-                                .map(renderGraphBox)}
-                        </div>
-                    </section>
-                ))}
+            <div className="investor_dashboard-graphs-container">
+                {graphOptions.map(graph => renderGraphBox(graph))}
             </div>
 
-            {/* Graph Modal */}
-            {selectedGraph && (
-                <div className="graph-modal">
-                    <div className="graph-modal-content">
-                        <button 
-                            className="close-button"
-                            onClick={() => setSelectedGraph(null)}
-                        >
-                            ×
-                        </button>
-                        <h3>{selectedGraph.title}</h3>
-                        <div className="graph-container">
-                            {selectedGraph.type === "line" && (
-                                <Line 
-                                    key={`${selectedGraph.id}-line`}
-                                    data={selectedGraph.data} 
-                                    options={chartOptions}
-                                />
-                            )}
-                            {selectedGraph.type === "pie" && (
-                                <Pie 
-                                    key={`${selectedGraph.id}-pie`}
-                                    data={selectedGraph.data} 
-                                    options={{
-                                        responsive: true,
-                                        maintainAspectRatio: false,
-                                        plugins: {
-                                            legend: {
-                                                position: 'top',
-                                            }
-                                        }
-                                    }}
-                                />
-                            )}
-                            {selectedGraph.type === "bar" && (
-                                <Bar 
-                                    key={`${selectedGraph.id}-bar`}
-                                    data={selectedGraph.data} 
-                                    options={getChartOptions(selectedGraph)}
-                                />
-                            )}
-                        </div>
-                    </div>
-                </div>
-            )}
+            <EditDataModal 
+                show={editMode}
+                onHide={() => setEditMode(false)}
+                data={editingData?.data}
+                onSave={handleSaveEdit}
+            />
         </div>
     );
 };

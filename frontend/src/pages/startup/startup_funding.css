@@ -1,16 +1,16 @@
 /* Timeline styling */
-.timeline {
+.startup_funding_timeline {
     position: relative;
     padding: 20px 0;
 }
 
-.timeline-item {
+.startup_funding_timeline-item {
     display: flex;
     margin-bottom: 20px;
     position: relative;
 }
 
-.timeline-item::before {
+.startup_funding_timeline-item::before {
     content: '';
     position: absolute;
     left: 120px;
@@ -24,7 +24,7 @@
     z-index: 1;
 }
 
-.timeline-item::after {
+.startup_funding_timeline-item::after {
     content: '';
     position: absolute;
     left: 130px;
@@ -34,7 +34,7 @@
     background: #8884d8;
 }
 
-.timeline-date {
+.startup_funding_timeline-date {
     width: 120px;
     padding-right: 20px;
     text-align: right;
@@ -42,23 +42,23 @@
     color: #666;
 }
 
-.timeline-content {
+.startup_funding_timeline-content {
     flex: 1;
     padding-left: 70px;
     padding-top: 3px;
 }
 
 /* Card styling */
-.card {
+.startup_funding_card {
     transition: transform 0.2s;
 }
 
-.card:hover {
+.startup_funding_card:hover {
     transform: translateY(-5px);
 }
 
 /* Badge styling */
-.badge {
+.startup_funding_badge {
     display: inline-flex;
     align-items: center;
     gap: 5px;
@@ -66,30 +66,30 @@
 }
 
 /* Modal styling */
-.modal-body table {
+.startup_funding_modal-body table {
     margin-bottom: 0;
 }
 
-.modal-body td:first-child {
+.startup_funding_modal-body td:first-child {
     font-weight: 500;
     width: 40%;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .timeline-item::before {
+    .startup_funding_timeline-item::before {
         left: 90px;
     }
     
-    .timeline-item::after {
+    .startup_funding_timeline-item::after {
         left: 100px;
     }
     
-    .timeline-date {
+    .startup_funding_timeline-date {
         width: 90px;
     }
     
-    .timeline-content {
+    .startup_funding_timeline-content {
         padding-left: 60px;
     }
 }

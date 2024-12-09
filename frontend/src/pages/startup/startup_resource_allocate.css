@@ -1,5 +1,5 @@
 /* Dashboard Layout */
-.resource-dashboard {
+.startup_resource_dashboard {
     padding: 32px;
     max-width: 1400px;
     margin: 0 auto;
@@ -7,7 +7,7 @@
     min-height: 100vh;
   }
   
-  .dashboard-title {
+  .startup_resource_dashboard-title {
     margin-bottom: 32px !important;
     color: #1e293b;
     font-weight: 600 !important;
@@ -18,7 +18,7 @@
     padding-bottom: 15px;
   }
   
-  .dashboard-title:after {
+  .startup_resource_dashboard-title:after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -31,7 +31,9 @@
   }
   
   /* Card Styles */
-  .input-card, .graph-card, .history-card {
+  .startup_resource_input-card, 
+  .startup_resource_graph-card, 
+  .startup_resource_history-card {
     padding: 24px;
     border-radius: 12px !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
@@ -40,19 +42,20 @@
     border: 1px solid #e2e8f0;
   }
   
-  .input-card:hover, .graph-card:hover {
+  .startup_resource_input-card:hover, 
+  .startup_resource_graph-card:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
                 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
   }
   
   /* Department Select Styles */
-  .department-select .MuiOutlinedInput-root {
+  .startup_resource_department-select .MuiOutlinedInput-root {
     border-radius: 8px;
     background: white;
     border: 1px solid #e2e8f0;
   }
   
-  .department-chip {
+  .startup_resource_department-chip {
     border-radius: 6px !important;
     font-weight: 500 !important;
     background: #0ea5e9 !important;
@@ -61,7 +64,7 @@
   }
   
   /* History Section Styles */
-  .history-section-title {
+  .startup_resource_history-section-title {
     color: #1e293b;
     font-weight: 600 !important;
     margin-bottom: 24px !important;
@@ -69,14 +72,14 @@
     padding-left: 16px;
   }
   
-  .history-grid {
+  .startup_resource_history-grid {
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
     gap: 24px !important;
     padding: 16px !important;
   }
   
-  .history-item {
+  .startup_resource_history-item {
     height: 200px !important; /* Fixed height */
     background: white;
     border-radius: 8px !important;
@@ -88,32 +91,32 @@
     flex-direction: column !important;
   }
   
-  .history-item:hover {
+  .startup_resource_history-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
                 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
     border-color: #0ea5e9;
   }
   
-  .history-item.selected {
+  .startup_resource_history-item.selected {
     background: #f0f9ff;
     border-color: #0ea5e9;
   }
   
-  .history-date {
+  .startup_resource_history-date {
     font-weight: 600 !important;
     color: #0ea5e9 !important;
     font-size: 1.1rem !important;
     margin-bottom: 8px !important;
   }
   
-  .history-amount {
+  .startup_resource_history-amount {
     color: #475569 !important;
     font-size: 1rem !important;
     font-weight: 500 !important;
   }
   
-  .history-allocations {
+  .startup_resource_history-allocations {
     margin-top: auto !important;
     display: flex;
     flex-wrap: wrap;
@@ -122,7 +125,7 @@
     padding: 8px 0;
   }
   
-  .history-allocation-chip {
+  .startup_resource_history-allocation-chip {
     background: #e0f2fe !important;
     color: #0369a1 !important;
     font-size: 0.85rem !important;
@@ -154,7 +157,7 @@
   }
   
   /* Empty State Styles */
-  .empty-graph {
+  .startup_resource_empty-graph {
     height: 400px;
     display: flex;
     flex-direction: column;

@@ -1,217 +1,121 @@
-.filters-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
+/* Styles for IPR Cases Overview */
+#ipr-cases-overview {
+    padding: 20px;
+    margin: 20px 0;
+    position: relative; /* For positioning the notification */
 }
 
-.filter-select-container {
-  flex: 1;
-  padding: 0 0.5rem;
+.notification-container {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
 }
 
-.filter-select {
-  display: block;
-  width: 100%;
-  border-radius: 0.5rem;
-  border: 1px solid #d1d5db;
-  background-color: white;
-  padding: 0.5rem 0.75rem;
-  padding-right: 2rem;
-  font-size: 0.875rem;
-  color: #374151;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+.notification-icon {
+    font-size: 24px; /* Slightly smaller size */
+    color: #763c9b; /* Violet color */
+    transition: color 0.3s;
 }
 
-.filter-select:hover {
-  border-color: #22c55e;
+.notification-icon:hover {
+    color: #4a148c; /* Darker shade on hover */
 }
 
-.filter-select:focus {
-  border-color: #22c55e;
-  outline: none;
-  ring: 1px #22c55e;
+.notification-popup {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    z-index: 1000; /* Ensure it appears above other elements */
+    width: 300px; /* Set a width for the popup */
+    transition: opacity 0.3s ease;
 }
 
-.filter-container {
-  background-color: white;
-  padding: 1rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  margin-bottom: 1.5rem;
+.notification-popup h4 {
+    margin: 0 0 10px;
+    font-size: 16px; /* Smaller font size */
+    color: #6a1b9a; /* Violet color for the header */
 }
 
-.filter-header {
-  margin-bottom: 0.75rem;
+.notification-popup ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
-.filter-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #111827;
+.notification-popup li {
+    font-size: 12px; /* Smaller font size */
+    color: #333;
+    margin-bottom: 6px; /* Reduced margin */
+    padding: 4px; /* Reduced padding */
+    border-radius: 4px;
+    display: flex;
+    align-items: center; /* Align icons and text */
+    transition: background 0.3s;
 }
 
-.filter-description {
-  font-size: 0.875rem;
-  color: #6b7280;
+.notification-popup li:hover {
+    background: #f0f0f0; /* Light gray background on hover */
 }
 
-.select-icon {
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 1.25rem;
-  width: 1.25rem;
-  color: #9ca3af;
-  pointer-events: none;
+/* Card styles */
+.ipr-card-container {
+    display: flex;
+    justify-content: space-between;
 }
 
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  gap: 1.5rem;
-  padding: 1.5rem;
+.ipr-card {
+    background: linear-gradient(135deg, #6a1b9a, #c718da); /* Gradient background */
+    border: none; /* Remove border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding for the card */
+    margin: 10px; /* Margin between cards */
+    flex: 1; /* Allow cards to grow equally */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    transition: transform 0.3s;
+    text-align: center;
+    color: white; /* White text color */
+    min-width: 200px; /* Minimum width for cards */
+    max-width: 250px; /* Maximum width for cards */
 }
 
-.card {
-  background-color: white;
-  border-radius: 0.75rem;
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-  transition: all 0.3s ease;
-  border: 1px solid #e5e7eb;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
+.ipr-card:hover {
+    transform: scale(1.05); /* Scale effect on hover */
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: rgba(17, 12, 46, 0.25) 0px 48px 100px 0px;
+.ipr-card h4 {
+    color: white; /* White color for card titles */
+    font-family: 'Arial', sans-serif;
+    font-size: 18px; /* Font size for titles */
+    margin: 8px 0; /* Margin for titles */
 }
 
-.card-content {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 200px;
+.ipr-card p {
+    font-size: 16px; /* Font size for descriptions */
+    color: #f0f0f0; /* Light gray for description text */
+    margin: 4px 0; /* Margin for descriptions */
 }
 
-.card-title {
-  color: #111827;
-  font-size: 1.125rem;
-  font-weight: 600;
-  line-height: 1.5;
-  margin-bottom: 1rem;
+.ipr-number {
+    font-size: 30px; /* Font size for numbers */
+    color: white; /* Highlighted number color */
+    margin: 8px 0; /* Margin for numbers */
 }
 
-.card-footer {
-  margin-top: auto;
-  border-top: 1px solid #e5e7eb;
-  padding-top: 1rem;
+.ipr-icon {
+    font-size: 32px; /* Icon size */
+    color: white; /* Icon color */
+    margin-bottom: 8px; /* Margin for icons */
 }
 
-.footer-company {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem 0;
-}
-
-.company-icon {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: #4b5563;
-}
-
-.company-name {
-  font-size: 1rem;
-  color: #374151;
-  font-weight: 500;
-}
-
-.footer-details {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.status-badge {
-  padding: 0.375rem 1rem;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-}
-
-.status-badge.granted {
-  background-color: #ecfdf5;
-  color: #065f46;
-  border: 1px solid #a7f3d0;
-}
-
-.status-badge.pending {
-  background-color: #fffbeb;
-  color: #b45309;
-  border: 1px solid #fcd34d;
-}
-
-.card-date {
-  font-size: 0.875rem;
-  color: #6b7280;
-  font-weight: 500;
-}
-
-/* Add a subtle background pattern for more visual interest */
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(to right, #10b981, #34d399);
-  opacity: 0.8;
-}
-
-.card-actions {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e5e7eb;
-}
-
-.view-docs-button {
-  width: 100%;
-  padding: 0.625rem 1rem;
-  background-color: #f8fafc;
-  color: #1e293b;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  transition: all 0.2s ease;
-}
-
-.view-docs-button:hover {
-  background-color: #f1f5f9;
-  border-color: #cbd5e1;
-  color: #0f172a;
-}
-
-.view-docs-button:focus {
-  outline: none;
-  ring: 2px #e2e8f0;
-}
-
-.button-icon {
-  width: 1rem;
-  height: 1rem;
+/* Styling for pending approvals card */
+.pending-card {
+    background: #f8d7da; /* Light red background */
+    border: none; /* Remove border */
+    color: #721c24; /* Dark red text */
 }

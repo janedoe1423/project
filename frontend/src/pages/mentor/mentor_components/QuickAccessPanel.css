@@ -1,0 +1,37 @@
+.mentor-quick-access {
+    padding: 20px;
+}
+
+.quick-access-header {
+    margin-bottom: 20px;
+}
+
+.quick-access-header h3 {
+    margin: 0;
+}
+
+.quick-access-links {
+    display: flex;
+    justify-content: space-around;
+}
+
+.quick-access-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    color: white;
+    text-decoration: none;
+}
+
+.quick-access-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px);
+}
+
+.quick-access-link span {
+    font-size: 1rem;
+}
