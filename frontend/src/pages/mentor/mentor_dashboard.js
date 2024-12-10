@@ -95,10 +95,12 @@ const MentorDashboard = () => {
                             className="mentor-dashboard-notification-button"
                             onClick={handleNotificationClick}
                         >
-                            <FaBell />
-                            {notifications.some(n => n.isNew) && (
-                                <span className="mentor-dashboard-notification-badge"></span>
-                            )}
+                            <div className="notification-icon-wrapper">
+                                <FaBell className="notification-bell" />
+                                {notifications.some(n => n.isNew) && (
+                                    <span className="mentor-dashboard-notification-badge pulse"></span>
+                                )}
+                            </div>
                         </button>
                         {showNotificationDropdown && (
                             <div className="mentor-dashboard-notification-dropdown">

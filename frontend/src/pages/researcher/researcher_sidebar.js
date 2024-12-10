@@ -8,18 +8,18 @@ import "./researcher_sidebar.css";
 
 const ResearcherSidebar = ({ currentHash }) => {
     return (
-        <div className="sidebar-wrapper">
-            <div className="sidebar-container">
-                <div className="sidebar-header">
+        <div className="res_bar-sidebar-wrapper">
+            <div className="res_bar-sidebar-container">
+                <div className="res_bar-sidebar-header">
                     <h4>Researcher Portal</h4>
                 </div>
 
-                <Nav className="sidebar-nav">
+                <Nav className="res_bar-sidebar-nav">
                     <Nav.Link
                         href="#dashboard"
-                        className={`sidebar-link ${currentHash === '#dashboard' ? 'active' : ''}`}
+                        className={`res_bar-sidebar-link ${currentHash === '#dashboard' ? 'active' : ''}`}
                     >
-                        <div className="icon-container">
+                        <div className="res_bar-icon-container">
                             <FaHome />
                         </div>
                         <span>Dashboard</span>
@@ -27,9 +27,9 @@ const ResearcherSidebar = ({ currentHash }) => {
 
                     <Nav.Link
                         href="#profile"
-                        className={`sidebar-link ${currentHash === '#profile' ? 'active' : ''}`}
+                        className={`res_bar-sidebar-link ${currentHash === '#profile' ? 'active' : ''}`}
                     >
-                        <div className="icon-container">
+                        <div className="res_bar-icon-container">
                             <FaUser />
                         </div>
                         <span>Profile</span>
@@ -37,9 +37,9 @@ const ResearcherSidebar = ({ currentHash }) => {
 
                     <Nav.Link
                         href="#research-papers"
-                        className={`sidebar-link ${currentHash === '#research-papers' ? 'active' : ''}`}
+                        className={`res_bar-sidebar-link ${currentHash === '#research-papers' ? 'active' : ''}`}
                     >
-                        <div className="icon-container">
+                        <div className="res_bar-icon-container">
                             <FaBook />
                         </div>
                         <span>Works</span>
@@ -47,9 +47,9 @@ const ResearcherSidebar = ({ currentHash }) => {
 
                     <Nav.Link
                         href="#ipr"
-                        className={`sidebar-link ${currentHash === '#ipr' ? 'active' : ''}`}
+                        className={`res_bar-sidebar-link ${currentHash === '#ipr' ? 'active' : ''}`}
                     >
-                        <div className="icon-container">
+                        <div className="res_bar-icon-container">
                             <FaCopyright />
                         </div>
                         <span>IPR</span>
@@ -57,9 +57,9 @@ const ResearcherSidebar = ({ currentHash }) => {
 
                     <Nav.Link
                         href="#collaboration-requests"
-                        className={`sidebar-link ${currentHash === '#collaboration-requests' ? 'active' : ''}`}
+                        className={`res_bar-sidebar-link ${currentHash === '#collaboration-requests' ? 'active' : ''}`}
                     >
-                        <div className="icon-container">
+                        <div className="res_bar-icon-container">
                             <FaHandshake />
                         </div>
                         <span>Collaboration</span>
@@ -67,9 +67,9 @@ const ResearcherSidebar = ({ currentHash }) => {
 
                     <Nav.Link
                         href="#grants-funding"
-                        className={`sidebar-link ${currentHash === '#grants-funding' ? 'active' : ''}`}
+                        className={`res_bar-sidebar-link ${currentHash === '#grants-funding' ? 'active' : ''}`}
                     >
-                        <div className="icon-container">
+                        <div className="res_bar-icon-container">
                             <FaMoneyBill />
                         </div>
                         <span>Grants & Funding</span>
@@ -77,16 +77,16 @@ const ResearcherSidebar = ({ currentHash }) => {
 
                     <Nav.Link
                         href="#insights"
-                        className={`sidebar-link ${currentHash === '#insights' ? 'active' : ''}`}
+                        className={`res_bar-sidebar-link ${currentHash === '#insights' ? 'active' : ''}`}
                     >
-                        <div className="icon-container">
+                        <div className="res_bar-icon-container">
                             <FaLightbulb />
                         </div>
                         <span>Insights</span>
                     </Nav.Link>
                 </Nav>
 
-                <div className="sidebar-footer">
+                <div className="res_bar-sidebar-footer">
                     <small>© 2024 Research Portal</small>
                 </div>
             </div>

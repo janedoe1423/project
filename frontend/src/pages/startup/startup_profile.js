@@ -75,44 +75,104 @@ const StartupProfile = () => {
         name: "AI Analytics Suite",
         description: "Enterprise-grade analytics platform powered by AI",
         features: ["Real-time Analysis", "Predictive Modeling", "Custom Dashboards"],
-        targetAudience: "Enterprise Businesses",
-        launchDate: "2022",
-        demoLink: "https://demo.techvision.com",
-        image: "/path/to/product1.jpg"
+        target_audience: "Enterprise Businesses",
+        launch_date: "2022",
+        demo_link: "https://demo.techvision.com/analytics",
+        image: "/images/products/analytics-suite.jpg"
       },
-      // Add more products...
+      {
+        name: "SmartBot Platform",
+        description: "Conversational AI platform for customer service automation",
+        features: ["Natural Language Processing", "Multi-language Support", "Integration APIs"],
+        target_audience: "Customer Service Teams",
+        launch_date: "2023",
+        demo_link: "https://demo.techvision.com/smartbot",
+        image: "/images/products/smartbot.jpg"
+      }
     ],
 
     team: [
       {
         name: "Dr. Sarah Johnson",
         role: "CEO & Founder",
-        image: "/path/to/sarah.jpg",
-        bio: "PhD in Machine Learning from Stanford",
+        image: "/images/team/sarah.jpg",
+        bio: "PhD in Machine Learning from Stanford. Former Research Lead at Google AI. 15+ years experience in AI and entrepreneurship.",
         linkedin: "https://linkedin.com/in/sarahjohnson",
-        skills: ["AI/ML", "Leadership", "Strategy"]
+        skills: ["AI/ML", "Leadership", "Strategy", "Research", "Product Vision"]
       },
-      // Add more team members...
+      {
+        name: "Michael Chen",
+        role: "CTO",
+        image: "/images/team/michael.jpg",
+        bio: "Ex-Google AI Tech Lead. Expert in large-scale ML systems and cloud architecture. MS in Computer Science from MIT.",
+        linkedin: "https://linkedin.com/in/michaelchen",
+        skills: ["System Architecture", "Cloud Computing", "Team Leadership", "ML Engineering"]
+      },
+      {
+        name: "Dr. Emily Rodriguez",
+        role: "Head of Research",
+        image: "/images/team/emily.jpg",
+        bio: "Published researcher in NLP and Computer Vision. Previously at OpenAI. PhD from Berkeley in AI.",
+        linkedin: "https://linkedin.com/in/emilyrodriguez",
+        skills: ["NLP", "Computer Vision", "Research Management", "Deep Learning"]
+      },
+      {
+        name: "Alex Kumar",
+        role: "Product Director",
+        image: "/images/team/alex.jpg",
+        bio: "10+ years in product management. Previously led AI products at Microsoft. MBA from Harvard.",
+        linkedin: "https://linkedin.com/in/alexkumar",
+        skills: ["Product Strategy", "UX Design", "Agile Management", "Go-to-Market"]
+      }
     ],
 
     achievements: [
       {
         title: "Best AI Startup 2023",
         organization: "Tech Innovation Awards",
-        icon: FaAward,
-        date: "December 2023"
+        date: "December 2023",
+        icon: FaAward
       },
-      // Add more achievements...
+      {
+        title: "Top 10 AI Companies to Watch",
+        organization: "Forbes Technology",
+        date: "October 2023",
+        icon: FaStar
+      },
+      {
+        title: "Innovation Excellence Award",
+        organization: "AI Summit 2023",
+        date: "September 2023",
+        icon: FaTrophy
+      },
+      {
+        title: "Best Enterprise AI Solution",
+        organization: "Global Tech Awards",
+        date: "August 2023",
+        icon: FaMedal
+      }
     ],
 
     financials: {
-      revenueModel: "SaaS Subscription",
-      funding: [
+      revenue_model: "Enterprise SaaS Subscription + Custom Solutions",
+      funding_rounds: [
         {
           round: "Series B",
           amount: "$50M",
-          date: "2023",
-          investors: ["Tech Ventures", "AI Capital"]
+          date: "December 2023",
+          investors: ["Tech Ventures Capital", "AI Growth Fund", "Innovation Partners"]
+        },
+        {
+          round: "Series A",
+          amount: "$15M",
+          date: "March 2022",
+          investors: ["Early Stage Ventures", "Future Tech Fund", "Angel Consortium"]
+        },
+        {
+          round: "Seed",
+          amount: "$3M",
+          date: "January 2021",
+          investors: ["Startup Accelerator", "Angel Investors Group", "Tech Seed Fund"]
         }
       ]
     }
@@ -159,7 +219,7 @@ const StartupProfile = () => {
                       <span key={idx} className="startup_profile_feature-tag">{feature}</span>
                     ))}
                   </div>
-                  <a href={product.demoLink} className="startup_profile_button-primary">
+                  <a href={product.demo_link} className="startup_profile_button-primary">
                     View Demo
                   </a>
                 </div>
@@ -168,7 +228,85 @@ const StartupProfile = () => {
           </div>
         );
 
-      // Add more cases for other tabs...
+      case 'team':
+        return (
+          <div className="startup_profile_team-section">
+            <div className="startup_profile_team-grid">
+              {companyInfo.team.map((member, index) => (
+                <div key={index} className="startup_profile_team-card">
+                  <div className="startup_profile_team-member-image">
+                    <img src={member.image} alt={member.name} />
+                  </div>
+                  <div className="startup_profile_team-member-info">
+                    <h3>{member.name}</h3>
+                    <p className="startup_profile_role">{member.role}</p>
+                    <p className="startup_profile_bio">{member.bio}</p>
+                    <div className="startup_profile_skills">
+                      {member.skills.map((skill, idx) => (
+                        <span key={idx} className="startup_profile_skill-tag">{skill}</span>
+                      ))}
+                    </div>
+                    <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="startup_profile_linkedin-link">
+                      <FaLinkedin /> Connect on LinkedIn
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'achievements':
+        return (
+          <div className="startup_profile_achievements-section">
+            <div className="startup_profile_achievements-grid">
+              {companyInfo.achievements.map((achievement, index) => (
+                <div key={index} className="startup_profile_achievement-card">
+                  <div className="startup_profile_achievement-icon">
+                    <achievement.icon />
+                  </div>
+                  <div className="startup_profile_achievement-content">
+                    <h3>{achievement.title}</h3>
+                    <p>{achievement.organization}</p>
+                    <span>{achievement.date}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'financials':
+        return (
+          <div className="startup_profile_financials-section">
+            <div className="startup_profile_revenue-model">
+              <h2>Revenue Model</h2>
+              <p>{companyInfo.financials.revenue_model}</p>
+            </div>
+            <div className="startup_profile_funding-history">
+              <h2>Funding History</h2>
+              {companyInfo.financials.funding_rounds.map((round, index) => (
+                <div key={index} className="startup_profile_funding-card">
+                  <div className="startup_profile_funding-header">
+                    <h3>{round.round}</h3>
+                    <span className="startup_profile_amount">{round.amount}</span>
+                  </div>
+                  <p className="startup_profile_date">{round.date}</p>
+                  <div className="startup_profile_investors">
+                    {round.investors.map((investor, idx) => (
+                      <span key={idx} className="startup_profile_investor-tag">
+                        {investor}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
     }
   };
 

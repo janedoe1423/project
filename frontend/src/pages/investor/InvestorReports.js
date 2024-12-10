@@ -1,23 +1,51 @@
 import React, { useState } from "react";
 import './InvestorReports.css'; // Ensure to import the CSS file
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    PointElement,
+    LineElement,
+    ArcElement,
+    RadialLinearScale,
+    Title,
+    Tooltip,
+    Legend,
+    Filler
+} from 'chart.js';
 import { Bar, Pie, Line, Radar } from 'react-chartjs-2'; // Importing chart components
 import { FaDownload } from 'react-icons/fa';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
+// Register ChartJS components
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    PointElement,
+    LineElement,
+    ArcElement,
+    RadialLinearScale,
+    Title,
+    Tooltip,
+    Legend,
+    Filler
+);
+
 const InvestorReports = () => {
     // Sample data for various reports
     const [roiData, setRoiData] = useState({
         labels: ['2021', '2022', '2023'],
-        datasets: [
-            {
-                label: 'ROI (%)',
-                data: [20, 30, 25],
-                backgroundColor: 'rgba(59, 130, 246, 0.5)',
-                borderColor: 'rgba(59, 130, 246, 1)',
-                borderWidth: 1,
-            },
-        ],
+        datasets: [{
+            label: 'ROI (%)',
+            data: [20, 30, 25],
+            backgroundColor: 'rgba(59, 130, 246, 0.5)',
+            borderColor: 'rgba(59, 130, 246, 1)',
+            borderWidth: 1,
+            fill: true
+        }]
     });
 
     const [industryData, setIndustryData] = useState({
@@ -113,42 +141,42 @@ const InvestorReports = () => {
     };
 
     const renderChart = (data, title) => {
-        const chartProps = {
-            data,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: title,
-                    },
+        const baseOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Value',
-                        },
-                    },
-                },
-            },
+                title: {
+                    display: true,
+                    text: title
+                }
+            }
         };
 
-        switch (customization.chartType) {
-            case 'Bar':
-                return <Bar {...chartProps} />;
-            case 'Pie':
-                return <Pie {...chartProps} />;
-            case 'Line':
-                return <Line {...chartProps} />;
-            case 'Radar':
-                return <Radar {...chartProps} />;
-            default:
-                return <Bar {...chartProps} />;
+        const chartProps = {
+            data: data,
+            options: baseOptions
+        };
+
+        try {
+            switch (customization.chartType) {
+                case 'Bar':
+                    return <Bar {...chartProps} />;
+                case 'Pie':
+                    return <Pie {...chartProps} />;
+                case 'Line':
+                    return <Line {...chartProps} />;
+                case 'Radar':
+                    return <Radar {...chartProps} />;
+                default:
+                    return <Bar {...chartProps} />;
+            }
+        } catch (error) {
+            console.error('Error rendering chart:', error);
+            return <div>Error rendering chart</div>;
         }
     };
 
