@@ -1,11 +1,29 @@
-import React, { useState } from "react";
-import { Card, Button, Modal, Row, Col, Typography, Space, Statistic, Progress, Avatar, Descriptions, Tabs, Tag } from "antd";
+import React, { useState, useRef, useEffect } from "react";
+import ReactDOM from 'react-dom';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { 
+    Card, 
+    Button, 
+    Modal, 
+    Row, 
+    Col, 
+    Typography, 
+    Space, 
+    Statistic, 
+    Progress, 
+    Avatar, 
+    Descriptions, 
+    Tabs, 
+    Tag, 
+    message 
+} from "antd";
 import {
     LineChart, Line, BarChart, Bar, PieChart, Pie,
     RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
     CartesianGrid, XAxis, YAxis, Tooltip, Legend, Cell, ResponsiveContainer
 } from 'recharts';
-import { ArrowUpOutlined, LineChartOutlined, UserOutlined, PieChartOutlined, DollarOutlined, RiseOutlined, Badge, EyeOutlined, SafetyOutlined, FundOutlined, BarChartOutlined, UpOutlined, DownOutlined, InfoCircleOutlined, DotChartOutlined, StockOutlined, ThunderboltOutlined, GlobalOutlined, UserAddOutlined } from '@ant-design/icons';
+import { ArrowUpOutlined, LineChartOutlined, UserOutlined, PieChartOutlined, DollarOutlined, RiseOutlined, Badge, EyeOutlined, SafetyOutlined, FundOutlined, BarChartOutlined, UpOutlined, DownOutlined, InfoCircleOutlined, DotChartOutlined, StockOutlined, ThunderboltOutlined, GlobalOutlined, UserAddOutlined, DownloadOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
 const { Title, Text } = Typography;
@@ -232,6 +250,7 @@ const InvestorInvestments = () => {
     const [analysisModal, setAnalysisModal] = useState(false);
     const [selectedCompany, setSelectedCompany] = useState(null);
     const [graphModal, setGraphModal] = useState({ visible: false, type: 'revenue' });
+    const investmentRef = useRef(null);
 
     const showDetails = (company) => {
         setSelectedCompany(company);
@@ -380,6 +399,192 @@ const InvestorInvestments = () => {
         }
     };
 
+    const downloadInvestmentPDF = async (company) => {
+        try {
+            message.loading('Generating PDF...', 0);
+
+            // Create a temporary container
+            const tempDiv = document.createElement('div');
+            tempDiv.style.width = '800px';
+            tempDiv.style.padding = '20px';
+            tempDiv.style.background = 'white';
+            tempDiv.style.position = 'fixed';
+            tempDiv.style.top = '0';
+            tempDiv.style.left = '0';
+            tempDiv.style.zIndex = '-9999';
+
+            // Add company header
+            const headerDiv = document.createElement('div');
+            headerDiv.innerHTML = `
+                <h1 style="color: #1890ff; margin-bottom: 20px; font-size: 24px;">
+                    ${company.companyName} - Investment Report
+                </h1>
+                <p style="color: #666; margin-bottom: 30px;">
+                    Generated on ${new Date().toLocaleDateString()}
+                </p>
+            `;
+            tempDiv.appendChild(headerDiv);
+
+            // Add investment details
+            const detailsDiv = document.createElement('div');
+            detailsDiv.innerHTML = `
+                <div style="margin-bottom: 30px;">
+                    <h2 style="color: #1890ff; font-size: 20px;">Investment Overview</h2>
+                    <p><strong>Current Value:</strong> $${company.currentValue.toLocaleString()}</p>
+                    <p><strong>Returns:</strong> ${company.returns}%</p>
+                    <p><strong>Sector:</strong> ${company.sector}</p>
+                    <p><strong>Description:</strong> ${company.description}</p>
+                </div>
+            `;
+            tempDiv.appendChild(detailsDiv);
+
+            // Add company metrics
+            const metricsDiv = document.createElement('div');
+            metricsDiv.innerHTML = `
+                <div style="margin-bottom: 30px;">
+                    <h2 style="color: #1890ff; font-size: 20px;">Key Metrics</h2>
+                    <p><strong>Market Share:</strong> ${company.additionalDetails.keyMetrics.marketShare}%</p>
+                    <p><strong>Growth Rate:</strong> ${company.additionalDetails.keyMetrics.growthRate}%</p>
+                    <p><strong>Location:</strong> ${company.additionalDetails.location}</p>
+                    <p><strong>Employees:</strong> ${company.additionalDetails.employeeCount}</p>
+                </div>
+            `;
+            tempDiv.appendChild(metricsDiv);
+
+            // Add graphs section
+            const graphsDiv = document.createElement('div');
+            graphsDiv.style.marginBottom = '30px';
+
+            // Create and render each graph
+            const graphTypes = ['competitive', 'acquisition', 'expansion', 'revenue', 'marketShare', 'riskMetrics'];
+            
+            for (const graphType of graphTypes) {
+                const graphContainer = document.createElement('div');
+                graphContainer.style.height = '300px';
+                graphContainer.style.marginBottom = '20px';
+                graphContainer.style.width = '100%';
+                
+                const graphTitle = document.createElement('h3');
+                graphTitle.style.color = '#1890ff';
+                graphTitle.style.marginBottom = '10px';
+                graphTitle.textContent = `${graphType.charAt(0).toUpperCase() + graphType.slice(1)} Analysis`;
+                
+                graphsDiv.appendChild(graphTitle);
+                graphsDiv.appendChild(graphContainer);
+
+                // Render graph using ReactDOM
+                const graph = renderGraph({ id: graphType });
+                if (graph) {
+                    ReactDOM.render(graph, graphContainer);
+                }
+            }
+
+            tempDiv.appendChild(graphsDiv);
+
+            // Add to document
+            document.body.appendChild(tempDiv);
+
+            // Wait for content and graphs to render
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            try {
+                // Generate PDF
+                const canvas = await html2canvas(tempDiv, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: true,
+                    allowTaint: true,
+                    backgroundColor: '#ffffff',
+                    windowWidth: tempDiv.scrollWidth,
+                    windowHeight: tempDiv.scrollHeight,
+                    onclone: (clonedDoc) => {
+                        // Ensure all content is visible in clone
+                        const clonedElement = clonedDoc.querySelector('[data-html2canvas-ignore]');
+                        if (clonedElement) {
+                            clonedElement.remove();
+                        }
+                    }
+                });
+
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: 'a4',
+                    compress: true
+                });
+
+                // Add content to PDF
+                const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+                const imgX = (pdfWidth - imgWidth * ratio) / 2;
+                let imgY = 10;
+
+                // Calculate number of pages needed
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                const imgPages = Math.ceil(imgHeight * ratio / pageHeight);
+
+                // Add image across multiple pages if needed
+                for (let i = 0; i < imgPages; i++) {
+                    if (i > 0) {
+                        pdf.addPage();
+                    }
+                    
+                    pdf.addImage(
+                        imgData,
+                        'JPEG',
+                        imgX,
+                        -(i * pageHeight) + imgY,
+                        imgWidth * ratio,
+                        imgHeight * ratio
+                    );
+
+                    // Add page number
+                    pdf.setFontSize(10);
+                    pdf.setTextColor(100);
+                    pdf.text(
+                        `Page ${i + 1} of ${imgPages}`,
+                        pdf.internal.pageSize.getWidth() / 2,
+                        pdf.internal.pageSize.getHeight() - 10,
+                        { align: 'center' }
+                    );
+                }
+
+                // Save the PDF
+                pdf.save(`${company.companyName}_Investment_Report.pdf`);
+                message.success('PDF generated successfully!');
+
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                message.error('Failed to generate PDF');
+            }
+
+            // Cleanup
+            document.body.removeChild(tempDiv);
+            
+        } catch (error) {
+            console.error('Error in PDF generation:', error);
+            message.error('Failed to generate PDF report');
+        } finally {
+            message.destroy();
+        }
+    };
+
+    // Add ResizeObserver error handler
+    useEffect(() => {
+        const resizeObserverError = error => {
+            if (error.message.includes('ResizeObserver')) {
+                error.preventDefault();
+            }
+        };
+
+        window.addEventListener('error', resizeObserverError);
+        return () => window.removeEventListener('error', resizeObserverError);
+    }, []);
+
     return (
         <div style={{ padding: "24px" }}>
             <Title level={2}>Investment Portfolio</Title>
@@ -388,6 +593,7 @@ const InvestorInvestments = () => {
                     <Card 
                         key={company.id}
                         className="investor_investment-investment-card"
+                        ref={investmentRef}
                         style={{ 
                             borderRadius: '12px',
                             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
@@ -451,6 +657,19 @@ const InvestorInvestments = () => {
                                     >
                                         Analysis
                                     </Button>
+                                    <Button 
+                                        icon={<DownloadOutlined />}
+                                        onClick={() => downloadInvestmentPDF(company)}
+                                        block
+                                        style={{
+                                            borderRadius: '6px',
+                                            height: '40px',
+                                            background: '#52c41a',
+                                            color: 'white'
+                                        }}
+                                    >
+                                        Download PDF
+                                    </Button>
                                 </Space>
                             </Col>
                         </Row>
@@ -460,12 +679,23 @@ const InvestorInvestments = () => {
 
             {/* Details Modal */}
             <Modal
-                title={null}
+                title={`${selectedCompany?.companyName || ''} Details`}
                 open={detailsModal}
                 onCancel={() => setDetailsModal(false)}
-                footer={null}
+                footer={[
+                    <Button key="close" onClick={() => setDetailsModal(false)}>
+                        Close
+                    </Button>,
+                    <Button 
+                        key="download" 
+                        type="primary"
+                        icon={<DownloadOutlined />}
+                        onClick={() => selectedCompany && downloadInvestmentPDF(selectedCompany)}
+                    >
+                        Download Report
+                    </Button>
+                ]}
                 width={1000}
-                className="investor_investment-details-modal"
             >
                 {selectedCompany && (
                     <>

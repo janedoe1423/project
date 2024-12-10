@@ -20,6 +20,8 @@
     border: none !important;
     background: linear-gradient(145deg, #ffffff, #f0f2f5);
     box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+    page-break-inside: avoid;
+    margin-bottom: 20px;
 }
 
 .investor_investment-investment-card .ant-card-body {
@@ -649,4 +651,15 @@
 /* Override Column styles */
 .investor_investment-analysis-dashboard .ant-col {
     padding: 0 !important;
+}
+
+.pdf-content {
+    background: white;
+    padding: 20px;
+}
+
+@media print {
+    .investor_investment-investment-card {
+        break-inside: avoid;
+    }
 }
