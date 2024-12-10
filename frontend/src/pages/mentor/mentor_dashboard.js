@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-=======
 import React, { useState, useEffect } from 'react';
->>>>>>> b20ce5c03122c52c01667eab2d0f5e5a6e9fc070
 import { Row, Col } from 'react-bootstrap';
 import { 
     FaUsers, FaChartLine, FaTrophy, FaBell,
@@ -15,17 +10,6 @@ import {
 import './mentor_dashboard.css';
 
 const MentorDashboard = () => {
-<<<<<<< HEAD
-    const [showNotifications, setShowNotifications] = useState(false);
-
-    const toggleNotifications = () => {
-        setShowNotifications(!showNotifications);
-    };
-
-    const cardVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0 }
-=======
     const [selectedTimeframe, setSelectedTimeframe] = useState('week');
     const [showAllNotifications, setShowAllNotifications] = useState(false);
     const [showNotificationDropdown, setShowNotificationDropdown] = useState(false);
@@ -75,7 +59,6 @@ const MentorDashboard = () => {
 
     const handleNotificationClick = () => {
         setShowNotificationDropdown(!showNotificationDropdown);
->>>>>>> b20ce5c03122c52c01667eab2d0f5e5a6e9fc070
     };
 
     // Close dropdown when clicking outside
@@ -91,19 +74,6 @@ const MentorDashboard = () => {
     }, []);
 
     return (
-<<<<<<< HEAD
-        <div className="mentor-dashboard-container">
-            <div className="mentor-dashboard-header">
-                <div className="mentor-dashboard-bell-container">
-                    <FaBell className="mentor-dashboard-bell-icon" onClick={toggleNotifications} />
-                    {showNotifications && <NotificationsPanel />}
-                </div>
-                <h1 className="mentor-dashboard-title">Mentor Dashboard</h1>
-            </div>
-            
-            <Row className="mentor-dashboard-grid">
-                {/* Overview Section */}
-=======
         <div className="mentor-dashboard">
             {/* Header Section */}
             <div className="mentor-dashboard-header">
@@ -125,10 +95,12 @@ const MentorDashboard = () => {
                             className="mentor-dashboard-notification-button"
                             onClick={handleNotificationClick}
                         >
-                            <FaBell />
-                            {notifications.some(n => n.isNew) && (
-                                <span className="mentor-dashboard-notification-badge"></span>
-                            )}
+                            <div className="notification-icon-wrapper">
+                                <FaBell className="notification-bell" />
+                                {notifications.some(n => n.isNew) && (
+                                    <span className="mentor-dashboard-notification-badge pulse"></span>
+                                )}
+                            </div>
                         </button>
                         {showNotificationDropdown && (
                             <div className="mentor-dashboard-notification-dropdown">
@@ -177,7 +149,6 @@ const MentorDashboard = () => {
             </Row>
 
             <Row>
->>>>>>> b20ce5c03122c52c01667eab2d0f5e5a6e9fc070
                 <Col lg={8}>
                     {/* Engagement Chart */}
                     <div className="mentor-dashboard-card">
@@ -245,78 +216,6 @@ const MentorDashboard = () => {
                     </div>
                 </Col>
 
-<<<<<<< HEAD
-                {/* Engagement Metrics */}
-                <Col lg={4}>
-                    <motion.div
-                        className="mentor-dashboard-card"
-                        variants={cardVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ delay: 0.3 }}
-                    >
-                        <EngagementMetrics />
-                    </motion.div>
-                </Col>
-
-                {/* Upcoming Schedule */}
-                <Col lg={6}>
-                    <motion.div
-                        className="mentor-dashboard-card"
-                        variants={cardVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ delay: 0.4 }}
-                    >
-                        <UpcomingSchedule />
-                    </motion.div>
-                </Col>
-
-                {/* Achievements Panel */}
-                <Col lg={6}>
-                    <motion.div
-                        className="mentor-dashboard-card"
-                        variants={cardVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ delay: 0.5 }}
-                    >
-                        <AchievementsPanel />
-                    </motion.div>
-                </Col>
-
-                {/* Mentor Spotlight */}
-                <Col lg={8}>
-                    <motion.div
-                        className="mentor-dashboard-card"
-                        variants={cardVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ delay: 0.6 }}
-                    >
-                        <MentorSpotlight />
-                    </motion.div>
-                </Col>
-
-                {/* Additional Sections */}
-                <Col lg={12}>
-                    <Row>
-                        <Col md={4}>
-                            <SuggestionsBox />
-                        </Col>
-                        <Col md={4}>
-                            <SessionAnalytics />
-                        </Col>
-                        <Col md={4}>
-                            <TrendingTopics />
-                        </Col>
-                    </Row>
-                </Col>
-
-                {/* Quick Access Panel */}
-                <Col lg={12}>
-                    <QuickAccessPanel />
-=======
                 <Col lg={4}>
                     {/* Quick Actions */}
                     <div className="mentor-dashboard-card">
@@ -350,7 +249,6 @@ const MentorDashboard = () => {
                             ))}
                         </div>
                     </div>
->>>>>>> b20ce5c03122c52c01667eab2d0f5e5a6e9fc070
                 </Col>
             </Row>
 
