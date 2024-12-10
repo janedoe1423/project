@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Nav } from "react-bootstrap";
 import {
     FaHome,
@@ -12,6 +12,12 @@ import {
 import "./investor_sidebar.css";
 
 const InvestorSidebar = ({ currentHash }) => {
+    const [activeLink, setActiveLink] = useState(currentHash);
+
+    const handleClick = (hash) => {
+        setActiveLink(hash);
+    };
+
     return (
         <div className="sidebar-wrapper">
             <div className="sidebar-container">
@@ -22,7 +28,8 @@ const InvestorSidebar = ({ currentHash }) => {
                 <Nav className="sidebar-nav">
                     <Nav.Link
                         href="#dashboard"
-                        className={`sidebar-link ${currentHash === '#dashboard' ? 'active' : ''}`}
+                        className={`sidebar-link ${activeLink === '#dashboard' ? 'active' : ''}`}
+                        onClick={() => handleClick('#dashboard')}
                     >
                         <div className="icon-container">
                             <FaHome />
@@ -32,7 +39,8 @@ const InvestorSidebar = ({ currentHash }) => {
 
                     <Nav.Link
                         href="#profile"
-                        className={`sidebar-link ${currentHash === '#profile' ? 'active' : ''}`}
+                        className={`sidebar-link ${activeLink === '#profile' ? 'active' : ''}`}
+                        onClick={() => handleClick('#profile')}
                     >
                         <div className="icon-container">
                             <FaUser />
@@ -42,7 +50,8 @@ const InvestorSidebar = ({ currentHash }) => {
 
                     <Nav.Link
                         href="#portfolio"
-                        className={`sidebar-link ${currentHash === '#portfolio' ? 'active' : ''}`}
+                        className={`sidebar-link ${activeLink === '#portfolio' ? 'active' : ''}`}
+                        onClick={() => handleClick('#portfolio')}
                     >
                         <div className="icon-container">
                             <FaChartPie />
@@ -52,7 +61,8 @@ const InvestorSidebar = ({ currentHash }) => {
 
                     <Nav.Link
                         href="#investments"
-                        className={`sidebar-link ${currentHash === '#investments' ? 'active' : ''}`}
+                        className={`sidebar-link ${activeLink === '#investments' ? 'active' : ''}`}
+                        onClick={() => handleClick('#investments')}
                     >
                         <div className="icon-container">
                             <FaHandshake />
@@ -62,7 +72,8 @@ const InvestorSidebar = ({ currentHash }) => {
 
                     <Nav.Link
                         href="#network"
-                        className={`sidebar-link ${currentHash === '#network' ? 'active' : ''}`}
+                        className={`sidebar-link ${activeLink === '#network' ? 'active' : ''}`}
+                        onClick={() => handleClick('#network')}
                     >
                         <div className="icon-container">
                             <FaNetworkWired />
@@ -72,7 +83,8 @@ const InvestorSidebar = ({ currentHash }) => {
 
                     <Nav.Link
                         href="#reports"
-                        className={`sidebar-link ${currentHash === '#reports' ? 'active' : ''}`}
+                        className={`sidebar-link ${activeLink === '#reports' ? 'active' : ''}`}
+                        onClick={() => handleClick('#reports')}
                     >
                         <div className="icon-container">
                             <FaChartBar />
@@ -82,7 +94,8 @@ const InvestorSidebar = ({ currentHash }) => {
 
                     <Nav.Link
                         href="#schemes"
-                        className={`sidebar-link ${currentHash === '#schemes' ? 'active' : ''}`}
+                        className={`sidebar-link ${activeLink === '#schemes' ? 'active' : ''}`}
+                        onClick={() => handleClick('#schemes')}
                     >
                         <div className="icon-container">
                             <FaLightbulb />

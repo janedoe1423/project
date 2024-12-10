@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import './admin_dashboard.css';
 import {
     Container, Grid, Card, Typography, Box,
     LinearProgress, IconButton, Tooltip, Tabs, Tab,
     styled, keyframes, CircularProgress, List, ListItem, 
     ListItemAvatar, ListItemText, Avatar,
-    Drawer, AppBar, Toolbar
+    Drawer, AppBar, Toolbar, Button
 } from '@mui/material';
 import {
     PeopleOutline, Campaign, GavelOutlined,
@@ -138,6 +139,59 @@ const chartOptions = {
     }
 };
 
+const industryChartOptions = {
+    ...chartOptions,
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        legend: {
+            position: 'bottom',
+            labels: {
+                padding: 20,
+                usePointStyle: true,
+                font: { size: 12 }
+            }
+        },
+        tooltip: {
+            backgroundColor: 'rgba(17, 24, 39, 0.9)',
+            padding: 12,
+            titleFont: { size: 14, weight: 'bold' },
+            bodyFont: { size: 13 },
+            displayColors: true,
+            callbacks: {
+                label: function(context) {
+                    let label = context.dataset.label || '';
+                    if (label) {
+                        label += ': ';
+                    }
+                    if (context.parsed.y !== null) {
+                        label += context.parsed.y.toLocaleString();
+                    }
+                    return label;
+                }
+            }
+        }
+    },
+    scales: {
+        y: {
+            beginAtZero: true,
+            grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+            },
+            ticks: {
+                callback: function(value) {
+                    return value.toLocaleString();
+                }
+            }
+        },
+        x: {
+            grid: {
+                display: false
+            }
+        }
+    }
+};
+
 const AdminDashboard = () => {
     // Add state declarations
     const [selectedMenu, setSelectedMenu] = useState('dashboard');
@@ -205,17 +259,44 @@ const AdminDashboard = () => {
         ]
     };
 
+    const [timeFrame, setTimeFrame] = useState('monthly');
     const fundingTrendsData = {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-        datasets: [{
-            label: 'Monthly Funding (Millions)',
-            data: [2.5, 3.2, 4.1, 3.8, 4.5, 5.2],
-            backgroundColor: 'rgba(99, 102, 241, 0.8)',
-            borderColor: 'rgba(99, 102, 241, 1)',
-            borderWidth: 2,
-            borderRadius: 5,
-            barThickness: 20
-        }]
+        weekly: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Weekly Funding (Millions)',
+                data: [0.8, 1.2, 0.9, 1.5, 1.1, 0.7, 1.3],
+                backgroundColor: 'rgba(99, 102, 241, 0.8)',
+                borderColor: 'rgba(99, 102, 241, 1)',
+                borderWidth: 2,
+                borderRadius: 5,
+                barThickness: 20
+            }]
+        },
+        monthly: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Monthly Funding (Millions)',
+                data: [2.5, 3.2, 4.1, 3.8, 4.5, 5.2],
+                backgroundColor: 'rgba(99, 102, 241, 0.8)',
+                borderColor: 'rgba(99, 102, 241, 1)',
+                borderWidth: 2,
+                borderRadius: 5,
+                barThickness: 20
+            }]
+        },
+        yearly: {
+            labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+            datasets: [{
+                label: 'Yearly Funding (Millions)',
+                data: [25.5, 32.1, 45.8, 52.3, 68.7, 75.2],
+                backgroundColor: 'rgba(99, 102, 241, 0.8)',
+                borderColor: 'rgba(99, 102, 241, 1)',
+                borderWidth: 2,
+                borderRadius: 5,
+                barThickness: 20
+            }]
+        }
     };
 
     const startups = [
@@ -440,12 +521,34 @@ const AdminDashboard = () => {
             </Grid>
             <Grid item xs={12}>
                 <ChartCard>
-                    <Typography variant="h6" className="chart-title" sx={{ mb: 2 }}>
-                        Monthly Funding Trends
-                    </Typography>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+                        <Typography variant="h6" className="chart-title">
+                            Funding Trends
+                        </Typography>
+                        <Box sx={{ display: 'flex', gap: 1 }}>
+                            {['weekly', 'monthly', 'yearly'].map((period) => (
+                                <Button
+                                    key={period}
+                                    variant={timeFrame === period ? 'contained' : 'outlined'}
+                                    size="small"
+                                    onClick={() => setTimeFrame(period)}
+                                    sx={{
+                                        textTransform: 'capitalize',
+                                        minWidth: '80px',
+                                        backgroundColor: timeFrame === period ? 'primary.main' : 'transparent',
+                                        '&:hover': {
+                                            backgroundColor: timeFrame === period ? 'primary.dark' : 'rgba(99, 102, 241, 0.08)'
+                                        }
+                                    }}
+                                >
+                                    {period}
+                                </Button>
+                            ))}
+                        </Box>
+                    </Box>
                     <Box sx={{ height: 300, position: 'relative' }}>
                         <Bar 
-                            data={fundingTrendsData} 
+                            data={fundingTrendsData[timeFrame]} 
                             options={chartOptions}
                         />
                     </Box>
@@ -649,6 +752,192 @@ const AdminDashboard = () => {
         );
     };
 
+    // Add this data near your other state declarations
+    const [industryData] = useState({
+        daily: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [
+                {
+                    label: 'Dairy Industry',
+                    data: [320, 350, 345, 360, 375, 380, 395],
+                    borderColor: 'rgba(99, 102, 241, 1)',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    fill: true
+                },
+                {
+                    label: 'Textile Industry',
+                    data: [280, 290, 285, 295, 300, 310, 315],
+                    borderColor: 'rgba(16, 185, 129, 1)',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true
+                },
+                {
+                    label: 'Chemical Industry',
+                    data: [420, 435, 430, 445, 460, 465, 480],
+                    borderColor: 'rgba(245, 158, 11, 1)',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    fill: true
+                }
+            ]
+        },
+        weekly: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+            datasets: [
+                {
+                    label: 'Dairy Production (tons)',
+                    data: [1200, 1250, 1300, 1350],
+                    backgroundColor: 'rgba(99, 102, 241, 0.8)',
+                    borderRadius: 5
+                },
+                {
+                    label: 'Textile Production (units)',
+                    data: [950, 1000, 1050, 1100],
+                    backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                    borderRadius: 5
+                }
+            ]
+        },
+        monthly: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [
+                {
+                    label: 'Renewable Energy (MWh)',
+                    data: [5000, 5200, 5400, 5600, 5800, 6000],
+                    backgroundColor: 'rgba(99, 102, 241, 0.8)',
+                    borderRadius: 5
+                },
+                {
+                    label: 'Chemical Industry (MWh)',
+                    data: [7000, 7200, 7400, 7600, 7800, 8000],
+                    backgroundColor: 'rgba(245, 158, 11, 0.8)',
+                    borderRadius: 5
+                }
+            ]
+        },
+        yearly: {
+            labels: ['2019', '2020', '2021', '2022', '2023'],
+            datasets: [
+                {
+                    label: 'Ports & Logistics Growth (%)',
+                    data: [15, 18, 22, 25, 30],
+                    borderColor: 'rgba(99, 102, 241, 1)',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    tension: 0.4
+                },
+                {
+                    label: 'Other Industries Growth (%)',
+                    data: [12, 14, 16, 19, 22],
+                    borderColor: 'rgba(245, 158, 11, 1)',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    tension: 0.4
+                }
+            ]
+        }
+    });
+
+    // Add this function to render the industry trends
+    const renderIndustryTrends = () => (
+        <div className="industry-trends-section">
+            <Typography variant="h5" className="section-title" sx={{ mb: 3 }}>
+                Gujarat Industry Trends
+            </Typography>
+            <Grid container spacing={3}>
+                <Grid item xs={12} md={6}>
+                    <ChartCard>
+                        <Typography variant="h6" className="chart-title">
+                            Daily Revenue Trends
+                        </Typography>
+                        <Box sx={{ height: 300 }}>
+                            <Line 
+                                data={industryData.daily}
+                                options={{
+                                    ...industryChartOptions,
+                                    plugins: {
+                                        ...industryChartOptions.plugins,
+                                        title: {
+                                            display: true,
+                                            text: 'Past Week Revenue'
+                                        }
+                                    }
+                                }}
+                            />
+                        </Box>
+                    </ChartCard>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <ChartCard>
+                        <Typography variant="h6" className="chart-title">
+                            Weekly Production Output
+                        </Typography>
+                        <Box sx={{ height: 300 }}>
+                            <Bar 
+                                data={industryData.weekly}
+                                options={{
+                                    ...industryChartOptions,
+                                    plugins: {
+                                        ...industryChartOptions.plugins,
+                                        title: {
+                                            display: true,
+                                            text: 'Dairy vs Textile Production'
+                                        }
+                                    }
+                                }}
+                            />
+                        </Box>
+                    </ChartCard>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <ChartCard>
+                        <Typography variant="h6" className="chart-title">
+                            Monthly Energy Consumption
+                        </Typography>
+                        <Box sx={{ height: 300 }}>
+                            <Bar 
+                                data={industryData.monthly}
+                                options={{
+                                    ...industryChartOptions,
+                                    plugins: {
+                                        ...industryChartOptions.plugins,
+                                        title: {
+                                            display: true,
+                                            text: 'Energy Consumption by Industry'
+                                        }
+                                    },
+                                    scales: {
+                                        x: { stacked: true },
+                                        y: { stacked: true }
+                                    }
+                                }}
+                            />
+                        </Box>
+                    </ChartCard>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <ChartCard>
+                        <Typography variant="h6" className="chart-title">
+                            Yearly Revenue Growth
+                        </Typography>
+                        <Box sx={{ height: 300 }}>
+                            <Line 
+                                data={industryData.yearly}
+                                options={{
+                                    ...industryChartOptions,
+                                    plugins: {
+                                        ...industryChartOptions.plugins,
+                                        title: {
+                                            display: true,
+                                            text: 'Industry Growth Comparison'
+                                        }
+                                    }
+                                }}
+                            />
+                        </Box>
+                    </ChartCard>
+                </Grid>
+            </Grid>
+        </div>
+    );
+
     return (
         <Box sx={{ display: 'flex' }}>
             <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 8 }}>
@@ -656,14 +945,6 @@ const AdminDashboard = () => {
                     <Container maxWidth="xl">
                         {renderTopCards()}
                         {renderCharts()}
-                        <Grid container spacing={3} sx={{ mt: 3 }}>
-                            <Grid item xs={12} md={6}>
-                                <RecentActivity />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                {/* Add your Top Campaigns component here */}
-                            </Grid>
-                        </Grid>
                         <div className="dashboard">
                             <div className="table-section">
                                 <h2 className="table-title">Total Startups Registered</h2>
@@ -706,6 +987,7 @@ const AdminDashboard = () => {
                                 )}
                             </div>
                         </div>
+                        {renderIndustryTrends()}
                     </Container>
                 )}
             </Box>
@@ -1069,6 +1351,55 @@ const styles = `
             width: 32px;
             height: 32px;
             font-size: 1.25rem;
+        }
+    }
+
+    .industry-trends-section {
+        margin-top: 3rem;
+        padding: 2rem;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-title {
+        color: #1e293b;
+        font-weight: 600;
+        position: relative;
+        padding-bottom: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(to right, #6366f1, #8b5cf6);
+        border-radius: 3px;
+    }
+
+    .chart-container {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        height: 100%;
+        transition: transform 0.3s ease;
+    }
+
+    .chart-container:hover {
+        transform: translateY(-5px);
+    }
+
+    @media (max-width: 768px) {
+        .industry-trends-section {
+            padding: 1rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
         }
     }
 `;

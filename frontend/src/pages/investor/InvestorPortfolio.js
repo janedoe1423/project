@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Line, Pie, Bar } from 'react-chartjs-2';
 import { 
     FaBuilding, FaChartLine, FaFilter, FaSearch, 
     FaSortAmountUp, FaDownload, FaInfoCircle 
 } from 'react-icons/fa';
 import './InvestorPortfolio.css';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 const InvestorPortfolio = () => {
     const [activeFilter, setActiveFilter] = useState('all');
@@ -13,6 +15,7 @@ const InvestorPortfolio = () => {
     const [timeRange, setTimeRange] = useState('1y');
     const [chartData, setChartData] = useState(null);
     const [filteredCompanies, setFilteredCompanies] = useState([]);
+    const portfolioRef = useRef(null);
 
     const portfolioData = {
         totalValue: "450M",
@@ -279,13 +282,34 @@ const InvestorPortfolio = () => {
         setFilteredCompanies(results);
     }, [searchQuery, activeFilter, sortBy]);
 
+    const exportToPDF = async () => {
+        const element = portfolioRef.current;
+        const canvas = await html2canvas(element, {
+            scale: 2,
+            logging: false,
+            useCORS: true
+        });
+        
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+        const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+        const imgX = (pdfWidth - imgWidth * ratio) / 2;
+        
+        pdf.addImage(imgData, 'PNG', imgX, 0, imgWidth * ratio, imgHeight * ratio);
+        pdf.save('investor-portfolio-report.pdf');
+    };
+
     return (
-        <div className="portfolio-container">
+        <div className="investor_portfolio-container" ref={portfolioRef}>
             {/* Portfolio Header */}
-            <div className="portfolio-header">
+            <div className="investor_portfolio-header">
                 <h1>Investment Portfolio</h1>
-                <div className="portfolio-actions">
-                    <button className="action-btn">
+                <div className="investor_portfolio-actions">
+                    <button className="action-btn" onClick={exportToPDF}>
                         <FaDownload /> Export Report
                     </button>
                     <button className="action-btn">
@@ -362,12 +386,12 @@ const InvestorPortfolio = () => {
             </div>
 
             {/* Portfolio Companies Section */}
-            <div className="companies-section">
-                <div className="section-header">
+            <div className="investor_portfolio-companies-section">
+                <div className="investor_portfolio-section-header">
                     <h2>Portfolio Companies</h2>
-                    <div className="filter-controls">
+                    <div className="investor_portfolio-filter-controls">
                         <select 
-                            className="filter-select"
+                            className="investor_portfolio-filter-select"
                             value={activeFilter}
                             onChange={(e) => setActiveFilter(e.target.value)}
                         >
@@ -378,7 +402,7 @@ const InvestorPortfolio = () => {
                             ))}
                         </select>
                         <select 
-                            className="sort-select"
+                            className="investor_portfolio-sort-select"
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value)}
                         >
@@ -391,35 +415,35 @@ const InvestorPortfolio = () => {
                     </div>
                 </div>
 
-                <div className="companies-grid">
+                <div className="investor_portfolio-companies-grid">
                     {filteredCompanies.length > 0 ? (
                         filteredCompanies.map(company => (
-                            <div key={company.id} className="company-card">
-                                <div className="company-header">
+                            <div key={company.id} className="investor_portfolio-company-card">
+                                <div className="investor_portfolio-company-header">
                                     <img src={company.logo} alt={company.name} />
                                     <span className={`status-badge ${company.status.toLowerCase()}`}>
                                         {company.status}
                                     </span>
                                 </div>
-                                <div className="company-info">
+                                <div className="investor_portfolio-company-info">
                                     <h3>{company.name}</h3>
-                                    <p className="sector">{company.sector}</p>
-                                    <div className="investment-details">
-                                        <div className="detail">
+                                    <p className="investor_portfolio-sector">{company.sector}</p>
+                                    <div className="investor_portfolio-investment-details">
+                                        <div className="investor_portfolio-detail">
                                             <span>Investment</span>
                                             <strong>${company.investmentAmount}</strong>
                                         </div>
-                                        <div className="detail">
+                                        <div className="investor_portfolio-detail">
                                             <span>Ownership</span>
                                             <strong>{company.ownership}</strong>
                                         </div>
-                                        <div className="detail">
+                                        <div className="investor_portfolio-detail">
                                             <span>Current Value</span>
                                             <strong>${company.valuation}</strong>
                                         </div>
                                     </div>
-                                    <div className="performance-metrics">
-                                        <div className={`trend ${company.performance.trend}`}>
+                                    <div className="investor_portfolio-performance-metrics">
+                                        <div className={`investor_portfolio-trend ${company.performance.trend}`}>
                                             {company.performance.growth}% Growth
                                         </div>
                                     </div>
@@ -427,7 +451,7 @@ const InvestorPortfolio = () => {
                             </div>
                         ))
                     ) : (
-                        <div className="no-results">
+                        <div className="investor_portfolio-no-results">
                             <p>No companies found matching your criteria</p>
                         </div>
                     )}

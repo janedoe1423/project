@@ -1014,3 +1014,4 @@ class SchemeApplication(models.Model):
 
     def __str__(self):
         return f"{self.startup.name} - {self.scheme.title}"
+
