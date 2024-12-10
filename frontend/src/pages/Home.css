@@ -489,3 +489,8 @@
         font-size: 2rem;
     }
 }
+
+.map-container {
+    text-align: center;
+    margin: 20px 0;
+}
