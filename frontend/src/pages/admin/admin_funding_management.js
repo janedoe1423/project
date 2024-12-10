@@ -648,7 +648,7 @@ const AdminDashboard = () => {
 
     // Render Funding Success Trends section
     const renderFundingSuccessTrends = () => (
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6}>
             <ChartCard>
                 <Typography variant="h6" className="chart-title" sx={{ mb: 2 }}>
                     Funding Success Trends
@@ -724,7 +724,7 @@ const AdminDashboard = () => {
 
     // Render Comparative Analysis section
     const renderComparativeAnalysis = () => (
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6}>
             <ChartCard>
                 <Typography variant="h6" className="chart-title" sx={{ mb: 2 }}>
                     Comparative Analysis

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css';
 import { FaRocket, FaLightbulb, FaCertificate, FaHandshake, FaChartLine, FaShieldAlt, FaUsers, FaGlobe, FaAward, FaComments, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import GujaratMap from '../components/GujaratMap';
 
 function Home() {
     const [showMap, setShowMap] = useState(false);
@@ -120,6 +121,7 @@ function Home() {
             {/* Conditional Rendering of Gujarat Map */}
             {showMap && (
                 <div className="map-container">
+                    <GujaratMap />
                     <button className="btn btn-secondary" onClick={() => setShowMap(false)}>Close Map</button>
                 </div>
             )}
