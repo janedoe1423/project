@@ -553,465 +553,62 @@ class RiskData(models.Model):
     def __str__(self):
         return f"{self.company.name} - {self.subject}"
 
-class Startup(models.Model):
-    """Main Startup model containing basic company information"""
-    id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False
-    )
-    
-    # Basic Info
-    name = models.CharField(max_length=255, unique=True)
-    logo = models.ImageField(upload_to='startups/logos/')
-    engagement_level = models.CharField(
-        max_length=50,
-        choices=[
-            ('EXPLORER', 'Explorer'),
-            ('GROWTH', 'Growth'),
-            ('SCALE', 'Scale'),
-            ('MATURE', 'Mature'),
-        ]
-    )
-    
-    # Contact Info
-    phone = models.CharField(max_length=20)
-    email = models.EmailField(unique=True)
-    website = models.URLField(blank=True)
-    founded_date = models.DateField()
-    
-    # Location
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    country = models.CharField(max_length=100, default='India')
-    
-    # Key Metrics
-    years_of_experience = models.PositiveIntegerField()
-    team_size = models.PositiveIntegerField()
-    revenue = models.DecimalField(max_digits=20, decimal_places=2)
-    patents_filed = models.PositiveIntegerField(default=0)
-    
-    # About
-    description = models.TextField()
-    
-    # Timestamps
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
-    class Meta:
-        indexes = [
-            models.Index(fields=['name']),
-            models.Index(fields=['engagement_level']),
-            models.Index(fields=['city', 'state']),
-        ]
-
-    def __str__(self):
-        return self.name
-
-class StartupIndustryFocus(models.Model):
-    """Industries that the startup focuses on"""
-    startup = models.ForeignKey(
-        Startup,
-        on_delete=models.CASCADE,
-        related_name='industry_focuses'
-    )
+class StartupBasicInfo(models.Model):
+    """Model to store basic information about a startup."""
+    name = models.CharField(max_length=200)
+    logo = models.ImageField(upload_to='startup_logos/', null=True, blank=True)
+    tagline = models.CharField(max_length=200)
+    founded = models.CharField(max_length=4)
+    type = models.CharField(max_length=100)
     industry = models.CharField(max_length=100)
-    
-    class Meta:
-        unique_together = ('startup', 'industry')
+    registration = models.CharField(max_length=100)
+    location = models.CharField(max_length=200)
+    website = models.URLField()
+    phone = models.CharField(max_length=20)
+    email = models.EmailField()
+    linkedin = models.URLField(blank=True)
+    twitter = models.URLField(blank=True)
+    instagram = models.URLField(blank=True)
 
-class StartupServiceArea(models.Model):
-    """Services offered by the startup"""
-    startup = models.ForeignKey(
-        Startup,
-        on_delete=models.CASCADE,
-        related_name='service_areas'
-    )
-    service = models.CharField(max_length=100)
-    
-    class Meta:
-        unique_together = ('startup', 'service')
+class StartupVisionMission(models.Model):
+    startup = models.OneToOneField(StartupBasicInfo, on_delete=models.CASCADE, related_name='vision_mission')
+    vision = models.TextField()
+    mission = models.TextField()
+    values = models.JSONField()  # Store as JSON array
 
-class StartupStageValidation(models.Model):
-    """Validation stages and progress"""
-    startup = models.OneToOneField(
-        Startup,
-        on_delete=models.CASCADE,
-        related_name='stage_validation'
-    )
-    current_stage = models.CharField(max_length=50)
-    market_validation_status = models.CharField(max_length=50)
-    product_validation_status = models.CharField(max_length=50)
+class StartupMetric(models.Model):
+    startup = models.ForeignKey(StartupBasicInfo, on_delete=models.CASCADE, related_name='metrics')
+    title = models.CharField(max_length=100)
+    value = models.CharField(max_length=50)
+    gradient = models.CharField(max_length=100)
+    growth = models.CharField(max_length=50)
 
-class StartupAchievement(models.Model):
-    """Awards and recognitions"""
-    startup = models.ForeignKey(
-        Startup,
-        on_delete=models.CASCADE,
-        related_name='achievements'
-    )
-    title = models.CharField(max_length=255)
-    year = models.PositiveIntegerField()
-    description = models.TextField(blank=True)
-    proof_document = models.FileField(
-        upload_to='startups/achievements/',
-        null=True,
-        blank=True
-    )
-    
-    class Meta:
-        ordering = ['-year']
-
-class StartupMarketPresence(models.Model):
-    """Market presence and reach"""
-    startup = models.OneToOneField(
-        Startup,
-        on_delete=models.CASCADE,
-        related_name='market_presence'
-    )
-    operations_type = models.CharField(max_length=100)  # e.g., "Pan India Operations"
-    international_markets = models.PositiveIntegerField()
-    active_customers = models.PositiveIntegerField()
-    
-    def __str__(self):
-        return f"Market Presence for {self.startup.name}"
-
-class StartupMetrics(models.Model):
-    """Monthly metrics tracking for startups"""
-    startup = models.ForeignKey(
-        'Startup',
-        on_delete=models.CASCADE,
-        related_name='metrics'
-    )
-    date = models.DateField()
-    
-    # Growth Metrics
-    growth_rate = models.DecimalField(
-        max_digits=5,
-        decimal_places=2,
-        help_text="Monthly growth rate in percentage"
-    )
-    growth_rate_trend = models.DecimalField(
-        max_digits=5,
-        decimal_places=2,
-        help_text="Change in growth rate vs previous month"
-    )
-    
-    # Revenue Metrics
-    monthly_revenue = models.DecimalField(
-        max_digits=12,
-        decimal_places=2
-    )
-    revenue_trend = models.DecimalField(
-        max_digits=5,
-        decimal_places=2,
-        help_text="Change in revenue vs previous month"
-    )
-    
-    # User Metrics
-    active_users = models.PositiveIntegerField()
-    user_growth_trend = models.DecimalField(
-        max_digits=5,
-        decimal_places=2,
-        help_text="Change in user base vs previous month"
-    )
-    
-    # Market Metrics
-    market_share = models.DecimalField(
-        max_digits=5,
-        decimal_places=2,
-        help_text="Market share percentage"
-    )
-    market_share_trend = models.DecimalField(
-        max_digits=5,
-        decimal_places=2,
-        help_text="Change in market share vs previous month"
-    )
-    
-    class Meta:
-        ordering = ['-date']
-        unique_together = ['startup', 'date']
-        indexes = [
-            models.Index(fields=['startup', 'date']),
-            models.Index(fields=['date']),
-        ]
-        
-    def __str__(self):
-        return f"{self.startup.name} - {self.date}"
-
-class StartupMetricsSnapshot(models.Model):
-    """Real-time/current metrics snapshot"""
-    startup = models.OneToOneField(
-        'Startup',
-        on_delete=models.CASCADE,
-        related_name='current_metrics'
-    )
-    last_updated = models.DateTimeField(auto_now=True)
-    
-    # Current Values
-    current_growth_rate = models.DecimalField(
-        max_digits=5,
-        decimal_places=2
-    )
-    current_monthly_revenue = models.DecimalField(
-        max_digits=12,
-        decimal_places=2
-    )
-    current_active_users = models.PositiveIntegerField()
-    current_market_share = models.DecimalField(
-        max_digits=5,
-        decimal_places=2
-    )
-    
-    def __str__(self):
-        return f"{self.startup.name} - Current Metrics"
-
-class StartupMetricTarget(models.Model):
-    """Target/goal metrics for startups"""
-    startup = models.ForeignKey(
-        'Startup',
-        on_delete=models.CASCADE,
-        related_name='metric_targets'
-    )
-    target_date = models.DateField()
-    
-    METRIC_TYPES = [
-        ('GROWTH', 'Growth Rate'),
-        ('REVENUE', 'Revenue'),
-        ('USERS', 'User Base'),
-        ('MARKET', 'Market Share'),
-    ]
-    
-    metric_type = models.CharField(
-        max_length=20,
-        choices=METRIC_TYPES
-    )
-    target_value = models.DecimalField(
-        max_digits=12,
-        decimal_places=2
-    )
-    achieved = models.BooleanField(default=False)
-    
-    class Meta:
-        unique_together = ['startup', 'metric_type', 'target_date']
-        ordering = ['target_date']
-
-class StartupMetricAlert(models.Model):
-    """Alerts/notifications for metric changes"""
-    startup = models.ForeignKey(
-        'Startup',
-        on_delete=models.CASCADE,
-        related_name='metric_alerts'
-    )
-    
-    ALERT_TYPES = [
-        ('POSITIVE', 'Positive Change'),
-        ('NEGATIVE', 'Negative Change'),
-        ('TARGET_REACHED', 'Target Reached'),
-        ('THRESHOLD_BREACH', 'Threshold Breach'),
-    ]
-    
-    alert_type = models.CharField(
-        max_length=20,
-        choices=ALERT_TYPES
-    )
-    metric_type = models.CharField(
-        max_length=20,
-        choices=StartupMetricTarget.METRIC_TYPES
-    )
-    message = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    acknowledged = models.BooleanField(default=False)
-    
-    class Meta:
-        ordering = ['-created_at']
-        indexes = [
-            models.Index(fields=['startup', 'created_at']),
-            models.Index(fields=['alert_type']),
-        ]
-
-class Scheme(models.Model):
-    """Model for government and private schemes available to startups"""
-    id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False
-    )
-
-    SCHEME_TYPES = [
-        ('education', 'Education'),
-        ('industry', 'Industry'),
-        ('financial', 'Financial'),
-        ('innovation', 'Innovation'),
-    ]
-
-    CATEGORY_CHOICES = [
-        ('Financial', 'Financial'),
-        ('Subsidy', 'Subsidy'),
-        ('Credit', 'Credit'),
-        ('Innovation', 'Innovation'),
-        ('Grant', 'Grant'),
-        ('Training', 'Training'),
-    ]
-
-    STATUS_CHOICES = [
-        ('Active', 'Active'),
-        ('Inactive', 'Inactive'),
-        ('Coming Soon', 'Coming Soon'),
-        ('Expired', 'Expired'),
-    ]
-
-    # Basic Information
-    title = models.CharField(max_length=255)
+class StartupProduct(models.Model):
+    startup = models.ForeignKey(StartupBasicInfo, on_delete=models.CASCADE, related_name='products')
+    name = models.CharField(max_length=200)
     description = models.TextField()
-    type = models.CharField(
-        max_length=20,
-        choices=SCHEME_TYPES
-    )
-    category = models.CharField(
-        max_length=20,
-        choices=CATEGORY_CHOICES
-    )
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default='Active'
-    )
-    
-    # Dates
-    start_date = models.DateField()
-    deadline = models.DateField(null=True, blank=True)
-    
-    # Additional Details
-    eligibility_criteria = models.TextField()
-    benefits = models.TextField()
-    application_process = models.TextField()
-    required_documents = models.JSONField(default=list)
-    
-    # External Links
-    external_link = models.URLField(blank=True)
-    application_link = models.URLField(blank=True)
-    
-    # Meta Information
-    is_featured = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    features = models.JSONField()  # Store as JSON array
+    target_audience = models.CharField(max_length=200)
+    launch_date = models.CharField(max_length=4)
+    demo_link = models.URLField()
+    image = models.ImageField(upload_to='product_images/', null=True, blank=True)
 
-    class Meta:
-        ordering = ['-created_at']
-        indexes = [
-            models.Index(fields=['type']),
-            models.Index(fields=['category']),
-            models.Index(fields=['status']),
-            models.Index(fields=['deadline']),
-        ]
+class TeamMember(models.Model):
+    startup = models.ForeignKey(StartupBasicInfo, on_delete=models.CASCADE, related_name='team')
+    name = models.CharField(max_length=200)
+    role = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='team_images/', null=True, blank=True)
+    bio = models.TextField()
+    linkedin = models.URLField()
+    skills = models.JSONField()  # Store as JSON array
 
-    def __str__(self):
-        return self.title
+class Achievement(models.Model):
+    startup = models.ForeignKey(StartupBasicInfo, on_delete=models.CASCADE, related_name='achievements')
+    title = models.CharField(max_length=200)
+    organization = models.CharField(max_length=200)
+    date = models.CharField(max_length=50)
 
-class SchemeDetail(models.Model):
-    """Detailed information about each scheme"""
-    id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False
-    )
-    scheme = models.OneToOneField(
-        Scheme,
-        on_delete=models.CASCADE,
-        related_name='details'
-    )
-    
-    # Detailed Content
-    overview = models.TextField()
-    objectives = models.JSONField(default=list)
-    funding_amount = models.TextField()
-    implementation_process = models.TextField()
-    
-    # Important Dates
-    key_dates = models.JSONField(default=dict)
-    
-    # Additional Resources
-    faqs = models.JSONField(default=list)
-    guidelines_document = models.FileField(
-        upload_to='schemes/guidelines/',
-        null=True,
-        blank=True
-    )
-    application_form = models.FileField(
-        upload_to='schemes/applications/',
-        null=True,
-        blank=True
-    )
-
-    def __str__(self):
-        return f"Details for {self.scheme.title}"
-
-class SchemeEligibilityCriteria(models.Model):
-    """Specific eligibility criteria for schemes"""
-    id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False
-    )
-    scheme = models.ForeignKey(
-        Scheme,
-        on_delete=models.CASCADE,
-        related_name='eligibility_criteria_list'
-    )
-    criteria = models.CharField(max_length=255)
-    description = models.TextField()
-    is_mandatory = models.BooleanField(default=True)
-
-    class Meta:
-        verbose_name_plural = "Scheme eligibility criteria"
-
-class SchemeApplication(models.Model):
-    """Track applications made by startups for schemes"""
-    id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False
-    )
-    scheme = models.ForeignKey(
-        Scheme,
-        on_delete=models.CASCADE,
-        related_name='applications'
-    )
-    startup = models.ForeignKey(
-        'Startup',  # Assuming Startup model exists
-        on_delete=models.CASCADE,
-        related_name='scheme_applications'
-    )
-    
-    STATUS_CHOICES = [
-        ('DRAFT', 'Draft'),
-        ('SUBMITTED', 'Submitted'),
-        ('UNDER_REVIEW', 'Under Review'),
-        ('APPROVED', 'Approved'),
-        ('REJECTED', 'Rejected'),
-    ]
-    
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default='DRAFT'
-    )
-    submitted_at = models.DateTimeField(null=True, blank=True)
-    documents = models.JSONField(default=dict)
-    notes = models.TextField(blank=True)
-    
-    # Timestamps
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        unique_together = ['scheme', 'startup']
-        indexes = [
-            models.Index(fields=['status']),
-            models.Index(fields=['submitted_at']),
-        ]
-
-    def __str__(self):
-        return f"{self.startup.name} - {self.scheme.title}"
-
+class Financial(models.Model):
+    startup = models.OneToOneField(StartupBasicInfo, on_delete=models.CASCADE, related_name='financials')
+    revenue_model = models.CharField(max_length=100)
+    funding_rounds = models.JSONField()  # Store as JSON array
