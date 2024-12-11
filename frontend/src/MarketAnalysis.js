@@ -39,7 +39,6 @@ import {
     faComments
 } from '@fortawesome/free-solid-svg-icons';
 
-// Chart.js imports
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -49,23 +48,15 @@ import {
     Title,
     Tooltip,
     Legend,
+    
     ArcElement,
     BarElement,
-    RadialLinearScale,
-    ScatterController
-} from 'chart.js';
-
-import {
-    Line,
-    Pie,
-    Bar,
-    Radar,
-    Scatter,
-    Doughnut
-} from 'react-chartjs-2';
-
-// Register ChartJS components
-ChartJS.register(
+    RadialLinearScale
+  } from 'chart.js';
+  import { Line, Pie, Bar, Doughnut,Radar,
+    Scatter, } from 'react-chartjs-2';
+  
+  ChartJS.register(
     CategoryScale,
     LinearScale,
     PointElement,
@@ -75,9 +66,8 @@ ChartJS.register(
     Legend,
     ArcElement,
     BarElement,
-    RadialLinearScale,
-    ScatterController
-);
+    RadialLinearScale
+  );
 
 const MarketAnalysis = () => {
     const [activeSection, setActiveSection] = useState('overview');
@@ -409,6 +399,61 @@ const MarketAnalysis = () => {
             }
         }
     };
+    const annualMarketData = {
+        labels: ['2019', '2020', '2021', '2022', '2023'],
+        datasets: [{
+          label: 'Market Growth ($B)',
+          data: [45, 52, 61, 74, 89],
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      };
+      
+      const competitorData = {
+        labels: ['Our Company', 'Competitor A', 'Competitor B', 'Others'],
+        datasets: [{
+          data: [35, 28, 20, 17],
+          backgroundColor: [
+            'rgba(54, 162, 235, 0.8)',
+            'rgba(255, 99, 132, 0.8)',
+            'rgba(255, 206, 86, 0.8)',
+            'rgba(75, 192, 192, 0.8)',
+          ]
+        }]
+      };
+      
+      const fundingData = {
+        labels: ['Seed', 'Series A', 'Series B', 'Series C', 'Late Stage'],
+        datasets: [{
+          label: 'Funding Distribution',
+          data: [15, 25, 35, 45, 30],
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        }]
+      };
+      
+      const regionalData = {
+        labels: ['North America', 'Europe', 'Asia', 'Latin America', 'Africa'],
+        datasets: [{
+          label: 'Regional Market Share (%)',
+          data: [40, 25, 20, 10, 5],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.8)',
+            'rgba(54, 162, 235, 0.8)',
+            'rgba(255, 206, 86, 0.8)',
+            'rgba(75, 192, 192, 0.8)',
+            'rgba(153, 102, 255, 0.8)',
+          ]
+        }]
+      };
+      
+      const chartOptions = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          }
+        }
+      };
 
     return (
         <div className="market_analysis_container">
