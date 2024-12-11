@@ -1,0 +1,94 @@
+.mentorship-engagements-container {
+    padding: 1.5rem;
+    background: #f8fafc;
+}
+
+.mentorship-engagements-container h1 {
+    color: #1e40af;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.metric-section {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.metric-section h2 {
+    color: #1e40af;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.chart-container {
+    width: 100%;
+    max-width: 600px;
+    height: 300px !important;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    margin: 0 auto 1rem auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-container > canvas {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 500px !important;
+    max-height: 280px !important;
+}
+
+.metric-summary {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.metric-summary h3 {
+    color: #1e40af;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.metric-summary ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.metric-summary li {
+    color: #4b5563;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.metric-summary li:before {
+    content: "•";
+    color: #3b82f6;
+    position: absolute;
+    left: 0;
+}
+
+@media (max-width: 1200px) {
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-container {
+        height: 250px !important;
+    }
+}

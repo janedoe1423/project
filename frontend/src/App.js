@@ -27,6 +27,7 @@ import InvestorProfile from './Investor_profile';
 import Research_inno from './Research_inno';
 import MentorProfilePage from './pages/mentor/mentor_profile_page'; // Import MentorProfilePage
 import MarketAnalysis from './MarketAnalysis';
+import GovernmentProfilePage from './pages/government_bodies/gb_profile_page';
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
           <Route path="/investor/:id" element={<InvestorProfile />} />
           <Route path="/mentor-profile" element={<MentorProfilePage />} /> {/* Add route for Mentor Profile */}
           <Route path="/market-analysis" element={<MarketAnalysis />} />
+          <Route path="/government-profile" element={<GovernmentProfilePage />} />
         </Routes>
       </div>
       <Footer />

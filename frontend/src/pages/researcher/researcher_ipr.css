@@ -7,11 +7,19 @@
 
 /* Page Title */
 .page-title {
-    color: #2d3748;
+    color: #ffffff;
+    background: linear-gradient(135deg, #2c5282 0%, #3182ce 50%, #4299e1 100%);background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #93c5fd 100%);
     font-weight: 600;
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
+    margin: 0 0 2rem 0;
+    border-radius: 0 0 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+    height:200px;
+    
+
 }
 
 /* Status Header Styles */
@@ -54,6 +62,7 @@
 .status-item.granted {
     border-left-color: #28a745;
 }
+
 
 .status-item.pending {
     border-left-color: #ffc107;

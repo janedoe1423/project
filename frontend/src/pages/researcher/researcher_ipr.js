@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { 
-    Container, Row, Col, Card, Badge, 
-    Button, ProgressBar, Modal, Form,
-    Alert, ListGroup, Dropdown, Nav,
-    Table
+    Container, Row, Col, Card,
+    Button, Modal, Form,
+    ListGroup
 } from 'react-bootstrap';
 import { 
-    FaShieldAlt, FaClipboardList, FaCalendarAlt, 
-    FaBell, FaFolder, FaRobot, FaBook, FaPlus,
+    FaShieldAlt,  
+    FaFolder, FaPlus,
     FaDownload, FaExclamationTriangle, FaCheckCircle,
     FaHourglassHalf, FaTimesCircle, FaFileAlt,
-    FaCertificate, FaUsers, FaChevronDown, FaCircle
+    FaUsers, FaCircle
 } from 'react-icons/fa';
 import './researcher_ipr.css';
 
@@ -312,17 +311,17 @@ const ResearcherIPR = () => {
                         Intellectual Property Management
                     </h2>
                 </Col>
-                <Col xs="auto">
-                    <Button 
-                        variant="purple" 
-                        className="neumorphic-btn"
-                        onClick={() => setShowAddModal(true)}
-                    >
-                        <FaPlus className="me-2" />
-                        New IPR Application
-                    </Button>
-                </Col>
             </Row>
+            <Col xs="auto">
+                <Button 
+                    variant="purple" 
+                    className="neumorphic-btn"
+                    onClick={() => setShowAddModal(true)}
+                 >
+                <FaPlus className="me-2" />
+                    New IPR Application
+                    </Button>
+            </Col>
 
             {/* Status Header */}
             <Row className="mb-4">
