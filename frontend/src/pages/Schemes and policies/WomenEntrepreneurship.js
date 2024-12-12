@@ -203,7 +203,7 @@ const WomenEntrepreneurship = () => {
             </div>
              {/* Introduction Section */}
         <div className="intro-section">
-            <h1 className="intro-title">Women Entrepreneurship in Gujarat</h1>
+            <h1 className="intro-title">Women Entrepreneurship in India</h1>
             <div className="intro-content">
                 <p>
                     The increasing presence of women as entrepreneurs has led to significant business and economic growth in the country. 
@@ -212,7 +212,7 @@ const WomenEntrepreneurship = () => {
                 </p>
                 <p>
                     With a vision to promote the sustainable development of women entrepreneurs for balanced growth in the country, 
-                    It is committed towards strengthening women entrepreneurship in India through initiatives, schemes, 
+                    Startup India is committed towards strengthening women entrepreneurship in India through initiatives, schemes, 
                     creation of enabling networks and communities and activating partnerships among diverse stakeholders in the startup ecosystem.
                 </p>
             </div>
