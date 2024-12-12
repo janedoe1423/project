@@ -17,7 +17,6 @@ const GovernmentSidebar = () => {
                     <a className="gb_sidebar-link" href="#collaboration">Collaboration</a>
                     <a className="gb_sidebar-link" href="#analytics">Analytics & Feedback</a>
                     <a className="gb_sidebar-link" href="#ipr">IPR Facilitation</a>
-                    <a className="gb_sidebar-link" href="#events">Event Management</a>
                     <a className="gb_sidebar-link" href="#market">Market Trends</a>
                 </nav>
                 <div className="gb_sidebar-footer">

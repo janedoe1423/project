@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
     Container, 
     Grid, 
@@ -16,7 +16,7 @@ import './startup_dashboard.css';
 import StartupMetricsDashboard from './startup_metrics';
 
 const StartupDashboard = () => {
-    const metricCards = [
+    const [metrics, setMetrics] = useState([
         {
             title: 'Growth Rate',
             value: '78%',
@@ -49,7 +49,50 @@ const StartupDashboard = () => {
             gradient: 'var(--blue-gradient)',
             description: 'Current market position'
         }
-    ];
+    ]);
+
+    const [graphData, setGraphData] = useState(null);
+
+    // Function to update metrics based on graph changes
+    const updateMetrics = (newGraphData) => {
+        const updatedMetrics = metrics.map(metric => {
+            switch(metric.title) {
+                case 'Growth Rate':
+                    return {
+                        ...metric,
+                        value: `${newGraphData.growth}%`,
+                        trend: `${newGraphData.growthChange}%`
+                    };
+                case 'Revenue':
+                    return {
+                        ...metric,
+                        value: `$${newGraphData.revenue}K`,
+                        trend: `${newGraphData.revenueChange}%`
+                    };
+                case 'User Base':
+                    return {
+                        ...metric,
+                        value: newGraphData.users.toLocaleString(),
+                        trend: `${newGraphData.userGrowth}%`
+                    };
+                case 'Market Share':
+                    return {
+                        ...metric,
+                        value: `${newGraphData.marketShare}%`,
+                        trend: `${newGraphData.marketShareChange}%`
+                    };
+                default:
+                    return metric;
+            }
+        });
+        setMetrics(updatedMetrics);
+    };
+
+    // Handle graph data changes
+    const handleGraphChange = (newData) => {
+        setGraphData(newData);
+        updateMetrics(newData);
+    };
 
     return (
         <>
@@ -70,7 +113,7 @@ const StartupDashboard = () => {
             </Typography>
             
             <Grid container spacing={4}>
-                {metricCards.map((card, index) => (
+                {metrics.map((card, index) => (
                     <Grid item xs={12} sm={6} md={3} key={index}>
                         <Card 
                             className="startup-dashboard-metric-card"
@@ -181,7 +224,10 @@ const StartupDashboard = () => {
                 ))}
             </Grid>
             </Container>
-            <StartupMetricsDashboard />
+            <StartupMetricsDashboard 
+                onDataChange={handleGraphChange}
+                initialData={graphData}
+            />
         </>
     );
 };

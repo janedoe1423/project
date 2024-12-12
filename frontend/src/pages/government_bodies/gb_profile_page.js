@@ -5,7 +5,7 @@ import PolicyImplementation from "./gb_policy";
 import FundingGrants from "./gb_funding";
 import DataTransparency from "./gb_data";
 import ResourceSupport from "./gb_rs";
-import Collaboration from "./gb_collab";
+import GbCollab from "./gb_collab";
 import AnalyticsFeedback from "./gb_analysis";
 import IPRFacilitation from "./gb_ipr";
 import MarketTrends from "./gb_market";
@@ -35,7 +35,7 @@ const AdminProfilePage = () => {
             case "#resources":
                 return <ResourceSupport />;
             case "#collaboration":
-                return <Collaboration />;
+                return <GbCollab />;
             case "#analytics":
                 return <AnalyticsFeedback />;
             case "#ipr":

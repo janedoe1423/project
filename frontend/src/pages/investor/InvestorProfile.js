@@ -16,7 +16,7 @@ const InvestorProfile = () => {
     useEffect(() => {
         const fetchInvestorData = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:8000/investor/6cd3cafe-a6d5-40ab-bbfe-094fb384037f/');
+                const response = await fetch('http://127.0.0.1:8000/investor/cc79e6dc-8fe1-4488-8768-b58cdf0dbd10/');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }

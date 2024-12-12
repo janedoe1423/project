@@ -84,13 +84,27 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sih',
+        'NAME': '1608',
         'USER': 'postgres',
-        'PASSWORD': 'a1b2c3',
+        'PASSWORD': 'sih2024',
         'HOST': 'localhost',  # Or your database host
         'PORT': '5432',       # Default PostgreSQL port
     }
 } 
+
+try:
+    import psycopg2
+except ImportError:
+    try:
+        import psycopg
+    except ImportError:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
+        print("Warning: PostgreSQL adapter not found, using SQLite instead")
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
