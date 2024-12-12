@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Card, Badge, Button, Modal } from 'react-bootstrap';
-import { FaFileAlt, FaChartLine, FaCalendarAlt, FaCheckCircle, FaTimesCircle, FaHourglassHalf } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { Card, Badge, Button, Modal, Form, ProgressBar } from 'react-bootstrap';
+import { FaFileAlt, FaChartLine, FaCalendarAlt, FaCheckCircle, FaTimesCircle, FaHourglassHalf, FaIndustry, FaUniversity, FaBuilding } from 'react-icons/fa';
 import {
     AreaChart,
     Area,
@@ -20,7 +20,17 @@ import {
 
 const StartupFunding = () => {
     const [showDetails, setShowDetails] = useState(false);
+    const [showNewApplication, setShowNewApplication] = useState(false);
     const [selectedFunding, setSelectedFunding] = useState(null);
+
+    // Prevent body scroll when modal is open
+    useEffect(() => {
+        if (showDetails || showNewApplication) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+    }, [showDetails, showNewApplication]);
 
     // Sample data - replace with actual API data
     const fundingApplications = [
@@ -98,13 +108,146 @@ const StartupFunding = () => {
         setShowDetails(true);
     };
 
+    const handleCloseDetails = () => {
+        setShowDetails(false);
+        setSelectedFunding(null);
+    };
+
+    const handleNewApplication = () => {
+        setShowNewApplication(true);
+    };
+
+    const handleCloseNewApplication = () => {
+        setShowNewApplication(false);
+    };
+
+    // New state for funding stages
+    const fundingStages = [
+        {
+            type: 'Government Funding',
+            stages: [
+                { 
+                    name: 'Initial Screening', 
+                    status: 'completed', 
+                    progress: 100,
+                    description: 'Preliminary application review',
+                    icon: <FaFileAlt />
+                },
+                { 
+                    name: 'Detailed Evaluation', 
+                    status: 'in-progress', 
+                    progress: 60,
+                    description: 'Comprehensive business plan assessment',
+                    icon: <FaChartLine />
+                },
+                { 
+                    name: 'Technical Validation', 
+                    status: 'pending', 
+                    progress: 0,
+                    description: 'Technical feasibility and innovation assessment',
+                    icon: <FaIndustry />
+                },
+                { 
+                    name: 'Final Approval', 
+                    status: 'pending', 
+                    progress: 0,
+                    description: 'Final funding sanctioning',
+                    icon: <FaUniversity />
+                }
+            ]
+        },
+        {
+            type: 'Private Funding',
+            stages: [
+                { 
+                    name: 'Investor Pitch', 
+                    status: 'completed', 
+                    progress: 100,
+                    description: 'Initial presentation to potential investors',
+                    icon: <FaFileAlt />
+                },
+                { 
+                    name: 'Due Diligence', 
+                    status: 'in-progress', 
+                    progress: 70,
+                    description: 'Comprehensive financial and operational review',
+                    icon: <FaBuilding />
+                },
+                { 
+                    name: 'Term Sheet Negotiation', 
+                    status: 'pending', 
+                    progress: 0,
+                    description: 'Discussing investment terms and conditions',
+                    icon: <FaChartLine />
+                },
+                { 
+                    name: 'Final Investment', 
+                    status: 'pending', 
+                    progress: 0,
+                    description: 'Closing the investment round',
+                    icon: <FaUniversity />
+                }
+            ]
+        }
+    ];
+
+    // Helper function to get progress bar variant
+    const getProgressVariant = (status) => {
+        switch (status) {
+            case 'completed': return 'success';
+            case 'in-progress': return 'warning';
+            case 'pending': return 'secondary';
+            default: return 'secondary';
+        }
+    };
+
+    // Render funding stages progress
+    const renderFundingStagesProgress = () => {
+        return (
+            <div className="funding-stages-container mt-4">
+                <h3 className="mb-4">Funding Journey Tracking</h3>
+                {fundingStages.map((fundingType, typeIndex) => (
+                    <Card key={typeIndex} className="mb-4 shadow-sm">
+                        <Card.Header>
+                            <h5>{fundingType.type}</h5>
+                        </Card.Header>
+                        <Card.Body>
+                            <div className="row">
+                                {fundingType.stages.map((stage, stageIndex) => (
+                                    <div key={stageIndex} className="col-md-3 mb-3">
+                                        <div className="d-flex align-items-center">
+                                            <div className="me-3">
+                                                {stage.icon}
+                                            </div>
+                                            <div className="flex-grow-1">
+                                                <h6 className="mb-2">{stage.name}</h6>
+                                                <ProgressBar 
+                                                    now={stage.progress} 
+                                                    variant={getProgressVariant(stage.status)}
+                                                    className="mb-2"
+                                                />
+                                                <small className="text-muted">
+                                                    {stage.description}
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </Card.Body>
+                    </Card>
+                ))}
+            </div>
+        );
+    };
+
     return (
         <div className="startup_funding_container p-4">
             <div className="startup_funding_header d-flex justify-content-between align-items-center mb-4">
                 <h2 className="mb-0">Funding Applications Overview</h2>
                 <Button 
                     variant="primary" 
-                    href="#funding/new"
+                    onClick={handleNewApplication}
                     className="startup_funding_new-button d-flex align-items-center gap-2"
                 >
                     <FaFileAlt /> New Application
@@ -157,14 +300,16 @@ const StartupFunding = () => {
 
             <Modal 
                 show={showDetails} 
-                onHide={() => setShowDetails(false)}
+                onHide={handleCloseDetails}
                 size="lg"
-                className="startup_funding_modal"
+                centered
+                className="startup_funding_modal details-modal"
+                backdropClassName="custom-backdrop"
             >
                 {selectedFunding && (
                     <>
                         <Modal.Header closeButton>
-                            <Modal.Title>{selectedFunding.fundingType} Application Details</Modal.Title>
+                            <Modal.Title>{selectedFunding.fundingType} Details</Modal.Title>
                         </Modal.Header>
                         <Modal.Body className="startup_funding_modal-body">
                             <div className="row mb-4">
@@ -257,13 +402,115 @@ const StartupFunding = () => {
                             </div>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button variant="secondary" onClick={() => setShowDetails(false)}>
+                            <Button variant="secondary" onClick={handleCloseDetails}>
                                 Close
                             </Button>
                         </Modal.Footer>
                     </>
                 )}
             </Modal>
+
+            <Modal 
+                show={showNewApplication} 
+                onHide={handleCloseNewApplication}
+                size="lg"
+                centered
+                className="startup_funding_modal new-application-modal"
+                backdropClassName="custom-backdrop"
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>New Startup Funding Application</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form className="new-funding-form">
+                        <h5>Basic Information</h5>
+                        <Form.Group controlId="companyName" className="form-group-custom">
+                            <Form.Label>Company/Startup Name</Form.Label>
+                            <Form.Control type="text" placeholder="Enter company name" className="form-control-custom" />
+                        </Form.Group>
+                        <Form.Group controlId="registrationNumber" className="form-group-custom">
+                            <Form.Label>Registration Number</Form.Label>
+                            <Form.Control type="text" placeholder="Enter registration number" className="form-control-custom" />
+                        </Form.Group>
+                        <Form.Group controlId="dateOfIncorporation" className="form-group-custom">
+                            <Form.Label>Date of Incorporation</Form.Label>
+                            <Form.Control type="date" className="form-control-custom" />
+                        </Form.Group>
+
+                            <h5>Founder(s) Information</h5>
+                            <Form.Group controlId="founderName" className="form-group-custom">
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control type="text" placeholder="Enter founder's name" className="form-control-custom" />
+                            </Form.Group>
+                            <Form.Group controlId="contactDetails" className="form-group-custom">
+                                <Form.Label>Contact Details</Form.Label>
+                                <Form.Control type="text" placeholder="Enter contact details" className="form-control-custom" />
+                            </Form.Group>
+                            <Form.Group controlId="role" className="form-group-custom">
+                                <Form.Label>Role</Form.Label>
+                                <Form.Control type="text" placeholder="Enter role" className="form-control-custom" />
+                            </Form.Group>
+                            <Form.Group controlId="experience" className="form-group-custom">
+                                <Form.Label>Experience</Form.Label>
+                                <Form.Control type="text" placeholder="Enter experience" className="form-control-custom" />
+                            </Form.Group>
+
+                        <h5>Funding Details</h5>
+                        <Form.Group controlId="requestedAmount">
+                            <Form.Label>Requested Amount</Form.Label>
+                            <Form.Control type="number" placeholder="Enter requested amount" />
+                        </Form.Group>
+                        <Form.Group controlId="fundingType">
+                            <Form.Label>Funding Type</Form.Label>
+                            <Form.Control as="select">
+                                <option>Seed</option>
+                                <option>Series A</option>
+                                {/* Add more options as needed */}
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId="investorType">
+                            <Form.Label>Preferred Investor Type</Form.Label>
+                            <Form.Control as="select">
+                                <option>Angel</option>
+                                <option>Venture Capital</option>
+                                {/* Add more options as needed */}
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId="currentValuation">
+                            <Form.Label>Current Valuation</Form.Label>
+                            <Form.Control type="number" placeholder="Enter current valuation" />
+                        </Form.Group>
+                        <Form.Group controlId="equityOffered">
+                            <Form.Label>Equity Offered (%)</Form.Label>
+                            <Form.Control type="number" placeholder="Enter equity offered" />
+                        </Form.Group>
+                        <Form.Group controlId="timeline">
+                            <Form.Label>Timeline for Fund Utilization</Form.Label>
+                            <Form.Control type="text" placeholder="Enter timeline" />
+                        </Form.Group>
+
+                            {/* Add more sections for Business Overview, Financial Information, etc. */}
+
+                        <Button variant="secondary" onClick={handleCloseNewApplication}>
+                            Close
+                        </Button>
+                        <Button variant="primary" type="submit" className="submit-button-custom">
+                            Submit Application
+                        </Button>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseNewApplication}>
+                        Close
+                    </Button>
+                    <Button variant="primary" type="submit" className="submit-button-custom">
+                        Submit Application
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* New section for funding stages progress */}
+            {renderFundingStagesProgress()}
         </div>
     );
 };

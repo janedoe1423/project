@@ -16,10 +16,13 @@ from .models import (
     InvestorPortfolio,
     InvestorCompany,
     InvestorPerformanceMetric,
-    Startup, StartupIndustryFocus, StartupServiceArea, 
-    StartupStageValidation, StartupAchievement, StartupMarketPresence,
-    StartupMetrics, StartupMetricsSnapshot, StartupMetricTarget, 
-    StartupMetricAlert
+    StartupBasicInfo,
+    StartupVisionMission,
+    StartupMetric,
+    StartupProduct,
+    TeamMember,
+    Achievement,
+    Financial
 )
 
 @admin.register(Investor)
@@ -186,116 +189,38 @@ class InvestorPerformanceMetricAdmin(admin.ModelAdmin):
     search_fields = ('company__name',)
     raw_id_fields = ('company',)
 
-@admin.register(Startup)
-class StartupAdmin(admin.ModelAdmin):
-    list_display = ('name', 'engagement_level', 'city', 'state', 'team_size', 'founded_date')
-    list_filter = ('engagement_level', 'state', 'created_at')
-    search_fields = ('name', 'email', 'city', 'state')
-    readonly_fields = ('created_at', 'updated_at')
-    date_hierarchy = 'created_at'
-    fieldsets = (
-        ('Basic Information', {
-            'fields': ('name', 'logo', 'engagement_level', 'description')
-        }),
-        ('Contact Details', {
-            'fields': ('phone', 'email', 'website')
-        }),
-        ('Location', {
-            'fields': ('city', 'state', 'country')
-        }),
-        ('Key Metrics', {
-            'fields': ('years_of_experience', 'team_size', 'revenue', 'patents_filed')
-        }),
-        ('Timestamps', {
-            'fields': ('founded_date', 'created_at', 'updated_at'),
-            'classes': ('collapse',)
-        }),
-    )
+@admin.register(StartupBasicInfo)
+class StartupBasicInfoAdmin(admin.ModelAdmin):
+    list_display = ('name', 'tagline', 'industry', 'location', 'founded', 'website')
+    list_filter = ('industry', 'founded')
+    search_fields = ('name', 'tagline', 'industry', 'location', 'website')
 
-@admin.register(StartupIndustryFocus)
-class StartupIndustryFocusAdmin(admin.ModelAdmin):
-    list_display = ('startup', 'industry')
-    list_filter = ('industry',)
-    search_fields = ('startup__name', 'industry')
-
-@admin.register(StartupServiceArea)
-class StartupServiceAreaAdmin(admin.ModelAdmin):
-    list_display = ('startup', 'service')
-    list_filter = ('service',)
-    search_fields = ('startup__name', 'service')
-
-@admin.register(StartupStageValidation)
-class StartupStageValidationAdmin(admin.ModelAdmin):
-    list_display = ('startup', 'current_stage', 'market_validation_status', 'product_validation_status')
-    list_filter = ('current_stage', 'market_validation_status', 'product_validation_status')
+@admin.register(StartupVisionMission)
+class StartupVisionMissionAdmin(admin.ModelAdmin):
+    list_display = ('startup',)
     search_fields = ('startup__name',)
 
-@admin.register(StartupAchievement)
-class StartupAchievementAdmin(admin.ModelAdmin):
-    list_display = ('startup', 'title', 'year')
-    list_filter = ('year',)
+@admin.register(StartupMetric)
+class StartupMetricAdmin(admin.ModelAdmin):
+    list_display = ('startup', 'title', 'value', 'growth')
     search_fields = ('startup__name', 'title')
-    ordering = ('-year',)
 
-@admin.register(StartupMarketPresence)
-class StartupMarketPresenceAdmin(admin.ModelAdmin):
-    list_display = ('startup', 'operations_type', 'international_markets', 'active_customers')
-    search_fields = ('startup__name', 'operations_type')
+@admin.register(StartupProduct)
+class StartupProductAdmin(admin.ModelAdmin):
+    list_display = ('startup', 'name', 'launch_date')
+    search_fields = ('startup__name', 'name')
 
-@admin.register(StartupMetrics)
-class StartupMetricsAdmin(admin.ModelAdmin):
-    list_display = (
-        'startup', 'date', 'growth_rate', 'monthly_revenue',
-        'active_users', 'market_share'
-    )
-    list_filter = ('date',)
+@admin.register(TeamMember)
+class TeamMemberAdmin(admin.ModelAdmin):
+    list_display = ('startup', 'name', 'role')
+    search_fields = ('startup__name', 'name')
+
+@admin.register(Achievement)
+class AchievementAdmin(admin.ModelAdmin):
+    list_display = ('startup', 'title', 'organization', 'date')
+    search_fields = ('startup__name', 'title')
+
+@admin.register(Financial)
+class FinancialAdmin(admin.ModelAdmin):
+    list_display = ('startup', 'revenue_model')
     search_fields = ('startup__name',)
-    date_hierarchy = 'date'
-    readonly_fields = ('startup',)
-    fieldsets = (
-        ('Growth Metrics', {
-            'fields': ('growth_rate', 'growth_rate_trend')
-        }),
-        ('Revenue Metrics', {
-            'fields': ('monthly_revenue', 'revenue_trend')
-        }),
-        ('User Metrics', {
-            'fields': ('active_users', 'user_growth_trend')
-        }),
-        ('Market Metrics', {
-            'fields': ('market_share', 'market_share_trend')
-        }),
-    )
-
-@admin.register(StartupMetricsSnapshot)
-class StartupMetricsSnapshotAdmin(admin.ModelAdmin):
-    list_display = (
-        'startup', 'last_updated', 'current_growth_rate',
-        'current_monthly_revenue', 'current_active_users',
-        'current_market_share'
-    )
-    search_fields = ('startup__name',)
-    readonly_fields = ('last_updated',)
-
-@admin.register(StartupMetricTarget)
-class StartupMetricTargetAdmin(admin.ModelAdmin):
-    list_display = ('startup', 'metric_type', 'target_date', 'target_value', 'achieved')
-    list_filter = ('metric_type', 'achieved', 'target_date')
-    search_fields = ('startup__name',)
-    date_hierarchy = 'target_date'
-
-@admin.register(StartupMetricAlert)
-class StartupMetricAlertAdmin(admin.ModelAdmin):
-    list_display = (
-        'startup', 'alert_type', 'metric_type',
-        'created_at', 'acknowledged'
-    )
-    list_filter = ('alert_type', 'metric_type', 'acknowledged', 'created_at')
-    search_fields = ('startup__name', 'message')
-    readonly_fields = ('created_at',)
-    date_hierarchy = 'created_at'
-    actions = ['mark_as_acknowledged']
-
-    def mark_as_acknowledged(self, request, queryset):
-        queryset.update(acknowledged=True)
-    mark_as_acknowledged.short_description = "Mark selected alerts as acknowledged"
