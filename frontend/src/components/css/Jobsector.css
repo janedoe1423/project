@@ -1,0 +1,168 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Job Sector Container */
+.job-sector-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styles */
+.job-sector-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.job-sector-header h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.job-sector-header p {
+    font-size: 1.2em;
+    color: #666;
+}
+
+/* Filters Section */
+.filters {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filters h2 {
+    font-size: 1.8em;
+    color: #333;
+}
+
+.filter-options {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.filter-select, .filter-input, .filter-button {
+    padding: 12px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.filter-select:focus, .filter-input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.filter-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-button:hover {
+    background-color: #0056b3;
+}
+
+/* Job Listings Section */
+.job-listings {
+    margin-bottom: 30px;
+}
+
+.job-listings h2 {
+    font-size: 1.8em;
+    color: #333;
+}
+
+.job-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.job-item {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.job-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.job-item h3 {
+    font-size: 1.5em;
+    color: #007bff;
+}
+
+.job-item p {
+    color: #555;
+}
+
+/* Apply Button */
+.apply-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.apply-button:hover {
+    background-color: #218838;
+}
+
+/* Government Initiatives Section */
+.government-initiatives {
+    margin-top: 30px;
+}
+
+.government-initiatives h2 {
+    font-size: 1.8em;
+    color: #333;
+}
+
+.initiative-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.initiative-list li {
+    background-color: #e9ecef;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.initiative-list li:hover {
+    background-color: #d6d8db;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .filter-options {
+        flex-direction: column;
+    }
+}

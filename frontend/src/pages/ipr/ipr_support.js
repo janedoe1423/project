@@ -11,23 +11,7 @@ const IprSupport = () => {
     const [showBooking, setShowBooking] = useState(false);
 
     const supportFeatures = [
-        {
-            title: "Live Chat Support",
-            icon: <FaComments />,
-            description: "Get instant help with your IPR-related queries",
-            features: ["24/7 Availability", "Quick Response", "Expert Guidance"],
-            action: "Start Chat",
-            color: "#2563EB",
-            onClick: () => setShowChat(true)
-        },
-        {
-            title: "IPR Helpline",
-            icon: <FaPhone />,
-            description: "Connect with official government IPR helplines",
-            features: ["Toll-Free Numbers", "Regional Support", "Multiple Languages"],
-            action: "View Numbers",
-            color: "#059669" // Green
-        },
+        
         {
             title: "Ask an Expert",
             icon: <FaUserTie />,
@@ -37,14 +21,7 @@ const IprSupport = () => {
             color: "#DC2626",
             onClick: () => setShowBooking(true)
         },
-        {
-            title: "Process Explainers",
-            icon: <FaClipboardList />,
-            description: "Simplified guides for complex IPR procedures",
-            features: ["Step-by-Step Guides", "Visual Aids", "Downloadable PDFs"],
-            action: "View Guides",
-            color: "#7C3AED" // Purple
-        },
+       
         {
             title: "Interactive Forums",
             icon: <FaUsers />,
@@ -69,14 +46,7 @@ const IprSupport = () => {
             action: "Start Learning",
             color: "#EA580C" // Orange
         },
-        {
-            title: "Video Q&A",
-            icon: <FaVideo />,
-            description: "Pre-recorded sessions on common topics",
-            features: ["Curated Content", "Expert Answers", "Searchable Library"],
-            action: "Watch Videos",
-            color: "#0D9488" // Teal
-        },
+        
         {
             title: "Virtual Filing Mockup",
             icon: <FaFileAlt />,

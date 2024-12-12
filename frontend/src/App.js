@@ -38,7 +38,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/startups" element={<Startups />} />
           <Route path="/investors" element={<Investors />} />
-          <Route path="/investor-dashboard" element={<InvestorDashboard />} /> {/* Add route for Investor Dashboard */}
+          <Route path="/investor-dashboard" element={<InvestorDashboard />} />
           <Route path="/innovations" element={<Innovations />} />
           <Route path="/research" element={<Research_inno />} />
           <Route path="/schemes" element={<Schemes />} />
@@ -56,7 +56,7 @@ function App() {
           <Route path="/investor-profile" element={<InvestorProfilePage />}/>
           <Route path="/startup-profile/:id" element={<StartupProfile />} />
           <Route path="/investor/:id" element={<InvestorProfile />} />
-          <Route path="/mentor-profile" element={<MentorProfilePage />} /> {/* Add route for Mentor Profile */}
+          <Route path="/mentor-profile" element={<MentorProfilePage />} />
           <Route path="/market-analysis" element={<MarketAnalysis />} />
           <Route path="/government-profile" element={<GovernmentProfilePage />} />
         </Routes>
