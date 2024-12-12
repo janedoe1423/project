@@ -401,3 +401,181 @@
         padding: 1.2rem;
     }
 }
+
+.gb_funding-section, .gb_key-analytics-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    border-radius: 18px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08), 0 5px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.gb_funding-section:hover, .gb_key-analytics-section:hover {
+    transform: translateY(-5px);
+}
+
+.gb_funding-section h3, .gb_key-analytics-section h3 {
+    font-size: 1.4rem;
+    color: #2979ff;
+    margin-bottom: 1rem;
+}
+
+.gb_key-analytics-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.gb_key-analytics-section li {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #666;
+}
+
+.gb_city-data-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    border-radius: 18px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08), 0 5px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.gb_city-data-section:hover {
+    transform: translateY(-5px);
+}
+
+.gb_city-data-section h3 {
+    font-size: 1.4rem;
+    color: #2979ff;
+    margin-bottom: 1rem;
+}
+
+.gb_events-section, .gb_map-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    border-radius: 18px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08), 0 5px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.gb_events-section:hover, .gb_map-section:hover {
+    transform: translateY(-5px);
+}
+
+.gb_events-section h3, .gb_map-section h3 {
+    font-size: 1.4rem;
+    color: #2979ff;
+    margin-bottom: 1rem;
+}
+
+.gb_events-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.gb_events-section li {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #666;
+}
+
+.gb_map-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    border-radius: 18px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08), 0 5px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.gb_map-section:hover {
+    transform: translateY(-5px);
+}
+
+.gb_map-section h3 {
+    font-size: 1.4rem;
+    color: #2979ff;
+    margin-bottom: 1rem;
+}
+
+/* Active Programs, Pending Tasks, and User Feedback Summary */
+.gb_dashboard-programs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.gb_programs-card, .gb_tasks-card, .gb_feedback-section {
+    background: var(--glass-bg);
+    border-radius: 20px;
+    padding: 1.8rem;
+    box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.08),
+        0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.gb_programs-card:hover, .gb_tasks-card:hover, .gb_feedback-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 15px 30px rgba(0, 0, 0, 0.12),
+        0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.gb_programs-card h3, .gb_tasks-card h3, .gb_feedback-section h3 {
+    font-size: 1.6rem;
+    color: #2979ff;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid rgba(41, 121, 255, 0.1);
+    text-shadow: 0 2px 4px rgba(41, 121, 255, 0.1);
+}
+
+.gb_program-item, .gb_task-item, .gb_feedback-card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.gb_program-item:hover, .gb_task-item:hover, .gb_feedback-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.gb_program-icon, .gb_task-icon, .gb_feedback-icon {
+    font-size: 1.5rem;
+    color: #2979ff;
+}
+
+.gb_progress-bar {
+    width: 100%;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.gb_progress {
+    height: 8px;
+    background: #2979ff;
+    border-radius: 10px;
+}
+
+.gb_feedback-rating {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ff6b00;
+}
+
+.gb_feedback-text {
+    font-size: 0.9rem;
+    color: #666;
+}

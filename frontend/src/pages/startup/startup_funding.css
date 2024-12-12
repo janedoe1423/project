@@ -93,3 +93,325 @@
         padding-left: 60px;
     }
 }
+
+.startup_funding_modal .modal-header {
+    background-color: #f0f3ff;
+    border-bottom: 1px solid #e6f0ff;
+}
+
+.startup_funding_modal .modal-title {
+    color: #2979ff;
+}
+
+.startup_funding_modal .modal-body {
+    padding: 2rem;
+}
+
+.startup_funding_modal .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.startup_funding_modal .form-label {
+    font-weight: bold;
+}
+
+.startup_funding_modal .form-control {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.startup_funding_modal .btn-primary {
+    background-color: #2979ff;
+    border-color: #2979ff;
+    transition: background-color 0.3s ease;
+}
+
+.startup_funding_modal .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.new-funding-form {
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.form-group-custom {
+    margin-bottom: 1.5rem;
+}
+
+.form-control-custom {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.form-control-custom:focus {
+    border-color: #2979ff;
+    box-shadow: 0 0 5px rgba(41, 121, 255, 0.5);
+}
+
+.submit-button-custom {
+    background-color: #2979ff;
+    border-color: #2979ff;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button-custom:hover {
+    background-color: #0056b3;
+}
+
+
+
+.modal-content {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    /* width: 80%; */      /* Commented out */
+    /* max-width: 500px; */ /* Commented out */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.startup_funding_modal .btn-secondary {
+    background-color: #f0f0f0;
+    border-color: #ccc;
+    transition: background-color 0.3s ease;
+}
+
+.startup_funding_modal .btn-secondary:hover {
+    background-color: #e0e0e0;
+}
+
+/* Modal Improvements */
+.startup_funding_modal .modal-dialog {
+    max-width: 800px;
+    margin: 1.75rem auto;
+}
+
+
+.startup_funding_modal .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 1rem 1.5rem;
+}
+
+.startup_funding_modal .modal-title {
+    font-weight: 600;
+    color: #2979ff;
+}
+
+.startup_funding_modal .modal-body {
+    padding: 1.5rem;
+    background-color: #ffffff;
+}
+
+.startup_funding_modal .modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    padding: 1rem 1.5rem;
+}
+
+/* New Funding Form Styling */
+.new-funding-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.new-funding-form h5 {
+    grid-column: 1 / -1;
+    margin-bottom: 1rem;
+    color: #2979ff;
+    border-bottom: 2px solid #2979ff;
+    padding-bottom: 0.5rem;
+}
+
+.form-group-custom {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-custom label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-control-custom {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.form-control-custom:focus {
+    border-color: #2979ff;
+    box-shadow: 0 0 0 0.2rem rgba(41, 121, 255, 0.25);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .new-funding-form {
+        grid-template-columns: 1fr;
+    }
+
+    .startup_funding_modal .modal-dialog {
+        max-width: 95%;
+        margin: 1.75rem 0.5rem;
+    }
+}
+
+/* Submit Button Styling */
+.submit-button-custom {
+    background-color: #2979ff;
+    border-color: #2979ff;
+    transition: all 0.3s ease;
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.submit-button-custom:hover {
+    background-color: #1a5aff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Error State */
+.form-control-custom.is-invalid {
+    border-color: #dc3545;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    display: block;
+    margin-top: 0.25rem;
+}
+
+/* Modal Backdrop Fix */
+.modal-backdrop {
+    opacity: 0.5 !important;
+    z-index: 1050 !important;
+}
+
+.custom-modal-dialog {
+    z-index: 1060 !important;
+}
+
+.startup_funding_modal {
+    z-index: 1070 !important;
+}
+
+.startup_funding_modal .modal-content {
+    z-index: 1080 !important;
+}
+
+/* Modal Backdrop and Z-Index Fix */
+
+
+.modal {
+    z-index: 1048 !important;
+    background: rgba(0,0,0,0.5) !important;
+}
+
+.modal-backdrop {
+    z-index: 9998 !important;
+    opacity: 0.5 !important;
+}
+
+.modal-dialog {
+    z-index: 10000 !important;
+}
+
+.modal-content {
+    z-index: 10001 !important;
+}
+
+/* Ensure modal is on top of other elements */
+.startup_funding_modal {
+    z-index: 10002 !important;
+}
+
+.startup_funding_modal .modal-dialog {
+    z-index: 10003 !important;
+    position: relative;
+}
+
+/* Prevent scrolling issues */
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-height: calc(100% - 3.5rem);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-content {
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* Reset Modal Styles */
+body.modal-open {
+    overflow: visible !important;
+    position: relative !important;
+}
+
+.modal {
+    z-index: 9999 !important;
+    background: rgba(0,0,0,0.5) !important;
+    overflow: visible !important;
+}
+
+.modal-backdrop {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(0,0,0,0.5) !important;
+    z-index: 1040 !important;
+}
+
+.modal-dialog {
+    z-index: 1050 !important;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    max-width: 90% !important;
+    width: auto !important;
+}
+
+.modal-content {
+    position: relative !important;
+    z-index: 1060 !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+}
+
+.startup_funding_modal {
+    z-index: 9999 !important;
+}
+
+.startup_funding_modal .modal-dialog {
+    max-width: 800px !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .modal-dialog {
+        max-width: 95% !important;
+        margin: 1.75rem auto !important;
+    }
+}
+
+/* Additional Styling to Ensure Visibility */

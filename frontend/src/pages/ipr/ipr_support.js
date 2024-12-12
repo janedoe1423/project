@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
     FaComments, FaPhone, FaUserTie, FaClipboardList,
     FaUsers, FaRobot, FaBookReader, FaVideo,
@@ -7,6 +7,9 @@ import {
 import './ipr_support.css';
 
 const IprSupport = () => {
+    const [showChat, setShowChat] = useState(false);
+    const [showBooking, setShowBooking] = useState(false);
+
     const supportFeatures = [
         {
             title: "Live Chat Support",
@@ -14,7 +17,8 @@ const IprSupport = () => {
             description: "Get instant help with your IPR-related queries",
             features: ["24/7 Availability", "Quick Response", "Expert Guidance"],
             action: "Start Chat",
-            color: "#2563EB" // Blue
+            color: "#2563EB",
+            onClick: () => setShowChat(true)
         },
         {
             title: "IPR Helpline",
@@ -30,7 +34,8 @@ const IprSupport = () => {
             description: "Public Q&A sessions with IPR professionals",
             features: ["Scheduled Sessions", "Expert Panel", "Topic-wise Discussions"],
             action: "Book Session",
-            color: "#DC2626" // Red
+            color: "#DC2626",
+            onClick: () => setShowBooking(true)
         },
         {
             title: "Process Explainers",
@@ -90,6 +95,12 @@ const IprSupport = () => {
         }
     ];
 
+    const startChat = () => {
+        // Implement chat initiation logic here
+        alert("Chat started!");
+        // You can replace this with actual chat integration logic
+    };
+
     return (
         <div className="ipr-support">
             <div className="ipr-support-header">
@@ -117,12 +128,56 @@ const IprSupport = () => {
                         <button 
                             className="ipr-support-button"
                             style={{backgroundColor: feature.color}}
+                            onClick={feature.onClick}
                         >
                             {feature.action}
                         </button>
                     </div>
                 ))}
             </div>
+
+            {showChat && (
+                <div className="chat-modal">
+                    <div className="chat-content">
+                        {/* Chatbot component or logic here */}
+                        <button onClick={() => setShowChat(false)}>Close Chat</button>
+                    </div>
+                </div>
+            )}
+
+            {showBooking && (
+                <div className="booking-modal">
+                    <div className="booking-content">
+                        <h2>Expert Sessions</h2>
+                        <div className="session-section">
+                            <h3>Scheduled Sessions</h3>
+                            <ul>
+                                <li>Session 1: Understanding Patents - Date & Time</li>
+                                <li>Session 2: Trademark Basics - Date & Time</li>
+                                {/* Add more sessions */}
+                            </ul>
+                        </div>
+                        <div className="session-section">
+                            <h3>Expert Panel</h3>
+                            <ul>
+                                <li>Dr. John Doe - Patent Specialist</li>
+                                <li>Ms. Jane Smith - Trademark Attorney</li>
+                                {/* Add more experts */}
+                            </ul>
+                        </div>
+                        <div className="session-section">
+                            <h3>Topic-wise Discussions</h3>
+                            <ul>
+                                <li>Patents</li>
+                                <li>Trademarks</li>
+                                <li>Copyrights</li>
+                                {/* Add more topics */}
+                            </ul>
+                        </div>
+                        <button onClick={() => setShowBooking(false)}>Close</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

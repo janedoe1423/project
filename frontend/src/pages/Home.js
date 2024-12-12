@@ -18,7 +18,7 @@ function Home() {
                 <div className="carousel-inner">
                     <div className="carousel-item active">
                         <div className="hero-slide slide-1">
-                            <div className="carousel-caption animate__animated animate__fadeInUp">
+                            <div className="carousel-caption animate_animated animate_fadeInUp">
                                 <h1 className="display-4 fw-bold glow-text">Innovation Gateway India</h1>
                                 <p className="lead glow-text-subtle">Empowering Startups, Protecting Innovation, Building Future</p>
                                 <button className="btn btn-primary btn-lg pulse-button">Get Started</button>
@@ -27,7 +27,7 @@ function Home() {
                     </div>
                     <div className="carousel-item">
                         <div className="hero-slide slide-2">
-                            <div className="carousel-caption animate__animated animate__fadeInUp">
+                            <div className="carousel-caption animate_animated animate_fadeInUp">
                                 <h1 className="display-4 fw-bold glow-text">Protect Your Innovation</h1>
                                 <p className="lead glow-text-subtle">Comprehensive IPR Management & Support</p>
                                 <button className="btn btn-primary btn-lg pulse-button">Explore IPR Services</button>
@@ -36,7 +36,7 @@ function Home() {
                     </div>
                     <div className="carousel-item">
                         <div className="hero-slide slide-3">
-                            <div className="carousel-caption animate__animated animate__fadeInUp">
+                            <div className="carousel-caption animate_animated animate_fadeInUp">
                                 <h1 className="display-4 fw-bold glow-text">Connect & Collaborate</h1>
                                 <p className="lead glow-text-subtle">Join India's Largest Innovation Ecosystem</p>
                                 <button className="btn btn-primary btn-lg pulse-button">Join Network</button>
