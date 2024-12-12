@@ -1,535 +1,1073 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Gujaratagri from './assets/images/Gujaratagri.jpg'; // Adjust the path as necessary
-import Image2 from './assets/images/agri.jpg'; // Add your second image
-import Image3 from './assets/images/agri2.jpg'; // Add your third image
-import MarketAnalyImage from './assets/images/marketanaly.jpeg'; // New image
-import AgriImage from './assets/images/agriintro.jpg'; // Image for the snapshot section
-import { yellow } from '@mui/material/colors';
-import stats from './assets/images/statsagri.jpeg'
-import { Chart, registerables } from 'chart.js';
-import infogrph from "./assets/images/agristats1.jpeg"
-import infogrph1 from "./assets/images/agriproduction.jpeg"
-import gujagro from "./assets/images/gujaratagro.jpeg"
-import infographicsImage from './assets/images/Infographics.jpeg'; // Path to your infographics image
+import React, { useState } from 'react';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import './MarketAnalysis.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+    faChartLine, 
+    faLightbulb, 
+    faArrowTrendUp, 
+    faUsers, 
+    faBuilding,
+    faGlobe,
+    faDollarSign,
+    faRocket,
+    faChartPie,
+    faCheck,
+    faBolt,
+    faGear,
+    faMoneyBill,
+    faIndustry,
+    faHandHoldingDollar,
+    faMoneyBillWave,
+    faScaleBalanced,
+    faStar,
+    faHandshake,
+    faAward,
+    faLeaf,
+    faRobot,
+    faVideo,
+    faPeopleGroup,
+    faLock,
+    faNetworkWired,
+    faCloud,
+    faDatabase,
+    faDownload,
+    faBalanceScale,
+    faChartBar,
+    faUserCheck,
+    faComments
+} from '@fortawesome/free-solid-svg-icons';
 
-Chart.register(...registerables);
-
-const images = [Gujaratagri, Image2, Image3]; // Array of images for the slider
-
-const sectors = [
-    'Agriculture and Allied Industries',
-    'Gems and Jewelleries',
-    'Textile Industry',
-]; // Array of sectors for the dropdown
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+    
+    ArcElement,
+    BarElement,
+    RadialLinearScale
+  } from 'chart.js';
+  import { Line, Pie, Bar, Doughnut,Radar,
+    Scatter, } from 'react-chartjs-2';
+  
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement,
+    BarElement,
+    RadialLinearScale
+  );
 
 const MarketAnalysis = () => {
-    const [currentImageIndex, setCurrentImageIndex] = useState(0); // State to manage current image index
-    const [isOpen, setIsOpen] = useState(false); // Dropdown visibility
-    const [activeTab, setActiveTab] = useState('SNAPSHOT'); // State to manage active tab
-    const [isVisible, setIsVisible] = useState(false); // State to manage visibility for animation
-    const [selectedSector, setSelectedSector] = useState('Choose Sector'); // Default sector
-    const [showImage, setShowImage] = useState(false); // State to control image visibility
+    const [activeSection, setActiveSection] = useState('overview');
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length); // Change image every 5 seconds
-        }, 5000); // Change the duration as needed
+    const images = [
+        { 
+            url: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80',
+            caption: 'Market Growth Trends 2024' 
+        },
+        { 
+            url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80',
+            caption: 'Industry Analysis Dashboard' 
+        },
+        { 
+            url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80',
+            caption: 'Global Market Statistics' 
+        }
+    ];
 
-        // Trigger the sliding animation after the component mounts
-        setIsVisible(true);
+    const sampleLineData = [
+        { name: '2018', value: 400 },
+        { name: '2019', value: 300 },
+        { name: '2020', value: 500 },
+        { name: '2021', value: 700 },
+        { name: '2022', value: 600 },
+    ];
 
-        return () => clearInterval(interval); // Cleanup interval on component unmount
-    }, []);
+    const samplePieData = [
+        { name: 'Tech', value: 400 },
+        { name: 'Finance', value: 300 },
+        { name: 'Healthcare', value: 300 },
+        { name: 'Retail', value: 200 },
+    ];
 
-    const toggleDropdown = () => setIsOpen((prev) => !prev);
-    const handleSectorSelect = (sector) => {
-        setSelectedSector(sector);
-        setIsOpen(false); // Close dropdown after selection
+    const sampleBarData = [
+        { name: '18-24', value: 400 },
+        { name: '25-34', value: 300 },
+        { name: '35-44', value: 300 },
+        { name: '45-54', value: 200 },
+    ];
+
+    const sampleRadarData = [
+        { subject: 'Pricing', A: 120, B: 110, fullMark: 150 },
+        { subject: 'Reach', A: 98, B: 130, fullMark: 150 },
+        { subject: 'Quality', A: 86, B: 130, fullMark: 150 },
+        { subject: 'Support', A: 99, B: 100, fullMark: 150 },
+        { subject: 'Innovation', A: 85, B: 90, fullMark: 150 },
+    ];
+
+    // Market Growth Data
+    const marketGrowthData = {
+        labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+        datasets: [{
+            label: 'Market Growth ($B)',
+            data: [45, 52, 65, 82, 96, 110],
+            borderColor: '#2563eb',
+            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+            fill: true,
+            tension: 0.4,
+        }]
     };
 
-    const handleTabClick = (tab) => {
-        setActiveTab(tab); // Update the active tab
-        if (tab === 'REPORTS') {
-            setShowImage(true); // Show image when Reports tab is clicked
-        } else {
-            setShowImage(false); // Hide image for other tabs
+    // Industry Distribution Data
+    const industryDistributionData = {
+        labels: ['Tech', 'Healthcare', 'Finance', 'Retail', 'Manufacturing'],
+        datasets: [{
+            data: [35, 25, 20, 15, 5],
+            backgroundColor: [
+                'rgba(37, 99, 235, 0.8)',
+                'rgba(124, 58, 237, 0.8)',
+                'rgba(5, 150, 105, 0.8)',
+                'rgba(234, 88, 12, 0.8)',
+                'rgba(79, 70, 229, 0.8)'
+            ],
+            borderColor: [
+                '#2563eb',
+                '#7c3aed',
+                '#059669',
+                '#ea580c',
+                '#4f46e5'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    // Audience Segmentation Data
+    const audienceSegmentationData = {
+        labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
+        datasets: [{
+            label: 'Age Distribution',
+            data: [15, 30, 25, 20, 10],
+            backgroundColor: 'rgba(79, 70, 229, 0.8)',
+            borderColor: '#4f46e5',
+            borderWidth: 1,
+            hoverBackgroundColor: 'rgba(79, 70, 229, 1)',
+            hoverBorderColor: '#4338ca'
+        }]
+    };
+
+    // Competitor Analysis Data
+    const competitorAnalysisData = {
+        labels: ['Product Quality', 'Price', 'Market Reach', 'Innovation', 'Customer Service'],
+        datasets: [
+            {
+                label: 'Company A',
+                data: [90, 85, 70, 88, 92],
+                backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                borderColor: '#2563eb',
+                pointBackgroundColor: '#2563eb',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#2563eb'
+            },
+            {
+                label: 'Company B',
+                data: [85, 90, 85, 75, 80],
+                backgroundColor: 'rgba(124, 58, 237, 0.2)',
+                borderColor: '#7c3aed',
+                pointBackgroundColor: '#7c3aed',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#7c3aed'
+            }
+        ]
+    };
+
+    // Chart Options
+    const lineChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Market Growth Trend'
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Value ($B)'
+                }
+            }
+        },
+        interaction: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
         }
     };
 
-    const styles = {
-        header: {
-            position: 'relative',
-            textAlign: 'center',
-            padding: '50px 20px',
-            backgroundImage: `url(${images[currentImageIndex]})`, // Use the current image
-            backgroundSize: 'cover', // Cover the entire header
-            backgroundPosition: 'center', // Center the image
-            color: 'white', // Change text color for better visibility
-            minHeight: '50vh', // Set height for the header
-            transition: 'background-image 0.5s ease-in-out', // Smooth transition for background image
-        },
-        overlay: {
-            position: 'absolute',
-            top: '0',
-            left: '0',
-            right: '0',
-            bottom: '0',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)', // Dark overlay for better text visibility
-            zIndex: 1,
-        },
-        title: {
-            fontSize: '3rem', // Increased font size for emphasis
-            marginBottom: '20px',
-            position: 'relative',
-            zIndex: 2, // Ensure title is above the overlay
-            fontWeight: 'bold', // Make the title bold
-            textTransform: 'uppercase', // Make the text uppercase
-            letterSpacing: '2px', // Add letter spacing for a more modern look
-            fontFamily: 'Roboto, sans-serif', // Use the imported font
-            color: '#FFD700', // Change title color to gold
-            opacity: isVisible ? 1 : 0, // Fade in effect
-            transform: isVisible ? 'translateY(0)' : 'translateY(20px)', // Slide in effect
-            transition: 'opacity 0.5s ease, transform 0.5s ease', // Animation for opacity and transform
-        },
-        description: {
-            fontSize: '1.5rem', // Increased font size for better readability
-            marginBottom: '30px',
-            position: 'relative',
-            zIndex: 2, // Ensure description is above the overlay
-            fontWeight: '400', // Normal weight for description
-            textAlign: 'center', // Center the description
-            fontFamily: 'Open Sans, sans-serif', // Use the imported font
-            color: '#FFFFFF', // Change description color to white
-            opacity: isVisible ? 1 : 0, // Fade in effect
-            transform: isVisible ? 'translateY(0)' : 'translateY(20px)', // Slide in effect
-            transition: 'opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s', // Animation for opacity and transform
-        },
-        marketImage: {
-            width: '100%', // Make the image responsive
-            height: 'auto', // Maintain aspect ratio
-            marginTop: '20px', // Space above the image
-        },
-        tabContainer: {
-            display: 'flex',
-            justifyContent: 'center',
-            margin: '20px 0',
-        },
-        tab: {
-            padding: '10px 20px',
-            cursor: 'pointer',
-            backgroundColor: activeTab === 'SNAPSHOT' ? '#ff9800' : '#f8f9fa', // Highlight active tab
-            color: activeTab === 'SNAPSHOT' ? '#fff' : '#000', // Change text color based on active tab
-            border: '1px solid #ccc',
-            borderRadius: '5px',
-            margin: '0 5px',
-            transition: 'background-color 0.3s ease',
-        },
-        content: {
-            padding: '20px',
-            backgroundColor: '#f8f9fa',
-            borderRadius: '5px',
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-        },
-        dropdownContainer: {
-            position: 'relative',
-            display: 'inline-block',
-        },
-        dropdown: {
-            padding: '10px 20px',
-            cursor: 'pointer',
-            backgroundColor: '#f8f9fa',
-            border: '1px solid #ccc',
-            borderRadius: '5px',
-            transition: 'background-color 0.3s ease',
-        },
-        dropdownMenu: {
-            position: 'absolute',
-            backgroundColor: '#fff',
-            border: '1px solid #ccc',
-            borderRadius: '5px',
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-            zIndex: 2,
-            marginTop: '5px',
-        },
-        dropdownItem: {
-            padding: '10px 20px',
-            cursor: 'pointer',
-            transition: 'background-color 0.3s ',
-        },
-        dropdownItemHover: {
-            backgroundColor: '#ffee58', // Change background on hover
-        },
+    const pieChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'right',
+            },
+            title: {
+                display: true,
+                text: 'Industry Distribution'
+            }
+        }
     };
 
-    // Chart.js setup
-    const marketSizeChartRef = useRef(null);
-    const productionChartRef = useRef(null);
-
-    useEffect(() => {
-        if (marketSizeChartRef.current && productionChartRef.current) {
-            const ctx1 = marketSizeChartRef.current.getContext('2d');
-            const marketSizeChart = new Chart(ctx1, {
-                type: 'bar',
-                data: {
-                    labels: ['FY18', 'FY19', 'FY20', 'FY21', 'FY22', 'FY23', 'FY24'],
-                    datasets: [{
-                        label: 'Gross Value Added (US$ billion)',
-                        data: [283.68, 267.90, 276.37, 279.00, 259.71, 288.78, 277.01],
-                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Value (US$ billion)'
-                            }
-                        }
-                    }
+    const barChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Audience Age Distribution'
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Percentage (%)'
                 }
-            });
-
-            const ctx2 = productionChartRef.current.getContext('2d');
-            const productionChart = new Chart(ctx2, {
-                type: 'pie',
-                data: {
-                    labels: ['Wheat', 'Pulses', 'Oilseeds', 'Coarse Cereals'],
-                    datasets: [{
-                        label: 'Rabi Area Sown in 2023-24 (million hectares)',
-                        data: [34.16, 11.10, 5.74, 3.93],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.6)',
-                            'rgba(54, 162, 235, 0.6)',
-                            'rgba(255, 206, 86, 0.6)',
-                            'rgba(75, 192, 192, 0.6)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)'
-                        ],
-                        borderWidth: 1,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Rabi Area Sown in 2023-24'
-                        }
-                    }
-                }
-            });
-
-            return () => {
-                marketSizeChart.destroy();
-                productionChart.destroy();
-            };
+            }
         }
-    }, [activeTab]); // Ensure effect runs when activeTab changes
+    };
+
+    const radarChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Competitive Analysis'
+            }
+        },
+        scales: {
+            r: {
+                angleLines: {
+                    display: true
+                },
+                suggestedMin: 0,
+                suggestedMax: 100
+            }
+        }
+    };
+
+    const adoptionRatesData = {
+        labels: ['Early Adopters', 'Early Majority', 'Late Majority', 'Laggards'],
+        datasets: [
+            {
+                data: [15, 35, 35, 15],
+                backgroundColor: [
+                    '#2563eb',
+                    '#4f46e5',
+                    '#7c3aed',
+                    '#059669'
+                ],
+            }
+        ]
+    };
+
+    // Risk vs. Opportunity Matrix Data
+    const riskOpportunityData = {
+        datasets: [{
+            label: 'Market Segments',
+            data: [
+                { x: 20, y: 80, r: 15, label: 'AI & ML', sector: 'Technology' },
+                { x: 70, y: 30, r: 12, label: 'IoT', sector: 'Hardware' },
+                { x: 40, y: 60, r: 20, label: 'Cloud Services', sector: 'Infrastructure' },
+                { x: 80, y: 20, r: 8, label: 'Blockchain', sector: 'Finance' },
+                { x: 30, y: 70, r: 12, label: 'Cybersecurity', sector: 'Security' },
+                { x: 60, y: 40, r: 10, label: '5G', sector: 'Telecom' },
+                { x: 50, y: 50, r: 15, label: 'Green Tech', sector: 'Sustainability' }
+            ],
+            backgroundColor: [
+                'rgba(37, 99, 235, 0.6)',  // Blue
+                'rgba(124, 58, 237, 0.6)', // Purple
+                'rgba(5, 150, 105, 0.6)',  // Green
+                'rgba(234, 88, 12, 0.6)',  // Orange
+                'rgba(79, 70, 229, 0.6)',  // Indigo
+                'rgba(220, 38, 38, 0.6)',  // Red
+                'rgba(16, 185, 129, 0.6)'  // Emerald
+            ],
+            borderColor: [
+                '#2563eb',
+                '#7c3aed',
+                '#059669',
+                '#ea580c',
+                '#4f46e5',
+                '#dc2626',
+                '#10b981'
+            ],
+            borderWidth: 2
+        }]
+    };
+
+    // Risk vs. Opportunity Matrix Options
+    const riskOpportunityOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                callbacks: {
+                    label: (context) => {
+                        const point = context.raw;
+                        return [
+                            `Sector: ${point.sector}`,
+                            `Risk Level: ${point.x}%`,
+                            `Opportunity: ${point.y}%`,
+                            `Market Size: ${point.r * 2}B`
+                        ];
+                    }
+                }
+            },
+            title: {
+                display: true,
+                text: 'Risk vs. Opportunity Matrix',
+                font: {
+                    size: 16,
+                    family: "'DM Sans', sans-serif"
+                }
+            }
+        },
+        scales: {
+            x: {
+                min: 0,
+                max: 100,
+                title: {
+                    display: true,
+                    text: 'Risk Level (%)',
+                    font: {
+                        size: 14,
+                        family: "'DM Sans', sans-serif"
+                    }
+                },
+                grid: {
+                    color: 'rgba(0, 0, 0, 0.1)'
+                }
+            },
+            y: {
+                min: 0,
+                max: 100,
+                title: {
+                    display: true,
+                    text: 'Opportunity Level (%)',
+                    font: {
+                        size: 14,
+                        family: "'DM Sans', sans-serif"
+                    }
+                },
+                grid: {
+                    color: 'rgba(0, 0, 0, 0.1)'
+                }
+            }
+        }
+    };
+    const annualMarketData = {
+        labels: ['2019', '2020', '2021', '2022', '2023'],
+        datasets: [{
+          label: 'Market Growth ($B)',
+          data: [45, 52, 61, 74, 89],
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      };
+      
+      const competitorData = {
+        labels: ['Our Company', 'Competitor A', 'Competitor B', 'Others'],
+        datasets: [{
+          data: [35, 28, 20, 17],
+          backgroundColor: [
+            'rgba(54, 162, 235, 0.8)',
+            'rgba(255, 99, 132, 0.8)',
+            'rgba(255, 206, 86, 0.8)',
+            'rgba(75, 192, 192, 0.8)',
+          ]
+        }]
+      };
+      
+      const fundingData = {
+        labels: ['Seed', 'Series A', 'Series B', 'Series C', 'Late Stage'],
+        datasets: [{
+          label: 'Funding Distribution',
+          data: [15, 25, 35, 45, 30],
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        }]
+      };
+      
+      const regionalData = {
+        labels: ['North America', 'Europe', 'Asia', 'Latin America', 'Africa'],
+        datasets: [{
+          label: 'Regional Market Share (%)',
+          data: [40, 25, 20, 10, 5],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.8)',
+            'rgba(54, 162, 235, 0.8)',
+            'rgba(255, 206, 86, 0.8)',
+            'rgba(75, 192, 192, 0.8)',
+            'rgba(153, 102, 255, 0.8)',
+          ]
+        }]
+      };
+      
+      const chartOptions = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          }
+        }
+      };
 
     return (
-        <div>
-            <div style={styles.header}>
-                <div style={styles.overlay}></div>
-                <h1 style={styles.title}>Transforming the Textile Industry: Unleashing Market Growth in Gujarat!</h1>
-                <p style={styles.description}>
-                    The Gujarat textiles and apparel market is set to transform, projected to reach US$ 350 billion by 2030 with exports hitting US$100 billion!
-                </p>
-                <div style={{ position: 'relative', display: 'inline-block', zIndex: 2 }}>
-                    <button
-                        style={{
-                            padding: '10px 20px',
-                            backgroundColor: '#FFD700',
-                            color: '#000',
-                            border: 'none',
-                            borderRadius: '5px',
-                            cursor: 'pointer',
-                            fontSize: '1.2rem',
-                        }}
-                        onClick={toggleDropdown}
-                    >
-                        {selectedSector} <span>&#9660;</span>
-                    </button>
-                    {isOpen && (
-                        <div
-                            style={{
-                                position: 'absolute',
-                                backgroundColor: '#fff',
-                                border: '1px solid #ccc',
-                                borderRadius: '5px',
-                                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                                zIndex: 3,
-                                marginTop: '5px',
-                                textAlign: 'left',
-                            }}
-                        >
-                            {sectors.map((sector) => (
-                                <div
-                                    key={sector}
-                                    style={{
-                                        padding: '10px 20px',
-                                        cursor: 'pointer',
-                                        borderBottom: '1px solid #ddd',
-                                    }}
-                                    onClick={() => handleSectorSelect(sector)}
-                                >
-                                    {sector}
-                                </div>
-                            ))}
+        <div className="market_analysis_container">
+            <h1 className="market_analysis_title">Market Analysis</h1>
+            
+            {/* Carousel Section */}
+            <div className="market_analysis_carousel">
+                <Carousel 
+                    showArrows={true} 
+                    showThumbs={false} 
+                    infiniteLoop={true} 
+                    autoPlay={true}
+                >
+                    {images.map((image, index) => (
+                        <div key={`market_analysis_slide_${index}`}>
+                            <img src={image.url} alt={image.caption} />
+                            <p className="market_analysis_legend">{image.caption}</p>
                         </div>
-                    )}
-                </div>
+                    ))}
+                </Carousel>
             </div>
 
-            {/* New Banner Section (Before Image) */}
-            <div style={{
-                backgroundColor: '#ff9800', // Orange background
-                padding: '20px',
-                textAlign: 'center',
-                color: '#FFFFFF', // White text color
-                fontSize: '2rem', // Font size
-                fontWeight: 'bold', // Bold text
-                textTransform: 'uppercase', // Uppercase text
-                borderRadius: '0 0 20px 20px', // Rounded corners
-                marginTop: '-5px', // Adjust margin as needed
-            }}>
-                Advantage Gujarat
-            </div>
-
-            {/* Image Section */}
-            <img src={MarketAnalyImage} alt="Market Analysis" style={styles.marketImage} />
-
-            {/* Tab Navigation */}
-            <div style={styles.tabContainer}>
-                {['SNAPSHOT', 'SHOWCASE', 'INFOGRAPHICS', 'REPORTS', 'RELATED NEWS'].map((tab) => (
-                    <div
-                        key={tab}
-                        style={{
-                            ...styles.tab,
-                            ...(activeTab === tab ? styles.tabHover : {}),
-                        }}
-                        onClick={() => handleTabClick(tab)}
-                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#ff9800'}
-                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = activeTab === tab ? '#ff9800' : '#f8f9fa'}
+            {/* Navigation Menu */}
+            <div className="market_analysis_menu">
+                {['overview', 'snapshot', 'infographs', 'reports', 'showcase'].map(section => (
+                    <button
+                        key={`market_analysis_btn_${section}`}
+                        className={`market_analysis_menu_item ${activeSection === section ? 'active' : ''}`}
+                        onClick={() => setActiveSection(section)}
                     >
-                        {tab}
-                    </div>
+                        {section.charAt(0).toUpperCase() + section.slice(1)}
+                    </button>
                 ))}
             </div>
 
-            
+            {/* Content Sections */}
+            <div className="market_analysis_content">
+                {activeSection === 'overview' && (
+                    <div className="market_analysis_overview">
+                        <section className="market_analysis_growth">
+                            <h2>
+                                <FontAwesomeIcon icon={faChartLine} /> Market Growth Summary
+                            </h2>
+                            <p>Industry showing remarkable growth with 15.7% CAGR</p>
+                        </section>
 
-            {/* Tab Content */}
-            <div style={styles.content}>
-                {activeTab === 'SNAPSHOT' && (
-                    <div style={{ display: 'flex', padding: '20px', textAlign: 'left' }}>
-                        <div style={{ flex: 1 }}>
-                            <h2 style={{ color: 'green' }}>Agriculture and Allied Industries Industry Report</h2>
-                            <p>Aug, 2024</p>
-                            <h3>INTRODUCTION</h3>
-                            <p>
-                                Gross State Domestic Product (GSDP) for the agriculture sector in Gujarat from FY 2012 to FY 2022, showcasing a consistent growth trajectory over the decade. The GSDP increased from ₹0.8 trillion in FY 2012 to ₹1.76 trillion in FY 2022, reflecting sustained development in Gujarat's agricultural sector. Despite a decline in FY 2013 to ₹0.68 trillion and a stagnation phase between FY 2015 and FY 2016 at ₹0.94 trillion, the sector witnessed significant recovery and growth from FY 2017 onwards. Major milestones include a notable increase in FY 2020 to ₹1.48 trillion, followed by ₹1.61 trillion in FY 2021, before peaking at ₹1.76 trillion in FY 2022.
-                            </p>
-                            <p>
-                                This growth has been driven by various factors, including robust state policies like the Sujalam Sufalam Yojana for irrigation and the Krishi Mahotsav initiative, which promoted modern farming techniques. Investments in water resource management, such as the Narmada Canal and micro-irrigation systems, provided crucial support for agriculture. Additionally, technological advancements like GIS mapping, AI-based crop monitoring, and drones enhanced efficiency and productivity. Gujarat's focus on crop diversification, including high-value crops such as cotton, groundnut, and cereals, along with an increase in horticulture production, further contributed to this growth.
-                            </p>
-                            <p>
-                                The state’s strong supply chains and market linkages also enabled farmers to access domestic and international markets, boosting exports of key products like cotton, spices, marine products, and processed food items. In FY 2022-23, Gujarat emerged as a leader in agricultural exports, benefiting from the increasing global demand for its high-quality produce. Investments and foreign direct investment (FDI) in agriculture and food processing have further strengthened Gujarat’s position.
-                            </p>
-                            <p>
-                                Overall, the consistent rise in agricultural GSDP highlights Gujarat’s strategic focus on sustainable farming practices, modern technology adoption, and export-oriented growth. This growth positions Gujarat as a model state in agricultural development and a significant contributor to India’s agrarian economy.
-                            </p>
+                        <section className="market_analysis_highlights">
+                            <h2>
+                                <FontAwesomeIcon icon={faLightbulb} /> Industry Highlights
+                            </h2>
+                            <ul>
+                                <li><FontAwesomeIcon icon={faArrowTrendUp} /> Record-breaking market capitalization</li>
+                                <li><FontAwesomeIcon icon={faCheck} /> Sustainable practices adoption at 67%</li>
+                                <li><FontAwesomeIcon icon={faBolt} /> Digital transformation acceleration</li>
+                            </ul>
+                        </section>
 
-                            {/* Market Size Section */}
-                            <h3 style={{ color: 'green' }}>MARKET SIZE</h3>
-                            <div style={{ display: 'flex' }}>
-                                <div style={{ flex: 1 }}>
-                                    <h4>Market Size Statistics</h4>
-                                    <p>
-                                        According to Inc42, the Indian agricultural sector is predicted to increase to US$ 24 billion by 2025. Indian food and grocery market is the world’s sixth largest, with retail contributing 70% of the sales.
-                                    </p>
-                                    <p>
-                                        As per the First Advance Estimates for 2023-24 (Kharif only), total foodgrain production in the country is estimated at 148.5 million tonnes.
-                                    </p>
-                                    <p>
-                                        Rabi crop area has from 709.09 lakh hectares in 2022-23 to 709.29 lakh hectares in 2022-23.
-                                    </p>
-                                    <p>
-                                        In 2022-23 (as per the second advance estimate), India's horticulture output is expected to have hit a record 351.92 million tonnes (MT), an increase of about 4.74 million tonnes (1.37%) as compared to the year 2021-22.
-                                    </p>
-                                    <p>
-                                        The Agriculture and Allied industry sector witnessed some major developments, investments, and support from the Government in the recent past. Between April 2000-March 2024, FDI in agriculture services stood at US$ 3.08 billion.
-                                    </p>
-                                    <p>
-                                        According to the Department for Promotion of Industry and Internal Trade (DPIIT), the Indian food processing industry has cumulatively attracted a Foreign Direct Investment (FDI) equity inflow of about US$ 12.58 billion between April 2000-March 2024. This accounts for 1.85% of total FDI inflows received across industries.
-                                    </p>
-                                    <p>
-                                        During 2024-25 (April-May), processed vegetables accounted for US$ 122.91 million, miscellaneous processed items accounted for US$ 302.07 million and processed fruits & juices accounted for US$ 143.51 million.
-                                    </p>
-                                    <p>
-                                        Rapid population expansion in India is the main factor driving the industry. The rising income levels in rural and urban areas, which have contributed to an increase in the demand for agricultural products across the nation, provide additional support for this. In accordance with this, the market is being stimulated by the growing adoption of cutting-edge techniques including biotechnology, artificial intelligence (AI), e-commerce platforms, etc.
-                                    </p>
+                        <section className="market_analysis_trends">
+                            <h2>
+                                <FontAwesomeIcon icon={faArrowTrendUp} /> Top-Sector Trends
+                            </h2>
+                            <div className="market_analysis_trends_grid">
+                                <div><FontAwesomeIcon icon={faGear} /> AI & Machine Learning</div>
+                                <div><FontAwesomeIcon icon={faLightbulb} /> Sustainable Tech</div>
+                                <div><FontAwesomeIcon icon={faUsers} /> Remote Solutions</div>
+                                <div><FontAwesomeIcon icon={faChartLine} /> Blockchain Integration</div>
+                            </div>
+                        </section>
+
+                        <section className="market_analysis_audience">
+                            <h2>
+                                <FontAwesomeIcon icon={faUsers} /> Audience Overview
+                            </h2>
+                            <div className="market_analysis_demographics">
+                                <p>Primary: Tech-savvy professionals (25-45)</p>
+                                <p>Secondary: Enterprise decision-makers</p>
+                                <p>Geographic Focus: North America, Europe, APAC</p>
+                            </div>
+                        </section>
+
+                        <section className="market_analysis_competitors">
+                            <h2>
+                                <FontAwesomeIcon icon={faBuilding} /> Competitor Snapshot
+                            </h2>
+                            <ul>
+                                <li>Market Leader: TechCorp (35% share)</li>
+                                <li>Rising Star: InnovateTech (15% growth)</li>
+                                <li>Emerging Players: 5 new entrants</li>
+                            </ul>
+                        </section>
+
+                        <section className="market_analysis_regional">
+                            <h2>
+                                <FontAwesomeIcon icon={faGlobe} /> Regional Insights
+                            </h2>
+                            <ul>
+                                <li>North America: 45% market share</li>
+                                <li>Europe: 30% market share</li>
+                                <li>Asia Pacific: 20% market share</li>
+                                <li>Rest of World: 5% market share</li>
+                            </ul>
+                        </section>
+
+                        <section className="market_analysis_economic">
+                            <h2>Economic Contributions</h2>
+                            {/* Add economic data */}
+                        </section>
+
+                        <section className="market_analysis_startup">
+                            <h2>Startup Landscape</h2>
+                            {/* Add startup information */}
+                        </section>
+
+                        <section className="market_analysis_segmentation">
+                            <h2>Market Segmentation</h2>
+                            {/* Add segmentation data */}
+                        </section>
+
+                        <div className="market_analysis_cta">
+                            <button className="market_analysis_cta_button">
+                                Explore Detailed Reports
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {activeSection === 'snapshot' && (
+                    <div className="market_analysis_snapshot">
+                        <h2 className="market_analysis_section_title">
+                            <FontAwesomeIcon icon={faChartPie} /> Market Snapshot
+                        </h2>
+                        
+                        <div className="market_analysis_metrics_grid">
+                            <div className="market_analysis_metric market_analysis_metric_size">
+                                <FontAwesomeIcon icon={faMoneyBill} />
+                                <h3>Total Market Size</h3>
+                                <p className="market_analysis_number">$157B</p>
+                                <p className="market_analysis_label">Current Market Value</p>
+                                <div className="market_analysis_trend positive">↑ 12.3% YoY</div>
+                            </div>
+
+                            <div className="market_analysis_metric market_analysis_metric_growth">
+                                <FontAwesomeIcon icon={faChartLine} />
+                                <h3>Growth Rate</h3>
+                                <p className="market_analysis_number">15.7%</p>
+                                <p className="market_analysis_label">Projected CAGR 2024-2025</p>
+                                <div className="market_analysis_trend positive">↑ 2.1% from 2023</div>
+                            </div>
+
+                            <div className="market_analysis_metric market_analysis_metric_funding">
+                                <FontAwesomeIcon icon={faHandHoldingDollar} />
+                                <h3>Total Funding</h3>
+                                <p className="market_analysis_number">$42B</p>
+                                <p className="market_analysis_label">Startup Investments</p>
+                                <div className="market_analysis_trend positive">↑ 8.5% Q4</div>
+                            </div>
+
+                            <div className="market_analysis_metric market_analysis_metric_users">
+                                <FontAwesomeIcon icon={faUsers} />
+                                <h3>Active Users</h3>
+                                <p className="market_analysis_number">85M+</p>
+                                <p className="market_analysis_label">Global User Base</p>
+                                <div className="market_analysis_trend positive">↑ 5.2M MoM</div>
+                            </div>
+                        </div>
+
+                        <div className="market_analysis_detailed_metrics">
+                            <div className="market_analysis_card market_analysis_industries">
+                                <h3><FontAwesomeIcon icon={faIndustry} /> Top Industries</h3>
+                                <div className="market_analysis_bar_chart">
+                                    <div className="market_analysis_bar" style={{width: '85%'}}>
+                                        <span>Technology</span>
+                                        <span>85%</span>
+                                    </div>
+                                    <div className="market_analysis_bar" style={{width: '70%'}}>
+                                        <span>Healthcare</span>
+                                        <span>70%</span>
+                                    </div>
+                                    <div className="market_analysis_bar" style={{width: '65%'}}>
+                                        <span>Finance</span>
+                                        <span>65%</span>
+                                    </div>
                                 </div>
-                                <img src={stats} alt="Market Size Statistics" style={{ width: '500px', height: '300px', objectFit: 'cover', marginLeft: '20px' }} />
                             </div>
-                        </div>
-                        <img src={AgriImage} alt="Agriculture in Gujarat" style={{ width: '300px', height: '300px', objectFit: 'cover', marginLeft: '20px' }} />
-                    </div>
-                )}
-                {activeTab === 'SHOWCASE' && (
-                    <div style={{ display: 'flex', flexDirection: 'column', padding: '20px' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px' }}>
-                            <h2 style={{ color: 'green' }}>GODREJ AGROVET</h2>
-                            <p>
-                                Godrej Agrovet is part of Godrej Group, one of the largest Indian conglomerates. The company has interests in diversified agriculture-related businesses. It operates across five business verticals which include animal feed, crop protection, oil palm, dairy and poultry and processed foods. Animal feed is the largest business of the company, contributing over 51.1% of its revenues till the third quarter of FY24. It is one of the largest organized players in India's compound animal feed market.
-                            </p>
-                            <p>The revenue of the company reached Rs. 2,144.47 crore (US$ 257.7 million) in the fourth quarter of FY24.</p>
-                            <p>The consolidated net profit of the company reached Rs. 65.48 crore (US$ 7.9 million) in the fourth quarter of FY24.</p>
-                            <a href="#" style={{ color: 'blue', textDecoration: 'underline' }}>Company Website</a>
-                            <button style={{ marginTop: '10px', padding: '5px 10px' }}>Read More</button>
-                        </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px' }}>
-                            <h2 style={{ color: 'green' }}>RALLIS INDIA</h2>
-                            <p>
-                                Rallis, a Tata Enterprise, is a subsidiary of Tata Chemicals, with its business presence in the farm essentials vertical. It is one of India’s leading crop care companies. The company’s 6,000+ dealers and 70,000+ retailers reach a vast multitude of India's farmers covering more than 80% of India's districts and exports to over 58 countries. Rallis is known for its deep understanding of Indian agriculture, sustained contact with farmers, quality agrochemicals, branding and marketing expertise and its strong product portfolio of comprehensive crop care solutions. Agricultural solutions from the company benefit more than five million farmers.
-                            </p>
-                            <p>The net profit of the company reached Rs. 48 crore (US$ 5.8 million) in the first quarter of FY25.</p>
-                            <a href="#" style={{ color: 'blue', textDecoration: 'underline' }}>Company Website</a>
-                            <button style={{ marginTop: '10px', padding: '5px 10px' }}>Read More</button>
-                        </div>
-
-                        <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px' }}>
-                            <h2 style={{ color: 'green' }}>BRITANNIA INDUSTRIES LTD</h2>
-                            <p>
-                                Britannia is one of the leading food companies in India with a legacy of more than 100 years. Today, it is among the most trusted food brands in India. Its portfolio includes biscuits, bread, cakes, rusk, and dairy products including cheese, beverages, milk, and yogurt. It is the largest brand in the organised bread market. The company has a reach across five million retail outlets and 50% of the Indian households through its range of products.
-                            </p>
-                            <p>The consolidated net profit of the company reached Rs. 504.88 crore (US$ 60.7 million) in the first quarter of FY25.</p>
-                            <a href="#" style={{ color: 'blue', textDecoration: 'underline' }}>Company Website</a>
-                            <button style={{ marginTop: '10px', padding: '5px 10px' }}>Read More</button>
-                        </div>
-                    </div>
-                )}
-                {activeTab === 'INFOGRAPHICS' && (
-                    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-                        <h2 style={{ color: 'green', textAlign: 'center' }}>Agriculture and Allied Industries Infographics</h2>
-                        <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', marginBottom: '20px' }}>
-                            <div style={{ width: '45%', marginBottom: '20px' }}>
-                                <canvas ref={marketSizeChartRef}></canvas>
-                                <p style={{ textAlign: 'center', marginTop: '10px' }}>Gross Value Added (US$ billion) over the years.</p>
-                            </div>
-                            <div style={{ width: '45%', height: '300px', marginBottom: '20px' }}>
-                                <canvas ref={productionChartRef} style={{ height: '100%' }}></canvas>
-                                <p style={{ textAlign: 'center', marginTop: '10px' }}>Rabi Area Sown in 2023-24 by crop type.</p>
-                            </div>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'flex-start', marginTop: '20px' }}>
-                            <img src={gujagro} alt="Focus Crops Cluster of Gujarat" style={{ width: '600px', marginRight: '20px' }} />
-                            <div style={{ marginLeft: '20px' }}>
-                                <h2 style={{ color: 'green' }}>Advantage Gujarat</h2>
-                                <ul style={{ listStyleType: 'disc', paddingLeft: '20px' }}>
-                                    <li>8 Agro-climatic zones</li>
-                                    <li>Diversity of climate and cropping</li>
-                                    <li>40+ major crops</li>
-                                    <li>Strong market infrastructure system</li>
-                                    <li>Increasing adoption of Hi-tech Agriculture</li>
-                                    <li>1600 km of long coastal belt</li>
-                                    <li>Total Geographical Area: 19.6 million ha</li>
-                                    <li>Net Area Sown: 9 million ha</li>
-                                    <li>Total Cropped Area: 13.9 million ha</li>
-                                    <li>Net Irrigated Area: 4.32 million ha</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <img src={infogrph} alt="Agriculture Stats" style={{ width: '600px', marginTop: '20px' }} />
-                        <img src={infogrph1} alt="Agriculture Production" style={{ width: '600px', marginTop: '20px', paddingLeft:'50px' }} />
-                       
-                    </div>
-                )}
-                {activeTab === 'REPORTS' && (
-                    <div style={{ padding: '20px', textAlign: 'center' }}>
-                        <h2 style={{ color: 'green' }}>Infographics Report</h2>
-                        <img
-                            src={infographicsImage}
-                            alt="Infographics"
-                            style={{
-                                width: '100%', // Ensure the image takes full width
-                                height: 'auto', // Maintain aspect ratio
-                                maxWidth: '800px', // Optional: limit max width for better appearance
-                            }}
-                        />
-                    </div>
-                )}
-                {activeTab === 'RELATED NEWS' && (
-                    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-                        <h2 style={{ color: 'green', textAlign: 'center' }}>Related News</h2>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                            {[
-                                {
-                                    date: '4 Dec 24',
-                                    title: "India's advancing role in global trade competitiveness...",
-                                    content: "India strengthens its global trade dominance with significant export growth in petroleum oils, agrochemicals, semiconductors, and precious stones, supported by Make in India and production-linked incentives."
-                                },
-                                {
-                                    date: '3 Dec 24',
-                                    title: "Why the biomass industry is booming in India...",
-                                    content: "India is rapidly becoming a global leader in biomass energy, with over 200 GW of installed capacity, supporting renewable energy goals and rural economic development while addressing pollution from crop residue burning."
-                                },
-                                {
-                                    date: '25 Nov 24',
-                                    title: "India proposes seven key pillars to expand ties with Caribbean as leader of Global South...",
-                                    content: "Prime Minister Mr. Narendra Modi outlined seven pillars to strengthen India-Caricom ties, including healthcare, food security, and renewable energy, as India and Guyana signed 10 MoUs across key sectors for enhanced cooperation."
-                                },
-                                {
-                                    date: '13 Nov 24',
-                                    title: "India secures position in top 10 countries in Patents, Trademarks, and Industrial Designs: WIPO 2024 Report...",
-                                    content: "India ranks sixth globally in patent filings, with a 15.7% growth in applications and a 36.4% rise in industrial design filings, showcasing rapid progress in its intellectual property ecosystem."
-                                },
-                                {
-                                    date: '6 Nov 24',
-                                    title: "Government estimates record 119.93 mt rice output for the year 2024-25 Kharif season...",
-                                    content: "India's rice production is set to reach a record 119.93 million tonnes in the 2024-25 kharif season, driven by favourable monsoon conditions and increased acreage, while total foodgrain production is estimated at 164.70 million tonnes."
-                                },
-                            ].map((news, index) => (
-                                <div key={index} style={{
-                                    border: '1px solid #ccc',
-                                    borderRadius: '5px',
-                                    padding: '15px',
-                                    backgroundColor: '#f9f9f9',
-                                    transition: 'transform 0.2s, box-shadow 0.2s',
-                                    cursor: 'pointer',
-                                    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.transform = 'scale(1.02)';
-                                    e.currentTarget.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.transform = 'scale(1)';
-                                    e.currentTarget.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
-                                }}>
-                                    <h3 style={{ margin: '0', color: '#333' }}>{news.date}</h3>
-                                    <h4 style={{ margin: '5px 0', color: 'green' }}>{news.title}</h4>
-                                    <p style={{ margin: '0', color: '#555' }}>{news.content}</p>
+                            <div className="market_analysis_card market_analysis_segments">
+                                <h3><FontAwesomeIcon icon={faUsers} /> Customer Segments</h3>
+                                <div className="market_analysis_segment_grid">
+                                    <div className="market_analysis_segment">
+                                        <div className="market_analysis_segment_value">45%</div>
+                                        <div className="market_analysis_segment_label">Enterprise</div>
+                                    </div>
+                                    <div className="market_analysis_segment">
+                                        <div className="market_analysis_segment_value">35%</div>
+                                        <div className="market_analysis_segment_label">SMB</div>
+                                    </div>
+                                    <div className="market_analysis_segment">
+                                        <div className="market_analysis_segment_value">20%</div>
+                                        <div className="market_analysis_segment_label">Consumer</div>
+                                    </div>
                                 </div>
-                            ))}
+                            </div>
+
+                            <div className="market_analysis_card market_analysis_regions">
+                                <h3><FontAwesomeIcon icon={faGlobe} /> Geographic Performance</h3>
+                                <div className="market_analysis_region_list">
+                                    <div className="market_analysis_region">
+                                        <span>North America</span>
+                                        <div className="market_analysis_progress" style={{width: '45%'}}>45%</div>
+                                    </div>
+                                    <div className="market_analysis_region">
+                                        <span>Europe</span>
+                                        <div className="market_analysis_progress" style={{width: '30%'}}>30%</div>
+                                    </div>
+                                    <div className="market_analysis_region">
+                                        <span>Asia Pacific</span>
+                                        <div className="market_analysis_progress" style={{width: '20%'}}>20%</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="market_analysis_card market_analysis_emerging">
+                                <h3><FontAwesomeIcon icon={faRocket} /> Emerging Markets</h3>
+                                <div className="market_analysis_emerging_grid">
+                                    <div className="market_analysis_emerging_item">
+                                        <span>Southeast Asia</span>
+                                        <span className="market_analysis_growth_tag">+25%</span>
+                                    </div>
+                                    <div className="market_analysis_emerging_item">
+                                        <span>Latin America</span>
+                                        <span className="market_analysis_growth_tag">+18%</span>
+                                    </div>
+                                    <div className="market_analysis_emerging_item">
+                                        <span>Middle East</span>
+                                        <span className="market_analysis_growth_tag">+15%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {activeSection === 'infographs' && (
+                    <div className="market_analysis_infographs">
+                        <h2 className="infographs_main_title">
+                            <FontAwesomeIcon icon={faChartPie} className="icon-pulse" /> Market Intelligence
+                        </h2>
+                        
+                        <div className="infographs_grid">
+                            {/* Market Growth Chart */}
+                            <div className="infograph_card">
+                                <h3>
+                                    <FontAwesomeIcon icon={faChartLine} className="icon-pulse" />
+                                    Market Growth Trend
+                                </h3>
+                                <div className="chart_container">
+                                    <Line data={marketGrowthData} options={lineChartOptions} />
+                                </div>
+                            </div>
+
+                            {/* Industry Distribution */}
+                            <div className="infograph_card">
+                                <h3>
+                                    <FontAwesomeIcon icon={faChartPie} className="icon-rotate" />
+                                    Industry Distribution
+                                </h3>
+                                <div className="chart_container">
+                                    <Pie data={industryDistributionData} options={pieChartOptions} />
+                                </div>
+                            </div>
+
+                            {/* Audience Segmentation */}
+                            <div className="infograph_card">
+                                <h3>
+                                    <FontAwesomeIcon icon={faPeopleGroup} className="icon-bounce" />
+                                    Audience Demographics
+                                </h3>
+                                <div className="chart_container">
+                                    <Bar data={audienceSegmentationData} options={barChartOptions} />
+                                </div>
+                            </div>
+
+                            {/* Competitor Analysis */}
+                            <div className="infograph_card">
+                                <h3>
+                                    <FontAwesomeIcon icon={faBuilding} className="icon-rotate" />
+                                    Competitor Analysis
+                                </h3>
+                                <div className="chart_container">
+                                    <Radar data={competitorAnalysisData} options={radarChartOptions} />
+                                </div>
+                            </div>
+
+                            {/* Product Adoption Rates */}
+                            <div className="infograph_card">
+                                <h3>
+                                    <FontAwesomeIcon icon={faRocket} className="icon-pulse" />
+                                    Adoption Rates
+                                </h3>
+                                <div className="chart_container">
+                                    <Doughnut data={adoptionRatesData} options={{
+                                        responsive: true,
+                                        plugins: {
+                                            legend: {
+                                                position: 'right',
+                                            },
+                                            title: {
+                                                display: true,
+                                                text: 'Product Adoption Distribution'
+                                            }
+                                        }
+                                    }} />
+                                </div>
+                            </div>
+
+                            {/* Risk vs. Opportunity Matrix */}
+                            <div className="infograph_card">
+                                <h3>
+                                    <FontAwesomeIcon icon={faBolt} className="icon-bounce" />
+                                    Risk vs. Opportunity Matrix
+                                </h3>
+                                <div className="chart_container">
+                                    <Scatter data={riskOpportunityData} options={riskOpportunityOptions} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {activeSection === 'reports' && (
+                    <div className="market_analysis_reports">
+                        <h2 className="reports_main_title">
+                            <FontAwesomeIcon icon={faChartPie} className="icon-pulse" /> Market Intelligence Reports
+                        </h2>
+                        
+                        <div className="reports_columns_container">
+                            {/* Left Column */}
+                            <div className="reports_column">
+                                {[
+                                    {
+                                        title: "Annual Market Reports",
+                                        description: "Comprehensive overview of the year's trends and data.",
+                                        icon: faChartLine,
+                                        color: "#2563eb"
+                                    },
+                                    {
+                                        title: "Competitor Analysis",
+                                        description: "Detailed comparisons of major players.",
+                                        icon: faUsers,
+                                        color: "#4f46e5"
+                                    },
+                                    {
+                                        title: "Funding Reports",
+                                        description: "Breakdown of investment flows and funding stages.",
+                                        icon: faMoneyBillWave,
+                                        color: "#059669"
+                                    },
+                                    {
+                                        title: "Policy Impact Reports",
+                                        description: "Analysis of how policies influenced the market.",
+                                        icon: faScaleBalanced,
+                                        color: "#ea580c"
+                                    },
+                                    {
+                                        title: "Regional Insights",
+                                        description: "In-depth analysis of performance in specific regions.",
+                                        icon: faGlobe,
+                                        color: "#7c3aed"
+                                    }
+                                ].map((report, index) => (
+                                    <div key={index} className="report_card" style={{"--report-color": report.color}}>
+                                        <div className="report_icon">
+                                            <FontAwesomeIcon icon={report.icon} />
+                                        </div>
+                                        <div className="report_content">
+                                            <h4>{report.title}</h4>
+                                            <p>{report.description}</p>
+                                        </div>
+                                        <button className="download_btn">
+                                            <FontAwesomeIcon icon={faDownload} /> Download
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Right Column */}
+                            <div className="reports_column">
+                                {[
+                                    {
+                                        title: "Audience Behavior",
+                                        description: "Customer behavior insights and purchase trends.",
+                                        icon: faPeopleGroup,
+                                        color: "#f59e0b"
+                                    },
+                                    {
+                                        title: "Technology Impact",
+                                        description: "Role of emerging technologies in market transformation.",
+                                        icon: faRobot,
+                                        color: "#10b981"
+                                    },
+                                    {
+                                        title: "Startup Case Studies",
+                                        description: "Reports highlighting success stories and lessons learned.",
+                                        icon: faLightbulb,
+                                        color: "#3b82f6"
+                                    },
+                                    {
+                                        title: "Trend Forecasts",
+                                        description: "Data-driven predictions for the next 5-10 years.",
+                                        icon: faChartLine,
+                                        color: "#8b5cf6"
+                                    },
+                                    {
+                                        title: "Sustainability Reports",
+                                        description: "Analysis of environmental and social impacts.",
+                                        icon: faLeaf,
+                                        color: "#22c55e"
+                                    }
+                                ].map((report, index) => (
+                                    <div key={index} className="report_card" style={{"--report-color": report.color}}>
+                                        <div className="report_icon">
+                                            <FontAwesomeIcon icon={report.icon} />
+                                        </div>
+                                        <div className="report_content">
+                                            <h4>{report.title}</h4>
+                                            <p>{report.description}</p>
+                                        </div>
+                                        <button className="download_btn">
+                                            <FontAwesomeIcon icon={faDownload} /> Download
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {activeSection === 'showcase' && (
+                    <div className="market_analysis_showcase">
+                        <div className="market_analysis_showcase_grid">
+                            {/* Left Column */}
+                            <div className="market_analysis_showcase_column">
+                                {/* Top Startups */}
+                                <section className="market_analysis_showcase_card glass_effect">
+                                    <div className="card_header">
+                                        <FontAwesomeIcon icon={faStar} className="header_icon" />
+                                        <h2>Leading Startups</h2>
+                                    </div>
+                                    <div className="market_analysis_list">
+                                        {[
+                                            {
+                                                name: "TechCorp AI",
+                                                growth: "156%",
+                                                focus: "AI Analytics",
+                                                stage: "Series B",
+                                                funding: "$50M",
+                                                icon: faRobot,
+                                                color: "#4f46e5"
+                                            },
+                                            {
+                                                name: "CloudFlow",
+                                                growth: "128%",
+                                                focus: "Cloud Solutions",
+                                                stage: "Series A",
+                                                funding: "$25M",
+                                                icon: faCloud,
+                                                color: "#0891b2"
+                                            },
+                                            {
+                                                name: "DataSense",
+                                                growth: "98%",
+                                                focus: "Big Data",
+                                                stage: "Series C",
+                                                funding: "$75M",
+                                                icon: faDatabase,
+                                                color: "#7c3aed"
+                                            }
+                                        ].map((item, index) => (
+                                            <div key={index} className="showcase_item" style={{"--item-color": item.color}}>
+                                                <div className="item_icon">
+                                                    <FontAwesomeIcon icon={item.icon} />
+                                                </div>
+                                                <div className="item_content">
+                                                    <div className="item_header">
+                                                        <h3>{item.name}</h3>
+                                                        <span className="growth_badge">↑ {item.growth}</span>
+                                                    </div>
+                                                    <p>{item.focus}</p>
+                                                    <div className="item_footer">
+                                                        <span className="info_badge">{item.stage}</span>
+                                                        <span className="info_badge">{item.funding}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+
+                                {/* Tech Solutions */}
+                                <section className="market_analysis_showcase_card glass_effect">
+                                    <div className="card_header">
+                                        <FontAwesomeIcon icon={faGear} className="header_icon" />
+                                        <h2>Tech Solutions</h2>
+                                    </div>
+                                    <div className="market_analysis_list">
+                                        {[
+                                            {
+                                                name: "AI Analytics Suite",
+                                                icon: faRobot,
+                                                description: "Enterprise AI Solution",
+                                                metrics: ["98% Accuracy", "50M+ API Calls"],
+                                                color: "#6366f1"
+                                            },
+                                            {
+                                                name: "IoT Platform",
+                                                icon: faNetworkWired,
+                                                description: "Smart Device Management",
+                                                metrics: ["10K+ Devices", "Real-time Data"],
+                                                color: "#0ea5e9"
+                                            }
+                                        ].map((item, index) => (
+                                            <div key={index} className="showcase_item" style={{"--item-color": item.color}}>
+                                                <div className="item_icon">
+                                                    <FontAwesomeIcon icon={item.icon} />
+                                                </div>
+                                                <div className="item_content">
+                                                    <h3>{item.name}</h3>
+                                                    <p>{item.description}</p>
+                                                    <div className="metrics_container">
+                                                        {item.metrics.map((metric, i) => (
+                                                            <span key={i} className="metric_badge">{metric}</span>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+                            </div>
+
+                            {/* Right Column */}
+                            <div className="market_analysis_showcase_column">
+                                {/* Success Stories */}
+                                <section className="market_analysis_showcase_card">
+                                    <h2 className="market_analysis_showcase_title">
+                                        <FontAwesomeIcon icon={faRocket} /> Success Stories
+                                    </h2>
+                                    <div className="market_analysis_story_list">
+                                        {[
+                                            {
+                                                title: "Market Leadership",
+                                                company: "TechCorp AI",
+                                                description: "From startup to market leader in 18 months",
+                                                achievement: "10x Growth"
+                                            },
+                                            {
+                                                title: "Innovation Award",
+                                                company: "DataSense",
+                                                description: "Revolutionary data processing solution",
+                                                achievement: "Industry First"
+                                            }
+                                        ].map((story, index) => (
+                                            <div key={index} className="market_analysis_story_item">
+                                                <div className="market_analysis_story_details">
+                                                    <div className="market_analysis_story_badge">{story.achievement}</div>
+                                                    <h3>{story.title}</h3>
+                                                    <p>{story.company}</p>
+                                                    <p>{story.description}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+
+                                {/* Major Investors */}
+                                <section className="market_analysis_showcase_card">
+                                    <h2 className="market_analysis_showcase_title">
+                                        <FontAwesomeIcon icon={faHandshake} /> Major Investors
+                                    </h2>
+                                    <div className="market_analysis_investor_list">
+                                        {[
+                                            {
+                                                name: "Tech Ventures",
+                                                portfolio: "25+ Companies",
+                                                aum: "$2B+",
+                                                focus: "AI & Cloud"
+                                            },
+                                            {
+                                                name: "Innovation Capital",
+                                                portfolio: "15+ Companies",
+                                                aum: "$1.5B+",
+                                                focus: "Deep Tech"
+                                            }
+                                        ].map((investor, index) => (
+                                            <div key={index} className="market_analysis_investor_item">
+                                                <div className="market_analysis_investor_details">
+                                                    <h3>{investor.name}</h3>
+                                                    <p>{investor.focus}</p>
+                                                    <div className="market_analysis_metrics">
+                                                        <span>{investor.portfolio}</span>
+                                                        <span>{investor.aum}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+                            </div>
                         </div>
                     </div>
                 )}
             </div>
         </div>
     );
-}
+};
 
 export default MarketAnalysis;

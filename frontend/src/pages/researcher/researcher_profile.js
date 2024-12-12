@@ -1,139 +1,223 @@
 import React from 'react';
 import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
 import { 
-    FaUser, FaEnvelope, FaPhone, FaUniversity, 
-    FaAward, FaBookOpen, FaHandshake, FaLinkedin,
-    FaGithub, FaResearchgate, FaGraduationCap
+    FaAward, FaBookOpen, FaLinkedin,
+    FaGithub, FaResearchgate, FaGraduationCap,
+    FaQuoteLeft, FaCertificate, FaStar, FaUser,
+    FaEnvelope
 } from 'react-icons/fa';
 import './researcher_profile.css';
+import profile from './profile.jpg';
 
 const ResearcherProfile = () => {
+    const publications = [
+        {
+            title: "Advanced Neural Networks in Healthcare",
+            authors: "Johnson, S., et al.",
+            journal: "Nature AI, 2023"
+        },
+        {
+            title: "Machine Learning Applications in Environmental Science",
+            authors: "Johnson, S., Smith, J., et al.",
+            journal: "Science Direct, 2023"
+        }
+    ];
+
+    const achievements = [
+        {
+            title: "Outstanding Research Award",
+            organization: "Tech Research University",
+            year: "2023"
+        },
+        {
+            title: "Best Paper Award",
+            organization: "International AI Conference",
+            year: "2022"
+        }
+    ];
+
+    const expertise = [
+        { name: "AI", icon: <FaStar /> },
+        { name: "ML", icon: <FaStar /> },
+        { name: "Neural Networks", icon: <FaStar /> },
+        { name: "Data Science", icon: <FaStar /> }
+    ];
+
+    const socialLinks = [
+        { icon: <FaLinkedin />, name: "LinkedIn", link: "#linkedin", className: "linkedin" },
+        { icon: <FaGithub />, name: "GitHub", link: "#github", className: "github" },
+        { icon: <FaResearchgate />, name: "ResearchGate", link: "#researchgate", className: "researchgate" },
+        { icon: <FaGraduationCap />, name: "Education", link: "#education", className: "education" }
+    ];
+
+    const handleContactClick = () => {
+        window.location.href = 'mailto:sarah.johnson@research.edu';
+    };
+
     return (
-        <Container fluid className="researcher-profile py-4">
-            {/* Profile Header */}
-            <Card className="profile-header mb-4 border-0">
-                <Card.Body>
-                    <Row className="align-items-center">
-                        <Col md={3} className="text-center">
-                            <div className="profile-image-wrapper mb-3 mb-md-0">
-                                <img 
-                                    src="https://via.placeholder.com/150" 
-                                    alt="Researcher" 
-                                    className="profile-image"
-                                />
-                            </div>
-                        </Col>
-                        <Col md={9}>
-                            <h2 className="mb-2">Dr. Sarah Johnson</h2>
-                            <h5 className="text-purple mb-2">Senior Research Scientist</h5>
-                            <p className="text-muted mb-3">Department of Computer Science</p>
-                            <div className="social-links mb-3">
-                                <a href="#linkedin"><FaLinkedin /></a>
-                                <a href="#github"><FaGithub /></a>
-                                <a href="#researchgate"><FaResearchgate /></a>
-                                <a href="#education"><FaGraduationCap /></a>
-                            </div>
-                            <div className="expertise-tags">
-                                <Badge className="me-2 mb-2">Artificial Intelligence</Badge>
-                                <Badge className="me-2 mb-2">Machine Learning</Badge>
-                                <Badge className="me-2 mb-2">Neural Networks</Badge>
-                                <Badge className="me-2 mb-2">Data Science</Badge>
-                            </div>
-                        </Col>
-                    </Row>
+        <Container fluid className="res_profile-researcher-profile py-4">
+            <Card className="res_profile-profile-header mb-4 hover-effect">
+                <div className="res_profile-profile-cover">
+                    <div className="res_profile-cover-overlay"></div>
+                </div>
+                <Card.Body className="text-center position-relative">
+                    <div className="res_profile-profile-image-wrapper">
+                        <div className="res_profile-profile-image-container">
+                            <img 
+                                src={profile} 
+                                alt="Researcher" 
+                                className="res_profile-profile-image"
+                            />
+                            <div className="res_profile-status-indicator pulse"></div>
+                        </div>
+                        <div className="res_profile-profile-frame"></div>
+                    </div>
+                    
+                    <h2 className="res_profile-profile-name mt-4">Dr. Sarah Johnson</h2>
+                    <div className="res_profile-title-badge">
+                        <FaStar className="res_profile-title-icon" />
+                        <h5 className="res_profile-text-gradient mb-0">Senior Research Scientist</h5>
+                    </div>
+                    
+                    <div className="res_profile-expertise-tags mb-3">
+                        {expertise.map((item, index) => (
+                            <Badge key={index} className="res_profile-custom-badge">
+                                {item.icon} {item.name}
+                            </Badge>
+                        ))}
+                    </div>
+                    
+                    <div className="res_profile-social-links">
+                        {socialLinks.map((item, index) => (
+                            <a 
+                                key={index}
+                                href={item.link} 
+                                className={`res_profile-social-icon ${item.className} hover-float`}
+                            >
+                                {item.icon}
+                                <span className="res_profile-icon-tooltip">{item.name}</span>
+                            </a>
+                        ))}
+                    </div>
                 </Card.Body>
             </Card>
 
-            <Row>
-                {/* Left Column */}
+            <Row className="res_profile-content-grid g-4">
                 <Col lg={4}>
-                    {/* Personal Info */}
-                    <Card className="mb-4 border-0">
-                        <Card.Header className="bg-white">
-                            <h5 className="mb-0"><FaUser className="me-2" />Personal Information</h5>
-                        </Card.Header>
+                    <Card className="res_profile-info-card glass-morphism hover-lift">
                         <Card.Body>
-                            <div className="info-item">
-                                <FaEnvelope className="me-2 text-purple" />
-                                <div>
-                                    <small className="text-muted">Email</small>
-                                    <p className="mb-0">sarah.johnson@research.edu</p>
+                            <h6 className="res_profile-section-title">
+                                <FaUser className="res_profile-section-icon rotating" />
+                                Personal Information
+                            </h6>
+                            <div className="res_profile-info-grid">
+                                <div className="res_profile-info-item glow-hover">
+                                    <div className="res_profile-info-content">
+                                        <small className="res_profile-info-label">Email</small>
+                                        <span className="res_profile-info-text">sarah.johnson@research.edu</span>
+                                    </div>
+                                </div>
+                                <div className="res_profile-info-item glow-hover">
+                                    <div className="res_profile-info-content">
+                                        <small className="res_profile-info-label">Phone</small>
+                                        <span className="res_profile-info-text">+1 (555) 123-4567</span>
+                                    </div>
+                                </div>
+                                <div className="res_profile-info-item glow-hover">
+                                    <div className="res_profile-info-content">
+                                        <small className="res_profile-info-label">Institution</small>
+                                        <span className="res_profile-info-text">Tech Research University</span>
+                                    </div>
+                                </div>
+                                <div className="res_profile-info-item res_profile-collab-status glow-hover">
+                                    <div className="res_profile-info-content">
+                                        <small className="res_profile-info-label">Status</small>
+                                        <div className="res_profile-contact-status">
+                                            <span className="res_profile-info-text">
+                                                Open to Collaboration
+                                            </span>
+                                            <Button 
+                                                className="res_profile-contact-btn"
+                                                onClick={handleContactClick}
+                                            >
+                                                <FaEnvelope /> Contact Now
+                                            </Button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="info-item">
-                                <FaPhone className="me-2 text-purple" />
-                                <div>
-                                    <small className="text-muted">Phone</small>
-                                    <p className="mb-0">+1 (555) 123-4567</p>
-                                </div>
-                            </div>
-                            <div className="info-item">
-                                <FaUniversity className="me-2 text-purple" />
-                                <div>
-                                    <small className="text-muted">Institution</small>
-                                    <p className="mb-0">Tech Research University</p>
-                                </div>
-                            </div>
-                        </Card.Body>
-                    </Card>
-
-                    {/* Collaboration Status */}
-                    <Card className="mb-4 border-0 text-center">
-                        <Card.Body>
-                            <FaHandshake className="collab-icon mb-3" />
-                            <h5 className="mb-3">Open to Collaboration</h5>
-                            <Button variant="purple" className="w-100">Contact Me</Button>
                         </Card.Body>
                     </Card>
                 </Col>
 
-                {/* Right Column */}
                 <Col lg={8}>
-                    {/* About */}
-                    <Card className="mb-4 border-0">
-                        <Card.Header className="bg-white">
-                            <h5 className="mb-0">About</h5>
-                        </Card.Header>
-                        <Card.Body>
-                            <p className="mb-0">
-                                Dr. Sarah Johnson is a distinguished researcher in artificial intelligence 
-                                and machine learning with over 10 years of experience. Her work focuses 
-                                on developing innovative solutions for complex problems in healthcare and 
-                                environmental science.
-                            </p>
-                        </Card.Body>
-                    </Card>
+                    <Row className="g-4">
+                        <Col md={12}>
+                            <Card className="res_profile-about-card glass-morphism hover-lift">
+                                <Card.Body>
+                                    <div className="res_profile-quote-wrapper">
+                                        <FaQuoteLeft className="res_profile-quote-icon floating" />
+                                    </div>
+                                    <p className="res_profile-about-text">
+                                        Distinguished researcher in AI and ML with 10+ years of experience, 
+                                        focusing on healthcare and environmental science solutions.
+                                    </p>
+                                </Card.Body>
+                            </Card>
+                        </Col>
 
-                    {/* Publications */}
-                    <Card className="mb-4 border-0">
-                        <Card.Header className="bg-white">
-                            <h5 className="mb-0"><FaBookOpen className="me-2" />Recent Publications</h5>
-                        </Card.Header>
-                        <Card.Body>
-                            <div className="publication-item">
-                                <h6>Advanced Neural Networks in Healthcare</h6>
-                                <p className="text-muted mb-1">Johnson, S., Smith, J., Davis, R.</p>
-                                <p className="text-muted mb-2">Nature AI, 2023</p>
-                                <Button variant="link" className="p-0">View Publication</Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
+                        <Col md={12}>
+                            <Card className="res_profile-publications-card glass-morphism hover-lift">
+                                <Card.Body>
+                                    <h6 className="res_profile-section-title">
+                                        <div className="res_profile-title-icon-wrapper">
+                                            <FaBookOpen className="res_profile-section-icon rotating" />
+                                        </div>
+                                        Recent Publications
+                                    </h6>
+                                    <div className="res_profile-publication-grid">
+                                        {publications.map((pub, index) => (
+                                            <div key={index} className="res_profile-publication-item glow-hover">
+                                                <div className="res_profile-pub-content">
+                                                    <h6 className="res_profile-pub-title">{pub.title}</h6>
+                                                    <p className="res_profile-pub-authors">{pub.authors}</p>
+                                                    <small className="res_profile-pub-journal">{pub.journal}</small>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        </Col>
 
-                    {/* Achievements */}
-                    <Card className="border-0">
-                        <Card.Header className="bg-white">
-                            <h5 className="mb-0"><FaAward className="me-2" />Achievements</h5>
-                        </Card.Header>
-                        <Card.Body>
-                            <div className="achievement-item">
-                                <FaAward className="text-purple me-3" />
-                                <div>
-                                    <h6 className="mb-1">Outstanding Research Award</h6>
-                                    <p className="text-muted mb-0">Tech Research University, 2023</p>
-                                </div>
-                            </div>
-                        </Card.Body>
-                    </Card>
+                        <Col md={12}>
+                            <Card className="res_profile-achievements-card glass-morphism hover-lift">
+                                <Card.Body>
+                                    <h6 className="res_profile-section-title">
+                                        <div className="res_profile-title-icon-wrapper">
+                                            <FaAward className="res_profile-section-icon floating" />
+                                        </div>
+                                        Achievements
+                                    </h6>
+                                    <div className="res_profile-achievement-grid">
+                                        {achievements.map((achievement, index) => (
+                                            <div key={index} className="res_profile-achievement-item glow-hover">
+                                                <div className="res_profile-achievement-icon-wrapper">
+                                                    <FaCertificate className="res_profile-achievement-icon rotating" />
+                                                </div>
+                                                <div className="res_profile-achievement-content">
+                                                    <h6 className="res_profile-achievement-title">{achievement.title}</h6>
+                                                    <small className="res_profile-achievement-year">
+                                                        {achievement.organization}, {achievement.year}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
         </Container>

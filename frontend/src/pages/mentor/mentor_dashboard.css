@@ -400,51 +400,102 @@
 }
 
 .mentor-dashboard-notification-button {
-    background: transparent;
+    background: rgba(59, 130, 246, 0.1);
     border: none;
     color: #3b82f6;
     font-size: 1.5rem;
-    padding: 0.5rem;
+    padding: 0.8rem;
     cursor: pointer;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
 }
 
 .mentor-dashboard-notification-button:hover {
-    color: #2563eb;
+    background: rgba(59, 130, 246, 0.2);
+    transform: translateY(-2px);
+}
+
+.notification-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-bell {
+    transition: transform 0.3s ease;
+}
+
+.mentor-dashboard-notification-button:hover .notification-bell {
+    transform: rotate(15deg);
 }
 
 .mentor-dashboard-notification-badge {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 8px;
-    height: 8px;
+    top: -2px;
+    right: -2px;
+    width: 12px;
+    height: 12px;
     background: #ef4444;
     border-radius: 50%;
+    border: 2px solid white;
+}
+
+.pulse {
+    animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+    0% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
 }
 
 .mentor-dashboard-notification-dropdown {
     position: absolute;
-    top: calc(100% + 10px);
+    top: calc(100% + 15px);
     right: 0;
-    width: 320px;
+    width: 380px;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     border: 1px solid rgba(59, 130, 246, 0.1);
     z-index: 1000;
+    transform-origin: top right;
+    animation: notification-dropdown 0.3s ease;
+}
+
+@keyframes notification-dropdown {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 .mentor-dashboard-notification-header {
-    padding: 1rem;
+    padding: 1.2rem;
     border-bottom: 1px solid rgba(59, 130, 246, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: rgba(59, 130, 246, 0.03);
+    border-radius: 16px 16px 0 0;
 }
 
 .mentor-dashboard-notification-header h3 {
@@ -454,54 +505,91 @@
 }
 
 .mentor-dashboard-notification-list-dropdown {
-    max-height: 300px;
+    max-height: 400px;
     overflow-y: auto;
     padding: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(59, 130, 246, 0.3) rgba(59, 130, 246, 0.1);
+}
+
+.mentor-dashboard-notification-list-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.mentor-dashboard-notification-list-dropdown::-webkit-scrollbar-track {
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 3px;
+}
+
+.mentor-dashboard-notification-list-dropdown::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.3);
+    border-radius: 3px;
+}
+
+.mentor-dashboard-notification-list-dropdown::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.5);
 }
 
 .mentor-dashboard-notification-item-dropdown {
-    padding: 0.8rem;
-    border-radius: 8px;
+    padding: 1rem;
+    border-radius: 12px;
     position: relative;
-    padding-left: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     transition: all 0.3s ease;
-    cursor: pointer;
+    margin: 0.5rem;
 }
 
 .mentor-dashboard-notification-item-dropdown:hover {
     background: rgba(59, 130, 246, 0.05);
+    transform: translateX(5px);
 }
 
-.mentor-dashboard-notification-content {
+.notification-icon {
+    width: 40px;
+    height: 40px;
     display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
 }
 
-.mentor-dashboard-notification-content p {
-    margin: 0;
-    color: #1e40af;
-    font-size: 0.9rem;
+.new-notification {
+    color: #3b82f6;
+    animation: bell-shake 2s infinite;
 }
 
-.mentor-dashboard-notification-content small {
-    color: #64748b;
+.read-notification {
+    color: #10b981;
+}
+
+@keyframes bell-shake {
+    0% { transform: rotate(0); }
+    5% { transform: rotate(15deg); }
+    10% { transform: rotate(-15deg); }
+    15% { transform: rotate(0); }
+    100% { transform: rotate(0); }
 }
 
 .mentor-dashboard-view-all {
     width: 100%;
-    padding: 0.8rem;
+    padding: 1rem;
     background: none;
     border: none;
     border-top: 1px solid rgba(59, 130, 246, 0.1);
     color: #3b82f6;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    border-radius: 0 0 16px 16px;
 }
 
 .mentor-dashboard-view-all:hover {
     background: rgba(59, 130, 246, 0.05);
+    color: #2563eb;
 }
 
 /* Full Notifications View */
@@ -602,4 +690,63 @@
     .mentor-dashboard-full-notifications-content {
         max-height: 90vh;
     }
+}
+
+.mentor-dashboard-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.mentor-dashboard-card {
+    background: #f0f0f3;
+    border-radius: 15px;
+    box-shadow: 9px 9px 16px #d1d1d1, -9px -9px 16px #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.mentor-dashboard-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 12px 12px 24px #d1d1d1, -12px -12px 24px #ffffff;
+}
+
+.mentor-dashboard-card-content {
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .mentor-dashboard-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.mentor-dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+.mentor-dashboard-bell-container {
+    position: relative;
+}
+
+.mentor-dashboard-bell-icon {
+    font-size: 1.5rem;
+    color: #8e44ad;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.mentor-dashboard-bell-icon:hover {
+    color: #9b59b6;
+}
+
+.mentor-dashboard-title {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #2d3436;
 }

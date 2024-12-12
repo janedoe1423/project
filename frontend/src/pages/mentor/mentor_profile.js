@@ -552,146 +552,152 @@ const MentorProfile = () => {
             </div>
 
             <div className="mentor-profile-content">
-                <div className="mentor-profile-card">
-                    <div className="mentor-profile-card-header">
-                        <h3><FaUser /> About Me</h3>
-                    </div>
-                    <div className="mentor-profile-about">
-                        <p>{personalInfo.bio}</p>
-                        <div className="mentor-profile-details">
-                            <div className="mentor-profile-detail-item">
-                                <FaGlobe /> {personalInfo.location}
+                <Row>
+                    <Col md={4}>
+                        <div className="mentor-profile-card">
+                            <div className="mentor-profile-card-header">
+                                <h3><FaUser /> About Me</h3>
                             </div>
-                            <div className="mentor-profile-detail-item">
-                                <FaGraduationCap /> {personalInfo.languages.join(", ")}
-                            </div>
-                            <div className="mentor-profile-social">
-                                <a href={personalInfo.linkedin} className="mentor-profile-social-link">
-                                    <FaLinkedin />
-                                </a>
-                                <a href={personalInfo.github} className="mentor-profile-social-link">
-                                    <FaGithub />
-                                </a>
-                                <a href={personalInfo.website} className="mentor-profile-social-link">
-                                    <FaGlobe />
-                                </a>
+                            <div className="mentor-profile-about">
+                                <p>{personalInfo.bio}</p>
+                                <div className="mentor-profile-details">
+                                    <div className="mentor-profile-detail-item">
+                                        <FaGlobe /> {personalInfo.location}
+                                    </div>
+                                    <div className="mentor-profile-detail-item">
+                                        <FaGraduationCap /> {personalInfo.languages.join(", ")}
+                                    </div>
+                                    <div className="mentor-profile-social">
+                                        <a href={personalInfo.linkedin} className="mentor-profile-social-link">
+                                            <FaLinkedin />
+                                        </a>
+                                        <a href={personalInfo.github} className="mentor-profile-social-link">
+                                            <FaGithub />
+                                        </a>
+                                        <a href={personalInfo.website} className="mentor-profile-social-link">
+                                            <FaGlobe />
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div className="mentor-profile-card">
-                    <div className="mentor-profile-card-header">
-                        <h3><FaCode /> Skills & Expertise</h3>
-                    </div>
-                    <div className="mentor-profile-skills">
-                        {skills.map((skill, index) => (
-                            <div key={index} className="mentor-profile-skill-item">
-                                <div className="mentor-profile-skill-header">
-                                    <span>{skill.name}</span>
-                                    <span>{skill.level}%</span>
-                                </div>
-                                <div className="mentor-profile-skill-bar">
-                                    <div 
-                                        className="mentor-profile-skill-progress"
-                                        style={{ width: `${skill.level}%` }}
-                                    ></div>
-                                </div>
+                        <div className="mentor-profile-card">
+                            <div className="mentor-profile-card-header">
+                                <h3><FaCode /> Skills & Expertise</h3>
                             </div>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="mentor-profile-card">
-                    <div className="mentor-profile-card-header">
-                        <h3><FaCertificate /> Certifications</h3>
-                    </div>
-                    <div className="mentor-profile-certifications">
-                        {certifications.map((cert, index) => (
-                            <div key={index} className="mentor-profile-certification-item">
-                                <FaCheckCircle className="mentor-profile-certification-icon" />
-                                <div className="mentor-profile-certification-content">
-                                    <h4>{cert.name}</h4>
-                                    <p>{cert.issuer} • {cert.year}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="mentor-profile-card">
-                    <div className="mentor-profile-card-header">
-                        <h3><FaTrophy /> Achievements</h3>
-                    </div>
-                    <div className="mentor-profile-achievements">
-                        {achievements.map((achievement, index) => (
-                            <div key={index} className="mentor-profile-achievement-item">
-                                <div className="mentor-profile-achievement-icon">
-                                    {achievement.icon}
-                                </div>
-                                <div className="mentor-profile-achievement-content">
-                                    <h4>{achievement.title}</h4>
-                                    <p>{achievement.description}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="mentor-profile-card">
-                    <div className="mentor-profile-card-header">
-                        <h3><FaBriefcase /> Professional Experience</h3>
-                    </div>
-                    <div className="mentor-profile-experience">
-                        {experience.map((exp, index) => (
-                            <div key={index} className="mentor-profile-experience-item">
-                                <div className="experience-header">
-                                    <h4>{exp.title}</h4>
-                                    <span className="experience-duration">{exp.duration}</span>
-                                </div>
-                                <div className="experience-subheader">
-                                    <span className="organization">{exp.organization}</span>
-                                    <span className="location">{exp.location}</span>
-                                </div>
-                                <div className="experience-tags">
-                                    <span className="industry-tag">{exp.industry}</span>
-                                </div>
-                                <p className="experience-description">{exp.description}</p>
-                                <ul className="experience-achievements">
-                                    {exp.achievements.map((achievement, i) => (
-                                        <li key={i}>{achievement}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="mentor-profile-card">
-                    <div className="mentor-profile-card-header">
-                        <h3><FaGraduationCap /> Education</h3>
-                    </div>
-                    <div className="mentor-profile-education">
-                        {education.map((edu, index) => (
-                            <div key={index} className="mentor-profile-education-item">
-                                <div className="education-header">
-                                    <h4>{edu.degree}</h4>
-                                    <span className="education-year">{edu.year}</span>
-                                </div>
-                                <div className="education-subheader">
-                                    <span className="university">{edu.university}</span>
-                                </div>
-                                {edu.recognition && (
-                                    <div className="education-recognition">
-                                        <FaMedal className="recognition-icon" />
-                                        <span>{edu.recognition}</span>
+                            <div className="mentor-profile-skills">
+                                {skills.map((skill, index) => (
+                                    <div key={index} className="mentor-profile-skill-item">
+                                        <div className="mentor-profile-skill-header">
+                                            <span>{skill.name}</span>
+                                            <span>{skill.level}%</span>
+                                        </div>
+                                        <div className="mentor-profile-skill-bar">
+                                            <div 
+                                                className="mentor-profile-skill-progress"
+                                                style={{ width: `${skill.level}%` }}
+                                            ></div>
+                                        </div>
                                     </div>
-                                )}
-                                <p className="education-description">{edu.description}</p>
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                </div>
+                        </div>
+
+                        <div className="mentor-profile-card">
+                            <div className="mentor-profile-card-header">
+                                <h3><FaCertificate /> Certifications</h3>
+                            </div>
+                            <div className="mentor-profile-certifications">
+                                {certifications.map((cert, index) => (
+                                    <div key={index} className="mentor-profile-certification-item">
+                                        <FaCheckCircle className="mentor-profile-certification-icon" />
+                                        <div className="mentor-profile-certification-content">
+                                            <h4>{cert.name}</h4>
+                                            <p>{cert.issuer} • {cert.year}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="mentor-profile-card">
+                            <div className="mentor-profile-card-header">
+                                <h3><FaTrophy /> Achievements</h3>
+                            </div>
+                            <div className="mentor-profile-achievements">
+                                {achievements.map((achievement, index) => (
+                                    <div key={index} className="mentor-profile-achievement-item">
+                                        <div className="mentor-profile-achievement-icon">
+                                            {achievement.icon}
+                                        </div>
+                                        <div className="mentor-profile-achievement-content">
+                                            <h4>{achievement.title}</h4>
+                                            <p>{achievement.description}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </Col>
+
+                    <Col md={8}>
+                        <div className="mentor-profile-card">
+                            <div className="mentor-profile-card-header">
+                                <h3><FaBriefcase /> Professional Experience</h3>
+                            </div>
+                            <div className="mentor-profile-experience">
+                                {experience.map((exp, index) => (
+                                    <div key={index} className="mentor-profile-experience-item">
+                                        <div className="experience-header">
+                                            <h4>{exp.title}</h4>
+                                            <span className="experience-duration">{exp.duration}</span>
+                                        </div>
+                                        <div className="experience-subheader">
+                                            <span className="organization">{exp.organization}</span>
+                                            <span className="location">{exp.location}</span>
+                                        </div>
+                                        <div className="experience-tags">
+                                            <span className="industry-tag">{exp.industry}</span>
+                                        </div>
+                                        <p className="experience-description">{exp.description}</p>
+                                        <ul className="experience-achievements">
+                                            {exp.achievements.map((achievement, i) => (
+                                                <li key={i}>{achievement}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="mentor-profile-card">
+                            <div className="mentor-profile-card-header">
+                                <h3><FaGraduationCap /> Education</h3>
+                            </div>
+                            <div className="mentor-profile-education">
+                                {education.map((edu, index) => (
+                                    <div key={index} className="mentor-profile-education-item">
+                                        <div className="education-header">
+                                            <h4>{edu.degree}</h4>
+                                            <span className="education-year">{edu.year}</span>
+                                        </div>
+                                        <div className="education-subheader">
+                                            <span className="university">{edu.university}</span>
+                                        </div>
+                                        {edu.recognition && (
+                                            <div className="education-recognition">
+                                                <FaMedal className="recognition-icon" />
+                                                <span>{edu.recognition}</span>
+                                            </div>
+                                        )}
+                                        <p className="education-description">{edu.description}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </Col>
+                </Row>
             </div>
 
             <EditProfileModal 
