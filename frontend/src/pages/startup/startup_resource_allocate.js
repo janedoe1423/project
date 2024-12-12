@@ -13,6 +13,7 @@ import {
   Checkbox,
   Chip,
   Slider,
+  InputAdornment,
 } from "@mui/material";
 import { Pie } from 'react-chartjs-2';
 import {
@@ -280,6 +281,38 @@ const ALL_DEPARTMENTS = {
   }
 };
 
+// Define allocation strategy based on growth stage
+const STAGE_STRATEGIES = {
+  seed: {
+    development: { base: 40, range: [35, 45] },
+    marketing: { base: 20, range: [15, 25] },
+    operations: { base: 15, range: [10, 20] },
+    hr: { base: 10, range: [5, 15] },
+    infrastructure: { base: 15, range: [10, 20] }
+  },
+  early: {
+    development: { base: 35, range: [30, 40] },
+    marketing: { base: 25, range: [20, 30] },
+    operations: { base: 20, range: [15, 25] },
+    hr: { base: 10, range: [5, 15] },
+    infrastructure: { base: 10, range: [5, 15] }
+  },
+  growth: {
+    development: { base: 30, range: [25, 35] },
+    marketing: { base: 30, range: [25, 35] },
+    operations: { base: 20, range: [15, 25] },
+    hr: { base: 12, range: [8, 16] },
+    infrastructure: { base: 8, range: [5, 12] }
+  },
+  mature: {
+    development: { base: 25, range: [20, 30] },
+    marketing: { base: 25, range: [20, 30] },
+    operations: { base: 25, range: [20, 30] },
+    hr: { base: 15, range: [10, 20] },
+    infrastructure: { base: 10, range: [5, 15] }
+  }
+};
+
 const StartupResourceAllocation = () => {
   const [totalFunds, setTotalFunds] = useState("");
   const [availableDepartments, setAvailableDepartments] = useState([
@@ -350,6 +383,38 @@ const StartupResourceAllocation = () => {
     riskFactors: {}
   });
 
+  // Add new state for metrics
+  const [metrics, setMetrics] = useState({
+    departments: {
+      development: {
+        growthRate: 0,
+        cac: 0,
+        priority: 50, // 0-100 scale
+      },
+      marketing: {
+        growthRate: 0,
+        cac: 0,
+        priority: 50,
+      },
+      operations: {
+        growthRate: 0,
+        cac: 0,
+        priority: 50,
+      },
+      hr: {
+        growthRate: 0,
+        cac: 0,
+        priority: 50,
+      },
+      infrastructure: {
+        growthRate: 0,
+        cac: 0,
+        priority: 50,
+      }
+    },
+    totalFunds: 0
+  });
+
   // Add normalizeWeights function
   const normalizeWeights = (weights) => {
     const total = Object.values(weights).reduce((sum, value) => sum + value, 0);
@@ -410,14 +475,60 @@ const StartupResourceAllocation = () => {
     return optimizeAllocation(combinedWeights, totalFunds);
   };
 
+  // Calculate allocation based on metrics
+  const calculateAllocation = (totalFunds) => {
+    const { departments } = metrics;
+    
+    // Step 1: Calculate individual scores
+    const scores = {};
+    Object.entries(departments).forEach(([dept, metrics]) => {
+      // Growth Rate Score (0-1): Higher growth = higher score
+      const growthScore = Math.min(metrics.growthRate / 100, 1);
+      
+      // CAC Score (0-1): Lower CAC = higher score
+      const maxCAC = Math.max(...Object.values(departments).map(d => d.cac));
+      const cacScore = metrics.cac ? 1 - (metrics.cac / maxCAC) : 0;
+      
+      // Priority Score (0-1)
+      const priorityScore = metrics.priority / 100;
+      
+      // Calculate weighted average score
+      scores[dept] = {
+        weightedScore: (
+          (growthScore * 0.4) +    // 40% weight to growth
+          (cacScore * 0.3) +       // 30% weight to CAC
+          (priorityScore * 0.3)    // 30% weight to priority
+        )
+      };
+    });
+
+    // Step 2: Normalize scores and calculate allocations
+    const totalScore = Object.values(scores)
+      .reduce((sum, { weightedScore }) => sum + weightedScore, 0);
+
+    const allocations = {};
+    Object.entries(scores).forEach(([dept, { weightedScore }]) => {
+      const percentage = (weightedScore / totalScore) * 100;
+      allocations[dept] = {
+        percentage,
+        amount: (percentage / 100) * totalFunds,
+        department: dept.charAt(0).toUpperCase() + dept.slice(1),
+        metrics: {
+          growthRate: departments[dept].growthRate,
+          cac: departments[dept].cac,
+          priority: departments[dept].priority
+        }
+      };
+    });
+
+    return allocations;
+  };
+
   // Move handleAllocation inside component
   const handleAllocation = async () => {
     if (!totalFunds) return;
 
-    await updateHistoricalMetrics();
-    await updateIndustryBenchmarks();
-
-    const allocation = calculateOptimalAllocation(parseFloat(totalFunds));
+    const allocation = calculateAllocation(parseFloat(totalFunds));
 
     const newAllocation = {
       id: Date.now(),
@@ -617,6 +728,157 @@ const StartupResourceAllocation = () => {
     </Box>
   );
 
+  // Add metrics input form
+  const renderMetricsForm = () => (
+    <Box sx={{ mb: 3 }}>
+      <Typography variant="h5" gutterBottom sx={{ mb: 3 }}>
+        Department Metrics
+      </Typography>
+      
+      {Object.entries(metrics.departments).map(([dept, deptMetrics]) => (
+        <Card 
+          key={dept} 
+          sx={{ 
+            mb: 3, 
+            p: 2,
+            background: 'linear-gradient(145deg, #ffffff 0%, #f5f5f5 100%)',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+            borderRadius: '16px',
+            transition: 'transform 0.2s',
+            '&:hover': {
+              transform: 'translateY(-2px)'
+            }
+          }}
+        >
+          <Typography 
+            variant="h6" 
+            gutterBottom 
+            sx={{ 
+              color: 'primary.main',
+              borderBottom: '2px solid',
+              borderColor: 'primary.light',
+              pb: 1,
+              mb: 2
+            }}
+          >
+            {dept.charAt(0).toUpperCase() + dept.slice(1)}
+          </Typography>
+          
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={4}>
+              <TextField
+                fullWidth
+                label="Growth Rate (%)"
+                type="number"
+                value={deptMetrics.growthRate}
+                onChange={(e) => setMetrics({
+                  ...metrics,
+                  departments: {
+                    ...metrics.departments,
+                    [dept]: {
+                      ...deptMetrics,
+                      growthRate: parseFloat(e.target.value) || 0
+                    }
+                  }
+                })}
+                InputProps={{
+                  endAdornment: <InputAdornment position="end">%</InputAdornment>
+                }}
+              />
+            </Grid>
+            
+            <Grid item xs={12} md={4}>
+              <TextField
+                fullWidth
+                label="CAC ($)"
+                type="number"
+                value={deptMetrics.cac}
+                onChange={(e) => setMetrics({
+                  ...metrics,
+                  departments: {
+                    ...metrics.departments,
+                    [dept]: {
+                      ...deptMetrics,
+                      cac: parseFloat(e.target.value) || 0
+                    }
+                  }
+                })}
+                InputProps={{
+                  startAdornment: <InputAdornment position="start">$</InputAdornment>
+                }}
+              />
+            </Grid>
+            
+            <Grid item xs={12} md={4}>
+              <Typography variant="subtitle2" gutterBottom>
+                Priority Level
+              </Typography>
+              <Slider
+                value={deptMetrics.priority}
+                onChange={(e, value) => setMetrics({
+                  ...metrics,
+                  departments: {
+                    ...metrics.departments,
+                    [dept]: {
+                      ...deptMetrics,
+                      priority: value
+                    }
+                  }
+                })}
+                valueLabelDisplay="auto"
+                marks={[
+                  { value: 0, label: 'Low' },
+                  { value: 50, label: 'Med' },
+                  { value: 100, label: 'High' }
+                ]}
+                sx={{
+                  '& .MuiSlider-thumb': {
+                    backgroundColor: 'primary.main',
+                  },
+                  '& .MuiSlider-track': {
+                    backgroundColor: 'primary.main',
+                  }
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Card>
+      ))}
+
+      <TextField
+        fullWidth
+        label="Total Budget ($)"
+        type="number"
+        value={metrics.totalFunds}
+        onChange={(e) => setMetrics({
+          ...metrics,
+          totalFunds: parseFloat(e.target.value) || 0
+        })}
+        sx={{ mt: 3 }}
+        InputProps={{
+          startAdornment: <InputAdornment position="start">$</InputAdornment>
+        }}
+      />
+
+      <Button
+        variant="contained"
+        fullWidth
+        onClick={handleAllocation}
+        sx={{ 
+          mt: 3, 
+          height: '56px',
+          background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+          boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
+          '&:hover': {
+            background: 'linear-gradient(45deg, #1976D2 30%, #2196F3 90%)',
+          }
+        }}
+      >
+        Calculate Allocation
+      </Button>
+    </Box>
+  );
+
   return (
     <Box className="startup_resource_dashboard">
       <Typography variant="h4" gutterBottom className="startup_resource_dashboard-title">
@@ -631,6 +893,7 @@ const StartupResourceAllocation = () => {
         {/* Input Section */}
         <Grid item xs={12} md={4}>
           <Card className="startup_resource_input-card">
+            {renderMetricsForm()}
             {renderBudgetParameters()}
             <Typography variant="h6" gutterBottom>
               Allocate Resources
