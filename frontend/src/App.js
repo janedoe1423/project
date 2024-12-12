@@ -28,6 +28,7 @@ import Research_inno from './Research_inno';
 import MentorProfilePage from './pages/mentor/mentor_profile_page'; // Import MentorProfilePage
 import MarketAnalysis from './MarketAnalysis';
 import { IPRProvider } from './pages/ipr-professional/IPRContent';
+import GovProfilePage from './pages/government_bodies/gb_profile_page';
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
             <Route path="/investor/:id" element={<InvestorProfile />} />
             <Route path="/mentor-profile" element={<MentorProfilePage />} /> {/* Add route for Mentor Profile */}
             <Route path="/market-analysis" element={<MarketAnalysis />} />
+            <Route path="/government-bodies" element={<GovProfilePage />} />
           </Routes>
         </div>
         <Footer />

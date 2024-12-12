@@ -18,6 +18,8 @@ const LoginPage = () => {
             navigate("/admin");
         } else if (userType === "mentor") {
             navigate("/mentor-profile");
+        } else if (userType === "government-bodies") {
+            navigate("/government-bodies");
         }
     };
 
@@ -44,6 +46,9 @@ const LoginPage = () => {
                     </button>
                     <button className="btn btn-warning" onClick={() => handleLogin("mentor")}>
                         Login as Mentor
+                    </button>
+                    <button className="btn btn-info" onClick={() => handleLogin("government-bodies")}>
+                        Login as Government Bodies
                     </button>
                 </div>
             </div>
