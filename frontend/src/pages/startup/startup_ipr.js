@@ -9,7 +9,7 @@ import { useIPR } from '../ipr-professional/IPRContent';
 import './startup_ipr.css';
 
 const StartupIPRRights = () => {
-    const { allIPRs, addNewIPR } = useIPR();
+    const { allIPRs, addNewIPR, acceptIPRRequest, requestIPR, isIPRAccepted } = useIPR();
     const [selectedStatus, setSelectedStatus] = useState('pending');
     const [selectedIPR, setSelectedIPR] = useState(null);
     const [showAddModal, setShowAddModal] = useState(false);
@@ -31,8 +31,16 @@ const StartupIPRRights = () => {
             { name: 'Technical Review', completed: false, current: false },
             { name: 'Examiner Interview', completed: false, current: false },
             { name: 'Final Decision', completed: false, current: false }
-        ]
+        ],
+        requestForPatent: false,
+        applicationAcceptance: false,
+        iprSpecificationSubmitted: false,
+        iprFiled: false,
+        iprStatus: 'pending'
     });
+    const [iprRequestStatus, setIprRequestStatus] = useState(null);
+    const [showRequestModal, setShowRequestModal] = useState(false);
+    const [requestMessage, setRequestMessage] = useState('');
 
     // Render IPR List based on selected status
     const renderIPRList = () => {
@@ -90,7 +98,8 @@ const StartupIPRRights = () => {
                 { name: 'Technical Specifications', type: 'DOC' }
             ],
             lastUpdated: currentDate.toISOString(),
-            lastUpdatedBy: 'Startup User'
+            lastUpdatedBy: 'Startup User',
+            iprStatus: 'requested'
         };
 
         addNewIPR(newIprEntry);
@@ -112,8 +121,30 @@ const StartupIPRRights = () => {
                 { name: 'Technical Review', completed: false, current: false },
                 { name: 'Examiner Interview', completed: false, current: false },
                 { name: 'Final Decision', completed: false, current: false }
-            ]
+            ],
+            requestForPatent: false,
+            applicationAcceptance: false,
+            iprSpecificationSubmitted: false,
+            iprFiled: false,
+            iprStatus: 'requested'
         });
+    };
+
+    const handleRequestIPR = () => {
+        requestIPR(newIPR);
+        console.log("Request for IPR permission sent:", requestMessage);
+        setShowRequestModal(false);
+        setRequestMessage('');
+    };
+
+    const handleAcceptIPR = (iprId) => {
+        acceptIPRRequest(iprId);
+    };
+
+    const handleSubmitIPR = () => {
+        if (iprRequestStatus === 'accepted') {
+            // Submit IPR details logic here
+        }
     };
 
     // Effect to update selected IPR when status changes
@@ -219,6 +250,7 @@ const StartupIPRRights = () => {
                     variant="primary" 
                     onClick={() => setShowAddModal(true)}
                     className="startup_ipr_add-button"
+                    disabled={!isIPRAccepted}
                 >
                     <FaPlus /> Add New IPR
                 </Button>
@@ -306,6 +338,45 @@ const StartupIPRRights = () => {
                     </Button>
                     <Button variant="primary" onClick={handleAddIPR}>
                         Add IPR
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            {iprRequestStatus === 'accepted' && (
+                <Button onClick={handleSubmitIPR}>Submit IPR Details</Button>
+            )}
+
+            <Button 
+                variant="secondary" 
+                onClick={() => setShowRequestModal(true)}
+                className="startup_ipr_request-button"
+            >
+                Request Permission to Apply for IPR
+            </Button>
+
+            <Modal show={showRequestModal} onHide={() => setShowRequestModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Request Permission to Apply for IPR</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group controlId="requestMessage">
+                            <Form.Label>Message</Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                value={requestMessage}
+                                onChange={(e) => setRequestMessage(e.target.value)}
+                                placeholder="Please provide your message here..."
+                            />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowRequestModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleRequestIPR}>
+                        Send Request
                     </Button>
                 </Modal.Footer>
             </Modal>

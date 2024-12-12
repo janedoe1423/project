@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
@@ -41,6 +41,19 @@ const containerVariants = {
     }
 };
 
+// Form animation variants
+const formVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.5,
+            ease: "easeInOut"
+        }
+    }
+};
+
 // Animated Section Component
 const AnimatedSection = ({ children, className }) => {
     const controls = useAnimation();
@@ -73,6 +86,9 @@ const HeroSection = () => {
     return (
         <section className="hero-section">
             <div className="hero-overlay" />
+            <div className="hero-image">
+                <img src="./gujarat main.jpg" alt="Gujarat" /> {/* Replace with your image path */}
+            </div>
             <AnimatedSection className="hero-content">
                 <motion.h1 variants={cardVariants}>
                     Transform Gujarat into an 
@@ -227,6 +243,91 @@ const BenefitsSection = () => {
     );
 };
 
+// Contact Us Section Component
+const ContactUs = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: ''
+    });
+
+    const controls = useAnimation();
+    const [ref, inView] = useInView({
+        threshold: 0.2,
+        triggerOnce: true
+    });
+
+    useEffect(() => {
+        if (inView) {
+            controls.start('visible');
+        }
+    }, [controls, inView]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Handle form submission logic here (e.g., send data to an API)
+        console.log('Form submitted:', formData);
+        // Reset form
+        setFormData({ name: '', email: '', message: '' });
+    };
+
+    return (
+        <section className="contact-us">
+            <AnimatedSection>
+                <motion.h2 variants={cardVariants} className="section-title">
+                    Contact Us
+                </motion.h2>
+                <motion.form 
+                    ref={ref}
+                    variants={formVariants}
+                    initial="hidden"
+                    animate={controls}
+                    onSubmit={handleSubmit}
+                >
+                    <div className="form-group">
+                        <label htmlFor="name">Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="message">Message</label>
+                        <textarea
+                            id="message"
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <button type="submit" className="submit-button">Send Message</button>
+                </motion.form>
+            </AnimatedSection>
+        </section>
+    );
+};
+
 // Main Home Component
 const Home = () => {
     return (
@@ -235,6 +336,7 @@ const Home = () => {
             <StatsSection />
             <FeaturesSection />
             <BenefitsSection />
+            <ContactUs /> {/* Add the contact us section */}
         </div>
     );
 };

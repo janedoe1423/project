@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
+import { Box, Typography, Button, LinearProgress } from '@mui/material';
+import { ListGroup } from 'react-bootstrap';
+import { useIPR } from './IPRContent';
+import './ipr_dashboard.css';
 import { 
     FaPlus, FaFileAlt, FaChartLine, FaUserTie, 
     FaBell, FaCalendarAlt, FaCheckCircle, FaClock,
     FaArrowUp, FaArrowDown, FaBook, FaGraduationCap, FaFilter, FaEdit, FaTimesCircle
 } from 'react-icons/fa';
 import { 
-    Card, Grid, Button, Typography, Box, 
-    LinearProgress, Avatar, Chip, Select, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, TextField
+    Card, Grid, Avatar, Chip, Select, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, TextField
 } from '@mui/material';
 import { Line } from 'react-chartjs-2';
-import './ipr_dashboard.css';
-import { useIPR } from './IPRContent';
 
 const IPRProfessionalDashboard = () => {
-    const { allIPRs, updateIPRStatus, updateIPRStage, updateApplicationStatus } = useIPR();
+    const { allIPRs, updateIPRStatus, updateIPRStage, updateApplicationStatus, acceptIPRRequest, requestIPR, rejectIPRRequest } = useIPR();
     const [rejectDialog, setRejectDialog] = useState({
         open: false,
         stageIndex: null,
@@ -95,6 +96,27 @@ const IPRProfessionalDashboard = () => {
 
             setRejectDialog({ open: false, stageIndex: null, iprId: null, message: '' });
         }
+    };
+
+    const handleSubmitIPR = (iprId) => {
+        const iprToSubmit = allIPRs.submitted.find(ipr => ipr.id === iprId);
+        if (iprToSubmit) {
+            console.log(`Submitting IPR: ${iprToSubmit.title}`);
+        }
+    };
+
+    const handleAcceptIPR = (iprId) => {
+        acceptIPRRequest(iprId);
+    };
+
+    const handleAcceptRequest = (iprId) => {
+        console.log(`Accepting IPR request with ID: ${iprId}`);
+        acceptIPRRequest(iprId);
+    };
+
+    const handleRejectRequest = (iprId) => {
+        console.log(`Rejecting IPR request with ID: ${iprId}`);
+        rejectIPRRequest(iprId);
     };
 
     const renderStageProgress = (ipr) => (
@@ -343,6 +365,53 @@ const IPRProfessionalDashboard = () => {
                     </Box>
                 </Box>
             )}
+
+            {/* New Milestones */}
+            <Box className="status-block request-patent">
+                <Typography variant="subtitle1">Request for Patent</Typography>
+                <Typography variant="body2">
+                    {ipr.requestForPatent ? 'Requested' : 'Not Requested'}
+                </Typography>
+            </Box>
+
+            <Box className="status-block application-acceptance">
+                <Typography variant="subtitle1">Application Acceptance</Typography>
+                <Typography variant="body2">
+                    {ipr.applicationAcceptance ? 'Accepted' : 'Pending'}
+                </Typography>
+            </Box>
+
+            <Box className="status-block ipr-specification">
+                <Typography variant="subtitle1">IPR Specification Submission</Typography>
+                <Typography variant="body2">
+                    {ipr.iprSpecificationSubmitted ? 'Submitted' : 'Not Submitted'}
+                </Typography>
+            </Box>
+
+            <Box className="status-block ipr-filed">
+                <Typography variant="subtitle1">IPR Filed</Typography>
+                <Typography variant="body2">
+                    {ipr.iprFiled ? 'Filed' : 'Not Filed'}
+                </Typography>
+            </Box>
+
+            <Box className="status-block ipr-status">
+                <Typography variant="subtitle1">Current IPR Status</Typography>
+                <Typography variant="body2">
+                    {ipr.iprStatus}
+                </Typography>
+            </Box>
+        </Box>
+    );
+
+    const renderPendingIPRs = () => (
+        <Box className="pending-iprs">
+            {allIPRs.pending.map(ipr => (
+                <Card key={ipr.id} className="pending-ipr-card">
+                    <Typography variant="h6">{ipr.title}</Typography>
+                    <Button onClick={() => handleAcceptIPR(ipr.id)}>Accept IPR</Button>
+                </Card>
+            ))}
         </Box>
     );
 
@@ -543,6 +612,45 @@ const IPRProfessionalDashboard = () => {
                     </Button>
                 </DialogActions>
             </Dialog>
+
+            {/* Add logic to display accepted IPRs */}
+            {allIPRs.submitted.map(ipr => (
+                <Card key={ipr.id}>
+                    <Typography variant="h6">{ipr.title}</Typography>
+                    <Button onClick={() => handleSubmitIPR(ipr.id)}>Submit IPR</Button>
+                </Card>
+            ))}
+
+            {/* IPR Requests Section */}
+            <Box className="ipr-requests-section">
+                <Typography variant="h6">IPR Requests</Typography>
+                {allIPRs.requests.length > 0 ? (
+                    <ListGroup>
+                        {allIPRs.requests.map((ipr) => (
+                            <ListGroup.Item key={ipr.id} className="ipr-request-item">
+                                <div className="ipr-request-content">
+                                    <h6>{ipr.title}</h6>
+                                    <p>{ipr.description}</p>
+                                    <Button 
+                                        variant="success" 
+                                        onClick={() => handleAcceptRequest(ipr.id)}
+                                    >
+                                        Accept
+                                    </Button>
+                                    <Button 
+                                        variant="danger" 
+                                        onClick={() => handleRejectRequest(ipr.id)}
+                                    >
+                                        Reject
+                                    </Button>
+                                </div>
+                            </ListGroup.Item>
+                        ))}
+                    </ListGroup>
+                ) : (
+                    <Typography variant="body2">No pending IPR requests.</Typography>
+                )}
+            </Box>
         </Box>
     );
 };
