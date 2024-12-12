@@ -119,3 +119,412 @@
     border: none; /* Remove border */
     color: #721c24; /* Dark red text */
 }
+
+.ipr-professional-dashboard {
+    padding: 2rem;
+    background: #f8fafc;
+    min-height: 100vh;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.primary-button {
+    background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%) !important;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2) !important;
+}
+
+.notification-button {
+    border-color: #4F46E5 !important;
+    color: #4F46E5 !important;
+}
+
+.metric-card {
+    padding: 1.5rem;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.metric-icon {
+    font-size: 2rem;
+    padding: 0.75rem;
+    border-radius: 12px;
+    background: rgba(79, 70, 229, 0.1);
+}
+
+.metric-icon.success {
+    color: #10B981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.metric-icon.warning {
+    color: #F59E0B;
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.metric-progress {
+    height: 6px !important;
+    border-radius: 3px !important;
+}
+
+.metric-progress.up {
+    background-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+.metric-progress.up .MuiLinearProgress-bar {
+    background-color: #10B981 !important;
+}
+
+.metric-progress.down {
+    background-color: rgba(245, 158, 11, 0.2) !important;
+}
+
+.metric-progress.down .MuiLinearProgress-bar {
+    background-color: #F59E0B !important;
+}
+
+.trend-chip {
+    font-size: 0.75rem !important;
+    height: 24px !important;
+}
+
+.trend-chip.up {
+    background: rgba(16, 185, 129, 0.1) !important;
+    color: #10B981 !important;
+}
+
+.trend-chip.down {
+    background: rgba(245, 158, 11, 0.1) !important;
+    color: #F59E0B !important;
+}
+
+.cases-card, .tasks-card {
+    height: 100%;
+    padding: 1.5rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.case-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.status-chip {
+    font-size: 0.75rem !important;
+    height: 24px !important;
+}
+
+.status-chip.filed {
+    background: rgba(79, 70, 229, 0.1) !important;
+    color: #4F46E5 !important;
+}
+
+.status-chip.completed {
+    background: rgba(16, 185, 129, 0.1) !important;
+    color: #10B981 !important;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.task-priority {
+    width: 4px;
+    height: 100%;
+    min-height: 40px;
+    border-radius: 2px;
+}
+
+.task-priority[data-priority="high"] {
+    background: #EF4444;
+}
+
+.task-priority[data-priority="medium"] {
+    background: #F59E0B;
+}
+
+@media (max-width: 1024px) {
+    .ipr-professional-dashboard {
+        padding: 1rem;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .header-actions {
+        width: 100%;
+    }
+}
+
+.case-item-card {
+    margin-bottom: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.case-header {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f9fe 0%, #f1f4f9 100%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.case-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.type-chip {
+    background: rgba(79, 70, 229, 0.1);
+    color: #4F46E5;
+}
+
+.case-progress {
+    padding: 2rem;
+}
+
+.stage-progress-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.stage-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #f8f9fe;
+    transition: all 0.3s ease;
+}
+
+.stage-item.current {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.1);
+    border: 1px solid rgba(79, 70, 229, 0.2);
+}
+
+.stage-marker {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e5e7eb;
+    color: #6b7280;
+}
+
+.stage-item.completed .stage-marker {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10B981;
+}
+
+.stage-item.current .stage-marker {
+    background: rgba(79, 70, 229, 0.1);
+    color: #4F46E5;
+}
+
+.stage-content {
+    flex: 1;
+}
+
+.complete-stage-btn {
+    color: #4F46E5 !important;
+    border-color: #4F46E5 !important;
+}
+
+.case-footer {
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.case-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.status-select {
+    min-width: 120px;
+}
+
+.stage-item.rejected {
+    background: rgba(239, 68, 68, 0.05);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.stage-icon.rejected {
+    color: #EF4444;
+}
+
+.rejection-info {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(239, 68, 68, 0.05);
+    border-radius: 4px;
+}
+
+.rejection-message {
+    display: block;
+    margin-top: 0.25rem;
+    color: #666;
+    font-style: italic;
+}
+
+.stage-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.reject-stage-btn {
+    color: #EF4444 !important;
+    border-color: #EF4444 !important;
+}
+
+.reject-stage-btn:hover {
+    background: rgba(239, 68, 68, 0.05) !important;
+}
+
+.stage-item.ipr-rejected {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.ipr-rejection-notice {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(239, 68, 68, 0.05);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 8px;
+}
+
+.case-item-card.rejected {
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.case-item-card.rejected .case-header {
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.rejection-status-badge {
+    background: rgba(239, 68, 68, 0.1);
+    color: #EF4444;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.stage-actions {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.ipr-rejected .stage-actions {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Application Status Styles */
+.application-status-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+    margin-bottom: 1.5rem;
+    color: #1F2937;
+    border-bottom: 2px solid #E5E7EB;
+    padding-bottom: 0.5rem;
+}
+
+.status-block {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #F9FAFB;
+    border-left: 4px solid #4F46E5;
+}
+
+.status-block.received {
+    border-left-color: #10B981;
+}
+
+.status-block.review {
+    border-left-color: #4F46E5;
+}
+
+.status-block.shortlisted {
+    border-left-color: #F59E0B;
+}
+
+.status-block.sanctioned {
+    border-left-color: #6366F1;
+}
+
+.status-block.disbursed {
+    border-left-color: #10B981;
+}
+
+.status-block.rejected {
+    border-left-color: #EF4444;
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.status-details {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: #fff;
+    border-radius: 4px;
+}
+
+.status-details button {
+    margin-top: 0.5rem;
+}

@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
     FaShieldAlt, FaUsers, FaFolder, FaCheckCircle, 
     FaHourglassHalf, FaTimesCircle, FaDownload, FaEye,
-    FaPlus, FaEdit, FaTrash
+    FaPlus, FaEdit, FaTrash, FaFileAlt
 } from 'react-icons/fa';
 import { Card, ListGroup, Modal, Form, Button, Tabs, Tab } from 'react-bootstrap';
+import { useIPR } from '../ipr-professional/IPRContent';
 import './startup_ipr.css';
 
 const StartupIPRRights = () => {
-    const [selectedStatus, setSelectedStatus] = useState('granted');
+    const { allIPRs, addNewIPR } = useIPR();
+    const [selectedStatus, setSelectedStatus] = useState('pending');
     const [selectedIPR, setSelectedIPR] = useState(null);
     const [showAddModal, setShowAddModal] = useState(false);
     const [newIPR, setNewIPR] = useState({
@@ -16,254 +18,197 @@ const StartupIPRRights = () => {
         type: '',
         description: '',
         inventors: '',
-        filingDate: ''
+        filingDate: '',
+        applicationNumber: '',
+        currentStage: {
+            name: 'Filing',
+            startDate: new Date().toISOString().split('T')[0],
+            estimatedCompletion: ''
+        },
+        progressStages: [
+            { name: 'Filing', completed: false, current: true },
+            { name: 'Formality Check', completed: false, current: false },
+            { name: 'Technical Review', completed: false, current: false },
+            { name: 'Examiner Interview', completed: false, current: false },
+            { name: 'Final Decision', completed: false, current: false }
+        ]
     });
 
-    // Sample IPR Data
-    const iprData = {
-        granted: [
-            {
-                id: 1,
-                title: "AI-Based Medical Diagnosis System",
-                patentNumber: "US123456789",
-                grantDate: "2023-05-15",
-                expiryDate: "2043-05-15",
-                inventors: ["Dr. John Smith", "Dr. Sarah Johnson"],
-                description: "Advanced AI system for early disease detection",
-                citations: 25,
-                documents: [
-                    { name: "Grant Certificate", type: "PDF" },
-                    { name: "Technical Specifications", type: "DOC" }
-                ]
-            },
-            {
-                id: 2,
-                title: "Blockchain-Based Supply Chain System",
-                patentNumber: "US987654321",
-                grantDate: "2023-03-10",
-                expiryDate: "2043-03-10",
-                inventors: ["Alice Chen", "Bob Wilson"],
-                description: "Decentralized supply chain tracking system",
-                citations: 15,
-                documents: [
-                    { name: "Patent Document", type: "PDF" },
-                    { name: "Implementation Guide", type: "PDF" }
-                ]
-            }
-        ],
-        pending: [
-            {
-                id: 3,
-                title: "Quantum Computing Optimization Algorithm",
-                applicationNumber: "PCT/US23/12345",
-                filingDate: "2023-08-01",
-                status: "Under Examination",
-                currentStage: {
-                    name: "Technical Review",
-                    startDate: "2023-10-15",
-                    estimatedCompletion: "2023-12-15"
-                },
-                progressStages: [
-                    { name: "Filing", completed: true, date: "2023-08-01" },
-                    { name: "Formality Check", completed: true, date: "2023-09-15" },
-                    { name: "Technical Review", completed: false, current: true },
-                    { name: "Examiner Interview", completed: false },
-                    { name: "Final Decision", completed: false }
-                ]
-            }
-        ],
-        rejected: [
-            {
-                id: 4,
-                title: "Neural Network Training Method",
-                applicationNumber: "US2023/98765",
-                filingDate: "2023-01-15",
-                rejectionDate: "2023-06-20",
-                reason: "Prior art exists",
-                appealStatus: "Appeal filed on 2023-07-15",
-                documents: [
-                    { name: "Rejection Notice", type: "PDF" },
-                    { name: "Appeal Document", type: "PDF" }
-                ]
-            }
-        ]
+    // Render IPR List based on selected status
+    const renderIPRList = () => {
+        const currentList = allIPRs[selectedStatus] || [];
+        
+        return (
+            <ListGroup className="startup_ipr_list">
+                {currentList.map((ipr) => (
+                    <ListGroup.Item
+                        key={ipr.id}
+                        action
+                        active={selectedIPR?.id === ipr.id}
+                        onClick={() => setSelectedIPR(ipr)}
+                        className="startup_ipr_list-item"
+                    >
+                        <div className="startup_ipr_list-item-content">
+                            <h6>{ipr.title}</h6>
+                            <p className="text-muted">
+                                {ipr.applicationNumber} • {ipr.filingDate}
+                            </p>
+                            <div className="startup_ipr_list-item-status">
+                                {ipr.status === 'pending' && (
+                                    <span className="status-badge pending">
+                                        <FaHourglassHalf /> Pending
+                                    </span>
+                                )}
+                                {ipr.status === 'granted' && (
+                                    <span className="status-badge granted">
+                                        <FaCheckCircle /> Granted
+                                    </span>
+                                )}
+                                {ipr.status === 'rejected' && (
+                                    <span className="status-badge rejected">
+                                        <FaTimesCircle /> Rejected
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                    </ListGroup.Item>
+                ))}
+            </ListGroup>
+        );
     };
 
     const handleAddIPR = () => {
-        // Add new IPR logic here
+        const currentDate = new Date();
+        const newIprEntry = {
+            id: Date.now(),
+            ...newIPR,
+            status: 'pending',
+            filingDate: currentDate.toISOString().split('T')[0],
+            applicationNumber: `IPR${Math.floor(Math.random() * 10000)}/${currentDate.getFullYear()}`,
+            documents: [
+                { name: 'Application Form', type: 'PDF' },
+                { name: 'Technical Specifications', type: 'DOC' }
+            ],
+            lastUpdated: currentDate.toISOString(),
+            lastUpdatedBy: 'Startup User'
+        };
+
+        addNewIPR(newIprEntry);
         setShowAddModal(false);
         setNewIPR({
             title: '',
             type: '',
             description: '',
             inventors: '',
-            filingDate: ''
+            filingDate: '',
+            currentStage: {
+                name: 'Filing',
+                startDate: new Date().toISOString().split('T')[0],
+                estimatedCompletion: ''
+            },
+            progressStages: [
+                { name: 'Filing', completed: false, current: true },
+                { name: 'Formality Check', completed: false, current: false },
+                { name: 'Technical Review', completed: false, current: false },
+                { name: 'Examiner Interview', completed: false, current: false },
+                { name: 'Final Decision', completed: false, current: false }
+            ]
         });
     };
 
-    const renderIPRList = () => {
-        const currentList = iprData[selectedStatus] || [];
-        return (
-            <div className="startup_ipr_list">
-                {currentList.map((ipr) => (
-                    <Card 
-                        key={ipr.id}
-                        className={`startup_ipr_card ${selectedIPR?.id === ipr.id ? 'active' : ''}`}
-                        onClick={() => setSelectedIPR(ipr)}
-                    >
-                        <Card.Body>
-                            <div className="startup_ipr_card-header">
-                                <FaShieldAlt className="startup_ipr_icon" />
-                                <div className="startup_ipr_card-title">
-                                    <h5>{ipr.title}</h5>
-                                    <span className="startup_ipr_id">
-                                        {selectedStatus === 'granted' ? ipr.patentNumber : ipr.applicationNumber}
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="startup_ipr_card-content">
-                                <p>{ipr.description}</p>
-                                <div className="startup_ipr_card-footer">
-                                    <span>
-                                        {selectedStatus === 'granted' ? `Granted: ${ipr.grantDate}` :
-                                         selectedStatus === 'pending' ? `Filed: ${ipr.filingDate}` :
-                                         `Rejected: ${ipr.rejectionDate}`}
-                                    </span>
-                                    <div className="startup_ipr_actions">
-                                        <Button variant="link" size="sm">
-                                            <FaEdit />
-                                        </Button>
-                                        <Button variant="link" size="sm" className="text-danger">
-                                            <FaTrash />
-                                        </Button>
-                                    </div>
-                                </div>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                ))}
-            </div>
-        );
-    };
+    // Effect to update selected IPR when status changes
+    useEffect(() => {
+        if (selectedIPR) {
+            const updatedIPR = [...allIPRs.granted, ...allIPRs.pending, ...allIPRs.rejected]
+                .find(ipr => ipr.id === selectedIPR.id);
+            if (updatedIPR) {
+                setSelectedIPR(updatedIPR);
+            }
+        }
+    }, [allIPRs, selectedIPR]);
 
     const renderDetailContent = () => {
         if (!selectedIPR) return null;
+        
+        return (
+            <Card className="startup_ipr_detail-card">
+                <div className="startup_ipr_detail-header">
+                    <h3>{selectedIPR.title}</h3>
+                    <div className="startup_ipr_detail-meta">
+                        <span><FaFolder /> {selectedIPR.type}</span>
+                        <span><FaUsers /> {selectedIPR.inventors}</span>
+                    </div>
+                </div>
 
-        switch (selectedStatus) {
-            case 'granted':
-                return (
-                    <div className="startup_ipr_detail-content">
-                        <div className="startup_ipr_detail-section">
-                            <h6>Patent Information</h6>
-                            <p><strong>Patent Number:</strong> {selectedIPR.patentNumber}</p>
-                            <p><strong>Grant Date:</strong> {selectedIPR.grantDate}</p>
-                            <p><strong>Expiry Date:</strong> {selectedIPR.expiryDate}</p>
-                            <p><strong>Citations:</strong> {selectedIPR.citations}</p>
-                        </div>
-                        
-                        <div className="startup_ipr_detail-section">
-                            <h6>Inventors</h6>
-                            <ListGroup variant="flush">
-                                {selectedIPR.inventors?.map((inventor, index) => (
-                                    <ListGroup.Item key={index}>
-                                        <FaUsers className="me-2" />
-                                        {inventor}
-                                    </ListGroup.Item>
-                                ))}
-                            </ListGroup>
-                        </div>
+                <div className="startup_ipr_detail-content">
+                    <div className="startup_ipr_detail-section">
+                        <h5>Description</h5>
+                        <p>{selectedIPR.description}</p>
+                    </div>
 
-                        <div className="startup_ipr_detail-section">
-                            <h6>Documents</h6>
-                            {selectedIPR.documents?.map((doc, index) => (
-                                <div key={index} className="startup_ipr_document-item">
-                                    <span>
-                                        <FaFolder className="me-2" />
-                                        {doc.name}
-                                    </span>
-                                    <div>
-                                        <Button variant="link" size="sm">
-                                            <FaEye /> View
-                                        </Button>
+                    <div className="startup_ipr_detail-section">
+                        <h5>Progress Stages</h5>
+                        <div className="startup_ipr_stages">
+                            {selectedIPR.progressStages.map((stage, index) => (
+                                <div 
+                                    key={index} 
+                                    className={`stage-item ${stage.completed ? 'completed' : ''} ${stage.current ? 'current' : ''}`}
+                                >
+                                    <div className="stage-marker">
+                                        {stage.completed ? <FaCheckCircle /> : index + 1}
+                                    </div>
+                                    <div className="stage-info">
+                                        <h6>{stage.name}</h6>
+                                        {stage.current && (
+                                            <p className="text-muted">
+                                                Started: {new Date(selectedIPR.currentStage.startDate).toLocaleDateString()}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="startup_ipr_detail-section">
+                        <h5>Documents</h5>
+                        <div className="startup_ipr_documents">
+                            {selectedIPR.documents.map((doc, index) => (
+                                <div key={index} className="document-item">
+                                    <FaFileAlt />
+                                    <span>{doc.name}</span>
+                                    <div className="document-actions">
                                         <Button variant="link" size="sm">
                                             <FaDownload /> Download
+                                        </Button>
+                                        <Button variant="link" size="sm">
+                                            <FaEye /> View
                                         </Button>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
-                );
-            
-            case 'pending':
-                return (
-                    <div className="startup_ipr_detail-content">
-                        <div className="startup_ipr_detail-section">
-                            <h6>Application Status</h6>
-                            <p><strong>Application Number:</strong> {selectedIPR.applicationNumber}</p>
-                            <p><strong>Filing Date:</strong> {selectedIPR.filingDate}</p>
-                            <p><strong>Current Stage:</strong> {selectedIPR.currentStage?.name}</p>
-                            <p><strong>Estimated Completion:</strong> {selectedIPR.currentStage?.estimatedCompletion}</p>
-                        </div>
 
-                        <div className="startup_ipr_detail-section">
-                            <h6>Progress Timeline</h6>
-                            <div className="startup_ipr_timeline">
-                                {selectedIPR.progressStages?.map((stage, index) => (
-                                    <div key={index} className={`startup_ipr_timeline-item ${stage.completed ? 'completed' : ''} ${stage.current ? 'current' : ''}`}>
-                                        <div className="startup_ipr_timeline-marker">
-                                            {stage.completed ? <FaCheckCircle /> : 
-                                             stage.current ? <FaHourglassHalf /> : 
-                                             <div className="startup_ipr_timeline-dot" />}
-                                        </div>
-                                        <div className="startup_ipr_timeline-content">
-                                            <h6>{stage.name}</h6>
-                                            {stage.date && <p>{stage.date}</p>}
-                                        </div>
-                                    </div>
-                                ))}
+                    <div className="startup_ipr_detail-section">
+                        <h5>Status Updates</h5>
+                        <div className="startup_ipr_updates">
+                            <div className="update-item">
+                                <span className="update-date">
+                                    {new Date(selectedIPR.lastUpdated).toLocaleDateString()}
+                                </span>
+                                <span className="update-by">
+                                    Updated by: {selectedIPR.lastUpdatedBy}
+                                </span>
+                                <span className={`update-status ${selectedIPR.status}`}>
+                                    Status: {selectedIPR.status.charAt(0).toUpperCase() + selectedIPR.status.slice(1)}
+                                </span>
                             </div>
                         </div>
                     </div>
-                );
-
-            case 'rejected':
-                return (
-                    <div className="startup_ipr_detail-content">
-                        <div className="startup_ipr_detail-section">
-                            <h6>Rejection Details</h6>
-                            <p><strong>Application Number:</strong> {selectedIPR.applicationNumber}</p>
-                            <p><strong>Filing Date:</strong> {selectedIPR.filingDate}</p>
-                            <p><strong>Rejection Date:</strong> {selectedIPR.rejectionDate}</p>
-                            <p><strong>Reason:</strong> {selectedIPR.reason}</p>
-                            <p><strong>Appeal Status:</strong> {selectedIPR.appealStatus}</p>
-                        </div>
-
-                        <div className="startup_ipr_detail-section">
-                            <h6>Documents</h6>
-                            {selectedIPR.documents?.map((doc, index) => (
-                                <div key={index} className="startup_ipr_document-item">
-                                    <span>
-                                        <FaFolder className="me-2" />
-                                        {doc.name}
-                                    </span>
-                                    <div>
-                                        <Button variant="link" size="sm">
-                                            <FaEye /> View
-                                        </Button>
-                                        <Button variant="link" size="sm">
-                                            <FaDownload /> Download
-                                        </Button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                );
-
-            default:
-                return null;
-        }
+                </div>
+            </Card>
+        );
     };
 
     return (
@@ -286,29 +231,30 @@ const StartupIPRRights = () => {
                             variant={selectedStatus === 'granted' ? 'primary' : 'light'}
                             onClick={() => setSelectedStatus('granted')}
                         >
-                            <FaCheckCircle /> Granted ({iprData.granted.length})
+                            <FaCheckCircle /> Granted ({allIPRs.granted.length})
                         </Button>
                         <Button 
                             variant={selectedStatus === 'pending' ? 'primary' : 'light'}
                             onClick={() => setSelectedStatus('pending')}
                         >
-                            <FaHourglassHalf /> Pending ({iprData.pending.length})
+                            <FaHourglassHalf /> Pending ({allIPRs.pending.length})
                         </Button>
                         <Button 
                             variant={selectedStatus === 'rejected' ? 'primary' : 'light'}
                             onClick={() => setSelectedStatus('rejected')}
                         >
-                            <FaTimesCircle /> Rejected ({iprData.rejected.length})
+                            <FaTimesCircle /> Rejected ({allIPRs.rejected.length})
                         </Button>
                     </div>
                     {renderIPRList()}
                 </div>
 
                 <div className="startup_ipr_details">
-                    {renderDetailContent()}
+                    {selectedIPR && renderDetailContent()}
                 </div>
             </div>
 
+            {/* Add Modal */}
             <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add New IPR</Modal.Title>
@@ -317,28 +263,28 @@ const StartupIPRRights = () => {
                     <Form>
                         <Form.Group className="mb-3">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control 
-                                type="text" 
+                            <Form.Control
+                                type="text"
                                 value={newIPR.title}
                                 onChange={(e) => setNewIPR({...newIPR, title: e.target.value})}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Type</Form.Label>
-                            <Form.Select 
+                            <Form.Select
                                 value={newIPR.type}
                                 onChange={(e) => setNewIPR({...newIPR, type: e.target.value})}
                             >
                                 <option value="">Select Type</option>
-                                <option value="patent">Patent</option>
-                                <option value="trademark">Trademark</option>
-                                <option value="copyright">Copyright</option>
+                                <option value="Patent">Patent</option>
+                                <option value="Trademark">Trademark</option>
+                                <option value="Copyright">Copyright</option>
                             </Form.Select>
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Description</Form.Label>
-                            <Form.Control 
-                                as="textarea" 
+                            <Form.Control
+                                as="textarea"
                                 rows={3}
                                 value={newIPR.description}
                                 onChange={(e) => setNewIPR({...newIPR, description: e.target.value})}
@@ -346,19 +292,10 @@ const StartupIPRRights = () => {
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Inventors</Form.Label>
-                            <Form.Control 
+                            <Form.Control
                                 type="text"
-                                placeholder="Separate multiple inventors with commas"
                                 value={newIPR.inventors}
                                 onChange={(e) => setNewIPR({...newIPR, inventors: e.target.value})}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Filing Date</Form.Label>
-                            <Form.Control 
-                                type="date"
-                                value={newIPR.filingDate}
-                                onChange={(e) => setNewIPR({...newIPR, filingDate: e.target.value})}
                             />
                         </Form.Group>
                     </Form>

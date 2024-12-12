@@ -1,305 +1,234 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
-  Box,
-  TextField,
-  Button,
-  Card,
-  Typography,
-  Grid,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Checkbox,
-  Chip,
+  Box, TextField, Button, Card, Typography, Grid
 } from "@mui/material";
 import { Pie } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import "./startup_resource_allocate.css";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
-// Register ChartJS components
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+// Reference data without startup names
+const referenceData = [
+  { budget: 1200000, growth: 15.20, allocations: { Marketing: 95893.08, "R&D": 613486.50, Operations: 269178.66, Sales: 186544.59, Logistics: 35392.12 } },
+  { budget: 1200000, growth: 12.50, allocations: { Marketing: 198000.00, "R&D": 210000.00, Operations: 480000.00, Sales: 246000.00, Logistics: 66000.00 } },
+  { budget: 750000, growth: 9.80, allocations: { Marketing: 132450.00, "R&D": 157350.00, Operations: 315000.00, Sales: 105750.00, Logistics: 39450.00 } },
+  // ... add other reference data
+];
 
 const StartupResourceAllocation = () => {
-  const [totalFunds, setTotalFunds] = useState("");
-  const [availableDepartments, setAvailableDepartments] = useState([
-    { name: "Research & Development", defaultPercentage: 30 },
-    { name: "Marketing", defaultPercentage: 25 },
-    { name: "Operations", defaultPercentage: 20 },
-    { name: "Human Resources", defaultPercentage: 15 },
-    { name: "IT Infrastructure", defaultPercentage: 10 },
-    { name: "Sales", defaultPercentage: 20 },
-    { name: "Customer Support", defaultPercentage: 15 },
-    { name: "Finance", defaultPercentage: 10 },
-  ]);
-  const [selectedDepartments, setSelectedDepartments] = useState([]);
+  const [totalBudget, setTotalBudget] = useState("");
+  const [growthRate, setGrowthRate] = useState("");
+  const [predictedAllocations, setPredictedAllocations] = useState(null);
   const [allocationHistory, setAllocationHistory] = useState([]);
-  const [selectedHistory, setSelectedHistory] = useState(null);
 
-  // Calculate allocations automatically based on selected departments
-  const calculateAllocations = (funds) => {
-    if (selectedDepartments.length === 0) return [];
-    const equalPercentage = 100 / selectedDepartments.length;
-    return selectedDepartments.map((dept) => ({
-      name: dept,
-      percentage: equalPercentage,
-      allocated: (funds * equalPercentage) / 100,
-    }));
+  // Utility function to clean and parse numbers
+  const parseAmount = (amount) => {
+    if (typeof amount === 'string') {
+      return parseFloat(amount.replace(/[₹,\s]/g, '')) || 0;
+    }
+    return amount || 0;
   };
 
-  // Update chart data for pie chart
+  // Enhanced prediction function
+  const predictAllocations = (budget, growth) => {
+    try {
+      const validBudget = parseAmount(budget);
+      const validGrowth = parseFloat(growth);
+
+      // Find similar growth rates (within ±3%)
+      let similarCases = referenceData.filter(data => 
+        Math.abs(data.growth - validGrowth) <= 3
+      );
+
+      // If no matches found, use all data
+      if (similarCases.length === 0) {
+        similarCases = referenceData;
+      }
+
+      // Calculate weighted average allocations
+      const totalWeight = similarCases.reduce((sum, data) => 
+        sum + (1 / (Math.abs(data.growth - validGrowth) + 1)), 0
+      );
+
+      const weightedAllocations = {
+        Marketing: 0, "R&D": 0, Operations: 0, Sales: 0, Logistics: 0
+      };
+
+      similarCases.forEach(data => {
+        const weight = 1 / (Math.abs(data.growth - validGrowth) + 1);
+        Object.keys(weightedAllocations).forEach(key => {
+          const percentage = data.allocations[key] / data.budget;
+          weightedAllocations[key] += (percentage * weight);
+        });
+      });
+
+      // Normalize and apply to new budget
+      Object.keys(weightedAllocations).forEach(key => {
+        weightedAllocations[key] = (weightedAllocations[key] / totalWeight) * validBudget;
+      });
+
+      return weightedAllocations;
+    } catch (error) {
+      console.error("Prediction error:", error);
+      // Return default allocation
+      return {
+        Marketing: budget * 0.15,
+        "R&D": budget * 0.30,
+        Operations: budget * 0.25,
+        Sales: budget * 0.20,
+        Logistics: budget * 0.10
+      };
+    }
+  };
+
+  const handleCalculate = () => {
+    try {
+      const budget = parseAmount(totalBudget);
+      const growth = parseFloat(growthRate);
+
+      if (budget <= 0) {
+        alert("Please enter a valid budget amount");
+        return;
+      }
+
+      if (isNaN(growth) || growth < 0 || growth > 100) {
+        alert("Please enter a valid growth rate between 0 and 100");
+        return;
+      }
+
+      const allocations = predictAllocations(budget, growth);
+      setPredictedAllocations(allocations);
+
+      setAllocationHistory([
+        {
+          id: Date.now(),
+          date: new Date().toLocaleDateString(),
+          budget,
+          growth,
+          allocations
+        },
+        ...allocationHistory
+      ]);
+    } catch (error) {
+      console.error("Calculation error:", error);
+      alert("An error occurred. Using default allocation model.");
+    }
+  };
+
   const getChartData = (allocations) => ({
-    labels: allocations.map((dept) => dept.name),
-    datasets: [
-      {
-        data: allocations.map((dept) => dept.allocated),
-        backgroundColor: [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56",
-          "#4BC0C0",
-          "#9966FF",
-          "#FF9F40",
-          "#4BC0C0",
-          "#FF66CC",
-        ],
-      },
-    ],
+    labels: Object.keys(allocations),
+    datasets: [{
+      data: Object.values(allocations),
+      backgroundColor: [
+        "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"
+      ],
+    }]
   });
-
-  // Modify handleDepartmentChange to remove automatic calculation
-  const handleDepartmentChange = (event) => {
-    setSelectedDepartments(event.target.value);
-  };
-
-  const handleAllocation = () => {
-    if (!totalFunds || selectedDepartments.length === 0) return;
-    
-    const allocations = calculateAllocations(parseFloat(totalFunds));
-    const newAllocation = {
-      id: Date.now(),
-      date: new Date().toLocaleDateString(),
-      totalFunds,
-      allocations,
-    };
-    
-    setAllocationHistory([newAllocation, ...allocationHistory]);
-    setSelectedHistory(newAllocation);
-  };
 
   return (
     <Box className="startup_resource_dashboard">
-      <Typography variant="h4" gutterBottom className="startup_resource_dashboard-title">
-        Startup Resource Allocation Dashboard
+      <Typography variant="h4" gutterBottom>
+        Smart Budget Allocation System
       </Typography>
 
       <Grid container spacing={3}>
         {/* Input Section */}
         <Grid item xs={12} md={4}>
-          <Card className="startup_resource_input-card">
+          <Card sx={{ p: 3 }}>
             <Typography variant="h6" gutterBottom>
-              Allocate Resources
+              Enter Details
             </Typography>
+            
             <TextField
               fullWidth
-              label="Total Funds ($)"
-              type="number"
-              value={totalFunds}
-              onChange={(e) => setTotalFunds(e.target.value)}
-              className="funds-input"
-              sx={{ 
-                '& .MuiInputBase-root': { 
-                  height: '56px'
-                },
-                '& .MuiInputBase-input': {
-                  fontSize: '1.1rem'
-                }
-              }}
+              label="Total Budget (₹)"
+              value={totalBudget}
+              onChange={(e) => setTotalBudget(e.target.value)}
+              sx={{ mb: 2 }}
             />
-            
-            <FormControl fullWidth sx={{ mt: 2 }}>
-              <InputLabel 
-                id="department-select-label"
-                sx={{ 
-                  backgroundColor: 'white',
-                  px: 1,
-                  '&.Mui-focused': {
-                    backgroundColor: 'white',
-                  }
-                }}
-              >
-                Select Departments
-              </InputLabel>
-              <Select
-                labelId="department-select-label"
-                multiple
-                value={selectedDepartments}
-                onChange={handleDepartmentChange}
-                className="startup_resource_department-select"
-                sx={{ 
-                  '& .MuiSelect-select': { 
-                    display: 'flex !important',
-                    flexWrap: 'wrap !important',
-                    gap: '8px !important',
-                    minHeight: '56px !important',
-                    height: 'auto !important',
-                    padding: '8px !important'
-                  },
-                  '& .MuiOutlinedInput-notchedOutline': {
-                    height: 'auto !important'
-                  }
-                }}
-                renderValue={(selected) => (
-                  <Box sx={{ 
-                    display: 'flex', 
-                    flexWrap: 'wrap', 
-                    gap: '8px',
-                    width: '100%'
-                  }}>
-                    {selected.map((value) => (
-                      <Chip
-                        key={value}
-                        label={value}
-                        className="department-chip"
-                        size="medium"
-                        sx={{ 
-                          m: '2px !important',
-                          height: '32px !important'
-                        }}
-                      />
-                    ))}
-                  </Box>
-                )}
-                MenuProps={{
-                  PaperProps: {
-                    style: {
-                      maxHeight: 300,
-                      width: 350
-                    }
-                  }
-                }}
-              >
-                {availableDepartments.map((dept) => (
-                  <MenuItem 
-                    key={dept.name} 
-                    value={dept.name}
-                    className={`startup_resource_department-menu-item ${
-                      selectedDepartments.includes(dept.name) ? 'selected' : ''
-                    }`}
-                  >
-                    <Checkbox checked={selectedDepartments.includes(dept.name)} />
-                    {dept.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
 
-            {/* Add Calculate Button */}
+            <TextField
+              fullWidth
+              label="Expected Growth Rate (%)"
+              value={growthRate}
+              onChange={(e) => setGrowthRate(e.target.value)}
+              sx={{ mb: 2 }}
+            />
+
             <Button 
-              variant="contained" 
-              fullWidth 
-              sx={{ 
-                mt: 3,
-                height: '56px',
-                fontSize: '1.1rem'
-              }}
-              onClick={handleAllocation}
-              disabled={!totalFunds || selectedDepartments.length === 0}
+              variant="contained"
+              fullWidth
+              onClick={handleCalculate}
+              disabled={!totalBudget || !growthRate}
             >
               Calculate Allocation
             </Button>
           </Card>
         </Grid>
 
-        {/* Graph Section - Update to Pie chart */}
+        {/* Chart Section */}
         <Grid item xs={12} md={8}>
-          <Card className="startup_resource_graph-card">
-            {selectedHistory ? (
+          <Card sx={{ p: 3, height: '100%' }}>
+            {predictedAllocations ? (
               <>
-                <Typography variant="h6" gutterBottom className="startup_resource_card-title">
-                  Allocation Distribution - {selectedHistory.date}
+                <Typography variant="h6" gutterBottom>
+                  Recommended Budget Allocation
                 </Typography>
-                <div className="startup_resource_chart-container">
+                <Box sx={{ height: 400 }}>
                   <Pie
-                    data={getChartData(selectedHistory.allocations)}
+                    data={getChartData(predictedAllocations)}
                     options={{
                       responsive: true,
                       maintainAspectRatio: false,
                       plugins: {
-                        legend: {
-                          position: 'right',
-                        },
-                        title: {
-                          display: true,
-                          text: `Total Funds: $${selectedHistory.totalFunds}`,
-                        },
-                      },
+                        legend: { position: 'right' },
+                        tooltip: {
+                          callbacks: {
+                            label: (context) => {
+                              const value = context.raw;
+                              const percentage = ((value / parseAmount(totalBudget)) * 100).toFixed(1);
+                              return `₹${value.toLocaleString('en-IN')} (${percentage}%)`;
+                            }
+                          }
+                        }
+                      }
                     }}
-                    height={300}
                   />
-                </div>
+                </Box>
               </>
             ) : (
-              <div className="startup_resource_empty-graph">
-                <Typography variant="h6">
-                  Select departments and enter funds to view the allocation
-                </Typography>
-              </div>
+              <Typography variant="h6" align="center">
+                Enter budget and growth rate to see recommendations
+              </Typography>
             )}
           </Card>
         </Grid>
 
-        {/* History Section */}
-        <Grid item xs={12}>
-          <Card className="startup_resource_history-card">
-            <Typography variant="h5" className="startup_resource_history-section-title">
-              Allocation History
-            </Typography>
-            <Box className="startup_resource_history-grid">
-              {allocationHistory.map((history) => (
-                <Card 
-                  key={history.id}
-                  className={`startup_resource_history-item ${
-                    selectedHistory?.id === history.id ? 'selected' : ''
-                  }`}
-                  onClick={() => setSelectedHistory(history)}
-                >
-                  <Typography variant="h6" className="startup_resource_history-date">
-                    {history.date}
-                  </Typography>
-                  <Typography variant="body1" className="startup_resource_history-amount">
-                    Total Funds: ${Number(history.totalFunds).toLocaleString()}
-                  </Typography>
-                  <Box className="startup_resource_history-allocations">
-                    {history.allocations.map((alloc) => (
-                      <Chip
-                        key={alloc.name}
-                        label={`${alloc.name}: ${alloc.percentage.toFixed(1)}%`}
-                        size="small"
-                        className="startup_resource_history-allocation-chip"
-                      />
-                    ))}
-                  </Box>
-                </Card>
-              ))}
-            </Box>
-          </Card>
-        </Grid>
+        {/* Allocation Details */}
+        {predictedAllocations && (
+          <Grid item xs={12}>
+            <Card sx={{ p: 3 }}>
+              <Typography variant="h6" gutterBottom>
+                Detailed Allocation Breakdown
+              </Typography>
+              <Grid container spacing={2}>
+                {Object.entries(predictedAllocations).map(([dept, amount]) => (
+                  <Grid item xs={12} sm={6} md={4} key={dept}>
+                    <Card variant="outlined" sx={{ p: 2 }}>
+                      <Typography variant="subtitle1">{dept}</Typography>
+                      <Typography variant="h6">
+                        ₹{amount.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        {((amount / parseAmount(totalBudget)) * 100).toFixed(1)}%
+                      </Typography>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </Card>
+          </Grid>
+        )}
       </Grid>
     </Box>
   );

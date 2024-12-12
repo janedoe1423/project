@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Home from './pages/Home';
+import Home from './pages/home/Home';
 import Startups from './pages/Startups';
 import Investors from './pages/Investors';
 import Innovations from './pages/Innovations';
@@ -27,40 +27,43 @@ import InvestorProfile from './Investor_profile';
 import Research_inno from './Research_inno';
 import MentorProfilePage from './pages/mentor/mentor_profile_page'; // Import MentorProfilePage
 import MarketAnalysis from './MarketAnalysis';
+import { IPRProvider } from './pages/ipr-professional/IPRContent';
 
 function App() {
   return (
-    <Router>
-      <Header />
-      <div className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/startups" element={<Startups />} />
-          <Route path="/investors" element={<Investors />} />
-          <Route path="/investor-dashboard" element={<InvestorDashboard />} /> {/* Add route for Investor Dashboard */}
-          <Route path="/innovations" element={<Innovations />} />
-          <Route path="/research" element={<Research_inno />} />
-          <Route path="/schemes" element={<Schemes />} />
-          <Route path="/ipr-rights" element={<IPR />} />
-          <Route path="/funding" element={<Funding />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/startup-profile" element={<StartupProfilePage />} />
-          <Route path="/ipr-professional-profile" element={<IPRProfilePage />} />
-          <Route path="/researcher" element={<Researcher />} />          
-          <Route path="/schemes/women-entrepreneurship" element={<WomenEntrepreneurship />} />
-          <Route path="/schemes/incubator-framework" element={<Incubator />} />
-          <Route path="/schemes/startup-gujarat" element={<StartupGujarat />} />
-          <Route path="/startup/:name" element={<StartupFundDetails />} />
-          <Route path="/admin" element={<Admin_profile_page />} />
-          <Route path="/investor-profile" element={<InvestorProfilePage />}/>
-          <Route path="/startup-profile/:id" element={<StartupProfile />} />
-          <Route path="/investor/:id" element={<InvestorProfile />} />
-          <Route path="/mentor-profile" element={<MentorProfilePage />} /> {/* Add route for Mentor Profile */}
-          <Route path="/market-analysis" element={<MarketAnalysis />} />
-        </Routes>
-      </div>
-      <Footer />
-    </Router>
+    <IPRProvider>
+      <Router>
+        <Header />
+        <div className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/startups" element={<Startups />} />
+            <Route path="/investors" element={<Investors />} />
+            <Route path="/investor-dashboard" element={<InvestorDashboard />} /> {/* Add route for Investor Dashboard */}
+            <Route path="/innovations" element={<Innovations />} />
+            <Route path="/research" element={<Research_inno />} />
+            <Route path="/schemes" element={<Schemes />} />
+            <Route path="/ipr-rights" element={<IPR />} />
+            <Route path="/funding" element={<Funding />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/startup-profile" element={<StartupProfilePage />} />
+            <Route path="/ipr-professional-profile" element={<IPRProfilePage />} />
+            <Route path="/researcher" element={<Researcher />} />          
+            <Route path="/schemes/women-entrepreneurship" element={<WomenEntrepreneurship />} />
+            <Route path="/schemes/incubator-framework" element={<Incubator />} />
+            <Route path="/schemes/startup-gujarat" element={<StartupGujarat />} />
+            <Route path="/startup/:name" element={<StartupFundDetails />} />
+            <Route path="/admin" element={<Admin_profile_page />} />
+            <Route path="/investor-profile" element={<InvestorProfilePage />}/>
+            <Route path="/startup-profile/:id" element={<StartupProfile />} />
+            <Route path="/investor/:id" element={<InvestorProfile />} />
+            <Route path="/mentor-profile" element={<MentorProfilePage />} /> {/* Add route for Mentor Profile */}
+            <Route path="/market-analysis" element={<MarketAnalysis />} />
+          </Routes>
+        </div>
+        <Footer />
+      </Router>
+    </IPRProvider>
   );
 }
 
