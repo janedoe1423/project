@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
     Box,
     Grid,
@@ -41,6 +41,36 @@ import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
 import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+
+// Add submitFundingApplication function
+const submitFundingApplication = async (applicationData) => {
+    try {
+        // Replace with your actual API endpoint
+        const response = await fetch('/api/funding/applications', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(applicationData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to submit application');
+        }
+
+        const data = await response.json();
+        return {
+            success: true,
+            data
+        };
+    } catch (error) {
+        console.error('Error submitting funding application:', error);
+        return {
+            success: false,
+            error: error.message
+        };
+    }
+};
 
 // Export the startups array
 export const startups = [
@@ -88,14 +118,159 @@ export const startups = [
 ];
 
 const StartupFunding = () => {
+    const location = useLocation();
     const navigate = useNavigate();
+
+    // Add state for application status
+    const [applicationStatus, setApplicationStatus] = useState(null);
+
+    // Handle incoming application data
+    useEffect(() => {
+        if (location.state?.fromStartupFunding) {
+            const applicationData = location.state.applicationData;
+            handleIncomingApplication(applicationData);
+        }
+    }, [location]);
+
+    // Handle the incoming application
+    const handleIncomingApplication = async (applicationData) => {
+        try {
+            // Submit to your API
+            const response = await submitFundingApplication(applicationData);
+            
+            if (response.success) {
+                setApplicationStatus({
+                    type: 'success',
+                    message: 'Application submitted successfully!'
+                });
+                
+                // Clear the location state after successful submission
+                navigate('.', { replace: true });
+            } else {
+                setApplicationStatus({
+                    type: 'error',
+                    message: 'Failed to submit application. Please try again.'
+                });
+            }
+        } catch (error) {
+            setApplicationStatus({
+                type: 'error',
+                message: error.message || 'An error occurred during submission'
+            });
+        }
+    };
+
+    // Add status message display
+    const renderStatusMessage = () => {
+        if (!applicationStatus) return null;
+
+        return (
+            <Box
+                sx={{
+                    position: 'fixed',
+                    top: 20,
+                    right: 20,
+                    zIndex: 1000,
+                    padding: 2,
+                    borderRadius: 1,
+                    backgroundColor: applicationStatus.type === 'success' ? '#4caf50' : '#f44336',
+                    color: 'white',
+                }}
+            >
+                <Typography>{applicationStatus.message}</Typography>
+            </Box>
+        );
+    };
 
     const handleCardClick = (startup) => {
         navigate(`/startup/${encodeURIComponent(startup.name)}`);
     };
 
+    // Add new state for startup funding
+    const [startupApplications, setStartupApplications] = useState([]);
+
+    // Handle incoming startup application
+    useEffect(() => {
+        if (location.state?.fromStartupFunding && location.state?.newApplication) {
+            const newApplication = location.state.newApplication;
+            setStartupApplications(prev => [...prev, newApplication]);
+        }
+    }, [location]);
+
+    // Add this section to your existing render method
+    const renderStartupFundingSection = () => (
+        <Box sx={{ mt: 4, mb: 6 }}>
+            <Typography 
+                variant="h4" 
+                sx={{
+                    fontWeight: 600,
+                    color: '#8B1EA7',
+                    display: 'flex',
+                    alignItems: 'center',
+                    mb: 3,
+                    '&::before': {
+                        content: '""',
+                        width: '4px',
+                        height: '24px',
+                        backgroundColor: '#D6168B',
+                        marginRight: '12px',
+                        borderRadius: '2px',
+                    }
+                }}
+            >
+                Startup Funding Applications
+            </Typography>
+
+            {startupApplications.length > 0 ? (
+                <Grid container spacing={3}>
+                    {startupApplications.map((application) => (
+                        <Grid item xs={12} md={6} lg={4} key={application.id}>
+                            <Card sx={{ 
+                                p: 2,
+                                transition: 'all 0.3s ease',
+                                '&:hover': {
+                                    transform: 'translateY(-4px)',
+                                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+                                }
+                            }}>
+                                <Typography variant="h6" gutterBottom>
+                                    {application.startupName}
+                                </Typography>
+                                <Typography color="textSecondary" gutterBottom>
+                                    {new Date(application.applicationDate).toLocaleDateString()}
+                                </Typography>
+                                <Box sx={{ mt: 2 }}>
+                                    <Typography>
+                                        Amount: ${application.requestedAmount.toLocaleString()}
+                                    </Typography>
+                                    <Typography>
+                                        Purpose: {application.purpose}
+                                    </Typography>
+                                    <Typography>
+                                        Industry: {application.industry}
+                                    </Typography>
+                                </Box>
+                            </Card>
+                        </Grid>
+                    ))}
+                </Grid>
+            ) : (
+                <Typography 
+                    sx={{ 
+                        color: '#666',
+                        fontStyle: 'italic',
+                        mt: 2 
+                    }}
+                >
+                    No startup funding applications yet.
+                </Typography>
+            )}
+        </Box>
+    );
+
     return (
         <Box>
+            {renderStatusMessage()}
             {/* Banner Section */}
             <Box
                 sx={{
@@ -1737,6 +1912,9 @@ const StartupFunding = () => {
                     ))}
                 </Grid>
             </Box>
+
+            {/* Add the startup funding section */}
+            {renderStartupFundingSection()}
         </Box>
     );
 };

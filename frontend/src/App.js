@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Home from './pages/Home';
+import Home from './pages/home/Home';
 import Startups from './pages/Startups';
 import Investors from './pages/Investors';
 import Innovations from './pages/Innovations';
@@ -28,6 +28,8 @@ import Research_inno from './Research_inno';
 import MentorProfilePage from './pages/mentor/mentor_profile_page'; // Import MentorProfilePage
 import MarketAnalysis from './MarketAnalysis';
 import GovernmentProfilePage from './pages/government_bodies/gb_profile_page';
+import { IPRProvider } from './pages/ipr-professional/IPRContent';
+
 
 function App() {
   return (

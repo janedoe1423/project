@@ -1,95 +1,401 @@
-/* Timeline styling */
-.startup_funding_timeline {
-    position: relative;
-    padding: 20px 0;
+/* Container Styling */
+.startup_funding_container {
+    background: #f8fafc;
+    min-height: 100vh;
+    padding: 2rem;
 }
 
-.startup_funding_timeline-item {
-    display: flex;
-    margin-bottom: 20px;
-    position: relative;
+.startup_funding_header {
+    margin-bottom: 2rem;
 }
 
-.startup_funding_timeline-item::before {
-    content: '';
-    position: absolute;
-    left: 120px;
-    top: 50%;
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    border: 3px solid #8884d8;
-    border-radius: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
+.startup_funding_header h2 {
+    color: #1f2937;
+    font-weight: 600;
 }
 
-.startup_funding_timeline-item::after {
-    content: '';
-    position: absolute;
-    left: 130px;
-    top: 50%;
-    width: 50px;
-    height: 2px;
-    background: #8884d8;
-}
-
-.startup_funding_timeline-date {
-    width: 120px;
-    padding-right: 20px;
-    text-align: right;
-    font-weight: 500;
-    color: #666;
-}
-
-.startup_funding_timeline-content {
-    flex: 1;
-    padding-left: 70px;
-    padding-top: 3px;
-}
-
-/* Card styling */
+/* Card Styling */
 .startup_funding_card {
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
+    border: none;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .startup_funding_card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Badge styling */
-.startup_funding_badge {
-    display: inline-flex;
+.startup_funding_card .card-body {
+    padding: 1.5rem;
+}
+
+/* Badge Styling */
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 500;
+    display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 6px 10px;
+    gap: 0.5rem;
 }
 
-/* Modal styling */
-.startup_funding_modal-body table {
+.badge svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Modal Core Styling */
+.modal-backdrop {
+    display: none !important;
+    z-index: 9998 !important;
+}
+
+.startup_funding_modal {
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(5px) !important;
+    animation: modalFadeIn 0.3s ease-out;
+    z-index: 9999 !important;
+}
+
+.startup_funding_modal .modal-dialog {
+    position: fixed !important;
+    left: 2.5% !important;
+    top: 2.5% !important;
+    width: 95% !important;
+    height: 95% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    transform: none !important;
+    z-index: 10000 !important;
+}
+
+.startup_funding_modal .modal-content {
+    position: relative !important;
+    z-index: 10001 !important;
+    height: 100% !important;
+    width: 100% !important;
+    max-height: 95vh !important;
+    margin: auto;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.startup_funding_modal .modal-body {
+    height: calc(95vh - 140px) !important;
+    max-height: none !important;
+    padding: 2rem;
+    overflow-y: auto;
+    background: #f8fafc;
+}
+
+/* Enhanced Modal Animations */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(5px);
+    }
+}
+
+@keyframes modalScaleIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Modal Header - More Attractive */
+.startup_funding_modal .modal-header {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    border-radius: 20px 20px 0 0;
+    padding: 1.75rem 2rem;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.startup_funding_modal .modal-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+}
+
+.startup_funding_modal .modal-title {
+    font-size: 2rem !important;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Detail Section Enhancement */
+.startup_funding_modal .detail-section {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 2rem !important;
+    margin-bottom: 2rem !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    animation: sectionFadeIn 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes sectionFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Form Controls Enhancement */
+.startup_funding_modal .form-control,
+.startup_funding_modal .form-select {
+    font-size: 1.1rem !important;
+    padding: 1rem 1.25rem !important;
+    border-radius: 12px;
+    border: 2px solid #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.startup_funding_modal .form-control:focus,
+.startup_funding_modal .form-select:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Form Controls - Enhanced */
+.startup_funding_modal .form-label {
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* File Upload Button */
+.startup_funding_modal .form-control::-webkit-file-upload-button {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Modal Footer */
+.startup_funding_modal .modal-footer {
+    border-top: 1px solid #e5e7eb;
+    padding: 1.5rem 2rem;
+    background: #ffffff;
+    border-radius: 0 0 20px 20px;
+}
+
+/* Buttons in Footer */
+.startup_funding_modal .modal-footer .btn {
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.startup_funding_modal .modal-footer .btn-primary {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    border: none;
+}
+
+.startup_funding_modal .modal-footer .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(79, 70, 229, 0.2);
+}
+
+.startup_funding_modal .modal-footer .btn-secondary {
+    background: #ffffff;
+    border: 1.5px solid #e5e7eb;
+    color: #4b5563;
+}
+
+.startup_funding_modal .modal-footer .btn-secondary:hover {
+    background: #f8fafc;
+    border-color: #d1d5db;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1800px) {
+    .startup_funding_modal .modal-dialog {
+        width: 95% !important;
+        height: 95vh !important;
+        max-height: 95vh !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .startup_funding_modal .modal-dialog {
+        left: 1% !important;
+        top: 1% !important;
+        width: 98% !important;
+        height: 98% !important;
+    }
+    
+    .startup_funding_modal .detail-section {
+        padding: 1.5rem !important;
+    }
+}
+
+/* Chart Container */
+.chart-container {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+    height: 600px !important;
+    width: 100% !important;
+}
+
+/* Team Grid */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.team-card {
+    background: #f8fafc;
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.team-member-name {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+}
+
+.team-member-role {
+    color: #4f46e5;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.team-member-experience {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+/* Button Styling */
+.startup_funding_new-button {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.startup_funding_new-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(99, 102, 241, 0.2);
+}
+
+/* Close Button */
+.modal-header .btn-close {
+    color: white;
+    opacity: 0.8;
+    padding: 1rem;
+    margin: -1rem -1rem -1rem auto;
+}
+
+.modal-header .btn-close:hover {
+    opacity: 1;
+}
+
+/* Chart Animations */
+.recharts-wrapper {
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+    animation-delay: 0.3s;
+}
+
+/* Form Styling */
+.startup_funding_modal .form-label {
+    font-weight: 500;
+    color: #374151;
+}
+
+.startup_funding_modal .form-control,
+.startup_funding_modal .form-select {
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    padding: 0.625rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.startup_funding_modal .form-control:focus,
+.startup_funding_modal .form-select:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.startup_funding_modal .form-control::placeholder {
+    color: #9ca3af;
+}
+
+.startup_funding_modal .form-control::-webkit-file-upload-button {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.startup_funding_modal .detail-section {
+    margin-bottom: 2rem;
+}
+
+.startup_funding_modal .detail-section:last-child {
     margin-bottom: 0;
 }
 
-.startup_funding_modal-body td:first-child {
-    font-weight: 500;
-    width: 40%;
+/* Form Validation Styling */
+.startup_funding_modal .form-control.is-invalid {
+    border-color: #dc3545;
+    background-image: none;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .startup_funding_timeline-item::before {
-        left: 90px;
-    }
-    
-    .startup_funding_timeline-item::after {
-        left: 100px;
-    }
-    
-    .startup_funding_timeline-date {
-        width: 90px;
-    }
-    
-    .startup_funding_timeline-content {
-        padding-left: 60px;
-    }
+.startup_funding_modal .form-control.is-valid {
+    border-color: #198754;
+    background-image: none;
 }
