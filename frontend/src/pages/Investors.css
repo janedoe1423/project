@@ -5,20 +5,20 @@
 @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
 
 /*! tailwindcss v3.4.11 | MIT License | https://tailwindcss.com*/
-*,
-:after,
-:before {
+#webcrumbs-investors *,
+#webcrumbs-investors :after,
+#webcrumbs-investors :before {
     border: 0 solid #e5e7eb;
     box-sizing: border-box;
 }
 
-:after,
-:before {
+#webcrumbs-investors :after,
+#webcrumbs-investors :before {
     --tw-content: "";
 }
 
-:host,
-html {
+#webcrumbs-investors :host,
+#webcrumbs-investors html {
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
     font-family:
@@ -37,45 +37,45 @@ html {
     -webkit-tap-highlight-color: transparent;
 }
 
-body {
+#webcrumbs-investors body {
     line-height: inherit;
     margin: 0;
 }
 
-hr {
+#webcrumbs-investors hr {
     border-top-width: 1px;
     color: inherit;
     height: 0;
 }
 
-abbr:where([title]) {
+#webcrumbs-investors abbr:where([title]) {
     text-decoration: underline dotted;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+#webcrumbs-investors h1,
+#webcrumbs-investors h2,
+#webcrumbs-investors h3,
+#webcrumbs-investors h4,
+#webcrumbs-investors h5,
+#webcrumbs-investors h6 {
     font-size: inherit;
     font-weight: inherit;
 }
 
-a {
+#webcrumbs-investors a {
     color: inherit;
     text-decoration: inherit;
 }
 
-b,
-strong {
+#webcrumbs-investors b,
+#webcrumbs-investors strong {
     font-weight: bolder;
 }
 
-code,
-kbd,
-pre,
-samp {
+#webcrumbs-investors code,
+#webcrumbs-investors kbd,
+#webcrumbs-investors pre,
+#webcrumbs-investors samp {
     font-family:
         ui-monospace,
         SFMono-Regular,
@@ -90,37 +90,37 @@ samp {
     font-variation-settings: normal;
 }
 
-small {
+#webcrumbs-investors small {
     font-size: 80%;
 }
 
-sub,
-sup {
+#webcrumbs-investors sub,
+#webcrumbs-investors sup {
     font-size: 75%;
     line-height: 0;
     position: relative;
     vertical-align: baseline;
 }
 
-sub {
+#webcrumbs-investors sub {
     bottom: -0.25em;
 }
 
-sup {
+#webcrumbs-investors sup {
     top: -0.5em;
 }
 
-table {
+#webcrumbs-investors table {
     border-collapse: collapse;
     border-color: inherit;
     text-indent: 0;
 }
 
-button,
-input,
-optgroup,
-select,
-textarea {
+#webcrumbs-investors button,
+#webcrumbs-investors input,
+#webcrumbs-investors optgroup,
+#webcrumbs-investors select,
+#webcrumbs-investors textarea {
     color: inherit;
     font-family: inherit;
     font-feature-settings: inherit;
@@ -133,136 +133,136 @@ textarea {
     padding: 0;
 }
 
-button,
-select {
+#webcrumbs-investors button,
+#webcrumbs-investors select {
     text-transform: none;
 }
 
-button,
-input:where([type="button"]),
-input:where([type="reset"]),
-input:where([type="submit"]) {
+#webcrumbs-investors button,
+#webcrumbs-investors input:where([type="button"]),
+#webcrumbs-investors input:where([type="reset"]),
+#webcrumbs-investors input:where([type="submit"]) {
     -webkit-appearance: button;
     background-color: transparent;
     background-image: none;
 }
 
-:-moz-focusring {
+#webcrumbs-investors :-moz-focusring {
     outline: auto;
 }
 
-:-moz-ui-invalid {
+#webcrumbs-investors :-moz-ui-invalid {
     box-shadow: none;
 }
 
-progress {
+#webcrumbs-investors progress {
     vertical-align: baseline;
 }
 
-::-webkit-inner-spin-button,
-::-webkit-outer-spin-button {
+#webcrumbs-investors ::-webkit-inner-spin-button,
+#webcrumbs-investors ::-webkit-outer-spin-button {
     height: auto;
 }
 
-[type="search"] {
+#webcrumbs-investors [type="search"] {
     -webkit-appearance: textfield;
     outline-offset: -2px;
 }
 
-::-webkit-search-decoration {
+#webcrumbs-investors ::-webkit-search-decoration {
     -webkit-appearance: none;
 }
 
-::-webkit-file-upload-button {
+#webcrumbs-investors ::-webkit-file-upload-button {
     -webkit-appearance: button;
     font: inherit;
 }
 
-summary {
+#webcrumbs-investors summary {
     display: list-item;
 }
 
-blockquote,
-dd,
-dl,
-figure,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-p,
-pre {
+#webcrumbs-investors blockquote,
+#webcrumbs-investors dd,
+#webcrumbs-investors dl,
+#webcrumbs-investors figure,
+#webcrumbs-investors h1,
+#webcrumbs-investors h2,
+#webcrumbs-investors h3,
+#webcrumbs-investors h4,
+#webcrumbs-investors h5,
+#webcrumbs-investors h6,
+#webcrumbs-investors hr,
+#webcrumbs-investors p,
+#webcrumbs-investors pre {
     margin: 0;
 }
 
-fieldset {
+#webcrumbs-investors fieldset {
     margin: 0;
 }
 
-fieldset,
-legend {
+#webcrumbs-investors fieldset,
+#webcrumbs-investors legend {
     padding: 0;
 }
 
-menu,
-ol,
-ul {
+#webcrumbs-investors menu,
+#webcrumbs-investors ol,
+#webcrumbs-investors ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-dialog {
+#webcrumbs-investors dialog {
     padding: 0;
 }
 
-textarea {
+#webcrumbs-investors textarea {
     resize: vertical;
 }
 
-input::placeholder,
-textarea::placeholder {
+#webcrumbs-investors input::placeholder,
+#webcrumbs-investors textarea::placeholder {
     color: #9ca3af;
     opacity: 1;
 }
 
-[role="button"],
-button {
+#webcrumbs-investors [role="button"],
+#webcrumbs-investors button {
     cursor: pointer;
 }
 
-:disabled {
+#webcrumbs-investors :disabled {
     cursor: default;
 }
 
-audio,
-canvas,
-embed,
-iframe,
-img,
-object,
-svg,
-video {
+#webcrumbs-investors audio,
+#webcrumbs-investors canvas,
+#webcrumbs-investors embed,
+#webcrumbs-investors iframe,
+#webcrumbs-investors img,
+#webcrumbs-investors object,
+#webcrumbs-investors svg,
+#webcrumbs-investors video {
     display: block;
     vertical-align: middle;
 }
 
-img,
-video {
+#webcrumbs-investors img,
+#webcrumbs-investors video {
     height: auto;
     max-width: 100%;
 }
 
-[hidden] {
+#webcrumbs-investors [hidden] {
     display: none;
 }
 
-*,
-:after,
-:before {
+#webcrumbs-investors *,
+#webcrumbs-investors :after,
+#webcrumbs-investors :before {
     --tw-border-spacing-x: 0;
     --tw-border-spacing-y: 0;
     --tw-translate-x: 0;
@@ -316,7 +316,7 @@ video {
     --tw-contain-style: ;
 }
 
-::backdrop {
+#webcrumbs-investors ::backdrop {
     --tw-border-spacing-x: 0;
     --tw-border-spacing-y: 0;
     --tw-translate-x: 0;

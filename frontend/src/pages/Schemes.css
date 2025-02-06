@@ -5,20 +5,20 @@
 @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
 
 /*! tailwindcss v3.4.11 | MIT License | https://tailwindcss.com*/
-*,
-:after,
-:before {
+#webcrumbs-schemes *,
+#webcrumbs-schemes :after,
+#webcrumbs-schemes :before {
   border: 0 solid #e5e7eb;
   box-sizing: border-box;
 }
 
-:after,
-:before {
+#webcrumbs-schemes :after,
+#webcrumbs-schemes :before {
   --tw-content: "";
 }
 
-:host,
-html {
+#webcrumbs-schemes :host,
+#webcrumbs-schemes html {
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
   font-family:
@@ -37,45 +37,45 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
-body {
+#webcrumbs-schemes body {
   line-height: inherit;
   margin: 0;
 }
 
-hr {
+#webcrumbs-schemes hr {
   border-top-width: 1px;
   color: inherit;
   height: 0;
 }
 
-abbr:where([title]) {
+#webcrumbs-schemes abbr:where([title]) {
   text-decoration: underline dotted;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+#webcrumbs-schemes h1,
+#webcrumbs-schemes h2,
+#webcrumbs-schemes h3,
+#webcrumbs-schemes h4,
+#webcrumbs-schemes h5,
+#webcrumbs-schemes h6 {
   font-size: inherit;
   font-weight: inherit;
 }
 
-a {
+#webcrumbs-schemes a {
   color: inherit;
   text-decoration: inherit;
 }
 
-b,
-strong {
+#webcrumbs-schemes b,
+#webcrumbs-schemes strong {
   font-weight: bolder;
 }
 
-code,
-kbd,
-pre,
-samp {
+#webcrumbs-schemes code,
+#webcrumbs-schemes kbd,
+#webcrumbs-schemes pre,
+#webcrumbs-schemes samp {
   font-family:
     ui-monospace,
     SFMono-Regular,
@@ -90,37 +90,37 @@ samp {
   font-variation-settings: normal;
 }
 
-small {
+#webcrumbs-schemes small {
   font-size: 80%;
 }
 
-sub,
-sup {
+#webcrumbs-schemes sub,
+#webcrumbs-schemes sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
   vertical-align: baseline;
 }
 
-sub {
+#webcrumbs-schemes sub {
   bottom: -0.25em;
 }
 
-sup {
+#webcrumbs-schemes sup {
   top: -0.5em;
 }
 
-table {
+#webcrumbs-schemes table {
   border-collapse: collapse;
   border-color: inherit;
   text-indent: 0;
 }
 
-button,
-input,
-optgroup,
-select,
-textarea {
+#webcrumbs-schemes button,
+#webcrumbs-schemes input,
+#webcrumbs-schemes optgroup,
+#webcrumbs-schemes select,
+#webcrumbs-schemes textarea {
   color: inherit;
   font-family: inherit;
   font-feature-settings: inherit;
@@ -133,136 +133,136 @@ textarea {
   padding: 0;
 }
 
-button,
-select {
+#webcrumbs-schemes button,
+#webcrumbs-schemes select {
   text-transform: none;
 }
 
-button,
-input:where([type="button"]),
-input:where([type="reset"]),
-input:where([type="submit"]) {
+#webcrumbs-schemes button,
+#webcrumbs-schemes input:where([type="button"]),
+#webcrumbs-schemes input:where([type="reset"]),
+#webcrumbs-schemes input:where([type="submit"]) {
   -webkit-appearance: button;
   background-color: transparent;
   background-image: none;
 }
 
-:-moz-focusring {
+#webcrumbs-schemes :-moz-focusring {
   outline: auto;
 }
 
-:-moz-ui-invalid {
+#webcrumbs-schemes :-moz-ui-invalid {
   box-shadow: none;
 }
 
-progress {
+#webcrumbs-schemes progress {
   vertical-align: baseline;
 }
 
-::-webkit-inner-spin-button,
-::-webkit-outer-spin-button {
+#webcrumbs-schemes ::-webkit-inner-spin-button,
+#webcrumbs-schemes ::-webkit-outer-spin-button {
   height: auto;
 }
 
-[type="search"] {
+#webcrumbs-schemes [type="search"] {
   -webkit-appearance: textfield;
   outline-offset: -2px;
 }
 
-::-webkit-search-decoration {
+#webcrumbs-schemes ::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
-::-webkit-file-upload-button {
+#webcrumbs-schemes ::-webkit-file-upload-button {
   -webkit-appearance: button;
   font: inherit;
 }
 
-summary {
+#webcrumbs-schemes summary {
   display: list-item;
 }
 
-blockquote,
-dd,
-dl,
-figure,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-p,
-pre {
+#webcrumbs-schemes blockquote,
+#webcrumbs-schemes dd,
+#webcrumbs-schemes dl,
+#webcrumbs-schemes figure,
+#webcrumbs-schemes h1,
+#webcrumbs-schemes h2,
+#webcrumbs-schemes h3,
+#webcrumbs-schemes h4,
+#webcrumbs-schemes h5,
+#webcrumbs-schemes h6,
+#webcrumbs-schemes hr,
+#webcrumbs-schemes p,
+#webcrumbs-schemes pre {
   margin: 0;
 }
 
-fieldset {
+#webcrumbs-schemes fieldset {
   margin: 0;
 }
 
-fieldset,
-legend {
+#webcrumbs-schemes fieldset,
+#webcrumbs-schemes legend {
   padding: 0;
 }
 
-menu,
-ol,
-ul {
+#webcrumbs-schemes menu,
+#webcrumbs-schemes ol,
+#webcrumbs-schemes ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-dialog {
+#webcrumbs-schemes dialog {
   padding: 0;
 }
 
-textarea {
+#webcrumbs-schemes textarea {
   resize: vertical;
 }
 
-input::placeholder,
-textarea::placeholder {
+#webcrumbs-schemes input::placeholder,
+#webcrumbs-schemes textarea::placeholder {
   color: #9ca3af;
   opacity: 1;
 }
 
-[role="button"],
-button {
+#webcrumbs-schemes [role="button"],
+#webcrumbs-schemes button {
   cursor: pointer;
 }
 
-:disabled {
+#webcrumbs-schemes :disabled {
   cursor: default;
 }
 
-audio,
-canvas,
-embed,
-iframe,
-img,
-object,
-svg,
-video {
+#webcrumbs-schemes audio,
+#webcrumbs-schemes canvas,
+#webcrumbs-schemes embed,
+#webcrumbs-schemes iframe,
+#webcrumbs-schemes img,
+#webcrumbs-schemes object,
+#webcrumbs-schemes svg,
+#webcrumbs-schemes video {
   display: block;
   vertical-align: middle;
 }
 
-img,
-video {
+#webcrumbs-schemes img,
+#webcrumbs-schemes video {
   height: auto;
   max-width: 100%;
 }
 
-[hidden] {
+#webcrumbs-schemes [hidden] {
   display: none;
 }
 
-*,
-:after,
-:before {
+#webcrumbs-schemes *,
+#webcrumbs-schemes :after,
+#webcrumbs-schemes :before {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -316,7 +316,7 @@ video {
   --tw-contain-style: ;
 }
 
-::backdrop {
+#webcrumbs-schemes ::backdrop {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -370,7 +370,13 @@ video {
   --tw-contain-style: ;
 }
 
-#webcrumbs-schemes .absolute {
+#webcrumbs-schemes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-xs #webcrumbs-schemes .absolute {
   position: absolute;
 }
 
@@ -433,7 +439,6 @@ video {
 }
 
 @keyframes bounce {
-
   0%,
   to {
     animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
