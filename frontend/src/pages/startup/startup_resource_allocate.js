@@ -1,11 +1,54 @@
 import React, { useState } from "react";
 import {
-  Box, TextField, Button, Card, Typography, Grid
+  Box, TextField, Button, Card, Typography, Grid,
+  InputAdornment, Fade, CircularProgress
 } from "@mui/material";
-import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie, Bar, Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  Title
+} from "chart.js";
+import './startup_resource_allocate.css'
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+// Register ChartJS components
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  Title
+);
+
+// Enhanced color palette for charts
+const chartColors = {
+  primary: [
+    'rgba(255, 99, 132, 0.8)',
+    'rgba(54, 162, 235, 0.8)',
+    'rgba(255, 206, 86, 0.8)',
+    'rgba(75, 192, 192, 0.8)',
+    'rgba(153, 102, 255, 0.8)',
+  ],
+  borders: [
+    'rgba(255, 99, 132, 1)',
+    'rgba(54, 162, 235, 1)',
+    'rgba(255, 206, 86, 1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+  ],
+  backgroundOpacity: 0.1
+};
 
 // Reference data without startup names
 const referenceData = [
@@ -20,6 +63,7 @@ const StartupResourceAllocation = () => {
   const [growthRate, setGrowthRate] = useState("");
   const [predictedAllocations, setPredictedAllocations] = useState(null);
   const [allocationHistory, setAllocationHistory] = useState([]);
+  const [isCalculating, setIsCalculating] = useState(false);
 
   // Utility function to clean and parse numbers
   const parseAmount = (amount) => {
@@ -81,8 +125,9 @@ const StartupResourceAllocation = () => {
     }
   };
 
-  const handleCalculate = () => {
+  const handleCalculate = async () => {
     try {
+      setIsCalculating(true);
       const budget = parseAmount(totalBudget);
       const growth = parseFloat(growthRate);
 
@@ -96,6 +141,8 @@ const StartupResourceAllocation = () => {
         return;
       }
 
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
       const allocations = predictAllocations(budget, growth);
       setPredictedAllocations(allocations);
 
@@ -112,6 +159,8 @@ const StartupResourceAllocation = () => {
     } catch (error) {
       console.error("Calculation error:", error);
       alert("An error occurred. Using default allocation model.");
+    } finally {
+      setIsCalculating(false);
     }
   };
 
@@ -119,87 +168,177 @@ const StartupResourceAllocation = () => {
     labels: Object.keys(allocations),
     datasets: [{
       data: Object.values(allocations),
-      backgroundColor: [
-        "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"
-      ],
+      backgroundColor: chartColors.primary,
+      borderColor: chartColors.borders,
+      borderWidth: 2,
+      hoverOffset: 4,
+    }]
+  });
+
+  const getBarChartData = (allocations) => ({
+    labels: Object.keys(allocations),
+    datasets: [{
+      label: 'Resource Allocation',
+      data: Object.values(allocations),
+      backgroundColor: chartColors.primary.map(color => color.replace('0.8', '0.7')),
+      borderColor: chartColors.borders,
+      borderWidth: 2,
+      borderRadius: 8,
+      hoverBackgroundColor: chartColors.primary,
     }]
   });
 
   return (
     <Box className="startup_resource_dashboard">
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" className="startup_resource_dashboard-title">
         Smart Budget Allocation System
       </Typography>
 
       <Grid container spacing={3}>
-        {/* Input Section */}
+        {/* Enhanced Input Section */}
         <Grid item xs={12} md={4}>
-          <Card sx={{ p: 3 }}>
-            <Typography variant="h6" gutterBottom>
-              Enter Details
+          <Card className="startup_resource_input-card">
+            <Typography variant="h6" gutterBottom sx={{ fontWeight: 600 }}>
+              Budget Details
             </Typography>
             
             <TextField
               fullWidth
-              label="Total Budget (₹)"
+              label="Total Budget"
               value={totalBudget}
               onChange={(e) => setTotalBudget(e.target.value)}
-              sx={{ mb: 2 }}
+              sx={{
+                mb: 3,
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '12px',
+                }
+              }}
+              InputProps={{
+                startAdornment: <InputAdornment position="start">₹</InputAdornment>,
+              }}
             />
 
             <TextField
               fullWidth
-              label="Expected Growth Rate (%)"
+              label="Expected Growth Rate"
               value={growthRate}
               onChange={(e) => setGrowthRate(e.target.value)}
-              sx={{ mb: 2 }}
+              sx={{
+                mb: 3,
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '12px',
+                }
+              }}
+              InputProps={{
+                endAdornment: <InputAdornment position="end">%</InputAdornment>,
+              }}
             />
 
             <Button 
               variant="contained"
               fullWidth
               onClick={handleCalculate}
-              disabled={!totalBudget || !growthRate}
+              disabled={!totalBudget || !growthRate || isCalculating}
+              sx={{
+                height: '48px',
+                borderRadius: '12px',
+                textTransform: 'none',
+                fontSize: '1rem',
+              }}
             >
-              Calculate Allocation
+              {isCalculating ? (
+                <CircularProgress size={24} color="inherit" />
+              ) : (
+                'Calculate Allocation'
+              )}
             </Button>
           </Card>
         </Grid>
 
-        {/* Chart Section */}
+        {/* Enhanced Chart Section */}
         <Grid item xs={12} md={8}>
-          <Card sx={{ p: 3, height: '100%' }}>
+          <Card className="startup_resource_graph-card">
             {predictedAllocations ? (
-              <>
-                <Typography variant="h6" gutterBottom>
-                  Recommended Budget Allocation
-                </Typography>
-                <Box sx={{ height: 400 }}>
-                  <Pie
-                    data={getChartData(predictedAllocations)}
-                    options={{
-                      responsive: true,
-                      maintainAspectRatio: false,
-                      plugins: {
-                        legend: { position: 'right' },
-                        tooltip: {
-                          callbacks: {
-                            label: (context) => {
-                              const value = context.raw;
-                              const percentage = ((value / parseAmount(totalBudget)) * 100).toFixed(1);
-                              return `₹${value.toLocaleString('en-IN')} (${percentage}%)`;
+              <Fade in={true} timeout={1000}>
+                <Box>
+                  <Typography variant="h6" gutterBottom sx={{ fontWeight: 600 }}>
+                    Resource Allocation Overview
+                  </Typography>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} md={6}>
+                      <Box sx={{ height: 300, mb: 2 }}>
+                        <Pie
+                          data={getChartData(predictedAllocations)}
+                          options={{
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                              legend: {
+                                position: 'bottom',
+                                labels: {
+                                  padding: 20,
+                                  usePointStyle: true,
+                                }
+                              },
+                              tooltip: {
+                                callbacks: {
+                                  label: (context) => {
+                                    const value = context.raw;
+                                    const percentage = ((value / parseAmount(totalBudget)) * 100).toFixed(1);
+                                    return `₹${value.toLocaleString('en-IN')} (${percentage}%)`;
+                                  }
+                                }
+                              }
                             }
-                          }
-                        }
-                      }
-                    }}
-                  />
+                          }}
+                        />
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Box sx={{ height: 300, mb: 2 }}>
+                        <Bar
+                          data={getBarChartData(predictedAllocations)}
+                          options={{
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                              legend: {
+                                display: false
+                              },
+                              tooltip: {
+                                callbacks: {
+                                  label: (context) => {
+                                    return `₹${context.raw.toLocaleString('en-IN')}`;
+                                  }
+                                }
+                              }
+                            },
+                            scales: {
+                              y: {
+                                beginAtZero: true,
+                                grid: {
+                                  display: false
+                                }
+                              },
+                              x: {
+                                grid: {
+                                  display: false
+                                }
+                              }
+                            }
+                          }}
+                        />
+                      </Box>
+                    </Grid>
+                  </Grid>
                 </Box>
-              </>
+              </Fade>
             ) : (
-              <Typography variant="h6" align="center">
-                Enter budget and growth rate to see recommendations
-              </Typography>
+              <Box className="startup_resource_empty-graph">
+                <Typography variant="h6" color="textSecondary">
+                  Enter budget details to see allocation recommendations
+                </Typography>
+              </Box>
             )}
           </Card>
         </Grid>
