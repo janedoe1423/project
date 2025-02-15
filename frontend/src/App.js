@@ -22,25 +22,24 @@ import StartupGujarat from './pages/Schemes and policies/StartupGUJ';
 import StartupFundDetails from "./pages/Startup_fund_details";
 import Admin_profile_page from './pages/admin/admin_profile_page';
 import InvestorProfilePage from './pages/investor/investor_profile_page';
-import StartupProfile from './Startup_profile';
-import InvestorProfile from './Investor_profile';
 import Research_inno from './Research_inno';
 import MentorProfilePage from './pages/mentor/mentor_profile_page'; // Import MentorProfilePage
-import MarketAnalysis from './MarketAnalysis';
+import MarketAnalysis from './pages/MarketAnalysis';
 import GovernmentProfilePage from './pages/government_bodies/gb_profile_page';
-import { IPRProvider } from './pages/ipr-professional/IPRContent';
+import NetworkPage from './pages/network';
 
 
 function App() {
   return (
     <Router>
+
       <Header />
       <div className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/startups" element={<Startups />} />
           <Route path="/investors" element={<Investors />} />
-          <Route path="/investor-dashboard" element={<InvestorDashboard />} /> {/* Add route for Investor Dashboard */}
+          <Route path="/investor-dashboard" element={<InvestorDashboard />} />
           <Route path="/innovations" element={<Innovations />} />
           <Route path="/research" element={<Research_inno />} />
           <Route path="/schemes" element={<Schemes />} />
@@ -56,14 +55,14 @@ function App() {
           <Route path="/startup/:name" element={<StartupFundDetails />} />
           <Route path="/admin" element={<Admin_profile_page />} />
           <Route path="/investor-profile" element={<InvestorProfilePage />}/>
-          <Route path="/startup-profile/:id" element={<StartupProfile />} />
-          <Route path="/investor/:id" element={<InvestorProfile />} />
-          <Route path="/mentor-profile" element={<MentorProfilePage />} /> {/* Add route for Mentor Profile */}
+          <Route path="/mentor-profile" element={<MentorProfilePage />} />
           <Route path="/market-analysis" element={<MarketAnalysis />} />
           <Route path="/government-profile" element={<GovernmentProfilePage />} />
+          <Route path="/network" element={<NetworkPage />} />
         </Routes>
       </div>
       <Footer />
+
     </Router>
   );
 }

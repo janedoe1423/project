@@ -23,18 +23,18 @@
     height: 100%;
 }
 
-.carousel-slide {
+.ipr-carousel-slide {
     height: 60vh;
     position: relative;
 }
 
-.carousel-slide img {
+.ipr-carousel-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.carousel-content {
+.ipr-carousel-content {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -45,13 +45,13 @@
     text-align: left;
 }
 
-.carousel-content h2 {
+.ipr-carousel-content h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     font-weight: 700;
 }
 
-.carousel-content p {
+.ipr-carousel-content p {
     font-size: 1.2rem;
     max-width: 600px;
 }
@@ -148,11 +148,11 @@
         font-size: 0.9rem;
     }
 
-    .carousel-content h2 {
+    .ipr-carousel-content h2 {
         font-size: 1.8rem;
     }
 
-    .carousel-content p {
+    .ipr-carousel-content p {
         font-size: 1rem;
     }
 }
