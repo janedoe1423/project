@@ -12,6 +12,12 @@
     box-sizing: border-box;
 }
 
+#webcrumbs-network {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #webcrumbs-network :after,
 #webcrumbs-network :before {
     --tw-content: "";
@@ -1262,4 +1268,8 @@
 
 #webcrumbs-network :is(.group:hover .group-hover\:animate-bounce) {
     animation: bounce 1s infinite;
+}
+
+#webcrumbs-network header{
+    background: none;
 }

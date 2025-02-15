@@ -10,199 +10,208 @@ const Startups = () => {
     return (
         <div id="webcrumbs-startups">
             <div className="w-[1200px] bg-gray-50">
-                <div className="relative h-[400px] overflow-hidden rounded-2xl shadow-lg">
-                    <div className="flex transition-transform duration-500 animate-carousel">
-                        <div className="min-w-full">
-                            <img src="https://images.unsplash.com/photo-1531973576160-7125cd663d86" alt="Startup 1" className="w-full h-[400px] object-cover" />
-                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/80 to-transparent p-8">
-                                <h1 className="text-4xl font-bold text-white mb-2">Discover Innovative Startups</h1>
-                                <p className="text-white/90">Connect with groundbreaking companies reshaping the future</p>
-                            </div>
+                <div className="relative h-[500px] overflow-hidden">
+                    <div className="flex animate-slide">
+                        <div className="min-w-full relative">
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c" className="w-full h-[500px] object-cover transition-transform duration-300 hover:scale-105" alt="startup" />
                         </div>
-                        <div className="min-w-full">
-                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0" alt="Startup 2" className="w-full h-[400px] object-cover" />
-                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/80 to-transparent p-8">
-                                <h1 className="text-4xl font-bold text-white mb-2">Future of Innovation</h1>
-                                <p className="text-white/90">Explore cutting-edge technologies and solutions</p>
-                            </div>
+                        <div className="min-w-full relative">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" className="w-full h-[500px] object-cover transition-transform duration-300 hover:scale-105" alt="startup" />
                         </div>
-                        <div className="min-w-full">
-                            <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786" alt="Startup 3" className="w-full h-[400px] object-cover" />
-                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/80 to-transparent p-8">
-                                <h1 className="text-4xl font-bold text-white mb-2">Transform Industries</h1>
-                                <p className="text-white/90">See how startups are revolutionizing traditional sectors</p>
-                            </div>
+                        <div className="min-w-full relative">
+                            <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b" className="w-full h-[500px] object-cover transition-transform duration-300 hover:scale-105" alt="startup" />
                         </div>
                     </div>
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                        <button className="w-2.5 h-2.5 rounded-full bg-white/60 hover:bg-white transition-colors" />
-                        <button className="w-2.5 h-2.5 rounded-full bg-white/60 hover:bg-white transition-colors" />
-                        <button className="w-2.5 h-2.5 rounded-full bg-white/60 hover:bg-white transition-colors" />
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white z-10">
+                        <h1 className="text-5xl font-bold mb-12 animate-fade-in">Discover Amazing Startups</h1>
+                        <div className="flex gap-8 justify-center items-center">
+                            <div className="text-center transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-4 rounded-xl backdrop-blur-sm">
+                                <span className="text-4xl font-bold block mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">1000+</span>
+                                <p className="text-lg opacity-80">Startups</p>
+                            </div>
+                            <div className="h-12 w-[1px] bg-white/30"></div>
+                            <div className="text-center transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-br from-purple-500/20 to-pink-500/20 p-4 rounded-xl backdrop-blur-sm">
+                                <span className="text-4xl font-bold block mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">50M+</span>
+                                <p className="text-lg opacity-80">Investment</p>
+                            </div>
+                            <div className="h-12 w-[1px] bg-white/30"></div>
+                            <div className="text-center transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-br from-pink-500/20 to-red-500/20 p-4 rounded-xl backdrop-blur-sm">
+                                <span className="text-4xl font-bold block mb-2 bg-gradient-to-r from-pink-400 to-red-400 bg-clip-text text-transparent">200+</span>
+                                <p className="text-lg opacity-80">Industries</p>
+                            </div>
+                            <div className="h-12 w-[1px] bg-white/30"></div>
+                            <div className="text-center transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-br from-red-500/20 to-orange-500/20 p-4 rounded-xl backdrop-blur-sm">
+                                <span className="text-4xl font-bold block mb-2 bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">5000+</span>
+                                <p className="text-lg opacity-80">Employees</p>
+                            </div>
+                            <div className="h-12 w-[1px] bg-white/30"></div>
+                            <div className="text-center transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-br from-orange-500/20 to-yellow-500/20 p-4 rounded-xl backdrop-blur-sm">
+                                <span className="text-4xl font-bold block mb-2 bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">150+</span>
+                                <p className="text-lg opacity-80">Countries</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div className="mt-12 grid grid-cols-2 gap-8">
-                    <div className="rounded-2xl bg-white p-8 shadow-sm hover:shadow-md transition-shadow">
-                        <h2 className="text-xl font-semibold mb-6">Monthly Startup Growth</h2>
-                        <Chart
-                            type="area"
-                            height={240}
-                            series={[{
-                                name: 'Startups Growth',
-                                data: [30, 40, 45, 50, 49, 60, 70, 91]
-                            }]}
-                            options={{
-                                chart: {
-                                    toolbar: { show: false },
-                                },
-                                stroke: { curve: 'smooth' },
-                                fill: { type: 'gradient', gradient: { shadeIntensity: 0.6 } },
-                                xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'] }
-                            }}
-                        />
-                    </div>
-                    <div className="rounded-2xl bg-white p-8 shadow-sm hover:shadow-md transition-shadow">
-                        <h2 className="text-xl font-semibold mb-6">Industry Distribution</h2>
-                        <Chart
-                            type="donut"
-                            height={240}
-                            series={[44, 55, 13, 33]}
-                            options={{
-                                labels: ['Tech', 'Finance', 'Healthcare', 'Others'],
-                                toolbar: { show: false }
-                            }}
-                        />
-                    </div>
-                </div>
-
-                <div className="mt-12">
-                    <div className="flex items-center justify-between mb-8">
-                        <div className="flex gap-4">
-                            <details className="relative">
-                                <summary className="px-5 py-2.5 rounded-lg bg-white border border-gray-200 cursor-pointer hover:border-gray-300 transition-colors">
-                                    Industry
-                                    <span className="material-symbols-outlined align-middle ml-2 text-gray-500">expand_more</span>
-                                </summary>
-                                <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl rounded-xl p-2 z-10">
-                                    <div className="p-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">Technology</div>
-                                    <div className="p-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">Healthcare</div>
-                                    <div className="p-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">Finance</div>
-                                    <div className="p-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">E-commerce</div>
-                                    <div className="p-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">Education</div>
-                                </div>
-                            </details>
-                            <details className="relative">
-                                <summary className="px-5 py-2.5 rounded-lg bg-white border border-gray-200 cursor-pointer hover:border-gray-300 transition-colors">
-                                    Stage
-                                    <span className="material-symbols-outlined align-middle ml-2 text-gray-500">expand_more</span>
-                                </summary>
-                                <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl rounded-xl p-2 z-10">
-                                    <div className="p-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">Pre-seed</div>
-                                    <div className="p-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">Seed</div>
-                                    <div className="p-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">Series A</div>
-                                    <div className="p-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">Series B+</div>
-                                    <div className="p-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">Growth</div>
-                                </div>
-                            </details>
-                            <details className="relative">
-                                <summary className="px-5 py-2.5 rounded-lg bg-white border border-gray-200 cursor-pointer hover:border-gray-300 transition-colors">
-                                    Location
-                                    <span className="material-symbols-outlined align-middle ml-2 text-gray-500">expand_more</span>
-                                </summary>
-                                <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl rounded-xl p-2 z-10">
-                                    <div className="p-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">North America</div>
-                                    <div className="p-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">Europe</div>
-                                    <div className="p-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">Asia</div>
-                                    <div className="p-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">Other</div>
-                                </div>
-                            </details>
+                <div className="p-8">
+                    <div className="flex gap-4 mb-8">
+                        <div className="flex-1 relative">
+                            <span className="material-symbols-outlined absolute left-4 top-3 text-gray-400">search</span>
+                            <input type="text" placeholder="Search startups..." className="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all" />
                         </div>
-                        <div className="relative">
-                            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
-                            <input type="text" placeholder="Search startups..." className="w-64 pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-shadow" />
-                        </div>
+                        <details className="relative group">
+                            <summary className="list-none px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 transition-all shadow-lg hover:shadow-blue-500/25">
+                                <span className="flex items-center gap-2">
+                                    <span className="material-symbols-outlined">filter_list</span>
+                                    Filters
+                                </span>
+                            </summary>
+                            <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 p-4 z-20 animate-fade-in">
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="font-medium">Industry</label>
+                                        <select className="w-full mt-1 rounded-md border border-gray-200 p-2 hover:border-blue-500 transition-all">
+                                            <option>All Industries</option>
+                                            <option>Technology</option>
+                                            <option>Healthcare</option>
+                                            <option>Finance</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label className="font-medium">Funding Stage</label>
+                                        <select className="w-full mt-1 rounded-md border border-gray-200 p-2 hover:border-blue-500 transition-all">
+                                            <option>All Stages</option>
+                                            <option>Seed</option>
+                                            <option>Series A</option>
+                                            <option>Series B</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
                     </div>
 
                     <div className="grid grid-cols-3 gap-6">
-                        <div className="rounded-2xl bg-white border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692" alt="Startup" className="w-full h-48 object-cover" />
-                            <div className="p-8">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <img src="https://api.dicebear.com/6.x/initials/svg?seed=TF" alt="Logo" className="w-12 h-12 rounded-full shadow-sm" />
-                                    <div>
-                                        <h3 className="text-xl font-semibold">TechFlow</h3>
-                                        <p className="text-sm text-gray-500">San Francisco, CA</p>
-                                    </div>
+                        <div className="bg-gradient-to-br from-white to-blue-50 rounded-xl p-6 shadow-sm hover:shadow-xl transition-all relative">
+                            <div className="flex items-center gap-4 mb-4">
+                                <img src="https://logo.clearbit.com/stripe.com" className="w-12 h-12 rounded-lg transition-transform hover:scale-110" alt="company logo" />
+                                <div>
+                                    <h3 className="text-xl font-semibold">Stripe</h3>
+                                    <p className="text-sm text-gray-500">San Francisco, CA</p>
                                 </div>
-                                <p className="text-gray-600 mb-6">AI-powered workflow automation platform revolutionizing team productivity</p>
-                                <div className="flex items-center justify-between">
-                                    <span className="px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-medium">Series A</span>
-                                    <div className="flex items-center gap-3">
-                                        <span className="material-symbols-outlined cursor-pointer hover:scale-110 transition-transform text-gray-500 hover:text-gray-700">bookmark</span>
-                                        <span className="material-symbols-outlined cursor-pointer hover:scale-110 transition-transform text-gray-500 hover:text-gray-700">share</span>
-                                    </div>
+                            </div>
+                            <p className="text-gray-600 mb-4">Financial infrastructure for the internet</p>
+                            <div className="space-y-3 mb-4">
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-gray-500 flex items-center gap-2">
+                                        <span className="material-symbols-outlined text-sm">calendar_today</span>Founded
+                                    </span>
+                                    <span className="font-medium">2010</span>
                                 </div>
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-gray-500 flex items-center gap-2">
+                                        <span className="material-symbols-outlined text-sm">payments</span>Total Funding
+                                    </span>
+                                    <span className="font-medium">$2.2B</span>
+                                </div>
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-gray-500 flex items-center gap-2">
+                                        <span className="material-symbols-outlined text-sm">group</span>Employees
+                                    </span>
+                                    <span className="font-medium">7000+</span>
+                                </div>
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1 rounded-full text-sm shadow-sm">Fintech</span>
+                                <button className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-sm hover:shadow-blue-500/25">
+                                    <span className="material-symbols-outlined">visibility</span>
+                                    View Details
+                                </button>
                             </div>
                         </div>
 
-                        <div className="rounded-2xl bg-white border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0" alt="Startup" className="w-full h-48 object-cover" />
-                            <div className="p-8">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <img src="https://api.dicebear.com/6.x/initials/svg?seed=HS" alt="Logo" className="w-12 h-12 rounded-full shadow-sm" />
-                                    <div>
-                                        <h3 className="text-xl font-semibold">HealthSync</h3>
-                                        <p className="text-sm text-gray-500">Boston, MA</p>
-                                    </div>
+                        <div className="bg-gradient-to-br from-white to-purple-50 rounded-xl p-6 shadow-sm hover:shadow-xl transition-all relative">
+                            <div className="flex items-center gap-4 mb-4">
+                                <img src="https://logo.clearbit.com/notion.so" className="w-12 h-12 rounded-lg transition-transform hover:scale-110" alt="company logo" />
+                                <div>
+                                    <h3 className="text-xl font-semibold">Notion</h3>
+                                    <p className="text-sm text-gray-500">San Francisco, CA</p>
                                 </div>
-                                <p className="text-gray-600 mb-6">Next-generation digital health monitoring solutions for remote patient care</p>
-                                <div className="flex items-center justify-between">
-                                    <span className="px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-600 text-sm font-medium">Seed</span>
-                                    <div className="flex items-center gap-3">
-                                        <span className="material-symbols-outlined cursor-pointer hover:scale-110 transition-transform text-gray-500 hover:text-gray-700">bookmark</span>
-                                        <span className="material-symbols-outlined cursor-pointer hover:scale-110 transition-transform text-gray-500 hover:text-gray-700">share</span>
-                                    </div>
+                            </div>
+                            <p className="text-gray-600 mb-4">All-in-one workspace for notes and collaboration</p>
+                            <div className="space-y-3 mb-4">
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-gray-500 flex items-center gap-2">
+                                        <span className="material-symbols-outlined text-sm">calendar_today</span>Founded
+                                    </span>
+                                    <span className="font-medium">2016</span>
                                 </div>
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-gray-500 flex items-center gap-2">
+                                        <span className="material-symbols-outlined text-sm">payments</span>Total Funding
+                                    </span>
+                                    <span className="font-medium">$275M</span>
+                                </div>
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-gray-500 flex items-center gap-2">
+                                        <span className="material-symbols-outlined text-sm">group</span>Employees
+                                    </span>
+                                    <span className="font-medium">400+</span>
+                                </div>
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <span className="bg-gradient-to-r from-purple-500 to-purple-600 text-white px-3 py-1 rounded-full text-sm shadow-sm">Productivity</span>
+                                <button className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all shadow-sm hover:shadow-purple-500/25">
+                                    <span className="material-symbols-outlined">visibility</span>
+                                    View Details
+                                </button>
                             </div>
                         </div>
 
-                        <div className="rounded-2xl bg-white border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                            <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786" alt="Startup" className="w-full h-48 object-cover" />
-                            <div className="p-8">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <img src="https://api.dicebear.com/6.x/initials/svg?seed=FE" alt="Logo" className="w-12 h-12 rounded-full shadow-sm" />
-                                    <div>
-                                        <h3 className="text-xl font-semibold">FinEdge</h3>
-                                        <p className="text-sm text-gray-500">London, UK</p>
-                                    </div>
+                        <div className="bg-gradient-to-br from-white to-green-50 rounded-xl p-6 shadow-sm hover:shadow-xl transition-all relative">
+                            <div className="flex items-center gap-4 mb-4">
+                                <img src="https://logo.clearbit.com/vercel.com" className="w-12 h-12 rounded-lg transition-transform hover:scale-110" alt="company logo" />
+                                <div>
+                                    <h3 className="text-xl font-semibold">Vercel</h3>
+                                    <p className="text-sm text-gray-500">San Francisco, CA</p>
                                 </div>
-                                <p className="text-gray-600 mb-6">Revolutionary blockchain-based financial technology platform</p>
-                                <div className="flex items-center justify-between">
-                                    <span className="px-4 py-1.5 rounded-full bg-purple-50 text-purple-600 text-sm font-medium">Series B</span>
-                                    <div className="flex items-center gap-3">
-                                        <span className="material-symbols-outlined cursor-pointer hover:scale-110 transition-transform text-gray-500 hover:text-gray-700">bookmark</span>
-                                        <span className="material-symbols-outlined cursor-pointer hover:scale-110 transition-transform text-gray-500 hover:text-gray-700">share</span>
-                                    </div>
+                            </div>
+                            <p className="text-gray-600 mb-4">Frontend development platform</p>
+                            <div className="space-y-3 mb-4">
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-gray-500 flex items-center gap-2">
+                                        <span className="material-symbols-outlined text-sm">calendar_today</span>Founded
+                                    </span>
+                                    <span className="font-medium">2015</span>
                                 </div>
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-gray-500 flex items-center gap-2">
+                                        <span className="material-symbols-outlined text-sm">payments</span>Total Funding
+                                    </span>
+                                    <span className="font-medium">$313M</span>
+                                </div>
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-gray-500 flex items-center gap-2">
+                                        <span className="material-symbols-outlined text-sm">group</span>Employees
+                                    </span>
+                                    <span className="font-medium">400+</span>
+                                </div>
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-1 rounded-full text-sm shadow-sm">Developer Tools</span>
+                                <button className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 rounded-lg hover:from-green-600 hover:to-green-700 transition-all shadow-sm hover:shadow-green-500/25">
+                                    <span className="material-symbols-outlined">visibility</span>
+                                    View Details
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <style>{`
-    	    @keyframes carousel {
-    	      0% { transform: translateX(0); }
-    	      33.33% { transform: translateX(-100%); }
-    	      66.66% { transform: translateX(-200%); }
-    	      100% { transform: translateX(0); }
-    	    }
-    	    .animate-carousel {
-    	      animation: carousel 15s infinite;
-    	    }
-    	  `}</style>
             </div>
         </div>
     )
 }
+
+
 
 export default Startups;

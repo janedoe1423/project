@@ -1,111 +1,114 @@
 import React from "react";
-
-
-/* Don't forget to download the CSS file too 
-OR remove the following line if you're already using Tailwind */
-
 import "./Innovations.css";
 
 const Innovations = () => {
     return (
         <div id="webcrumbs-innovations">
-            <div className="w-[1200px] font-sans">
-                <div className="relative h-[500px] overflow-hidden rounded-2xl">
-                    <div className="flex transition-transform duration-[20s] animate-carousel">
-                        <div className="min-w-full relative">
-                            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa" className="w-full h-[500px] object-cover transition-transform duration-500 hover:scale-110 animate-slowPulse" alt="Innovation" />
-                            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 flex items-center justify-center backdrop-blur-sm transition-all duration-500 hover:backdrop-blur-none">
-                                <div className="text-white text-center transform transition-all duration-500 hover:translate-y-[-8px] animate-float">
-                                    <h1 className="text-7xl font-black mb-6 tracking-tight hover:scale-105 transition-transform">Future of Innovation</h1>
-                                    <p className="text-2xl font-light animate-fadeIn">Transforming ideas into reality</p>
-                                </div>
+            <div className="w-[1200px] bg-white">
+                <div className="relative h-[400px] overflow-hidden group">
+                    <div className="flex transition-transform duration-1000 ease-in-out transform hover:scale-105 h-full animate-slide">
+                        <img src="https://webcrumbs-innovations.cloud/placeholder" className="w-full h-full object-cover transition-all duration-700 hover:brightness-110" alt="Innovation" />
+                        <img src="https://images.unsplash.com/photo-1516110833967-0b5716ca1387" className="w-full h-full object-cover transition-all duration-700 hover:brightness-110" alt="Technology" />
+                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e" className="w-full h-full object-cover transition-all duration-700 hover:brightness-110" alt="Science" />
+                    </div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white z-10">
+                        <h1 className="text-6xl font-bold mb-8 animate-fade-in transition-transform duration-500 hover:scale-105">Discover Breakthrough Innovations</h1>
+                        <div className="flex gap-8 justify-center">
+                            <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl hover:scale-110 hover:bg-white/20 transition-all duration-500 cursor-pointer shadow-lg border border-white/20 hover:shadow-2xl">
+                                <span className="text-5xl font-bold transition-all duration-500 hover:text-blue-300">2000+</span>
+                                <p className="text-lg mt-2 transition-all duration-500">Innovations Listed</p>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl hover:scale-110 hover:bg-white/20 transition-all duration-500 cursor-pointer shadow-lg border border-white/20 hover:shadow-2xl">
+                                <span className="text-5xl font-bold transition-all duration-500 hover:text-blue-300">150+</span>
+                                <p className="text-lg mt-2 transition-all duration-500">Patent Pending</p>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl hover:scale-110 hover:bg-white/20 transition-all duration-500 cursor-pointer shadow-lg border border-white/20 hover:shadow-2xl">
+                                <span className="text-5xl font-bold transition-all duration-500 hover:text-blue-300">50+</span>
+                                <p className="text-lg mt-2 transition-all duration-500">Industries</p>
                             </div>
                         </div>
-                        <div className="min-w-full relative">
-                            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e" className="w-full h-[500px] object-cover transition-transform duration-500 hover:scale-110 animate-slowPulse" alt="Technology" />
-                            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 flex items-center justify-center backdrop-blur-sm transition-all duration-500 hover:backdrop-blur-none">
-                                <div className="text-white text-center transform transition-all duration-500 hover:translate-y-[-8px] animate-float">
-                                    <h1 className="text-7xl font-black mb-6 tracking-tight hover:scale-105 transition-transform">Leading Technology</h1>
-                                    <p className="text-2xl font-light animate-fadeIn">Pushing boundaries forward</p>
-                                </div>
-                            </div>
+                    </div>
+                </div>
+
+                <div className="p-12">
+                    <div className="flex gap-6 mb-12">
+                        <div className="flex-1 relative group">
+                            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-hover:text-blue-600 transition-all duration-300 group-hover:scale-110">search</span>
+                            <input type="text" placeholder="Search innovations..." className="w-full pl-12 pr-4 py-4 border-2 rounded-xl hover:border-blue-600 focus:border-blue-600 focus:ring-4 focus:ring-blue-200 transition-all duration-300 outline-none text-lg" />
                         </div>
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-4 gap-8 my-16">
-                    <div className="bg-gradient-to-br from-blue-500/90 to-violet-600/90 p-8 rounded-2xl transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 backdrop-blur-lg animate-bounce-slow">
-                        <h3 className="text-white text-4xl font-black mb-3 animate-pulse">2000+</h3>
-                        <p className="text-white/90 text-lg">Innovations Created</p>
-                    </div>
-                    <div className="bg-gradient-to-br from-emerald-500/90 to-teal-600/90 p-8 rounded-2xl transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/20 backdrop-blur-lg animate-bounce-slow delay-100">
-                        <h3 className="text-white text-4xl font-black mb-3 animate-pulse">500+</h3>
-                        <p className="text-white/90 text-lg">Active Innovators</p>
-                    </div>
-                    <div className="bg-gradient-to-br from-amber-500/90 to-red-600/90 p-8 rounded-2xl transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/20 backdrop-blur-lg animate-bounce-slow delay-200">
-                        <h3 className="text-white text-4xl font-black mb-3 animate-pulse">150+</h3>
-                        <p className="text-white/90 text-lg">Countries Reached</p>
-                    </div>
-                    <div className="bg-gradient-to-br from-fuchsia-500/90 to-rose-600/90 p-8 rounded-2xl transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-fuchsia-500/20 backdrop-blur-lg animate-bounce-slow delay-300">
-                        <h3 className="text-white text-4xl font-black mb-3 animate-pulse">$100M+</h3>
-                        <p className="text-white/90 text-lg">Funding Raised</p>
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-10 mb-16">
-                    <div className="bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-xl p-10 transition-all duration-500 hover:shadow-2xl hover:translate-y-[-8px] animate-float">
-                        <span className="material-symbols-outlined text-6xl text-blue-600 transition-all duration-500 hover:scale-110 hover:rotate-12 animate-spin-slow">rocket_launch</span>
-                        <h2 className="text-3xl font-black mt-6 mb-4 hover:scale-105 transition-transform">Latest Innovations</h2>
-                        <p className="text-gray-600 text-lg">Discover groundbreaking technologies and solutions that are shaping our future.</p>
-                        <button className="mt-8 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-500 hover:shadow-xl hover:shadow-blue-500/20 hover:translate-y-[-4px] animate-pulse">Explore Now</button>
-                    </div>
-                    <div className="bg-gradient-to-br from-white to-green-50 rounded-2xl shadow-xl p-10 transition-all duration-500 hover:shadow-2xl hover:translate-y-[-8px] animate-float delay-150">
-                        <span className="material-symbols-outlined text-6xl text-green-600 transition-all duration-500 hover:scale-110 hover:rotate-12 animate-bounce">group</span>
-                        <h2 className="text-3xl font-black mt-6 mb-4 hover:scale-105 transition-transform">Top Innovators</h2>
-                        <p className="text-gray-600 text-lg">Meet the brilliant minds behind revolutionary ideas and transformative solutions.</p>
-                        <button className="mt-8 bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-500 hover:shadow-xl hover:shadow-green-500/20 hover:translate-y-[-4px] animate-pulse">Meet Them</button>
-                    </div>
-                </div>
-
-                <div className="mb-8">
-                    <div className="flex gap-4 mb-8">
-                        <button className="px-6 py-3 rounded-full bg-gradient-to-r from-gray-100 to-gray-200 text-lg font-semibold transition-all duration-500 hover:shadow-lg hover:translate-y-[-4px] hover:scale-105 animate-pulse">All</button>
-                        <button className="px-6 py-3 rounded-full bg-gradient-to-r from-gray-100 to-gray-200 text-lg font-semibold transition-all duration-500 hover:shadow-lg hover:translate-y-[-4px] hover:scale-105 animate-pulse delay-100">Technology</button>
-                        <button className="px-6 py-3 rounded-full bg-gradient-to-r from-gray-100 to-gray-200 text-lg font-semibold transition-all duration-500 hover:shadow-lg hover:translate-y-[-4px] hover:scale-105 animate-pulse delay-200">Healthcare</button>
-                        <button className="px-6 py-3 rounded-full bg-gradient-to-r from-gray-100 to-gray-200 text-lg font-semibold transition-all duration-500 hover:shadow-lg hover:translate-y-[-4px] hover:scale-105 animate-pulse delay-300">Environment</button>
+                        <details className="relative">
+                            <summary className="list-none px-8 py-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl cursor-pointer hover:from-blue-100 hover:to-purple-100 transition-all duration-300 flex items-center gap-3 border-2 border-transparent hover:border-blue-200">
+                                Category
+                                <span className="material-symbols-outlined transition-transform duration-300">expand_more</span>
+                            </summary>
+                            <div className="absolute mt-2 bg-white shadow-xl rounded-xl p-4 min-w-[240px] z-10 border-2">
+                                <label className="block p-3 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-lg cursor-pointer transition-all duration-300">
+                                    <input type="checkbox" className="mr-3 accent-blue-600 transition-all duration-300" />
+                                    AI & Machine Learning
+                                </label>
+                                <label className="block p-3 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-lg cursor-pointer transition-all duration-300">
+                                    <input type="checkbox" className="mr-3 accent-blue-600 transition-all duration-300" />
+                                    Clean Energy
+                                </label>
+                                <label className="block p-3 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-lg cursor-pointer transition-all duration-300">
+                                    <input type="checkbox" className="mr-3 accent-blue-600 transition-all duration-300" />
+                                    Biotechnology
+                                </label>
+                            </div>
+                        </details>
                     </div>
 
                     <div className="grid grid-cols-3 gap-8">
-                        <div className="bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:translate-y-[-8px] animate-float">
-                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" className="w-full h-56 object-cover transition-transform duration-500 hover:scale-110" alt="Innovation" />
-                            <div className="p-8">
-                                <h3 className="text-2xl font-black mb-3 hover:scale-105 transition-transform">AI-Powered Healthcare</h3>
-                                <p className="text-gray-600 text-lg mb-6">Revolutionary AI system for early disease detection</p>
-                                <div className="flex items-center gap-3">
-                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80" className="w-10 h-10 rounded-full transition-transform duration-500 hover:scale-110 animate-spin-slow" alt="Innovator" />
-                                    <span className="text-lg font-medium">Sarah Johnson</span>
+                        <div className="border-2 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 group hover:border-blue-200 bg-gradient-to-br from-white to-blue-50/50 hover:-translate-y-2">
+                            <div className="flex flex-col h-full">
+                                <div className="w-full h-48 rounded-xl overflow-hidden mb-6">
+                                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" alt="Innovation" />
+                                </div>
+                                <h3 className="text-2xl font-bold mb-2 transition-all duration-300 group-hover:text-blue-600">QuantumAI Processor</h3>
+                                <p className="text-gray-600 mb-4 text-lg transition-all duration-300">By Quantum Computing Inc.</p>
+                                <div className="flex flex-wrap gap-2 mb-6">
+                                    <span className="px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full text-sm hover:from-blue-200 hover:to-purple-200 transition-all duration-300 cursor-pointer hover:scale-105">Quantum Computing</span>
+                                    <span className="px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full text-sm hover:from-blue-200 hover:to-purple-200 transition-all duration-300 cursor-pointer hover:scale-105">AI</span>
+                                </div>
+                                <p className="text-gray-600 mb-6 line-clamp-3 transition-all duration-300">Revolutionary quantum processor that combines AI algorithms with quantum computing capabilities.</p>
+                                <div className="mt-auto">
+                                    <button className="w-full py-3 border-2 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white border-transparent hover:from-blue-600 hover:to-purple-600 transition-all duration-500 text-lg font-semibold shadow-lg hover:shadow-xl hover:scale-105">Learn More</button>
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-gradient-to-br from-white to-green-50 rounded-2xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:translate-y-[-8px] animate-float delay-150">
-                            <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69" className="w-full h-56 object-cover transition-transform duration-500 hover:scale-110" alt="Innovation" />
-                            <div className="p-8">
-                                <h3 className="text-2xl font-black mb-3 hover:scale-105 transition-transform">Green Energy Solution</h3>
-                                <p className="text-gray-600 text-lg mb-6">Sustainable power generation technology</p>
-                                <div className="flex items-center gap-3">
-                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" className="w-10 h-10 rounded-full transition-transform duration-500 hover:scale-110 animate-spin-slow" alt="Innovator" />
-                                    <span className="text-lg font-medium">Michael Chen</span>
+
+                        <div className="border-2 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 group hover:border-blue-200 bg-gradient-to-br from-white to-blue-50/50 hover:-translate-y-2">
+                            <div className="flex flex-col h-full">
+                                <div className="w-full h-48 rounded-xl overflow-hidden mb-6">
+                                    <img src="https://images.unsplash.com/photo-1516110833967-0b5716ca1387" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" alt="Innovation" />
+                                </div>
+                                <h3 className="text-2xl font-bold mb-2 transition-all duration-300 group-hover:text-blue-600">SolarFlex Panels</h3>
+                                <p className="text-gray-600 mb-4 text-lg transition-all duration-300">By GreenTech Solutions</p>
+                                <div className="flex flex-wrap gap-2 mb-6">
+                                    <span className="px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full text-sm hover:from-blue-200 hover:to-purple-200 transition-all duration-300 cursor-pointer hover:scale-105">Clean Energy</span>
+                                    <span className="px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full text-sm hover:from-blue-200 hover:to-purple-200 transition-all duration-300 cursor-pointer hover:scale-105">Solar</span>
+                                </div>
+                                <p className="text-gray-600 mb-6 line-clamp-3 transition-all duration-300">Flexible solar panels with 40% higher efficiency than traditional panels.</p>
+                                <div className="mt-auto">
+                                    <button className="w-full py-3 border-2 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white border-transparent hover:from-blue-600 hover:to-purple-600 transition-all duration-500 text-lg font-semibold shadow-lg hover:shadow-xl hover:scale-105">Learn More</button>
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-gradient-to-br from-white to-purple-50 rounded-2xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:translate-y-[-8px] animate-float delay-300">
-                            <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1" className="w-full h-56 object-cover transition-transform duration-500 hover:scale-110" alt="Innovation" />
-                            <div className="p-8">
-                                <h3 className="text-2xl font-black mb-3 hover:scale-105 transition-transform">Quantum Computing</h3>
-                                <p className="text-gray-600 text-lg mb-6">Next-generation computing platform</p>
-                                <div className="flex items-center gap-3">
-                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" className="w-10 h-10 rounded-full transition-transform duration-500 hover:scale-110 animate-spin-slow" alt="Innovator" />
-                                    <span className="text-lg font-medium">Emily Zhang</span>
+
+                        <div className="border-2 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 group hover:border-blue-200 bg-gradient-to-br from-white to-blue-50/50 hover:-translate-y-2">
+                            <div className="flex flex-col h-full">
+                                <div className="w-full h-48 rounded-xl overflow-hidden mb-6">
+                                    <img src="https://webcrumbs-innovations.cloud/placeholder" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" alt="Innovation" />
+                                </div>
+                                <h3 className="text-2xl font-bold mb-2 transition-all duration-300 group-hover:text-blue-600">BioRegenX</h3>
+                                <p className="text-gray-600 mb-4 text-lg transition-all duration-300">By MediGen Labs</p>
+                                <div className="flex flex-wrap gap-2 mb-6">
+                                    <span className="px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full text-sm hover:from-blue-200 hover:to-purple-200 transition-all duration-300 cursor-pointer hover:scale-105">Biotech</span>
+                                    <span className="px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full text-sm hover:from-blue-200 hover:to-purple-200 transition-all duration-300 cursor-pointer hover:scale-105">Healthcare</span>
+                                </div>
+                                <p className="text-gray-600 mb-6 line-clamp-3 transition-all duration-300">Breakthrough tissue regeneration technology using stem cell research.</p>
+                                <div className="mt-auto">
+                                    <button className="w-full py-3 border-2 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white border-transparent hover:from-blue-600 hover:to-purple-600 transition-all duration-500 text-lg font-semibold shadow-lg hover:shadow-xl hover:scale-105">Learn More</button>
                                 </div>
                             </div>
                         </div>
@@ -115,6 +118,5 @@ const Innovations = () => {
         </div>
     )
 }
-
 
 export default Innovations;

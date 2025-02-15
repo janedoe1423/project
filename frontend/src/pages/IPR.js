@@ -11,7 +11,7 @@ import IprSupport from './ipr/ipr_support';
 import './IPR.css';
 
 const IPR = () => {
-    const [activeSection, setActiveSection] = useState('overview');
+    const [activeSection, setActiveSection] = useState('ipr-overview');
     const controls = useAnimation();
     const [ref, inView] = useInView();
 
@@ -40,11 +40,11 @@ const IPR = () => {
     ];
 
     const menuItems = [
-        { id: 'overview', label: 'Overview', icon: '📋' },
-        { id: 'resources', label: 'Resources & Knowledge Hub', icon: '📚' },
-        { id: 'tools', label: 'Tools & Calculators', icon: '🔧' },
-        { id: 'insights', label: 'IPR Insights & Data', icon: '📊' },
-        { id: 'support', label: 'Support System', icon: '💡' }
+        { id: 'ipr-overview', label: 'Overview', icon: '📋' },
+        { id: 'ipr-resources', label: 'Resources & Knowledge Hub', icon: '📚' },
+        { id: 'ipr-tools', label: 'Tools & Calculators', icon: '🔧' },
+        { id: 'ipr-insights', label: 'IPR Insights & Data', icon: '📊' },
+        { id: 'ipr-support', label: 'Support System', icon: '💡' }
     ];
 
     const fadeInUp = {
@@ -58,15 +58,15 @@ const IPR = () => {
 
     const renderContent = () => {
         switch (activeSection) {
-            case 'overview':
+            case 'ipr-overview':
                 return <IPROverview />;
-            case 'resources':
+            case 'ipr-resources':
                 return <IprResources />;
-            case 'tools':
+            case 'ipr-tools':
                 return <IprTools />;
-            case 'insights':
+            case 'ipr-insights':
                 return <IprInsights />;
-            case 'support':
+            case 'ipr-support':
                 return <IprSupport />;
             default:
                 return <IPROverview />;
@@ -86,9 +86,9 @@ const IPR = () => {
                     className="ipr-carousel"
                 >
                     {carouselImages.map((image, index) => (
-                        <div key={index} className="carousel-slide">
+                        <div key={index} className="ipr-carousel-slide">
                             <img src={image.url} alt={image.title} />
-                            <div className="carousel-content">
+                            <div className="ipr-carousel-content">
                                 <h2>{image.title}</h2>
                                 <p>{image.description}</p>
                             </div>
