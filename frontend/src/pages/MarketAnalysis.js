@@ -1,29 +1,23 @@
 import React, { useState } from "react";
-
-/* Don't forget to download the CSS file too 
-OR remove the following line if you're already using Tailwind */
-
 import "./MarketAnalysis.css";
-
-// Import the content for each page
-// Import the content for each page
-import MOverview from "./market/overview"; // Change 'Overview' to 'overview'
+import MOverview from "./market/overview";
 import MSnapshot from "./market/snapshot";
 import MInfographs from "./market/infographs";
 import MReports from "./market/reports";
 import MShowcase from "./market/showcase";
+import { FaChartLine, FaUsers, FaMoneyBillWave, FaClipboardList, FaStar } from 'react-icons/fa';
 
 const MarketAnalysis = () => {
-    const [selectedPage, setSelectedPage] = useState("Overview"); // Default page
+    const [selectedPage, setSelectedPage] = useState("Overview");
 
     const handleMenuClick = (page) => {
-        setSelectedPage(page); // Update the selected page
+        setSelectedPage(page);
     };
 
     return (
         <div id="webcrumbs-market">
             <div className="ema-container w-[1600px]">
-                <section className="ema-hero relative h-[500px] rounded-b-[40px] overflow-hidden animate-gradient-x bg-gradient-to-br from-blue-700 via-indigo-800 to-violet-900">
+                <section className="ema-hero relative h-[500px] rounded-b-[40px] overflow-hidden animate-gradient-x bg-gradient-to-br from-purple-600 via-blue-700 to-indigo-800">
                     <div className="ema-overlay-radial absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-400/30 via-transparent to-transparent"></div>
                     <div className="ema-overlay-image absolute inset-0 bg-[url('https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f')] bg-cover bg-center mix-blend-overlay opacity-30"></div>
                     <div className="ema-overlay-pattern absolute inset-0 bg-[linear-gradient(45deg,rgba(99,102,241,0.15)_25%,transparent_25%,transparent_75%,rgba(99,102,241,0.15)_75%,rgba(99,102,241,0.15))] bg-[length:12px_12px]"></div>
@@ -32,22 +26,22 @@ const MarketAnalysis = () => {
                         <p className="ema-subtitle text-xl text-white/90 max-w-3xl mx-auto font-medium mb-12 animate-fade-in-delayed">Advanced insights and real-time market intelligence platform for data-driven decision making and strategic business growth.</p>
                         <div className="ema-stats-grid grid grid-cols-5 gap-6 mt-12">
                             <div className="ema-stat-card-market bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-xl rounded-2xl p-8 hover:bg-white/20 transition-all duration-500 cursor-pointer border border-white/30 hover:border-cyan-400/50 hover:translate-y-[-8px] hover:scale-105 shadow-xl hover:shadow-cyan-500/30 group">
-                                <span className="ema-icon-market material-symbols-outlined text-4xl text-white mb-4 group-hover:text-cyan-400 transition-colors duration-300">trending_up</span>
+                                <FaChartLine className="ema-icon-market text-4xl text-white mb-4 group-hover:text-cyan-400 transition-colors duration-300" />
                                 <h3 className="ema-stat-title-market text-white text-lg font-semibold mb-2 group-hover:text-cyan-300">Market Growth</h3>
                                 <p className="ema-stat-value-market text-white text-base group-hover:text-white/90">+32.5% vs Last Quarter</p>
                             </div>
                             <div className="ema-stat-card-users bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-xl rounded-2xl p-8 hover:bg-white/20 transition-all duration-500 cursor-pointer border border-white/30 hover:border-purple-400/50 hover:translate-y-[-8px] hover:scale-105 shadow-xl hover:shadow-purple-500/30 group">
-                                <span className="ema-icon-users material-symbols-outlined text-4xl text-white mb-4 group-hover:text-purple-400 transition-colors duration-300">monitoring</span>
+                                <FaUsers className="ema-icon-users text-4xl text-white mb-4 group-hover:text-purple-400 transition-colors duration-300" />
                                 <h3 className="ema-stat-title-users text-white text-lg font-semibold mb-2 group-hover:text-purple-300">Active Users</h3>
                                 <p className="ema-stat-value-users text-white text-base group-hover:text-white/90">18.7K Daily Average</p>
                             </div>
                             <div className="ema-stat-card-revenue bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-xl rounded-2xl p-8 hover:bg-white/20 transition-all duration-500 cursor-pointer border border-white/30 hover:border-emerald-400/50 hover:translate-y-[-8px] hover:scale-105 shadow-xl hover:shadow-emerald-500/30 group">
-                                <span className="ema-icon-revenue material-symbols-outlined text-4xl text-white mb-4 group-hover:text-emerald-400 transition-colors duration-300">business_center</span>
+                                <FaMoneyBillWave className="ema-icon-revenue text-4xl text-white mb-4 group-hover:text-emerald-400 transition-colors duration-300" />
                                 <h3 className="ema-stat-title-revenue text-white text-lg font-semibold mb-2 group-hover:text-emerald-300">Revenue</h3>
                                 <p className="ema-stat-value-revenue text-white text-base group-hover:text-white/90">$3.8M This Month</p>
                             </div>
                             <div className="ema-stat-card-clients bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-xl rounded-2xl p-8 hover:bg-white/20 transition-all duration-500 cursor-pointer border border-white/30 hover:border-pink-400/50 hover:translate-y-[-8px] hover:scale-105 shadow-xl hover:shadow-pink-500/30 group">
-                                <span className="ema-icon-clients material-symbols-outlined text-4xl text-white mb-4 group-hover:text-pink-400 transition-colors duration-300">group</span>
+                                <FaStar className="ema-icon-clients text-4xl text-white mb-4 group-hover:text-pink-400 transition-colors duration-300" />
                                 <h3 className="ema-stat-title-clients text-white text-lg font-semibold mb-2 group-hover:text-pink-300">New Clients</h3>
                                 <p className="ema-stat-value-clients text-white text-base group-hover:text-white/90">+245 This Week</p>
                             </div>
@@ -102,7 +96,7 @@ const MarketAnalysis = () => {
                 {selectedPage === "Showcase" && <MShowcase />}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default MarketAnalysis;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
     FaComments, FaPhone, FaUserTie, FaClipboardList,
     FaUsers, FaRobot, FaBookReader, FaVideo,
@@ -7,6 +7,8 @@ import {
 import './ipr_support.css';
 
 const IprSupport = () => {
+    const [showBooking, setShowBooking] = useState(false);
+
     const supportFeatures = [
         
         {
@@ -89,6 +91,7 @@ const IprSupport = () => {
                         <button 
                             className="ipr-support-button"
                             style={{backgroundColor: feature.color}}
+                            onClick={feature.onClick}
                         >
                             {feature.action}
                         </button>

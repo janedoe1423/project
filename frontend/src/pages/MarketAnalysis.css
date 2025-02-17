@@ -878,3 +878,51 @@ body {
 #webcrumbs-market :is(.group:hover .group-hover\:text-white\/90) {
     color: hsla(0, 0%, 100%, 0.9);
 }
+
+#webcrumbs-market .ema-hero {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#webcrumbs-market .ema-stat-card-market,
+#webcrumbs-market .ema-stat-card-users,
+#webcrumbs-market .ema-stat-card-revenue,
+#webcrumbs-market .ema-stat-card-clients,
+#webcrumbs-market .ema-stat-card-products {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#webcrumbs-market .ema-stat-card-market:hover,
+#webcrumbs-market .ema-stat-card-users:hover,
+#webcrumbs-market .ema-stat-card-revenue:hover,
+#webcrumbs-market .ema-stat-card-clients:hover,
+#webcrumbs-market .ema-stat-card-products:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+#webcrumbs-market .ema-nav-link-overview:hover,
+#webcrumbs-market .ema-nav-link-snapshot:hover,
+#webcrumbs-market .ema-nav-link-infographs:hover,
+#webcrumbs-market .ema-nav-link-reports:hover,
+#webcrumbs-market .ema-nav-link-showcase:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s;
+}
+
+/* Additional styles for better visuals */
+#webcrumbs-market .bg-gradient-to-br {
+    background-image: linear-gradient(to bottom right, #6ee7b7, #3b82f6);
+}
+
+#webcrumbs-market .text-white {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
