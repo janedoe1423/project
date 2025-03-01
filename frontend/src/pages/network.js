@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 /* Don't forget to download the CSS file too 
@@ -9,14 +10,14 @@ import "./network.css";
 const NetworkPage = () => {
 	return (
 		<div id="webcrumbs-network">
-			<div className="w-[1400px] bg-gradient-to-br from-slate-50 via-white to-blue-50 rounded-2xl p-12 shadow-xl">
-				<header className="text-center mb-16">
-					<h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">Connect with Your Network</h1>
-					<p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">Discover opportunities, build relationships, and grow your business with our diverse network of professionals and organizations.</p>
+			<div className="max-w-[1400px] w-full mx-auto p-4 md:p-8 lg:p-12 bg-gradient-to-br from-slate-50 via-white to-blue-50 rounded-2xl shadow-xl">
+				<header className="text-center mb-8 md:mb-12 lg:mb-16">
+					<h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">Connect with Your Network</h1>
+					<p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">Discover opportunities, build relationships, and grow your business with our diverse network of professionals and organizations.</p>
 				</header>
 
-				<div className="grid grid-cols-3 gap-8 mb-12">
-					<div className="group bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-50 rounded-xl p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-blue-200 hover:-translate-y-2 hover:rotate-1">
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 mb-8 md:mb-12">
+					<div className="group bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-50 rounded-xl p-6 md:p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-blue-200 hover:-translate-y-2 hover:rotate-1">
 						<div className="bg-gradient-to-br from-blue-400 via-blue-500 to-indigo-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
 							<span className="material-symbols-outlined text-3xl text-white">rocket_launch</span>
 						</div>
@@ -28,7 +29,7 @@ const NetworkPage = () => {
 							<li className="flex items-center"><span className="material-symbols-outlined mr-2 text-blue-500">check_circle</span>Resource library</li>
 						</ul>
 						<div className="flex items-center text-blue-600 group-hover:translate-x-3 transition-all duration-300">
-							<span className="font-medium bg-blue-100 px-4 py-2 rounded-full hover:bg-blue-200 transition-colors">Explore Startups</span>
+							<Link to="/startups" className="font-medium bg-blue-100 px-4 py-2 rounded-full hover:bg-blue-200 transition-colors">Explore Startups</Link>
 							<span className="material-symbols-outlined ml-2 text-sm group-hover:animate-bounce">arrow_forward</span>
 						</div>
 						<div className="mt-6 pt-6 border-t border-blue-200 flex items-center justify-between">
@@ -37,7 +38,7 @@ const NetworkPage = () => {
 						</div>
 					</div>
 
-					<div className="group bg-gradient-to-br from-emerald-50 via-green-100 to-teal-50 rounded-xl p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-green-200 hover:-translate-y-2 hover:rotate-1">
+					<div className="group bg-gradient-to-br from-emerald-50 via-green-100 to-teal-50 rounded-xl p-6 md:p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-green-200 hover:-translate-y-2 hover:rotate-1">
 						<div className="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
 							<span className="material-symbols-outlined text-3xl text-white">payments</span>
 						</div>
@@ -49,7 +50,7 @@ const NetworkPage = () => {
 							<li className="flex items-center"><span className="material-symbols-outlined mr-2 text-green-500">check_circle</span>Deal flow access</li>
 						</ul>
 						<div className="flex items-center text-green-600 group-hover:translate-x-3 transition-all duration-300">
-							<span className="font-medium bg-green-100 px-4 py-2 rounded-full hover:bg-green-200 transition-colors">Meet Investors</span>
+							<Link to="/investors" className="font-medium bg-green-100 px-4 py-2 rounded-full hover:bg-green-200 transition-colors">Meet Investors</Link>
 							<span className="material-symbols-outlined ml-2 text-sm group-hover:animate-bounce">arrow_forward</span>
 						</div>
 						<div className="mt-6 pt-6 border-t border-green-200 flex items-center justify-between">
@@ -58,7 +59,7 @@ const NetworkPage = () => {
 						</div>
 					</div>
 
-					<div className="group bg-gradient-to-br from-purple-50 via-violet-100 to-fuchsia-50 rounded-xl p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-purple-200 hover:-translate-y-2 hover:rotate-1">
+					<div className="group bg-gradient-to-br from-purple-50 via-violet-100 to-fuchsia-50 rounded-xl p-6 md:p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-purple-200 hover:-translate-y-2 hover:rotate-1">
 						<div className="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
 							<span className="material-symbols-outlined text-3xl text-white">lightbulb</span>
 						</div>
@@ -70,7 +71,7 @@ const NetworkPage = () => {
 							<li className="flex items-center"><span className="material-symbols-outlined mr-2 text-purple-500">check_circle</span>Innovation labs</li>
 						</ul>
 						<div className="flex items-center text-purple-600 group-hover:translate-x-3 transition-all duration-300">
-							<span className="font-medium bg-purple-100 px-4 py-2 rounded-full hover:bg-purple-200 transition-colors">Find Innovators</span>
+							<Link to="/innovations" className="font-medium bg-purple-100 px-4 py-2 rounded-full hover:bg-purple-200 transition-colors">Find Innovators</Link>
 							<span className="material-symbols-outlined ml-2 text-sm group-hover:animate-bounce">arrow_forward</span>
 						</div>
 						<div className="mt-6 pt-6 border-t border-purple-200 flex items-center justify-between">
@@ -79,7 +80,7 @@ const NetworkPage = () => {
 						</div>
 					</div>
 
-					<div className="group bg-gradient-to-br from-amber-50 via-orange-100 to-yellow-50 rounded-xl p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-orange-200 hover:-translate-y-2 hover:rotate-1">
+					<div className="group bg-gradient-to-br from-amber-50 via-orange-100 to-yellow-50 rounded-xl p-6 md:p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-orange-200 hover:-translate-y-2 hover:rotate-1">
 						<div className="bg-gradient-to-br from-amber-400 via-orange-500 to-yellow-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
 							<span className="material-symbols-outlined text-3xl text-white">school</span>
 						</div>
@@ -91,7 +92,7 @@ const NetworkPage = () => {
 							<li className="flex items-center"><span className="material-symbols-outlined mr-2 text-orange-500">check_circle</span>Expert insights</li>
 						</ul>
 						<div className="flex items-center text-orange-600 group-hover:translate-x-3 transition-all duration-300">
-							<span className="font-medium bg-orange-100 px-4 py-2 rounded-full hover:bg-orange-200 transition-colors">Find Mentors</span>
+							<Link to="/mentor-profile" className="font-medium bg-orange-100 px-4 py-2 rounded-full hover:bg-orange-200 transition-colors">Find Mentors</Link>
 							<span className="material-symbols-outlined ml-2 text-sm group-hover:animate-bounce">arrow_forward</span>
 						</div>
 						<div className="mt-6 pt-6 border-t border-orange-200 flex items-center justify-between">
@@ -100,7 +101,7 @@ const NetworkPage = () => {
 						</div>
 					</div>
 
-					<div className="group bg-gradient-to-br from-cyan-50 via-indigo-100 to-blue-50 rounded-xl p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-indigo-200 hover:-translate-y-2 hover:rotate-1">
+					<div className="group bg-gradient-to-br from-cyan-50 via-indigo-100 to-blue-50 rounded-xl p-6 md:p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-indigo-200 hover:-translate-y-2 hover:rotate-1">
 						<div className="bg-gradient-to-br from-cyan-400 via-indigo-500 to-blue-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
 							<span className="material-symbols-outlined text-3xl text-white">corporate_fare</span>
 						</div>
@@ -112,7 +113,7 @@ const NetworkPage = () => {
 							<li className="flex items-center"><span className="material-symbols-outlined mr-2 text-indigo-500">check_circle</span>Strategic alliances</li>
 						</ul>
 						<div className="flex items-center text-indigo-600 group-hover:translate-x-3 transition-all duration-300">
-							<span className="font-medium bg-indigo-100 px-4 py-2 rounded-full hover:bg-indigo-200 transition-colors">View Corporations</span>
+							<Link to="/research" className="font-medium bg-indigo-100 px-4 py-2 rounded-full hover:bg-indigo-200 transition-colors">View Research</Link>
 							<span className="material-symbols-outlined ml-2 text-sm group-hover:animate-bounce">arrow_forward</span>
 						</div>
 						<div className="mt-6 pt-6 border-t border-indigo-200 flex items-center justify-between">
@@ -121,7 +122,7 @@ const NetworkPage = () => {
 						</div>
 					</div>
 
-					<div className="group bg-gradient-to-br from-rose-50 via-pink-100 to-red-50 rounded-xl p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-pink-200 hover:-translate-y-2 hover:rotate-1">
+					<div className="group bg-gradient-to-br from-rose-50 via-pink-100 to-red-50 rounded-xl p-6 md:p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-pink-200 hover:-translate-y-2 hover:rotate-1">
 						<div className="bg-gradient-to-br from-rose-400 via-pink-500 to-red-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
 							<span className="material-symbols-outlined text-3xl text-white">hub</span>
 						</div>
@@ -133,7 +134,7 @@ const NetworkPage = () => {
 							<li className="flex items-center"><span className="material-symbols-outlined mr-2 text-pink-500">check_circle</span>Demo days</li>
 						</ul>
 						<div className="flex items-center text-pink-600 group-hover:translate-x-3 transition-all duration-300">
-							<span className="font-medium bg-pink-100 px-4 py-2 rounded-full hover:bg-pink-200 transition-colors">Browse Accelerators</span>
+							<Link to="/schemes" className="font-medium bg-pink-100 px-4 py-2 rounded-full hover:bg-pink-200 transition-colors">Browse Schemes</Link>
 							<span className="material-symbols-outlined ml-2 text-sm group-hover:animate-bounce">arrow_forward</span>
 						</div>
 						<div className="mt-6 pt-6 border-t border-pink-200 flex items-center justify-between">
@@ -144,8 +145,8 @@ const NetworkPage = () => {
 				</div>
 
 				<footer className="text-center">
-					<p className="text-gray-500">Join our growing community of 100,000+ professionals</p>
-					<div className="inline-flex items-center justify-center gap-2 mt-4 text-gray-400">
+					<p className="text-base md:text-lg text-gray-500">Join our growing community of 100,000+ professionals</p>
+					<div className="inline-flex items-center justify-center gap-2 mt-3 md:mt-4 text-gray-400">
 						<span className="material-symbols-outlined">verified</span>
 						<span>Verified Network</span>
 					</div>

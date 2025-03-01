@@ -710,6 +710,10 @@ body {
 #webcrumbs-market {
     font-family: Open Sans !important;
     font-size: 16px !important;
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 #webcrumbs-market .hover\:translate-y-\[-8px\]:hover {
@@ -880,6 +884,12 @@ body {
 }
 
 #webcrumbs-market .ema-hero {
+    position: relative;
+    height: 400px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #6366f1, #4f46e5, #4338ca);
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -892,30 +902,159 @@ body {
     }
 }
 
-#webcrumbs-market .ema-stat-card-market,
-#webcrumbs-market .ema-stat-card-users,
-#webcrumbs-market .ema-stat-card-revenue,
-#webcrumbs-market .ema-stat-card-clients,
-#webcrumbs-market .ema-stat-card-products {
-    transition: transform 0.3s, box-shadow 0.3s;
+#webcrumbs-market .ema-overlay-radial {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(96, 165, 250, 0.3), transparent);
 }
 
-#webcrumbs-market .ema-stat-card-market:hover,
-#webcrumbs-market .ema-stat-card-users:hover,
-#webcrumbs-market .ema-stat-card-revenue:hover,
-#webcrumbs-market .ema-stat-card-clients:hover,
-#webcrumbs-market .ema-stat-card-products:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+#webcrumbs-market .ema-overlay-image {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f');
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: overlay;
+    opacity: 0.3;
 }
 
-#webcrumbs-market .ema-nav-link-overview:hover,
-#webcrumbs-market .ema-nav-link-snapshot:hover,
-#webcrumbs-market .ema-nav-link-infographs:hover,
-#webcrumbs-market .ema-nav-link-reports:hover,
-#webcrumbs-market .ema-nav-link-showcase:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transition: background-color 0.3s;
+#webcrumbs-market .ema-overlay-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(45deg,
+            rgba(99, 102, 241, 0.15) 25%,
+            transparent 25%,
+            transparent 75%,
+            rgba(99, 102, 241, 0.15) 75%,
+            rgba(99, 102, 241, 0.15));
+    background-size: 12px 12px;
+}
+
+#webcrumbs-market .ema-content {
+    position: relative;
+    padding: 40px;
+    text-align: center;
+    z-index: 1;
+}
+
+#webcrumbs-market .ema-title {
+    font-size: 40px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 16px;
+    letter-spacing: -0.025em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#webcrumbs-market .ema-subtitle {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 48rem;
+    margin: 0 auto 32px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+#webcrumbs-market .ema-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+    padding: 0 16px;
+}
+
+#webcrumbs-market .ema-stat-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    backdrop-filter: blur(24px);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+#webcrumbs-market .ema-stat-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#webcrumbs-market .ema-icon {
+    font-size: 36px;
+    color: white;
+    margin-bottom: 16px;
+    transition: color 0.3s;
+}
+
+#webcrumbs-market .ema-stat-title {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+#webcrumbs-market .ema-stat-value {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+}
+
+@media (max-width: 1200px) {
+    #webcrumbs-market .ema-stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    #webcrumbs-market .ema-content {
+        padding: 32px 24px;
+    }
+    
+    #webcrumbs-market .ema-title {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    #webcrumbs-market .ema-hero {
+        height: auto;
+        min-height: 300px;
+    }
+    
+    #webcrumbs-market .ema-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    
+    #webcrumbs-market .ema-content {
+        padding: 32px 20px;
+    }
+    
+    #webcrumbs-market .ema-title {
+        font-size: 32px;
+        margin-bottom: 16px;
+    }
+    
+    #webcrumbs-market .ema-subtitle {
+        font-size: 18px;
+        margin-bottom: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    #webcrumbs-market .ema-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    #webcrumbs-market .ema-title {
+        font-size: 28px;
+    }
+    
+    #webcrumbs-market .ema-subtitle {
+        font-size: 16px;
+    }
+    
+    #webcrumbs-market .ema-stat-card {
+        padding: 24px;
+    }
 }
 
 /* Additional styles for better visuals */
@@ -925,4 +1064,70 @@ body {
 
 #webcrumbs-market .text-white {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Navigation bar adjustments */
+#webcrumbs-market .ema-navigation {
+    margin: 16px 40px;
+    border-radius: 20px;
+}
+
+#webcrumbs-market .ema-nav-list {
+    padding: 8px;
+}
+
+#webcrumbs-market .ema-nav-link-overview,
+#webcrumbs-market .ema-nav-link-snapshot,
+#webcrumbs-market .ema-nav-link-infographs,
+#webcrumbs-market .ema-nav-link-reports,
+#webcrumbs-market .ema-nav-link-showcase {
+    padding: 8px 16px;
+}
+
+#webcrumbs-market .ema-nav-text {
+    font-size: 16px;
+}
+
+#webcrumbs-market .ema-nav-icon {
+    font-size: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    #webcrumbs-market .ema-hero {
+        height: 350px;
+    }
+    
+    #webcrumbs-market .ema-content {
+        padding: 32px 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    #webcrumbs-market .ema-hero {
+        height: auto;
+        min-height: 300px;
+    }
+    
+    #webcrumbs-market .ema-navigation {
+        margin: 12px 20px;
+    }
+    
+    #webcrumbs-market .ema-nav-text {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    #webcrumbs-market .ema-hero {
+        min-height: 250px;
+    }
+    
+    #webcrumbs-market .ema-content {
+        padding: 24px 16px;
+    }
+    
+    #webcrumbs-market .ema-navigation {
+        margin: 8px 12px;
+    }
 }

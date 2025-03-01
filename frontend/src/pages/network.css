@@ -16,6 +16,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 1rem;
+    min-height: calc(100vh - 140px); /* Account for header and footer */
 }
 
 #webcrumbs-network :after,
@@ -252,7 +254,7 @@
 #webcrumbs-network object,
 #webcrumbs-network svg,
 #webcrumbs-network video {
-    display: block;
+    display: inline-block;
     vertical-align: middle;
 }
 
@@ -554,7 +556,7 @@
 #webcrumbs-network * object,
 #webcrumbs-network * svg,
 #webcrumbs-network * video {
-    display: block;
+    display: inline-block;
     vertical-align: middle;
 }
 
@@ -845,7 +847,7 @@
 
 #webcrumbs-network .from-slate-50 {
     --tw-gradient-from: #f8fafc var(--tw-gradient-from-position);
-    --tw-gradient-to: rgba(248, 250, 252, 0) var(--tw-gradient-to-position);
+    --tw-gradient-to: rgb(248 250 252 / 0) var(--tw-gradient-to-position);
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
@@ -928,9 +930,8 @@
 }
 
 #webcrumbs-network .via-white {
-    --tw-gradient-to: hsla(0, 0%, 100%, 0) var(--tw-gradient-to-position);
-    --tw-gradient-stops: var(--tw-gradient-from),
-        #fff var(--tw-gradient-via-position), var(--tw-gradient-to);
+    --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), #ffffff var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
 
 #webcrumbs-network .to-blue-50 {
@@ -1272,4 +1273,450 @@
 
 #webcrumbs-network header{
     background: none;
+}
+
+/* Add these responsive styles */
+@media (max-width: 1536px) {
+        #webcrumbs-network .max-w-full {
+        max-width: 95%;
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    #webcrumbs-network {
+        padding: 0.75rem;
+    }
+
+            #webcrumbs-network .max-w-full {
+        padding: 1.5rem;
+    }
+
+    #webcrumbs-network .group {
+        padding: 1.25rem;
+        margin: 0.25rem;
+    }
+
+    #webcrumbs-network .text-5xl {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+
+    #webcrumbs-network .p-12 {
+        padding: 2rem;
+    }
+
+    #webcrumbs-network .gap-8 {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #webcrumbs-network {
+        padding: 0.5rem;
+    }
+
+    #webcrumbs-network .max-w-full {
+        padding: 1.25rem;
+        border-radius: 0.75rem;
+    }
+
+    #webcrumbs-network .group {
+        padding: 1rem;
+        margin: 0.25rem;
+    }
+
+    #webcrumbs-network .text-5xl {
+        font-size: 2rem;
+    }
+
+    #webcrumbs-network .text-xl {
+        font-size: 1.1rem;
+    }
+
+    #webcrumbs-network .p-8 {
+        padding: 1.5rem;
+    }
+
+    #webcrumbs-network .w-16,
+    #webcrumbs-network .h-16 {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    #webcrumbs-network .text-3xl {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    #webcrumbs-network {
+        padding: 0.25rem;
+    }
+
+    #webcrumbs-network .max-w-full {
+        padding: 1rem;
+        border-radius: 0.5rem;
+        max-width: 100%;
+    }
+
+    #webcrumbs-network .group {
+        padding: 1rem;
+        margin: 0.125rem;
+        border-radius: 0.5rem;
+    }
+
+    #webcrumbs-network .p-12 {
+        padding: 1.5rem;
+    }
+
+    #webcrumbs-network .text-2xl {
+        font-size: 1.25rem;
+    }
+
+    #webcrumbs-network .mb-16 {
+        margin-bottom: 2rem;
+    }
+
+    #webcrumbs-network .mb-12 {
+        margin-bottom: 1.5rem;
+    }
+
+    #webcrumbs-network .gap-8 {
+        gap: 1rem;
+    }
+
+    #webcrumbs-network .rounded-2xl {
+        border-radius: 1rem;
+    }
+
+    #webcrumbs-network .rounded-xl {
+        border-radius: 0.75rem;
+    }
+}
+
+/* Animation adjustments for mobile */
+@media (prefers-reduced-motion: reduce) {
+    #webcrumbs-network .animate-gradient,
+    #webcrumbs-network .group-hover\:animate-bounce,
+    #webcrumbs-network .transition-all {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* Base container adjustments */
+#webcrumbs-network {
+    padding: 1rem;
+    min-height: calc(100vh - 140px); /* Account for header and footer */
+}
+
+#webcrumbs-network .max-w-[1400px] {
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    padding: 2rem;
+}
+
+/* Card adjustments - make them shorter and wider */
+#webcrumbs-network .group {
+    border-width: 1px;
+    border-style: solid;
+    padding: 1.5rem 2rem;
+    margin: 0.5rem;
+    min-height: 480px; /* Changed from max-height to min-height */
+    height: 100%; /* Ensure full height */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Adjust internal card spacing */
+#webcrumbs-network .group h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+}
+
+#webcrumbs-network .group p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+#webcrumbs-network .group ul {
+    margin-bottom: 1.25rem;
+}
+
+#webcrumbs-network .group ul li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Button container */
+#webcrumbs-network .group .flex.items-center {
+    margin-top: auto;
+    margin-bottom: 1.25rem;
+}
+
+/* Stats container */
+#webcrumbs-network .group > div:last-child {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top-width: 1px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Grid adjustments */
+#webcrumbs-network .grid {
+    gap: 1.25rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    #webcrumbs-network .group {
+        padding: 1.25rem 1.75rem;
+        min-height: 460px;
+    }
+}
+
+@media (max-width: 768px) {
+    #webcrumbs-network .group {
+        padding: 1rem 1.5rem;
+        min-height: 440px;
+    }
+}
+
+@media (max-width: 640px) {
+    #webcrumbs-network .group {
+        padding: 1rem;
+        min-height: 420px;
+        margin: 0.25rem;
+    }
+}
+
+/* Fix animation and gradient issues */
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+#webcrumbs-network .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 6s ease infinite;
+}
+
+/* Fix missing Tailwind classes */
+#webcrumbs-network .from-slate-50 {
+    --tw-gradient-from: #f8fafc var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(248 250 252 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+#webcrumbs-network .via-white {
+    --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), #ffffff var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+#webcrumbs-network .to-blue-50 {
+    --tw-gradient-to: #eff6ff var(--tw-gradient-to-position);
+}
+
+#webcrumbs-network .bg-clip-text {
+    background-clip: text;
+}
+
+/* Fix container and spacing */
+#webcrumbs-network {
+    padding: 1rem;
+    min-height: calc(100vh - 140px);
+}
+
+#webcrumbs-network .max-w-[1400px] {
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    padding: 2rem;
+}
+
+/* Fix card styles */
+#webcrumbs-network .group {
+    border-width: 1px;
+    border-style: solid;
+    padding: 1.5rem 2rem;
+    margin: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+/* Fix responsive styles */
+@media (max-width: 1536px) {
+    #webcrumbs-network .max-w-full {
+        max-width: 95%;
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    #webcrumbs-network {
+        padding: 0.75rem;
+    }
+
+    #webcrumbs-network .max-w-full {
+        padding: 1.5rem;
+    }
+
+    #webcrumbs-network .group {
+        padding: 1.25rem;
+        margin: 0.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #webcrumbs-network {
+        padding: 0.5rem;
+    }
+
+    #webcrumbs-network .max-w-full {
+        padding: 1.25rem;
+        border-radius: 0.75rem;
+    }
+
+    #webcrumbs-network .group {
+        padding: 1rem;
+        margin: 0.25rem;
+    }
+}
+
+@media (max-width: 640px) {
+    #webcrumbs-network {
+        padding: 0.25rem;
+    }
+
+    #webcrumbs-network .max-w-full {
+        padding: 1rem;
+        border-radius: 0.5rem;
+        max-width: 100%;
+    }
+
+    #webcrumbs-network .group {
+        padding: 1rem;
+        margin: 0.125rem;
+        border-radius: 0.5rem;
+    }
+}
+
+/* Fix animation performance */
+@media (prefers-reduced-motion: reduce) {
+    #webcrumbs-network .animate-gradient,
+    #webcrumbs-network .group-hover\:animate-bounce,
+    #webcrumbs-network .transition-all {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* Base container styles */
+#webcrumbs-network {
+    padding: 1rem;
+    min-height: calc(100vh - 140px);
+}
+
+#webcrumbs-network .max-w-[1400px] {
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    padding: 2rem;
+}
+
+/* Card layout and alignment */
+#webcrumbs-network .group {
+    border-width: 1px;
+    border-style: solid;
+    padding: 1.5rem 2rem;
+    margin: 0.5rem;
+    min-height: 480px; /* Changed from max-height to min-height */
+    height: 100%; /* Ensure full height */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Icon container */
+#webcrumbs-network .group > div:first-child {
+    margin-bottom: 1.25rem;
+    align-self: flex-start;
+}
+
+/* Title */
+#webcrumbs-network .group h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+}
+
+/* Description */
+#webcrumbs-network .group p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+/* Features list */
+#webcrumbs-network .group ul {
+    margin-bottom: 1.25rem;
+}
+
+#webcrumbs-network .group ul li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Button container */
+#webcrumbs-network .group .flex.items-center {
+    margin-top: auto;
+    margin-bottom: 1.25rem;
+}
+
+/* Stats container */
+#webcrumbs-network .group > div:last-child {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top-width: 1px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Grid spacing */
+#webcrumbs-network .grid {
+    gap: 1.25rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    #webcrumbs-network .group {
+        padding: 1.25rem 1.75rem;
+        min-height: 460px;
+    }
+}
+
+@media (max-width: 768px) {
+    #webcrumbs-network .group {
+        padding: 1rem 1.5rem;
+        min-height: 440px;
+    }
+}
+
+@media (max-width: 640px) {
+    #webcrumbs-network .group {
+        padding: 1rem;
+        min-height: 420px;
+        margin: 0.25rem;
+    }
 }

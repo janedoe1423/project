@@ -25,7 +25,7 @@ import InvestorProfilePage from './pages/investor/investor_profile_page';
 import Research_inno from './Research_inno';
 import MentorProfilePage from './pages/mentor/mentor_profile_page'; // Import MentorProfilePage
 import MarketAnalysis from './pages/MarketAnalysis';
-import GovernmentProfilePage from './pages/government_bodies/gb_profile_page';
+// import GovernmentProfilePage from './pages/government_bodies/gb_profile_page';
 import NetworkPage from './pages/network';
 
 
@@ -57,7 +57,7 @@ function App() {
           <Route path="/investor-profile" element={<InvestorProfilePage />}/>
           <Route path="/mentor-profile" element={<MentorProfilePage />} />
           <Route path="/market-analysis" element={<MarketAnalysis />} />
-          <Route path="/government-profile" element={<GovernmentProfilePage />} />
+          {/* <Route path="/government-profile" element={<GovernmentProfilePage />} /> */}
           <Route path="/network" element={<NetworkPage />} />
         </Routes>
       </div>

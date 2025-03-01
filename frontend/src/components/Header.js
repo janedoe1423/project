@@ -8,13 +8,16 @@ import {
     FaBrain, 
     FaClipboardList, 
     FaCopyright, 
-    FaMoneyBillWave 
+    FaMoneyBillWave,
+    FaBars,
+    FaTimes 
 } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/Header.css';
 
 function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
 
     useEffect(() => {
@@ -22,6 +25,11 @@ function Header() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Close menu when route changes
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [location]);
 
     const menuItems = [
         { path: '/', name: 'Home', icon: <FaHome /> },
@@ -35,44 +43,56 @@ function Header() {
                 { path: '/innovations', name: 'Innovations' }
             ]
         },
-        { path: '/schemes', name: 'Schemes', icon: <FaClipboardList />, dropdown: [
-            { path: '/schemes/startup-gujarat', name: 'Startup Gujarat Support' },
-            { path: '/schemes/women-entrepreneurship', name: 'Women Entrepreneurship' },
-            { path: '/schemes/incubator-framework', name: 'Incubator Framework' }
-        ] },
+        { 
+            path: '/schemes', 
+            name: 'Schemes', 
+            icon: <FaClipboardList />, 
+            dropdown: [
+                { path: '/schemes/startup-gujarat', name: 'Startup Gujarat Support' },
+                { path: '/schemes/women-entrepreneurship', name: 'Women Entrepreneurship' },
+                { path: '/schemes/incubator-framework', name: 'Incubator Framework' }
+            ] 
+        },
         { path: '/ipr-rights', name: 'IPR', icon: <FaCopyright /> },
         { path: '/funding', name: 'Funding', icon: <FaMoneyBillWave /> },
         { path: '/market-analysis', name: 'Market Analysis', icon: <FaBrain /> }
     ];
 
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
     return (
         <>
-            <header className={`fixed-top py-2 ${isScrolled ? 'scrolled' : ''}`}>
+            <header className={`fixed-top ${isScrolled ? 'scrolled' : ''}`}>
                 <div className="container d-flex justify-content-between align-items-center">
-                    <div className="d-flex align-items-center">
-                        <h1 className="m-0 logo-text">StartupHub</h1>
-                    </div>
+                    <Link to="/" className="text-decoration-none">
+                        <h1 className="logo-text">StartupHub</h1>
+                    </Link>
 
                     <nav className="navbar navbar-expand-lg">
                         <button 
                             className="navbar-toggler" 
                             type="button" 
-                            data-bs-toggle="collapse" 
-                            data-bs-target="#navbarNav"
+                            onClick={toggleMenu}
+                            aria-label="Toggle navigation"
                         >
-                            <span className="navbar-toggler-icon"></span>
+                            {isMenuOpen ? <FaTimes /> : <FaBars />}
                         </button>
-                        <div className="collapse navbar-collapse" id="navbarNav">
+
+                        <div className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''}`}>
                             <ul className="navbar-nav mx-auto">
                                 {menuItems.map((item, index) => (
-                                    <li className={`nav-item ${item.dropdown ? 'dropdown-hover' : ''}`} key={index}>
+                                    <li 
+                                        className={`nav-item ${item.dropdown ? 'dropdown-hover' : ''}`} 
+                                        key={index}
+                                    >
                                         <Link 
                                             to={item.path} 
-                                            className={`nav-link d-flex align-items-center ${
-                                                location.pathname === item.path ? 'active' : ''
-                                            }`}
+                                            className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
+                                            onClick={() => setIsMenuOpen(false)}
                                         >
-                                            <span className="me-1">{item.icon}</span>
+                                            {item.icon}
                                             {item.name}
                                         </Link>
                                         {item.dropdown && (
@@ -82,6 +102,7 @@ function Header() {
                                                         key={dropIndex}
                                                         to={dropItem.path}
                                                         className={location.pathname === dropItem.path ? 'active' : ''}
+                                                        onClick={() => setIsMenuOpen(false)}
                                                     >
                                                         {dropItem.name}
                                                     </Link>
@@ -91,16 +112,16 @@ function Header() {
                                     </li>
                                 ))}
                             </ul>
+
+                            <div className="auth-buttons">
+                                <Link to="/login" className="btn btn-outline-primary">Log In</Link>
+                                <Link to="/signup" className="btn btn-primary">Sign Up</Link>
+                            </div>
                         </div>
                     </nav>
-
-                    <div className="auth-buttons d-flex gap-2">
-                        <Link to="/login" className="btn btn-outline-primary">Log In</Link>
-                        <Link to="/signup" className="btn btn-primary">Sign Up</Link>
-                    </div>
                 </div>
             </header>
-            <div style={{ height: '60px' }} />
+            <div style={{ height: '70px' }} />
         </>
     );
 }

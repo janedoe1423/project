@@ -26,7 +26,7 @@
     --card-radius: 12px;
     --transition: all 0.3s ease;
     --primary-pink: #E91E63;
-    --primary-purple: #9C27B0;
+    --primary-purple: #8c17a0;
     --light-pink: #FCE4EC;
     --light-purple: #F3E5F5;
     --dark-purple: #6A1B9A;
@@ -68,7 +68,7 @@ body, html {
     position: relative;
     height: 100vh;
     overflow: hidden;
-    margin-top: -56px;
+    margin-top: -70px; /* Adjust based on your header height */
 }
 
 .carousel-item {
@@ -99,11 +99,10 @@ body, html {
     height: 100%;
     background: linear-gradient(
         180deg,
-        rgba(0, 0, 0, 0.85) 0%,
-        rgba(0, 0, 0, 0.6) 50%,
-        rgba(0, 0, 0, 0.85) 100%
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0.7) 100%
     );
-    opacity: 0.9;
 }
 
 .carousel-content {
@@ -115,139 +114,44 @@ body, html {
     justify-content: center;
     align-items: center;
     color: white;
-    padding: 0 20px;
-}
-
-.stats-container {
-    display: flex;
-    gap: 3rem;
-    margin-bottom: 3rem;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease;
-}
-
-.carousel-item.active .stats-container {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.stat-item {
+    padding: 2rem;
     text-align: center;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1rem 2rem;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-}
-
-.stat-item:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.stat-number {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(45deg, #fff, #f0f0f0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.stat-label {
-    font-size: 1rem;
-    opacity: 0.9;
 }
 
 .carousel-text-content {
-    text-align: center;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease 0.3s;
     max-width: 800px;
     margin: 0 auto;
-    padding: 0 20px;
-    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.carousel-item.active .carousel-text-content {
-    opacity: 1;
-    transform: translateY(0);
+    padding: 2rem;
 }
 
 .slide-title {
-    font-size: 4.5rem;
-    font-weight: 800;
+    font-size: 3.5rem;
+    font-weight: 700;
     margin-bottom: 1.5rem;
-    color: #ffffff;
-    letter-spacing: -1px;
-    line-height: 1.2;
-    text-shadow: 
-        2px 2px 4px rgba(0, 0, 0, 0.3),
-        0 0 40px rgba(0, 0, 0, 0.1);
-    animation: glowText 2s ease-in-out infinite alternate;
+    color: #b388ff;
+    text-shadow: 0 0 10px rgba(179, 136, 255, 0.3);
 }
 
 .slide-subtitle {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     margin-bottom: 2rem;
-    color: rgba(255, 255, 255, 0.95);
-    font-weight: 400;
-    line-height: 1.4;
-    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+    color: #e0e0e0;
 }
 
 .slide-button {
-    padding: 1.2rem 3rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    background: linear-gradient(45deg, #ffffff, #f8f9fa);
-    color: var(--primary-purple);
-    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    background: rgba(179, 136, 255, 0.2);
+    color: #b388ff;
+    border: 2px solid #b388ff;
     border-radius: 50px;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 
-        0 4px 15px rgba(0, 0, 0, 0.2),
-        0 0 20px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
 }
 
 .slide-button:hover {
-    transform: translateY(-3px) scale(1.05);
-    background: #ffffff;
-    box-shadow: 
-        0 8px 25px rgba(0, 0, 0, 0.3),
-        0 0 30px rgba(255, 255, 255, 0.3);
-}
-
-.button-arrow {
-    transition: transform 0.4s ease;
-    font-size: 1.4rem;
-}
-
-.slide-button:hover .button-arrow {
-    transform: translateX(8px);
-}
-
-/* Text Glow Animation */
-@keyframes glowText {
-    from {
-        text-shadow: 
-            2px 2px 4px rgba(0, 0, 0, 0.3),
-            0 0 20px rgba(255, 255, 255, 0.1);
-    }
-    to {
-        text-shadow: 
-            2px 2px 4px rgba(0, 0, 0, 0.3),
-            0 0 30px rgba(255, 255, 255, 0.2);
-    }
+    background: rgba(179, 136, 255, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(179, 136, 255, 0.3);
 }
 
 /* Carousel Controls */
@@ -255,71 +159,120 @@ body, html {
 .carousel-control-next {
     width: 5%;
     opacity: 0;
-    transition: all 0.3s ease;
-}
-
-.home-carousel:hover .carousel-control-prev,
-.home-carousel:hover .carousel-control-next {
-    opacity: 0.8;
+    transition: opacity 0.3s ease;
 }
 
 .carousel-indicators {
-    bottom: 40px;
+    bottom: 2rem;
 }
 
 .carousel-indicators button {
-    width: 50px;
+    width: 40px;
     height: 4px;
     border-radius: 2px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(179, 136, 255, 0.5);
     border: none;
     margin: 0 5px;
     transition: all 0.3s ease;
 }
 
 .carousel-indicators button.active {
-    background-color: white;
+    background-color: #b388ff;
     transform: scaleX(1.2);
 }
 
 /* Responsive Styles */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .slide-title {
-        font-size: 2.8rem;
-        margin-bottom: 1rem;
+        font-size: 3rem;
     }
     
     .slide-subtitle {
         font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .slide-title {
+        font-size: 2.5rem;
+    }
+    
+    .carousel-text-content {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-carousel {
+        height: 80vh;
+    }
+    
+    .carousel-item {
+        height: 80vh;
+    }
+    
+    .slide-title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .slide-subtitle {
+        font-size: 1.1rem;
         margin-bottom: 1.5rem;
     }
     
     .slide-button {
-        padding: 1rem 2rem;
-        font-size: 1.1rem;
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
     }
     
-    .stats-container {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .stat-item {
-        padding: 0.8rem 1.5rem;
-    }
-    
-    .stat-number {
-        font-size: 2rem;
+    .carousel-text-content {
+        padding: 1rem;
     }
 }
 
-@media (min-width: 1400px) {
+@media (max-width: 576px) {
+    .home-carousel {
+        height: 70vh;
+    }
+    
+    .carousel-item {
+        height: 70vh;
+    }
+    
     .slide-title {
-        font-size: 5rem;
+        font-size: 1.8rem;
     }
     
     .slide-subtitle {
-        font-size: 2rem;
+        font-size: 1rem;
+    }
+    
+    .carousel-indicators button {
+        width: 30px;
+        height: 3px;
+    }
+}
+
+/* Landscape mode */
+@media (max-height: 500px) and (orientation: landscape) {
+    .home-carousel,
+    .carousel-item {
+        height: 100vh;
+    }
+    
+    .carousel-content {
+        padding: 1rem;
+    }
+    
+    .slide-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .slide-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1rem;
     }
 }
 
@@ -2080,13 +2033,13 @@ section + section {
     }
     
     .update-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 2rem;
+        width: 50px;
+        height: 50px;
+        font-size: 1.8rem;
     }
     
     .update-card h3 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 }
 
@@ -2279,5 +2232,49 @@ section + section {
 
     .stat-number-wrapper {
         font-size: 2rem;
+    }
+}
+
+/* Additional small screen adjustments */
+@media (max-width: 480px) {
+    .slide-title {
+        font-size: 1.8rem;
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;  /* Force single column */
+    }
+
+    .carousel-indicators {
+        bottom: 20px;
+    }
+
+    .carousel-indicators button {
+        width: 30px;
+        height: 3px;
+    }
+
+    .scroll-button {
+        display: none;  /* Hide scroll buttons on very small screens */
+    }
+}
+
+/* Landscape mode adjustments */
+@media (max-height: 480px) and (orientation: landscape) {
+    .home-carousel,
+    .carousel-item {
+        height: 100vh;  /* Full height for landscape */
+    }
+
+    .carousel-content {
+        padding: 1rem;
+    }
+
+    .slide-title {
+        font-size: 1.5rem;
+    }
+
+    .slide-subtitle {
+        font-size: 0.9rem;
     }
 }
